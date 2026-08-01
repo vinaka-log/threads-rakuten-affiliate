@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-01T10:02:08+09:00",
+  "updated_at": "2026-08-01T14:57:46+09:00",
   "entries": [
     {
       "item_code": "nuthyougo:10000672",
@@ -28,6 +28,16 @@
       ],
       "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00twl6n.x8u2bbed.g00twl6n.x8u2cc83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flarocheposay%2Fl00332ropenkit%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
       "rank": 1
+    },
+    {
+      "item_code": "value:point-math",
+      "item_name": "価値投稿 point-math",
+      "kind": "value",
+      "slot": 3,
+      "posted_on": "2026-08-01",
+      "threads_post_ids": [
+        "18017145434883393"
+      ]
     }
   ]
 }
