@@ -21,6 +21,7 @@
 ├── .github/workflows/daily.yml
 ├── config.py                 # ジャンル・品質フィルタ・枠・セール日程
 ├── data/posted.json          # 投稿済み台帳
+├── data/reuse.json           # 価値投稿の再利用キュー
 ├── requirements.txt
 └── src/
     ├── threads_client.py     # Meta Threads Graph API
@@ -28,6 +29,7 @@
     ├── picker.py             # ジャンルローテ + rank帯ローテ + 台帳
     ├── composer.py           # 投稿文テンプレート
     ├── value_posts.py        # 価値投稿（リンクなし）のプール
+    ├── reuse.py              # 伸びた投稿の3日おき再利用
     ├── sale.py               # 5と0のつく日・セール期間判定
     └── post.py               # CLI
 ```
@@ -145,6 +147,11 @@ PYTHONPATH=src:. python src/post.py --dry-run --genre 100939
 PYTHONPATH=src:. python src/post.py --dry-run --slot 0
 PYTHONPATH=src:. python src/post.py --dry-run --value --value-id marathon-basics
 
+# 再利用枠（slot 4=17:00）。期限到来の候補があれば優先
+PYTHONPATH=src:. python src/post.py --dry-run --slot 4
+PYTHONPATH=src:. python src/post.py --list-reuse
+PYTHONPATH=src:. python src/post.py --mark-reuse stock-buy
+
 # ランキングダイジェスト（slot 3/5/6/9。楽天 env 必要）
 PYTHONPATH=src:. python src/post.py --dry-run --slot 3
 PYTHONPATH=src:. python src/post.py --dry-run --digest --digest-format quiz
@@ -193,7 +200,7 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 1. **本投稿** … URLなし。1行目は42字以内の家庭のあるあるフック（商品名から入らない）→ 買う理由の具体 →「リプ見て👇」→ **問いかけで締める**
 2. **自分リプ** … 1行目 `#PR` → 価格・レビュー → 家庭の買い足し候補である旨 → （5と0のつく日・セール中なら「今日買う理由」を自動追記）→ `affiliateUrl`
 
-テンプレは `hook-stock` / `hook-heavy` / `hook-tonight` / `hook-reason` の4種を商品×日付で自動選択。すべて「家庭の消耗品チェック係」の脱力・正直トーンで統一しています。
+テンプレは `hook-stock` / `hook-heavy` / `hook-tonight` / `hook-reason` の4種を商品×日付で自動選択。すべて「日用品の買い時メモ」の脱力・正直トーンで統一しています。
 
 ### ランキングダイジェスト（slot 3 / 5 / 6 / 9）
 
@@ -206,6 +213,15 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 ### 価値投稿（slot 0 / 2 / 4 / 8）
 
 リンク・PRなしの単発投稿。セール攻略、レビューの読み方、ポイント計算、雑談問いかけ、失敗談など「保存したくなるネタ」36本を `value_posts.py` のプールから日付ローテで選びます（9日で一巡・同日重複なし）。マラソン/スーパーセール期間中はその日の最初の枠で攻略系を優先します。
+
+### 再利用（slot 4 = 17:00 優先）
+
+参考運用の「伸びた投稿を3日に1回再利用」に対応。`data/reuse.json` のキューから、前回投稿から3日以上経過した価値投稿を優先投下します。
+
+- 通常の価値投稿は自動でキュー登録
+- 伸びた投稿は手動で優先度アップ: `python src/post.py --mark-reuse stock-buy`
+- Insights 権限がある場合: `python src/post.py --sync-insights` で views/likes を取り込み
+- キュー確認: `python src/post.py --list-reuse`
 
 ### 共通ルール
 

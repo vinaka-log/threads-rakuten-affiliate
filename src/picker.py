@@ -198,9 +198,10 @@ def record_value_post(
     posted_on: str,
     threads_post_ids: List[str],
     dry_run: bool = False,
+    reused: bool = False,
     ledger_path: Path = config.LEDGER_PATH,
 ) -> None:
-    """価値投稿を台帳に追記。dry_run では書かない。"""
+    """価値投稿を台帳に追記。dry_run では書かない。再利用キューにも登録。"""
     if dry_run:
         return
     entries = load_ledger(ledger_path)
@@ -212,6 +213,19 @@ def record_value_post(
             "slot": slot,
             "posted_on": posted_on,
             "threads_post_ids": threads_post_ids,
+            "reused": reused,
         }
     )
     save_ledger(entries, ledger_path)
+    try:
+        from reuse import register_value_post
+
+        register_value_post(
+            value_id=value_id,
+            posted_on=posted_on,
+            threads_post_ids=threads_post_ids,
+            source="reuse" if reused else "auto",
+        )
+    except Exception:
+        # キュー更新失敗で投稿自体は落とさない
+        pass
