@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-01T21:05:36+09:00",
+  "updated_at": "2026-08-01T21:53:51+09:00",
   "entries": [
     {
       "item_code": "nuthyougo:10000672",
@@ -83,6 +83,16 @@
       ],
       "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00twl6n.x8u2bbed.g00twl6n.x8u2cc83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flarocheposay%2Fl00255%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
       "rank": 11
+    },
+    {
+      "item_code": "value:keep-cart",
+      "item_name": "価値投稿 keep-cart",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-08-01",
+      "threads_post_ids": [
+        "18091481171565405"
+      ]
     }
   ]
 }
