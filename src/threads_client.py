@@ -167,13 +167,16 @@ class ThreadsClient:
         *,
         reply_to_id: Optional[str] = None,
         topic_tag: Optional[str] = None,
+        image_url: Optional[str] = None,
         client: Optional[httpx.AsyncClient] = None,
     ) -> str:
         params: dict = {
             "text": text,
             "access_token": self.access_token,
-            "media_type": "TEXT",
+            "media_type": "IMAGE" if image_url else "TEXT",
         }
+        if image_url:
+            params["image_url"] = image_url
         if reply_to_id:
             params["reply_to_id"] = reply_to_id
         if topic_tag:
@@ -204,12 +207,14 @@ class ThreadsClient:
         *,
         reply_to_id: Optional[str] = None,
         topic_tag: Optional[str] = None,
+        image_url: Optional[str] = None,
         client: Optional[httpx.AsyncClient] = None,
     ) -> str:
         creation_id = await self.create_media_container(
             text,
             reply_to_id=reply_to_id,
             topic_tag=topic_tag,
+            image_url=image_url,
             client=client,
         )
         if self.publish_delay_sec:
@@ -266,11 +271,13 @@ class ThreadsClient:
         texts: List[str],
         *,
         topic_tag: Optional[str] = None,
+        image_url: Optional[str] = None,
         dry_run: bool = False,
         allow_partial: bool = True,
     ) -> ThreadsPostResult:
         """本投稿→自分リプの連鎖。
 
+        image_url がある場合、1本目のみ IMAGE 投稿（⑥）。リプは TEXT。
         allow_partial=True: 2本目以降が失敗しても、親が出ていれば warnings 付きで返す。
         """
         cleaned = [t.strip() for t in texts if t and t.strip()]
@@ -278,10 +285,16 @@ class ThreadsClient:
             raise ValueError("投稿コンテンツが空です")
 
         if dry_run:
-            return ThreadsPostResult(texts=cleaned, post_ids=[], dry_run=True)
+            return ThreadsPostResult(
+                texts=cleaned,
+                post_ids=[],
+                dry_run=True,
+                image_urls=[image_url] if image_url else [],
+            )
 
         post_ids: List[str] = []
         warnings: List[str] = []
+        used_image = image_url
         async with httpx.AsyncClient(timeout=self.timeout_sec) as http:
             reply_to: Optional[str] = None
             for index, text in enumerate(cleaned):
@@ -292,21 +305,37 @@ class ThreadsClient:
                         text,
                         reply_to_id=reply_to,
                         topic_tag=topic_tag if index == 0 else None,
+                        # 画像は本投稿のみ。IMAGE失敗時は TEXT にフォールバック
+                        image_url=used_image if index == 0 else None,
                         client=http,
                     )
                 except ThreadsApiError as exc:
-                    if index == 0 or not allow_partial or not post_ids:
+                    if index == 0 and used_image:
+                        warnings.append(f"image attach failed, fallback to TEXT: {exc}")
+                        used_image = None
+                        try:
+                            post_id = await self.publish_item(
+                                text,
+                                reply_to_id=None,
+                                topic_tag=topic_tag,
+                                image_url=None,
+                                client=http,
+                            )
+                        except ThreadsApiError:
+                            raise
+                    elif index == 0 or not allow_partial or not post_ids:
                         raise
-                    hint = ""
-                    if self._is_reply_permission_error(exc):
-                        hint = (
-                            " Meta で threads_manage_replies を追加し、"
-                            "長期トークンを再発行してください。"
+                    else:
+                        hint = ""
+                        if self._is_reply_permission_error(exc):
+                            hint = (
+                                " Meta で threads_manage_replies を追加し、"
+                                "長期トークンを再発行してください。"
+                            )
+                        warnings.append(
+                            f"reply[{index}] failed after parent={post_ids[0]}: {exc}.{hint}"
                         )
-                    warnings.append(
-                        f"reply[{index}] failed after parent={post_ids[0]}: {exc}.{hint}"
-                    )
-                    break
+                        break
                 post_ids.append(post_id)
                 reply_to = post_id
 
@@ -314,5 +343,6 @@ class ThreadsClient:
             texts=cleaned,
             post_ids=post_ids,
             dry_run=False,
+            image_urls=[image_url] if image_url and used_image else [],
             warnings=warnings,
         )

@@ -1,4 +1,4 @@
-"""ジャンルローテ + posted.json 台帳による商品ピッカー。"""
+"""ジャンルローテ + 悩みキーワード起点 + posted.json 台帳による商品ピッカー。"""
 
 from __future__ import annotations
 
@@ -20,6 +20,7 @@ class PickResult:
     genre: config.Genre
     slot: int
     posted_on: str  # YYYY-MM-DD (JST)
+    pain: Optional[config.PainIntent] = None
 
 
 def today_jst() -> date:
@@ -86,7 +87,30 @@ def genre_by_id(genre_id: str) -> Optional[config.Genre]:
     for g in config.GENRES:
         if g.id == genre_id:
             return g
-    return config.Genre(id=genre_id, label=f"genre:{genre_id}", short="売れ筋")
+    # 悩み起点で GENRES 外（例: 水=100227）を使う場合
+    shorts = {
+        "100227": "ドリンク",
+        "100939": "日用品",
+        "551167": "キッチン",
+    }
+    return config.Genre(
+        id=genre_id,
+        label=f"genre:{genre_id}",
+        short=shorts.get(genre_id, "日用品"),
+    )
+
+
+def pain_for_slot(slot: int, on: Optional[date] = None) -> config.PainIntent:
+    """日付×商品枠の通し番号で悩みをローテ。"""
+    on = on or today_jst()
+    intents = config.PAIN_INTENTS
+    # 商品枠だけを進める（価値/ダイジェスト枠では使わない想定）
+    item_index = 0
+    if slot in config.ITEM_SLOTS:
+        item_index = config.ITEM_SLOTS.index(slot)
+    day_i = on.toordinal()
+    idx = (day_i * max(1, len(config.ITEM_SLOTS)) + item_index) % len(intents)
+    return intents[idx]
 
 
 def rank_band_for(on: Optional[date] = None) -> tuple[int, int]:
@@ -111,48 +135,96 @@ def passes_quality(item: RakutenItem) -> bool:
     )
 
 
+def _name_matches(item: RakutenItem, hints: tuple[str, ...]) -> bool:
+    name = item.item_name.lower()
+    return any(h.lower() in name for h in hints)
+
+
+def _filter_candidates(
+    items: List[RakutenItem],
+    *,
+    used: Set[str],
+    pain: Optional[config.PainIntent] = None,
+    band: Optional[tuple[int, int]] = None,
+) -> List[RakutenItem]:
+    quality = [i for i in items if i.item_code not in used and passes_quality(i)]
+    if pain:
+        hinted = [i for i in quality if _name_matches(i, pain.name_hints)]
+        quality = hinted or quality
+    if band:
+        banded = [i for i in quality if _in_band(i, band)]
+        if banded:
+            return banded
+    return quality
+
+
 def pick_item(
     client: RakutenClient,
     *,
     slot: int = 0,
     genre_id: Optional[str] = None,
     on: Optional[date] = None,
+    pain_id: Optional[str] = None,
     ledger_path: Path = config.LEDGER_PATH,
 ) -> PickResult:
-    """ランキング上位から未投稿・品質OKの商品を1件選ぶ。"""
+    """悩みキーワード起点で商品を1件選ぶ。取れなければランキングへフォールバック。"""
     on = on or today_jst()
+    pain: Optional[config.PainIntent] = None
+    if pain_id:
+        pain = next((p for p in config.PAIN_INTENTS if p.id == pain_id), None)
+        if pain is None:
+            raise ValueError(f"未知の pain_id: {pain_id}")
+    elif genre_id is None:
+        pain = pain_for_slot(slot, on)
+
     if genre_id:
         genre = genre_by_id(genre_id)
+        assert genre is not None
+    elif pain is not None:
+        genre = genre_by_id(pain.genre_id)
         assert genre is not None
     else:
         genre = genre_for_slot(slot, on)
 
     entries = load_ledger(ledger_path)
     used = recent_item_codes(entries, on=on)
-    ranking = client.fetch_ranking(genre.id, hits=config.RANKING_HITS)
-
     band = rank_band_for(on)
-    quality = [i for i in ranking if i.item_code not in used and passes_quality(i)]
-    # まず当日のrank帯から選び、無ければ帯を無視して品質OKから選ぶ
-    candidates = [i for i in quality if _in_band(i, band)] or quality
+
+    candidates: List[RakutenItem] = []
+    if pain is not None:
+        try:
+            searched = client.search_items(
+                pain.keyword,
+                hits=config.RANKING_HITS,
+                sort="-reviewCount",
+                genre_id=pain.genre_id,
+            )
+            candidates = _filter_candidates(searched, used=used, pain=pain)
+        except Exception:
+            candidates = []
+
     if not candidates:
-        # 品質フィルタを緩めて再試行（レビュー件数のみ半分）
-        soft = [
-            i
-            for i in ranking
-            if i.item_code not in used
-            and i.review_average >= config.MIN_REVIEW_AVERAGE
-            and i.review_count >= max(20, config.MIN_REVIEW_COUNT // 2)
-            and i.affiliate_url
-        ]
-        candidates = soft
-    if not candidates:
-        # それでも無ければ未使用の先頭（品質不問・URL必須）
-        candidates = [i for i in ranking if i.item_code not in used and i.affiliate_url]
+        ranking = client.fetch_ranking(genre.id, hits=config.RANKING_HITS)
+        candidates = _filter_candidates(ranking, used=used, pain=pain, band=band)
+        if not candidates:
+            soft = [
+                i
+                for i in ranking
+                if i.item_code not in used
+                and i.review_average >= config.MIN_REVIEW_AVERAGE
+                and i.review_count >= max(20, config.MIN_REVIEW_COUNT // 2)
+                and i.affiliate_url
+            ]
+            if pain:
+                soft = [i for i in soft if _name_matches(i, pain.name_hints)] or soft
+            candidates = soft
+        if not candidates:
+            candidates = [i for i in ranking if i.item_code not in used and i.affiliate_url]
+
     if not candidates:
         raise RuntimeError(
             f"投稿可能な商品がありません genre={genre.id}({genre.label}) "
-            f"used={len(used)} ranking={len(ranking)}"
+            f"pain={pain.id if pain else '-'} used={len(used)}"
         )
 
     item = candidates[0]
@@ -161,6 +233,7 @@ def pick_item(
         genre=genre,
         slot=slot,
         posted_on=on.isoformat(),
+        pain=pain,
     )
 
 
@@ -186,6 +259,8 @@ def record_post(
             "threads_post_ids": threads_post_ids,
             "affiliate_url": pick.item.affiliate_url,
             "rank": pick.item.rank,
+            "pain_id": pick.pain.id if pick.pain else "",
+            "image_url": pick.item.image_url,
         }
     )
     save_ledger(entries, ledger_path)
