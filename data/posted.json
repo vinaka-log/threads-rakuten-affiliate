@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-08-01T23:46:13+09:00",
+  "updated_at": "2026-08-02T07:56:40+09:00",
   "entries": [
+    {
+      "item_code": "value:chat-repeat",
+      "item_name": "価値投稿 chat-repeat",
+      "kind": "value",
+      "slot": 0,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "18613336153005885"
+      ],
+      "reused": false
+    },
     {
       "item_code": "nuthyougo:10000672",
       "item_name": "ミックスナッツ 1kg 送料無料 素焼きミックスナッツ 大人気3種類素焼きナッツ プレミアム ミックスナッツ 素焼きアーモンド 素焼きカシューナッツ 生くるみ 自然 ナッツ おつまみ おやつ『無添加・無塩・植物油不使用』",
