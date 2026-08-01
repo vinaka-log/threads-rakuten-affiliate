@@ -79,7 +79,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--template",
         type=str,
         default=None,
-        help="投稿テンプレID（hook-honne / hook-minna / hook-teiten / hook-price）",
+        help="投稿テンプレID（hook-stock / hook-heavy / hook-tonight / hook-reason）",
     )
     kind = p.add_mutually_exclusive_group()
     kind.add_argument(
