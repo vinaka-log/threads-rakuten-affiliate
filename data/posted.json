@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T07:56:40+09:00",
+  "updated_at": "2026-08-02T08:58:22+09:00",
   "entries": [
     {
       "item_code": "value:chat-repeat",
@@ -11,6 +11,22 @@
         "18613336153005885"
       ],
       "reused": false
+    },
+    {
+      "item_code": "lancome:10000136",
+      "item_name": "【ポイント15倍 楽天Brand Day★7/30 00:00-7/31 23:59★】 LANCÔME(ランコム) ジェニフィック アルティメ セラム 30mL 50mL 導入 美容液 保湿 毛穴 ハリ 透明感 スキンケア 正規品 美肌菌 エイジングケア 保湿 うるおい ツヤ 日本処方 彼女 化粧品 詰め替え レフィル",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 1,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "18552231709078174",
+        "18029754662832851"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00trnun.x8u2b224.g00trnun.x8u2c0ae/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flancome%2Fjp-lan-000329%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 4,
+      "pain_id": "detergent",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/lancome/cabinet/12611101/12611109/13646792/imgrc0138028575.jpg?_ex=400x400"
     },
     {
       "item_code": "nuthyougo:10000672",
