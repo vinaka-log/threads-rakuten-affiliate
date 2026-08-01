@@ -13,7 +13,7 @@ from __future__ import annotations
 import asyncio
 import os
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 import httpx
 
@@ -215,6 +215,51 @@ class ThreadsClient:
         if self.publish_delay_sec:
             await asyncio.sleep(self.publish_delay_sec)
         return await self.publish_container(creation_id, client=client)
+
+    async def fetch_media_insights(
+        self,
+        media_id: str,
+        *,
+        metrics: Optional[List[str]] = None,
+        client: Optional[httpx.AsyncClient] = None,
+    ) -> Dict[str, int]:
+        """投稿インサイトを取得。threads_manage_insights が必要。
+
+        権限不足や未対応メディアでは空 dict を返す（呼び出し側で握りつぶし可）。
+        """
+        metric_list = metrics or ["views", "likes", "replies", "reposts", "quotes"]
+        params = {
+            "metric": ",".join(metric_list),
+            "access_token": self.access_token,
+        }
+        own_client = client is None
+        http = client or httpx.AsyncClient(timeout=self.timeout_sec)
+        try:
+            response = await http.get(
+                f"{self.api_base}/{media_id}/insights",
+                params=params,
+            )
+            data = response.json() if response.content else {}
+            if response.status_code >= 400:
+                raise ThreadsApiError(
+                    f"insights失敗 {media_id}: {data}",
+                    status_code=response.status_code,
+                    payload=data if isinstance(data, dict) else {},
+                )
+            out: Dict[str, int] = {}
+            for row in (data.get("data") or []) if isinstance(data, dict) else []:
+                name = str(row.get("name") or "")
+                values = row.get("values") or []
+                if not name:
+                    continue
+                if values and isinstance(values[0], dict):
+                    out[name] = int(values[0].get("value") or 0)
+                else:
+                    out[name] = int(row.get("total_value", {}).get("value") or 0)
+            return out
+        finally:
+            if own_client:
+                await http.aclose()
 
     async def publish_thread(
         self,

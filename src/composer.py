@@ -35,48 +35,49 @@ class ComposedPost:
 
 
 # 本投稿テンプレ: {short_name} {category} {rank} {review_avg} {review_count} {price}
-# 方針:
-#   - 1行目は42文字以内の「悩み・あるある・本音」フック（商品名から入らない）
+# 方針（ペルソナ A: 家庭の消耗品・時短買い）:
+#   - 1行目は42文字以内の「家庭のあるある・買い足し悩み」フック（商品名から入らない）
+#   - 「買う理由」がすぐ浮かぶ具体を本文に1つ入れる
 #   - シロクマの脱力・正直トーンで統一
 #   - 最後は問いかけで締めて返信を促す
 _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
     (
-        "hook-honne",
-        "正直、ランキング上位って疑ってかかるタイプ🐻‍❄️\n\n"
-        "でも今日の{category}で見つけたこれ、\n"
-        "レビュー{review_count}件で{review_avg}点は疑えなかった…\n\n"
+        "hook-stock",
+        "ストック、切れてから買う派になってない?\n\n"
+        "今日の{category}ランキング、家庭の買い足し枠で目立ってたのがこれ🐻‍❄️\n"
+        "レビュー{review_count}件・{review_avg}点。切れそうになる前に置く系。\n\n"
         "「{short_name}」\n\n"
         "詳細はリプに置いとくね👇\n"
-        "使ってる人いたら、実際どう？",
+        "同じのリピしてる人いる？",
     ),
     (
-        "hook-minna",
-        "{category}って、結局みんな何買ってるんだろ?\n\n"
-        "気になって楽天のランキング見てきた🐻‍❄️\n"
-        "今日の上位にいたのがこれ。\n\n"
-        "「{short_name}」\n"
-        "{price}円でレビュー{review_avg}点。\n\n"
+        "hook-heavy",
+        "重い日用品、まだ店で運んでる?\n\n"
+        "楽天の{category}で、宅配に任せたくなる枠にいたのがこれ🐻‍❄️\n"
+        "{price}円・レビュー{review_avg}点（{review_count}件）。\n\n"
+        "「{short_name}」\n\n"
         "リプに詳細まとめた👇\n"
-        "もう持ってる人いたら感想教えて",
+        "もうネット買いしてる人、感想教えて",
     ),
     (
-        "hook-teiten",
-        "今日もランキング見てきたよ🐻‍❄️\n\n"
+        "hook-tonight",
+        "今夜の買い足し、迷ってる人へ🐻‍❄️\n\n"
         "{category}でここ最近ずっと上位にいるのが\n"
         "「{short_name}」\n\n"
         "レビュー{review_avg}点（{review_count}件）。\n"
-        "まあ、売れ続けてるのには理由がありそう。\n\n"
+        "「また同じの切れそう」ってときの候補になりそう。\n\n"
         "気になる人はリプ見て👇\n"
-        "これ系で他におすすめあったら教えて",
+        "家の定番、他にもあったら教えて",
     ),
     (
-        "hook-price",
-        "{price}円でレビュー{review_count}件って、何ごと?\n\n"
+        "hook-reason",
+        "買う理由がすぐ浮かぶやつ、探してきた🐻‍❄️\n\n"
         "楽天の{category}ランキングで見つけた\n"
-        "「{short_name}」🐻‍❄️\n\n"
-        "安いから売れてるのか、良いから売れてるのか…\n"
-        "スペックはリプに整理した👇\n\n"
-        "買ったことある人いる？",
+        "「{short_name}」\n\n"
+        "{price}円でレビュー{review_count}件。\n"
+        "点数より「また買う」が多そうな空気。\n\n"
+        "スペックはリプに整理した👇\n"
+        "使ってる人いたら、実際どう？",
     ),
 )
 
@@ -88,6 +89,7 @@ _REPLY_TEMPLATE = (
     "・レビュー: {review_avg}点（{review_count}件）\n"
     "{rank_line}"
     "・ショップ: {shop_name}\n"
+    "・向き: 家庭の買い足し・ストック候補\n"
     "{sale_block}"
     "\n気になった人はこちら↓\n"
     "{affiliate_url}"
@@ -167,10 +169,10 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
 
 # ダイジェスト用: TOP3の下に添える一言（日付ローテ）
 _DIGEST_COMMENTS: Sequence[str] = (
-    "毎日見てると「また君か」ってやつがいるんだよね",
-    "しばらく順位が動かないやつは、だいたい本物",
-    "急に入ってきた新顔は、ちょっと様子を見る派",
-    "セールが近づくと顔ぶれが変わるから、そこも見てる",
+    "家庭の定番って、だいたいこのへんに居座るんだよね",
+    "しばらく順位が動かないやつは、リピ勢が支えてる証拠",
+    "急に入ってきた新顔は、セール玉のことが多いから様子見",
+    "買い足しタイミングと重なると、顔ぶれが一気に動く",
 )
 
 
@@ -211,17 +213,17 @@ def compose_digest(client, on: date, slot: int, *, fmt: str | None = None) -> Co
     if fmt == "top3":
         comment = _DIGEST_COMMENTS[(on.toordinal() + slot) % len(_DIGEST_COMMENTS)]
         texts = [
-            f"今日の楽天{genre.short}ランキング、上位メモ🐻‍❄️\n\n"
+            f"今日の家庭向け{genre.short}ランキング、上位メモ🐻‍❄️\n\n"
             f"1位 {names[0]}\n"
             f"2位 {names[1]}\n"
             f"3位 {names[2]}\n\n"
             f"{comment}。\n\n"
-            f"この中で気になるの、あった？"
+            f"この中で、家のストックに欲しいのあった？"
         ]
     elif fmt == "quiz":
         top = ranking[0]
         texts = [
-            f"【クイズ】今日の楽天{genre.short}ランキング🐻‍❄️\n\n"
+            f"【クイズ】今日の{genre.short}買い足しランキング🐻‍❄️\n\n"
             f"2位 {names[1]}\n"
             f"3位 {names[2]}\n\n"
             f"さて、1位はなんでしょう?\n"
@@ -230,17 +232,17 @@ def compose_digest(client, on: date, slot: int, *, fmt: str | None = None) -> Co
             f"正解は…\n\n"
             f"「{names[0]}」でした🐻‍❄️\n"
             f"レビュー{top.review_average:.1f}点（{top.review_count:,}件）。\n\n"
-            f"当たった人いる？",
+            f"家で使ってる人、当たった？",
         ]
     elif fmt == "sleeper":
         tail = ranking[-3:]
         lines = "\n".join(f"・{_shorten(i.short_name)}" for i in tail)
         texts = [
-            f"1位より「じわじわ来てるゾーン」が好きなんだよね🐻‍❄️\n\n"
-            f"今日の楽天{genre.short}ランキング、\n"
+            f"1位より「じわじわ買い足されてるゾーン」が好きなんだよね🐻‍❄️\n\n"
+            f"今日の{genre.short}ランキング、\n"
             f"上位のすぐ下にいたのがこのへん。\n\n"
             f"{lines}\n\n"
-            f"派手じゃないけど、掘り出し物はだいたいここにいる。\n\n"
+            f"派手じゃないけど、家庭の定番候補はだいたいここにいる。\n\n"
             f"使ってるのあったら教えて"
         ]
     else:
