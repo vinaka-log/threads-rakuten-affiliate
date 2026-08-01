@@ -92,6 +92,7 @@ PR・アフィリエイトリンクを含みます
    - `threads_basic`
    - `threads_content_publish`
    - `threads_manage_replies`（自分リプ連鎖に必須）
+   - `threads_manage_insights`（任意・伸びた投稿の再利用優先度に使用）
 3. 長期アクセストークンと Threads User ID を控える
 
 ### 3. 楽天ウェブサービス + アフィリエイト
