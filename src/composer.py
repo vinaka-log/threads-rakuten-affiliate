@@ -17,7 +17,6 @@ from typing import List, Sequence, Tuple
 
 import config
 from picker import PickResult
-from sale import sale_lines
 from value_posts import ValuePost, pick_value_post
 
 _URL_RE = re.compile(r"https?://|www\.", re.IGNORECASE)
