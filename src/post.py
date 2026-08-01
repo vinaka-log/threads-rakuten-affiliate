@@ -26,8 +26,8 @@ if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
 import config
-from composer import compose
-from picker import genre_for_slot, pick_item, record_post, today_jst
+from composer import compose, compose_value
+from picker import genre_for_slot, pick_item, record_post, record_value_post, today_jst
 from rakuten import RakutenClient
 from threads_client import ThreadsClient
 
@@ -76,7 +76,24 @@ def build_parser() -> argparse.ArgumentParser:
         "--template",
         type=str,
         default=None,
-        help="投稿テンプレID（hook-rank / hook-review / hook-price / hook-daily）",
+        help="投稿テンプレID（hook-honne / hook-minna / hook-teiten / hook-price）",
+    )
+    kind = p.add_mutually_exclusive_group()
+    kind.add_argument(
+        "--value",
+        action="store_true",
+        help="価値投稿（リンクなし）を強制。省略時は slot が VALUE_SLOTS なら自動で価値投稿",
+    )
+    kind.add_argument(
+        "--item",
+        action="store_true",
+        help="商品紹介投稿を強制（VALUE_SLOTS の slot でも商品を投稿）",
+    )
+    p.add_argument(
+        "--value-id",
+        type=str,
+        default=None,
+        help="価値投稿のIDを直接指定（省略時は日付ローテ）",
     )
     return p
 
@@ -133,6 +150,45 @@ def main(argv: list[str] | None = None) -> int:
         on = date.fromisoformat(args.date)
 
     slot = args.slot if args.slot is not None else _default_slot()
+
+    # 価値投稿かどうかの判定:
+    #   --value 明示 > --item/--genre/--template による商品強制 > VALUE_SLOTS の自動割当
+    is_value = args.value or (
+        slot in config.VALUE_SLOTS
+        and not args.item
+        and not args.genre
+        and not args.template
+    )
+
+    if is_value:
+        composed = compose_value(on, slot, value_id=args.value_id)
+        label = config.SLOT_LABELS[slot] if 0 <= slot < len(config.SLOT_LABELS) else "?"
+        print("=== Threads value post preview ===")
+        print(f"mode: {'dry-run' if dry_run else 'publish'}")
+        print(f"date: {on.isoformat()}  slot: {slot} ({label})")
+        print(f"template: {composed.template_id}")
+        print("---")
+        print(f"[MAIN] ({len(composed.texts[0])} chars)")
+        print(composed.texts[0])
+        print("---")
+        if dry_run:
+            print("dry-run: not publishing, ledger unchanged")
+            return 0
+        result = asyncio.run(_publish(composed.texts))
+        if result.warnings:
+            for w in result.warnings:
+                print(f"WARNING: {w}", file=sys.stderr)
+        print(f"published post_ids={result.post_ids} partial={result.partial}")
+        record_value_post(
+            value_id=composed.item_code.removeprefix("value:"),
+            slot=slot,
+            posted_on=on.isoformat(),
+            threads_post_ids=result.post_ids,
+            dry_run=False,
+        )
+        print(f"ledger updated: {config.LEDGER_PATH}")
+        return 0
+
     genre_preview = args.genre or genre_for_slot(slot, on).id
     print(f"resolving item for slot={slot} genre={genre_preview} date={on.isoformat()}")
 

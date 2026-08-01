@@ -89,6 +89,19 @@ def genre_by_id(genre_id: str) -> Optional[config.Genre]:
     return config.Genre(id=genre_id, label=f"genre:{genre_id}", short="売れ筋")
 
 
+def rank_band_for(on: Optional[date] = None) -> tuple[int, int]:
+    """日替わりでrank帯をローテ（上位帯は競合と被るため準上位帯も使う）。"""
+    on = on or today_jst()
+    bands = config.RANK_BANDS
+    return bands[on.toordinal() % len(bands)]
+
+
+def _in_band(item: RakutenItem, band: tuple[int, int]) -> bool:
+    if item.rank is None:
+        return True
+    return band[0] <= item.rank <= band[1]
+
+
 def passes_quality(item: RakutenItem) -> bool:
     return (
         item.review_average >= config.MIN_REVIEW_AVERAGE
@@ -118,7 +131,10 @@ def pick_item(
     used = recent_item_codes(entries, on=on)
     ranking = client.fetch_ranking(genre.id, hits=config.RANKING_HITS)
 
-    candidates = [i for i in ranking if i.item_code not in used and passes_quality(i)]
+    band = rank_band_for(on)
+    quality = [i for i in ranking if i.item_code not in used and passes_quality(i)]
+    # まず当日のrank帯から選び、無ければ帯を無視して品質OKから選ぶ
+    candidates = [i for i in quality if _in_band(i, band)] or quality
     if not candidates:
         # 品質フィルタを緩めて再試行（レビュー件数のみ半分）
         soft = [
@@ -170,6 +186,32 @@ def record_post(
             "threads_post_ids": threads_post_ids,
             "affiliate_url": pick.item.affiliate_url,
             "rank": pick.item.rank,
+        }
+    )
+    save_ledger(entries, ledger_path)
+
+
+def record_value_post(
+    *,
+    value_id: str,
+    slot: int,
+    posted_on: str,
+    threads_post_ids: List[str],
+    dry_run: bool = False,
+    ledger_path: Path = config.LEDGER_PATH,
+) -> None:
+    """価値投稿を台帳に追記。dry_run では書かない。"""
+    if dry_run:
+        return
+    entries = load_ledger(ledger_path)
+    entries.append(
+        {
+            "item_code": f"value:{value_id}",
+            "item_name": f"価値投稿 {value_id}",
+            "kind": "value",
+            "slot": slot,
+            "posted_on": posted_on,
+            "threads_post_ids": threads_post_ids,
         }
     )
     save_ledger(entries, ledger_path)

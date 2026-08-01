@@ -2,24 +2,29 @@
 
 楽天市場の売れ筋ランキングから商品を自動取得し、テンプレートで投稿文を生成して Threads に自動投稿する**自分専用**ツールです。
 
-- 本投稿: リンクなし（フック型）
+- 本投稿: リンクなし（悩みフック型 + 問いかけ締め）
 - 自分リプ: 冒頭 `#PR` + アフィリエイトURL
 - スケジュール: **毎日3回 JST（08:00 / 12:00 / 20:00）**
+- **昼枠（12:00）は価値投稿**: リンクなしの保存ネタ（セール攻略・レビューの読み方等）で信頼とアルゴリズム評価を積む
 - 重複防止: `data/posted.json`（直近30日は同一 `itemCode` を再投稿しない）
+- rank帯ローテ: 偶数日=1〜10位 / 奇数日=11〜30位（競合アカウントとの商品被りを回避）
+- セール連動: 5と0のつく日は自動でポイントアップ告知をリプに追記。マラソン等は `config.SALE_PERIODS` に日程を追記
 
 ## 構成
 
 ```
 .
 ├── .github/workflows/daily.yml
-├── config.py                 # ジャンル・品質フィルタ・枠
+├── config.py                 # ジャンル・品質フィルタ・枠・セール日程
 ├── data/posted.json          # 投稿済み台帳
 ├── requirements.txt
 └── src/
     ├── threads_client.py     # Meta Threads Graph API
     ├── rakuten.py            # 楽天ランキング / 検索 API
-    ├── picker.py             # ジャンルローテ + 台帳
+    ├── picker.py             # ジャンルローテ + rank帯ローテ + 台帳
     ├── composer.py           # 投稿文テンプレート
+    ├── value_posts.py        # 価値投稿（リンクなし）のプール
+    ├── sale.py               # 5と0のつく日・セール期間判定
     └── post.py               # CLI
 ```
 
@@ -113,6 +118,10 @@ PYTHONPATH=src:. python src/post.py --dry-run --slot 0
 PYTHONPATH=src:. python src/post.py --list-genres
 PYTHONPATH=src:. python src/post.py --dry-run --genre 100939
 
+# 価値投稿（slot 1 は自動で価値投稿になる。楽天 env 不要）
+PYTHONPATH=src:. python src/post.py --dry-run --slot 1
+PYTHONPATH=src:. python src/post.py --dry-run --value --value-id marathon-basics
+
 # 本番投稿（要 Threads env）
 export THREADS_ACCESS_TOKEN=...
 export THREADS_USER_ID=...
@@ -124,8 +133,10 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 | slot | 時刻(JST) | 内容 |
 |------|-----------|------|
 | 0 | 08:00 | ランキング商品（ジャンルローテ） |
-| 1 | 12:00 | 同上 |
-| 2 | 20:00 | 同上 |
+| 1 | 12:00 | **価値投稿**（リンクなし・`value_posts.py` を日付ローテ） |
+| 2 | 20:00 | ランキング商品（ジャンルローテ） |
+
+価値投稿の枠は `config.VALUE_SLOTS` で変更できます。slot 1 でも `--item` を付ければ商品紹介を強制、逆に任意 slot で `--value` / `--value-id` を付ければ価値投稿を強制できます。
 
 ジャンルは `config.py` の `GENRES` を日付×slot でローテします。初期値:
 
@@ -142,10 +153,21 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 ## 投稿フォーマット
 
-1. **本投稿** … URLなし。売れ筋フック +「続きはリプ👇」
-2. **自分リプ** … 1行目 `#PR` → 価格・レビュー → `affiliateUrl`
+### 商品紹介（slot 0 / 2）
 
-ハート系絵文字は使いません。
+1. **本投稿** … URLなし。1行目は42字以内の悩み・あるあるフック（商品名から入らない）→ 商品 →「リプ見て👇」→ **問いかけで締める**
+2. **自分リプ** … 1行目 `#PR` → 価格・レビュー → （5と0のつく日・セール中なら「今日買う理由」を自動追記）→ `affiliateUrl`
+
+テンプレは `hook-honne` / `hook-minna` / `hook-teiten` / `hook-price` の4種を商品×日付で自動選択。すべて「毎日ランキングを見てるしろくま」の脱力・正直トーンで統一しています。
+
+### 価値投稿（slot 1）
+
+リンク・PRなしの単発投稿。セール攻略、レビューの読み方、ポイント計算、失敗談など「保存したくなるネタ」を `value_posts.py` のプールから日付ローテで選びます。マラソン/スーパーセール期間中は攻略系を優先します。
+
+### 共通ルール
+
+- ハート系絵文字は使いません（🐻‍❄️は可）
+- 全投稿を問いかけで締めて返信を促します
 
 ## 失敗時の切り分け
 

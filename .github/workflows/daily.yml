@@ -1,7 +1,8 @@
 name: Threads Rakuten daily post
 
 # 毎日3回 JST: 08:00 / 12:00 / 20:00
-# 本投稿(リンクなし) → 自分リプ(#PR + 楽天アフィURL)
+# slot 0/2: 商品紹介 = 本投稿(リンクなし) → 自分リプ(#PR + 楽天アフィURL)
+# slot 1  : 価値投稿(リンクなし・保存ネタ) ※config.VALUE_SLOTS で変更可
 
 on:
   schedule:

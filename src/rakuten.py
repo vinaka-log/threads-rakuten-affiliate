@@ -34,10 +34,24 @@ class RakutenItem:
     def short_name(self) -> str:
         """投稿向けに商品名を短縮（先頭装飾を除去 / 最大40字）。"""
         name = self.item_name.strip()
-        # 先頭の【...】[…]（…）を繰り返し除去
+        # 先頭の【...】[…]（…）＼...／ を繰り返し除去
         prev = None
         while prev != name:
             prev = name
+            name = re.sub(
+                r"^(【[^】]*】|\[[^\]]*\]|（[^）]*）|\([^)]*\)|＼[^／]*／|\\[^/]*/)\s*",
+                "",
+                name,
+            )
+        # 末尾の「※...」注記を除去
+        name = re.sub(r"※[^※]*$", "", name).strip()
+        # 先頭の「〜★」宣伝セグメント（例: ポイント最大19倍★）を繰り返し除去
+        while True:
+            m = re.match(r"^[^★]{1,45}★\s*", name)
+            if not m or len(name) - m.end() < 8:
+                break
+            name = name[m.end() :]
+            # セグメント除去で先頭に現れた括弧装飾も再除去
             name = re.sub(r"^(【[^】]*】|\[[^\]]*\]|（[^）]*）|\([^)]*\))\s*", "", name)
         # 残った途中の装飾の前まで（十分長い場合のみ）
         for sep in ("【", "［", "[", "／", "/"):

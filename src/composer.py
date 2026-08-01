@@ -17,9 +17,13 @@ from typing import List, Sequence, Tuple
 
 import config
 from picker import PickResult
+from sale import sale_lines
+from value_posts import ValuePost, pick_value_post
 
 _URL_RE = re.compile(r"https?://|www\.", re.IGNORECASE)
-_HEART_RE = re.compile(r"[💕❤️🧡💛💚💙💜🖤🤍🤎💖💗💓💞💘💝💟🫶♥]")
+# 注意: ❤️ 等の異体字セレクタ(U+FE0F)を文字クラスに含めると
+# 🐻‍❄️ のような合成絵文字まで誤検知するため、基底文字のみ列挙する。
+_HEART_RE = re.compile("[\u2764\u2765\u2665💕🧡💛💚💙💜🖤🤍🤎💖💗💓💞💘💝💟🫶]")
 
 
 @dataclass(frozen=True)
@@ -31,38 +35,48 @@ class ComposedPost:
 
 
 # 本投稿テンプレ: {short_name} {category} {rank} {review_avg} {review_count} {price}
+# 方針:
+#   - 1行目は42文字以内の「悩み・あるある・本音」フック（商品名から入らない）
+#   - シロクマの脱力・正直トーンで統一
+#   - 最後は問いかけで締めて返信を促す
 _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
     (
-        "hook-rank",
-        "で、楽天の{category}ランキング見てたら\n"
-        "これレビュー{review_avg}点なのに毎日上位なんだけど\n\n"
+        "hook-honne",
+        "正直、ランキング上位って疑ってかかるタイプ🐻‍❄️\n\n"
+        "でも今日の{category}で見つけたこれ、\n"
+        "レビュー{review_count}件で{review_avg}点は疑えなかった…\n\n"
         "「{short_name}」\n\n"
-        "なんで売れてるのか分かった気がする\n"
-        "続きはリプ👇",
+        "詳細はリプに置いとくね👇\n"
+        "使ってる人いたら、実際どう？",
     ),
     (
-        "hook-review",
-        "レビュー{review_count}件・平均{review_avg}点の{category}、\n"
-        "いま楽天でよく見かけるやつ見つけた\n\n"
+        "hook-minna",
+        "{category}って、結局みんな何買ってるんだろ?\n\n"
+        "気になって楽天のランキング見てきた🐻‍❄️\n"
+        "今日の上位にいたのがこれ。\n\n"
+        "「{short_name}」\n"
+        "{price}円でレビュー{review_avg}点。\n\n"
+        "リプに詳細まとめた👇\n"
+        "もう持ってる人いたら感想教えて",
+    ),
+    (
+        "hook-teiten",
+        "今日もランキング見てきたよ🐻‍❄️\n\n"
+        "{category}でここ最近ずっと上位にいるのが\n"
         "「{short_name}」\n\n"
-        "口コミの共通点、気になる人いる？\n"
-        "続きはリプ👇",
+        "レビュー{review_avg}点（{review_count}件）。\n"
+        "まあ、売れ続けてるのには理由がありそう。\n\n"
+        "気になる人はリプ見て👇\n"
+        "これ系で他におすすめあったら教えて",
     ),
     (
         "hook-price",
-        "これ{price}円でこのレビュー数は強すぎない？\n\n"
-        "楽天{category}売れ筋の\n"
-        "「{short_name}」\n\n"
-        "とりあえず仕様だけ整理した↓\n"
-        "続きはリプ👇",
-    ),
-    (
-        "hook-daily",
-        "今日の楽天{category}チェック結果\n\n"
-        "ランキング上位で気になったのが\n"
-        "「{short_name}」\n\n"
-        "レビュー{review_avg}点 / {review_count}件\n"
-        "詳細はリプにまとめた👇",
+        "{price}円でレビュー{review_count}件って、何ごと?\n\n"
+        "楽天の{category}ランキングで見つけた\n"
+        "「{short_name}」🐻‍❄️\n\n"
+        "安いから売れてるのか、良いから売れてるのか…\n"
+        "スペックはリプに整理した👇\n\n"
+        "買ったことある人いる？",
     ),
 )
 
@@ -73,8 +87,9 @@ _REPLY_TEMPLATE = (
     "・価格: {price}円\n"
     "・レビュー: {review_avg}点（{review_count}件）\n"
     "{rank_line}"
-    "・ショップ: {shop_name}\n\n"
-    "気になった人はこちら↓\n"
+    "・ショップ: {shop_name}\n"
+    "{sale_block}"
+    "\n気になった人はこちら↓\n"
     "{affiliate_url}"
 )
 
@@ -122,6 +137,9 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
     if tid not in templates:
         raise ValueError(f"未知の template_id: {tid}")
 
+    lines = sale_lines(on)
+    sale_block = "".join(f"\n{line}" for line in lines) + ("\n" if lines else "")
+
     fields = {
         "short_name": item.short_name,
         "category": pick.genre.short,
@@ -132,6 +150,7 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
         "shop_name": item.shop_name or "楽天市場",
         "affiliate_url": item.affiliate_url,
         "rank_line": f"・ランキング: {item.rank}位付近\n" if item.rank else "",
+        "sale_block": sale_block,
     }
 
     main = _truncate(templates[tid].format(**fields))
@@ -143,4 +162,27 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
         item_code=item.item_code,
         genre_id=pick.genre.id,
         template_id=tid,
+    )
+
+
+def compose_value(on: date, slot: int = 0, *, value_id: str | None = None) -> ComposedPost:
+    """価値投稿（リンクなし・単発）を組み立てる。"""
+    if value_id:
+        from value_posts import _find
+
+        post: ValuePost = _find(value_id)
+    else:
+        post = pick_value_post(on, slot)
+    text = _truncate(post.text)
+    if _URL_RE.search(text):
+        raise ValueError("価値投稿にURLを含められません")
+    if _HEART_RE.search(text):
+        raise ValueError("価値投稿にハート系絵文字があります")
+    if not text.strip():
+        raise ValueError("価値投稿が空です")
+    return ComposedPost(
+        texts=[text],
+        item_code=f"value:{post.value_id}",
+        genre_id="",
+        template_id=f"value-{post.value_id}",
     )
