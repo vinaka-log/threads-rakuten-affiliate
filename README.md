@@ -199,11 +199,11 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 ### 商品紹介（slot 1 / 7）
 
-1. **本投稿** … URLなし（⑥商品画像は本投稿に添付）。悩みフック → 使用シーン / 買う理由 / 失敗回避 →「リプ見て👇」
-2. **自分リプ** … 1行目 `#PR` → 価格・レビュー・買う理由 → （ポイント倍率気配・5と0の日・セール）→ `affiliateUrl`
+1. **本投稿** … URLなし（商品画像添付）。構成は **悩み → 困り事 → 買うとこう助かる → 商品** →「リプ見て👇」
+2. **自分リプ** … 1行目 `#PR` → 悩み/困り事/ベネフィット → 価格・レビュー → （ポイント倍率気配・5と0の日・セール）→ `affiliateUrl`
 
-選定は `PAIN_INTENTS` の悩みキーワード検索が先で、取れなければランキングへフォールバック。  
-テンプレは `hook-stock` / `hook-heavy` / `hook-tonight` / `hook-reason`（悩みごとに既定あり）。
+選定は `PAIN_INTENTS` の悩みキーワード検索が先。各悩みに `problem`（困り）と `benefit`（助かること）を持たせ、スペックより役立ちを先に伝える。  
+既定テンプレは `hook-benefit`（他に `hook-stock` / `hook-heavy` / `hook-tonight` / `hook-reason`）。
 
 ### ランキングダイジェスト（slot 3 / 5 / 6 / 9）
 
