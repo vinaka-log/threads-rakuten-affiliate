@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-01T19:58:43+09:00",
+  "updated_at": "2026-08-01T21:05:36+09:00",
   "entries": [
     {
       "item_code": "nuthyougo:10000672",
@@ -69,6 +69,20 @@
         "17900667741536684",
         "18201832807365819"
       ]
+    },
+    {
+      "item_code": "larocheposay:10000014",
+      "item_name": "ポイント最大19倍★楽天 Brand Day 7/30 00:00~ 7/31 23:59★【公式】UVイデア XL プロテクショントーンアップ ホワイト/ローズ+/クリア/ティント/ 単品［ 日焼け止め 化粧下地 日焼け対策 UVケア SPF 50+ 乳液 くすみ 乾燥肌 正規品 ラ ロッシュ ポゼ ダーマコスメ ］",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 7,
+      "posted_on": "2026-08-01",
+      "threads_post_ids": [
+        "18094328531632689",
+        "18004867943766458"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00twl6n.x8u2bbed.g00twl6n.x8u2cc83/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flarocheposay%2Fl00255%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 11
     }
   ]
 }
