@@ -5,9 +5,10 @@
 
 ペルソナ A（家庭の消耗品・時短買い）向け:
   ストック補充・重い日用品の宅配・ポイント日のまとめ買いが主語。
+  うち1日2本は「30代共働きのリアル苦悩」共感投稿（STRUGGLE_SLOTS）。
 
-1日に config.VALUE_SLOTS の数だけ静的投稿が出るため、
-プールは十分な本数を維持する（36本 / 4本毎日 = 9日で一巡）。
+1日に config.VALUE_SLOTS の数だけ静的投稿が出る。
+攻略ネタは tip 枠、苦悩は struggle 枠で別プールをローテする。
 """
 
 from __future__ import annotations
@@ -413,13 +414,174 @@ _POOL: Sequence[ValuePost] = (
     ),
 )
 
+# 30代共働きのリアル苦悩（リンクなし・PRなし）。
+# STRUGGLE_SLOTS（1日2本）専用。共感と返信を取りにいく。
+# 方針:
+#   - 攻略ノウハウより「あるあるの吐露」
+#   - しろくま視点だが、家庭の買い足し担当の本音
+#   - 最後は問いかけ（共感の返信を誘う）
+#   - ハート絵文字なし / URLなし
+_STRUGGLE_POOL: Sequence[ValuePost] = (
+    ValuePost(
+        "struggle-empty-fridge",
+        "共働きって、冷蔵庫が空なのに\n"
+        "どっちも「今日は無理」って顔してる時間が一番つらい\n\n"
+        "仕事終わって帰宅して、\n"
+        "ドア開けた瞬間に現実が来るんだよね…🐻‍❄️\n\n"
+        "外食でもいいのに、なぜか罪悪感がある。\n"
+        "かといってスーパーに寄る体力もない。\n\n"
+        "同じ時間帯、みんな何してる？",
+    ),
+    ValuePost(
+        "struggle-who-buys",
+        "家の消耗品、気づいた方が買うルールになってない？\n\n"
+        "気づくの、だいたい同じ人なんだよな…🐻‍❄️\n"
+        "トイレットペーパーの残量センサー、\n"
+        "共働き夫婦のどちらかに偏りがち。\n\n"
+        "文句というより、見えてしまう側の疲れ。\n"
+        "見えないものは存在しない、が家庭では強い。\n\n"
+        "うちも偏ってる人、いる？",
+    ),
+    ValuePost(
+        "struggle-drugstore-overtime",
+        "残業終わりにドラッグストア寄って、\n"
+        "洗剤と牛乳だけ持って帰る夜、好きな人いる？\n\n"
+        "しろくまは好きじゃない。\n"
+        "でも「切れてる」が分かってると寄っちゃう…🐻‍❄️\n\n"
+        "30代共働きの夜って、\n"
+        "仕事のあとにもう一本のクエストがある感じ。\n\n"
+        "帰りの寄り道、やめられた人いる？",
+    ),
+    ValuePost(
+        "struggle-weekend-errands",
+        "休日なのに、休みに見えなくて笑う\n\n"
+        "午前: 買い出し\n"
+        "午後: 掃除と洗い物と宅配のダンボール\n"
+        "夜: 「明日も早いし…」でもう動けない\n\n"
+        "共働きあるあるだと思うんだけど、\n"
+        "週末を回復に使えないのが地味に効く🐻‍❄️\n\n"
+        "日曜の夜、みんな何してる？",
+    ),
+    ValuePost(
+        "struggle-mental-stock",
+        "頭の中のタブ、閉じられない\n\n"
+        "・柔軟剤あと何回分だっけ\n"
+        "・子どもの水筒のパッキン壊れてない？\n"
+        "・米、いつ頼んだっけ\n"
+        "・今晚のおかず、在庫でいける？\n\n"
+        "仕事中に突然浮かぶの、やめてほしい…🐻‍❄️\n"
+        "メモしても、メモを見ない自分がいる。\n\n"
+        "頭の在庫管理、疲れてる人いる？",
+    ),
+    ValuePost(
+        "struggle-delivery-box",
+        "宅配ボックスが戦場\n\n"
+        "共働きだと日中受け取れないから、\n"
+        "置き配とボックスに頼るんだけど、\n"
+        "気づくと箱だらけで玄関が狭い…🐻‍❄️\n\n"
+        "「ネットで買えば楽」は本当。\n"
+        "でも開封と処分の労働は消えない。\n\n"
+        "ダンボール、どう処理してる？",
+    ),
+    ValuePost(
+        "struggle-night-cart",
+        "夜22時、カゴに入れただけで満足して寝る\n\n"
+        "買う気満々でアプリ開いて、\n"
+        "レビュー読んで、比較して、\n"
+        "結局「明日でいいか」って閉じる…🐻‍❄️\n\n"
+        "共働きの夜って、決断力の残量が少ない。\n"
+        "カゴは、明日の自分への申し送り。\n\n"
+        "カゴ放置、何個たまってる？",
+    ),
+    ValuePost(
+        "struggle-point-guilt",
+        "ポイント日を逃すと、なぜか自己嫌悪する\n\n"
+        " rationally は数百円の差なのに、\n"
+        "「また損した」が頭に残るんだよね🐻‍❄️\n\n"
+        "忙しい日に賢く買えない自分が、\n"
+        "家計に申し訳ない気がする。\n"
+        "そんな感情、いらないんだけど消えない。\n\n"
+        "ポイント最適化、追いすぎて疲れてない？",
+    ),
+    ValuePost(
+        "struggle-both-tired",
+        "「どっちがスーパー寄る？」で無言になる瞬間\n\n"
+        "悪意はない。どっちも限界なだけ。\n"
+        "でも無言が続くと、空気が重い…🐻‍❄️\n\n"
+        "結局、近い方のコンビニでお茶とパン。\n"
+        "正解かどうかより、今夜を終わらせたい。\n\n"
+        "似た会話、したことある？",
+    ),
+    ValuePost(
+        "struggle-invisible-work",
+        "買って、開封して、補充して、空容器捨てて、\n"
+        "次のタイミングを覚えておく。\n\n"
+        "これ全部、仕事じゃない扱いになりがち。\n"
+        "でもやらないと生活が止まるんだよね🐻‍❄️\n\n"
+        "30代共働きの消耗品管理、\n"
+        "地味なのに毎日発生する。\n\n"
+        "見えない家事、誰が持ってる？",
+    ),
+    ValuePost(
+        "struggle-salary-day",
+        "給料日なのに、余裕が来ない\n\n"
+        "振込を見て一瞬だけ安心する。\n"
+        "そのあと固定費と積立と日用品で薄まる…🐻‍❄️\n\n"
+        "「贅沢してないのに残らない」が、\n"
+        "いちばん静かにくるストレス。\n\n"
+        "日用品の値上げ、家計で感じてる？",
+    ),
+    ValuePost(
+        "struggle-morning-out",
+        "朝、ティッシュも洗剤も余裕がある家にしたい\n\n"
+        "実際は「これ昨日で終わりだった」が連発。\n"
+        "出勤前に慌てるのが、いちばん嫌…🐻‍❄️\n\n"
+        "前夜に気づいても、もう動けない。\n"
+        "だからストック信仰が育つ。\n\n"
+        "朝の消耗品パニック、あるある？",
+    ),
+    ValuePost(
+        "struggle-compare",
+        "SNSの「時短が完璧な共働き」見ると、\n"
+        "うちの玄関のリアリティが刺さる\n\n"
+        "箱、靴、明日の袋、なんかの紙。\n"
+        "完璧じゃなくて回ってるだけなのに、\n"
+        "なぜか負けた気がする🐻‍❄️\n\n"
+        "比べる相手を間違えると消耗する。\n\n"
+        "最近見て凹んだ投稿、ある？",
+    ),
+    ValuePost(
+        "struggle-tiny-win",
+        "正直、大きな成功より\n"
+        "「切れそうな洗剤を先に買えた日」が勝利\n\n"
+        "共働きって、ヒーローイベントが少ない。\n"
+        "あるのは小さな回避の連続…🐻‍❄️\n\n"
+        "今日の小さな勝ち、なにがあった？\n"
+        "トイレットペーパーでもいい。教えて",
+    ),
+)
+
 
 def pool() -> Sequence[ValuePost]:
     return _POOL
 
 
+def struggle_pool() -> Sequence[ValuePost]:
+    return _STRUGGLE_POOL
+
+
+def _struggle_position(slot: int) -> int:
+    """その日の苦悩枠のうち何番目か（0始まり）。"""
+    if slot in config.STRUGGLE_SLOTS:
+        return config.STRUGGLE_SLOTS.index(slot)
+    return 0
+
+
 def _static_position(slot: int) -> int:
-    """その日の静的価値枠のうち何番目か（0始まり）。"""
+    """その日の攻略系価値枠のうち何番目か（0始まり）。"""
+    tip_slots = tuple(s for s in config.VALUE_SLOTS if s not in config.STRUGGLE_SLOTS)
+    if slot in tip_slots:
+        return tip_slots.index(slot)
     if slot in config.VALUE_SLOTS:
         return config.VALUE_SLOTS.index(slot)
     return slot % max(1, len(config.VALUE_SLOTS))
@@ -428,9 +590,14 @@ def _static_position(slot: int) -> int:
 def pick_value_post(on: date, slot: int = 0) -> ValuePost:
     """日付×枠ローテで価値投稿を1本選ぶ。
 
-    セール期間中は、その日の最初の静的枠だけ攻略系を優先し、
-    他の枠で同じ投稿が重複しないようにする。
+    STRUGGLE_SLOTS は共働きリアル苦悩プールから選ぶ。
+    それ以外は攻略・保存ネタプール。セール時は攻略枠の先頭だけ優先。
     """
+    if slot in config.STRUGGLE_SLOTS:
+        k = _struggle_position(slot)
+        idx = (on.toordinal() * len(config.STRUGGLE_SLOTS) + k) % len(_STRUGGLE_POOL)
+        return _STRUGGLE_POOL[idx]
+
     label = active_sale_label(on)
     priority: ValuePost | None = None
     if label and "マラソン" in label:
@@ -438,11 +605,12 @@ def pick_value_post(on: date, slot: int = 0) -> ValuePost:
     elif label and "スーパーセール" in label:
         priority = _find("regret-checklist")
 
+    tip_slots = tuple(s for s in config.VALUE_SLOTS if s not in config.STRUGGLE_SLOTS)
     k = _static_position(slot)
     if priority is not None and k == 0:
         return priority
 
-    idx = (on.toordinal() * len(config.VALUE_SLOTS) + k) % len(_POOL)
+    idx = (on.toordinal() * max(1, len(tip_slots)) + k) % len(_POOL)
     picked = _POOL[idx]
     if priority is not None and picked.value_id == priority.value_id:
         picked = _POOL[(idx + 1) % len(_POOL)]
@@ -451,6 +619,9 @@ def pick_value_post(on: date, slot: int = 0) -> ValuePost:
 
 def _find(value_id: str) -> ValuePost:
     for p in _POOL:
+        if p.value_id == value_id:
+            return p
+    for p in _STRUGGLE_POOL:
         if p.value_id == value_id:
             return p
     raise KeyError(value_id)

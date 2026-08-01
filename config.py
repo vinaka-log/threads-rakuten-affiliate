@@ -241,6 +241,10 @@ DIGEST_SLOTS: Tuple[int, ...] = (3, 5, 6, 9)
 # 静的な価値投稿（value_posts.py のプールをローテ）を出す枠。
 VALUE_SLOTS: Tuple[int, ...] = (0, 2, 4, 8)
 
+# うち2枠は「30代共働きのリアル苦悩」投稿（攻略ネタではなく共感系）。
+# 12:00 昼休み / 21:00 夜のひと息。
+STRUGGLE_SLOTS: Tuple[int, ...] = (2, 8)
+
 # 伸びた価値投稿の再利用（参考: 3日に1回）。
 # REUSE_SLOTS では通常ローテより再利用キューを優先する。
 REUSE_INTERVAL_DAYS = 3
