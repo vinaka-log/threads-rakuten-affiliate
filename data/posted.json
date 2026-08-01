@@ -1,4 +1,19 @@
 {
-  "updated_at": null,
-  "entries": []
+  "updated_at": "2026-08-01T09:57:01+09:00",
+  "entries": [
+    {
+      "item_code": "nuthyougo:10000672",
+      "item_name": "ミックスナッツ 1kg 送料無料 素焼きミックスナッツ 大人気3種類素焼きナッツ プレミアム ミックスナッツ 素焼きアーモンド 素焼きカシューナッツ 生くるみ 自然 ナッツ おつまみ おやつ『無添加・無塩・植物油不使用』",
+      "genre_id": "551167",
+      "genre_label": "キッチン用品・食器・調理器具",
+      "slot": 0,
+      "posted_on": "2026-08-01",
+      "threads_post_ids": [
+        "17975680008120421",
+        "18056301563610491"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00trtsn.x8u2b3b7.g00trtsn.x8u2c2c4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnuthyougo%2Fitem610%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 1
+    }
+  ]
 }
