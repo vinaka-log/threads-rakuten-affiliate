@@ -165,6 +165,97 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
     )
 
 
+# ダイジェスト用: TOP3の下に添える一言（日付ローテ）
+_DIGEST_COMMENTS: Sequence[str] = (
+    "毎日見てると「また君か」ってやつがいるんだよね",
+    "しばらく順位が動かないやつは、だいたい本物",
+    "急に入ってきた新顔は、ちょっと様子を見る派",
+    "セールが近づくと顔ぶれが変わるから、そこも見てる",
+)
+
+
+def _shorten(name: str, limit: int = 28) -> str:
+    name = name.strip()
+    return name if len(name) <= limit else name[: limit - 1] + "…"
+
+
+def _validate_generic(texts: List[str]) -> None:
+    for i, t in enumerate(texts):
+        if _URL_RE.search(t):
+            raise ValueError(f"texts[{i}] にURLを含められません")
+        if _HEART_RE.search(t):
+            raise ValueError(f"texts[{i}] にハート系絵文字があります")
+        if len(t) > config.MAX_TEXT_LEN:
+            raise ValueError(f"texts[{i}] が長すぎます ({len(t)} > {config.MAX_TEXT_LEN})")
+        if not t.strip():
+            raise ValueError(f"texts[{i}] が空です")
+
+
+def compose_digest(client, on: date, slot: int, *, fmt: str | None = None) -> ComposedPost:
+    """ランキングダイジェスト（リンクなし・毎日内容が変わる価値投稿）。
+
+    fmt: top3 / quiz / sleeper。省略時は日付×枠でローテ。
+    """
+    from picker import genre_for_slot
+
+    genre = genre_for_slot(slot, on)
+    ranking = client.fetch_ranking(genre.id, hits=10)
+    if len(ranking) < 3:
+        raise RuntimeError(f"ダイジェストに必要な件数が取れません genre={genre.id}")
+
+    # 枠のインデックス（slot番号そのものだと mod 3 で同日衝突するため）でローテ
+    k = config.DIGEST_SLOTS.index(slot) if slot in config.DIGEST_SLOTS else slot
+    fmt = fmt or ("top3", "quiz", "sleeper")[(on.toordinal() + k) % 3]
+    names = [_shorten(i.short_name) for i in ranking]
+
+    if fmt == "top3":
+        comment = _DIGEST_COMMENTS[(on.toordinal() + slot) % len(_DIGEST_COMMENTS)]
+        texts = [
+            f"今日の楽天{genre.short}ランキング、上位メモ🐻‍❄️\n\n"
+            f"1位 {names[0]}\n"
+            f"2位 {names[1]}\n"
+            f"3位 {names[2]}\n\n"
+            f"{comment}。\n\n"
+            f"この中で気になるの、あった？"
+        ]
+    elif fmt == "quiz":
+        top = ranking[0]
+        texts = [
+            f"【クイズ】今日の楽天{genre.short}ランキング🐻‍❄️\n\n"
+            f"2位 {names[1]}\n"
+            f"3位 {names[2]}\n\n"
+            f"さて、1位はなんでしょう?\n"
+            f"ヒント: レビュー{top.review_count:,}件のあれ。\n\n"
+            f"答えはリプに置いとくね👇",
+            f"正解は…\n\n"
+            f"「{names[0]}」でした🐻‍❄️\n"
+            f"レビュー{top.review_average:.1f}点（{top.review_count:,}件）。\n\n"
+            f"当たった人いる？",
+        ]
+    elif fmt == "sleeper":
+        tail = ranking[-3:]
+        lines = "\n".join(f"・{_shorten(i.short_name)}" for i in tail)
+        texts = [
+            f"1位より「じわじわ来てるゾーン」が好きなんだよね🐻‍❄️\n\n"
+            f"今日の楽天{genre.short}ランキング、\n"
+            f"上位のすぐ下にいたのがこのへん。\n\n"
+            f"{lines}\n\n"
+            f"派手じゃないけど、掘り出し物はだいたいここにいる。\n\n"
+            f"使ってるのあったら教えて"
+        ]
+    else:
+        raise ValueError(f"未知のダイジェスト形式: {fmt}")
+
+    texts = [_truncate(t) for t in texts]
+    _validate_generic(texts)
+    return ComposedPost(
+        texts=texts,
+        item_code=f"digest:{fmt}:{genre.id}",
+        genre_id=genre.id,
+        template_id=f"digest-{fmt}",
+    )
+
+
 def compose_value(on: date, slot: int = 0, *, value_id: str | None = None) -> ComposedPost:
     """価値投稿（リンクなし・単発）を組み立てる。"""
     if value_id:

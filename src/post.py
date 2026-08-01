@@ -26,7 +26,7 @@ if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
 import config
-from composer import compose, compose_value
+from composer import compose, compose_digest, compose_value
 from picker import genre_for_slot, pick_item, record_post, record_value_post, today_jst
 from rakuten import RakutenClient
 from threads_client import ThreadsClient
@@ -36,15 +36,18 @@ def _default_slot() -> int:
     raw = (os.environ.get("THREADS_SLOT") or "").strip()
     if raw.isdigit():
         return int(raw)
-    # 時刻から推定（JST）
-    hour = __import__("datetime").datetime.now(
-        __import__("datetime").timezone(__import__("datetime").timedelta(hours=9))
-    ).hour
-    if hour < 10:
-        return 0
-    if hour < 16:
-        return 1
-    return 2
+    # 現在時刻（JST）に最も近い枠を選ぶ
+    from datetime import datetime, timedelta, timezone
+
+    now = datetime.now(timezone(timedelta(hours=9)))
+    minutes = now.hour * 60 + now.minute
+    best, best_dist = 0, 10**9
+    for i, label in enumerate(config.SLOT_LABELS):
+        h, m = label.split(":")
+        dist = abs(minutes - (int(h) * 60 + int(m)))
+        if dist < best_dist:
+            best, best_dist = i, dist
+    return best
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -57,7 +60,7 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         choices=tuple(range(config.POSTS_PER_DAY)),
         default=None,
-        help="日内枠 0=08 1=12 2=20",
+        help="日内枠 0..9（時刻は config.SLOT_LABELS 参照）",
     )
     p.add_argument(
         "--genre",
@@ -82,18 +85,30 @@ def build_parser() -> argparse.ArgumentParser:
     kind.add_argument(
         "--value",
         action="store_true",
-        help="価値投稿（リンクなし）を強制。省略時は slot が VALUE_SLOTS なら自動で価値投稿",
+        help="静的価値投稿（リンクなし）を強制。省略時は slot 種別で自動判定",
+    )
+    kind.add_argument(
+        "--digest",
+        action="store_true",
+        help="ランキングダイジェスト（リンクなし）を強制",
     )
     kind.add_argument(
         "--item",
         action="store_true",
-        help="商品紹介投稿を強制（VALUE_SLOTS の slot でも商品を投稿）",
+        help="商品紹介投稿を強制",
     )
     p.add_argument(
         "--value-id",
         type=str,
         default=None,
         help="価値投稿のIDを直接指定（省略時は日付ローテ）",
+    )
+    p.add_argument(
+        "--digest-format",
+        type=str,
+        choices=("top3", "quiz", "sleeper"),
+        default=None,
+        help="ダイジェスト形式を直接指定（省略時は日付×枠でローテ）",
     )
     return p
 
@@ -151,26 +166,37 @@ def main(argv: list[str] | None = None) -> int:
 
     slot = args.slot if args.slot is not None else _default_slot()
 
-    # 価値投稿かどうかの判定:
-    #   --value 明示 > --item/--genre/--template による商品強制 > VALUE_SLOTS の自動割当
-    is_value = args.value or (
-        slot in config.VALUE_SLOTS
-        and not args.item
-        and not args.genre
-        and not args.template
-    )
+    # 投稿種別の判定:
+    #   明示フラグ（--value / --digest / --item / --genre / --template）> slot 種別の自動割当
+    if args.value:
+        kind = "value"
+    elif args.digest:
+        kind = "digest"
+    elif args.item or args.genre or args.template:
+        kind = "item"
+    elif slot in config.VALUE_SLOTS:
+        kind = "value"
+    elif slot in config.DIGEST_SLOTS:
+        kind = "digest"
+    else:
+        kind = "item"
 
-    if is_value:
-        composed = compose_value(on, slot, value_id=args.value_id)
+    if kind in ("value", "digest"):
+        if kind == "value":
+            composed = compose_value(on, slot, value_id=args.value_id)
+        else:
+            composed = compose_digest(RakutenClient(), on, slot, fmt=args.digest_format)
         label = config.SLOT_LABELS[slot] if 0 <= slot < len(config.SLOT_LABELS) else "?"
-        print("=== Threads value post preview ===")
+        print(f"=== Threads {kind} post preview ===")
         print(f"mode: {'dry-run' if dry_run else 'publish'}")
         print(f"date: {on.isoformat()}  slot: {slot} ({label})")
         print(f"template: {composed.template_id}")
         print("---")
-        print(f"[MAIN] ({len(composed.texts[0])} chars)")
-        print(composed.texts[0])
-        print("---")
+        for i, text in enumerate(composed.texts):
+            title = "MAIN" if i == 0 else f"REPLY[{i}]"
+            print(f"[{title}] ({len(text)} chars)")
+            print(text)
+            print("---")
         if dry_run:
             print("dry-run: not publishing, ledger unchanged")
             return 0
@@ -180,7 +206,7 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"WARNING: {w}", file=sys.stderr)
         print(f"published post_ids={result.post_ids} partial={result.partial}")
         record_value_post(
-            value_id=composed.item_code.removeprefix("value:"),
+            value_id=composed.item_code.split(":", 1)[-1],
             slot=slot,
             posted_on=on.isoformat(),
             threads_post_ids=result.post_ids,

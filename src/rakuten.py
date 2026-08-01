@@ -61,6 +61,9 @@ class RakutenItem:
                     name = head
                     break
         name = name.strip(" 　-–—|｜")
+        # 削りすぎて商品名として意味をなさない場合は、注記だけ除いた元名にフォールバック
+        if len(name) < 10:
+            name = re.sub(r"※[^※]*$", "", self.item_name).strip()
         if len(name) > 40:
             name = name[:39] + "…"
         return name or self.item_name[:40]
