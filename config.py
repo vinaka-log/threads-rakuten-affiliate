@@ -89,9 +89,13 @@ class PainIntent:
     name_hints: Tuple[str, ...]
     # 優先ジャンル（空なら GENRES ローテ）
     genre_id: str
-    # 使用シーン
+    # 困っている場面
     scene: str
-    # 買う理由（一瞬で浮かぶ一文）
+    # 買わないと続く困り（Before）
+    problem: str
+    # 買うとどう楽になるか（After / ベネフィット）
+    benefit: str
+    # 買う理由（補足）
     buy_reason: str
     # 失敗回避
     avoid: str
@@ -100,6 +104,7 @@ class PainIntent:
 
 
 # 家庭の買い足し悩み。日付×商品枠でローテ。
+# problem / benefit で「買うとその人にどう役立つか」を必ず言えるようにする。
 PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="detergent",
@@ -107,10 +112,12 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         keyword="洗濯洗剤 詰め替え",
         name_hints=("洗剤", "詰め替え", "液体洗剤"),
         genre_id="100939",
-        scene="洗濯機まわりのストックが心もとないとき",
-        buy_reason="切れてからドラッグストアに走る前に、詰め替えを宅配で足せる",
+        scene="洗濯しようとしたらボトルが軽い夜",
+        problem="切れた瞬間に洗濯が止まり、残業後のドラッグストア行きが発生する",
+        benefit="詰め替えを先に置いておけば、洗濯が止まらず寄り道も減る",
+        buy_reason="共働きの平日は「切れてから買う」が一番高いコスト",
         avoid="香りが強すぎる・容量を見ずに小さい方を掴む失敗を避ける",
-        template_id="hook-stock",
+        template_id="hook-benefit",
     ),
     PainIntent(
         id="softener",
@@ -118,10 +125,12 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         keyword="柔軟剤 詰め替え",
         name_hints=("柔軟剤", "詰替", "詰め替え"),
         genre_id="100939",
-        scene="洗濯カゴが溜まる平日の夜",
-        buy_reason="詰め替えを先に置いておくと、洗濯が止まらない",
-        avoid="匂い残りの合わない香りをリピしてしまう前にレビューの不満も見る",
-        template_id="hook-stock",
+        scene="洗濯カゴが溜まってるのにボトルが空の平日",
+        problem="空だと洗濯コースが止まり、衣類が部屋に滞留する",
+        benefit="替えがあるだけで洗濯が回り続け、朝の着替えパニックが減る",
+        buy_reason="柔軟剤切れは家事全体の詰まりに直結する",
+        avoid="匂い残りの合わない香りをリピする前にレビューの不満も見る",
+        template_id="hook-benefit",
     ),
     PainIntent(
         id="toilet-paper",
@@ -129,10 +138,12 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         keyword="トイレットペーパー まとめ買い",
         name_hints=("トイレットペーパー", "トイレ", "シングル", "ダブル"),
         genre_id="100939",
-        scene="夜中に芯だけ発見したくないとき",
-        buy_reason="まとめ買いなら重いし、届けてもらった方が楽",
+        scene="夜中に芯だけを発見したくないとき",
+        problem="切れに気づくのが最悪のタイミングで、誰かが深夜に走る羽目になる",
+        benefit="まとめ買い宅配なら重労働なしで、切れリスクを先に潰せる",
+        buy_reason="重い消耗品ほど、店で抱えるより届けてもらう方が生活が楽",
         avoid="シングル/ダブルと芯ありなしの取り違えに注意",
-        template_id="hook-heavy",
+        template_id="hook-benefit",
     ),
     PainIntent(
         id="tissue",
@@ -141,9 +152,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         name_hints=("ティッシュ", "ボックスティッシュ", "ソフトパック"),
         genre_id="100939",
         scene="リビングと寝室で同時に空になるパターン",
-        buy_reason="ケース買いだと単価が落ちて、補充の手間も減る",
+        problem="箱ごとに買うと単価も手間も増え、気づくたびに小さなストレスが積もる",
+        benefit="ケース買いなら補充回数が減り、単価も下がって家計と手間の両方助かる",
+        buy_reason="毎日使うものほど、まとめが効く",
         avoid="ソフトパックと箱の置き場所を確認してから選ぶ",
-        template_id="hook-stock",
+        template_id="hook-benefit",
     ),
     PainIntent(
         id="trash-bag",
@@ -151,10 +164,12 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         keyword="ゴミ袋 半透明",
         name_hints=("ゴミ袋", "ポリ袋", "ごみ袋"),
         genre_id="100939",
-        scene="ゴミの日の朝に袋がないとき",
-        buy_reason="指定サイズをまとめ買いしておくと朝の慌てがなくなる",
+        scene="ゴミの日の朝に指定袋がないとき",
+        problem="朝の出発が遅れ、最悪ゴミを一週間持ち越す",
+        benefit="指定サイズを先に積んでおけば、朝の慌てと持ち越しが消える",
+        buy_reason="ゴミ袋切れは時間も気力も持っていく",
         avoid="自治体の色・厚さ指定を見落とさない",
-        template_id="hook-tonight",
+        template_id="hook-benefit",
     ),
     PainIntent(
         id="water-case",
@@ -163,9 +178,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         name_hints=("水", "ラベルレス", "天然水", "2L", "ケース"),
         genre_id="100227",
         scene="買い出し帰りが重くてしんどい日",
-        buy_reason="ケース水は宅配が本領。ポイント日に寄せるとなお良い",
+        problem="重い水を運ぶたびに疲れが残り、他の家事まで崩れる",
+        benefit="ケース水を宅配に寄せれば、腕も時間も空けて帰宅できる",
+        buy_reason="水は「買う商品」より「運ばなくていい仕組み」",
         avoid="置き場所（箱の高さ）を測ってから決める",
-        template_id="hook-heavy",
+        template_id="hook-benefit",
     ),
     PainIntent(
         id="wrap",
@@ -174,9 +191,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         name_hints=("ラップ", "サランラップ", "保鲜膜"),
         genre_id="551167",
         scene="お弁当や作り置きの朝",
-        buy_reason="替え玉を先に置いておくと、朝の小パニックが消える",
+        problem="朝いちで切れると準備が止まり、出発が全体的に遅れる",
+        benefit="替え玉があれば朝の小パニックが消え、支度が止まらない",
+        buy_reason="朝に効く消耗品は、前夜の自分への投資",
         avoid="幅（22cm/30cm）の取り違えに注意",
-        template_id="hook-stock",
+        template_id="hook-benefit",
     ),
     PainIntent(
         id="dish-sponge",
@@ -184,10 +203,12 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         keyword="キッチン スポンジ 抗菌",
         name_hints=("スポンジ", "キッチンスポンジ", "食器洗い"),
         genre_id="551167",
-        scene="洗い物のたびに気になる衛生感",
-        buy_reason="安くて消耗品だから、まとめ買いが一番コスパいい",
+        scene="洗い物のたびに衛生感が気になるとき",
+        problem="替え時を逃すと気持ち悪さと洗い残し不安が毎日続く",
+        benefit="まとめ買いしておけば迷わず交換でき、洗い物のストレスが下がる",
+        buy_reason="安い消耗品ほど、決断コストをゼロにする価値がある",
         avoid="油汚れ用とグラス用を分けた方が持ちがいい",
-        template_id="hook-reason",
+        template_id="hook-benefit",
     ),
     PainIntent(
         id="dishwasher-tab",
@@ -196,9 +217,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         name_hints=("食洗機", "タブレット", "ジェル", "フィニッシュ", "キュキュット"),
         genre_id="551167",
         scene="食洗機を回すたびに減っていくストック",
-        buy_reason="大容量にすると買い忘れと単価の両方を減らせる",
+        problem="切れると手洗い戻りが発生し、共働きの夜が一気に重くなる",
+        benefit="大容量を先に置けば買い忘れが減り、時短家電が止まらない",
+        buy_reason="食洗機は洗剤があって初めて時短装置になる",
         avoid="機種の専用指定（粉/タブ/ジェル）を確認",
-        template_id="hook-stock",
+        template_id="hook-benefit",
     ),
     PainIntent(
         id="kitchen-paper",
@@ -207,9 +230,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         name_hints=("キッチンペーパー", "クッキングペーパー"),
         genre_id="551167",
         scene="揚げ物や肉の下処理の最中",
-        buy_reason="替えを棚に1個あるだけで調理が止まらない",
+        problem="調理中に切れると手が止まり、油跳ねや片付けが雑になる",
+        benefit="替えが1個あるだけで調理が止まらず、後片付けも楽になる",
+        buy_reason="料理中の切れは、いちばん腹立たしい切れ方",
         avoid="ホルダーサイズに合うかだけ先に見る",
-        template_id="hook-tonight",
+        template_id="hook-benefit",
     ),
 )
 

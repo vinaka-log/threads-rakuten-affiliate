@@ -33,57 +33,64 @@ class ComposedPost:
     template_id: str
 
 
-# 本投稿テンプレ: {pain} {scene} {buy_reason} {avoid} {short_name} ...
-# 方針（ペルソナ A: 家庭の消耗品・時短買い）:
-#   - 1行目は悩みフック（商品名から入らない）
-#   - 使用シーン / 買う理由 / 失敗回避を本文に入れる（⑩）
-#   - シロクマの脱力・正直トーンで統一
-#   - 最後は問いかけで締めて返信を促す
+# 本投稿テンプレ:
+#   悩み → 困り事(Before) → 買うとどう楽か(After) → 商品 → 問いかけ
+# 価格・レビューは主役にしない（⑩ / ベネフィット優先）
 _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
+    (
+        "hook-benefit",
+        "{pain}\n\n"
+        "このままだと: {problem}\n"
+        "これを置くと: {benefit}🐻‍❄️\n\n"
+        "「{short_name}」\n"
+        "{price}円 / レビュー{review_avg}点（{review_count}件）\n\n"
+        "詳細はリプにまとめた👇\n"
+        "同じ悩みあった人、どうしてる？",
+    ),
     (
         "hook-stock",
         "{pain}\n\n"
-        "{scene}に効くのがこれ🐻‍❄️\n"
-        "買う理由: {buy_reason}\n"
-        "注意: {avoid}\n\n"
-        "「{short_name}」\n"
-        "{price}円 / レビュー{review_avg}点（{review_count}件）\n\n"
-        "詳細はリプに置いとくね👇\n"
-        "同じのリピしてる人いる？",
+        "{scene}あるあるだと思う。\n"
+        "困り: {problem}\n"
+        "解決: {benefit}\n\n"
+        "「{short_name}」🐻‍❄️\n"
+        "先に足しておくだけで、夜の自分が助かる。\n\n"
+        "リプに詳細置いとくね👇\n"
+        "切れそうストック、いま何がある？",
     ),
     (
         "hook-heavy",
         "{pain}\n\n"
-        "重いものは宅配に寄せる派なんだよね🐻‍❄️\n"
-        "シーン: {scene}\n"
-        "買う理由: {buy_reason}\n\n"
+        "重いものを店で運ぶコスト、見えてないだけで高い🐻‍❄️\n"
+        "困り: {problem}\n"
+        "買うと: {benefit}\n\n"
         "「{short_name}」\n"
-        "{price}円・レビュー{review_avg}点。\n"
-        "注意: {avoid}\n\n"
-        "リプに詳細まとめた👇\n"
-        "もうネット買いしてる人、感想教えて",
+        "{price}円。宅配に寄せる候補。\n\n"
+        "リプ見てね👇\n"
+        "もうネット買いしてる人、楽になった？",
     ),
     (
         "hook-tonight",
         "{pain}\n\n"
-        "今夜の買い足し候補として見てきた🐻‍❄️\n"
-        "「{short_name}」\n\n"
-        "Before: 切れがちで毎回慌てる\n"
-        "After: {buy_reason}\n"
+        "Before: {problem}\n"
+        "After: {benefit}\n\n"
+        "今夜の候補はこれ🐻‍❄️\n"
+        "「{short_name}」\n"
         "注意: {avoid}\n\n"
         "気になる人はリプ見て👇\n"
-        "家の定番、他にもあったら教えて",
+        "うちの定番、他にもあったら教えて",
     ),
     (
         "hook-reason",
         "{pain}\n\n"
-        "買う理由がすぐ浮かぶやつ、探してきた🐻‍❄️\n"
-        "「{short_name}」\n\n"
-        "・シーン: {scene}\n"
-        "・理由: {buy_reason}\n"
-        "・回避: {avoid}\n"
-        "・{price}円 / レビュー{review_count}件\n\n"
-        "スペックはリプに整理した👇\n"
+        "買う意味がはっきりしてるやつ🐻‍❄️\n"
+        "・場面: {scene}\n"
+        "・困り: {problem}\n"
+        "・助かること: {benefit}\n"
+        "・補足: {buy_reason}\n\n"
+        "「{short_name}」\n"
+        "{price}円 / レビュー{review_count}件\n\n"
+        "スペックはリプに👇\n"
         "使ってる人いたら、実際どう？",
     ),
 )
@@ -92,13 +99,15 @@ _REPLY_TEMPLATE = (
     "#PR\n"
     "アフィリエイトリンクを含みます\n\n"
     "【{short_name}】\n"
+    "・悩み: {pain_short}\n"
+    "・困り事: {problem}\n"
+    "・買うとこう助かる: {benefit}\n"
+    "・補足: {buy_reason}\n"
+    "・注意: {avoid}\n"
     "・価格: {price}円\n"
     "・レビュー: {review_avg}点（{review_count}件）\n"
     "{rank_line}"
     "・ショップ: {shop_name}\n"
-    "・悩み: {pain_short}\n"
-    "・買う理由: {buy_reason}\n"
-    "・向き: 家庭の買い足し・ストック候補\n"
     "{sale_block}"
     "\n気になった人はこちら↓\n"
     "{affiliate_url}"
@@ -173,8 +182,18 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
         "pain": (pain.pain if pain else "今夜の買い足し、迷ってる人へ"),
         "pain_short": (pain.pain.rstrip("？?") if pain else "家庭の買い足し"),
         "scene": (pain.scene if pain else "切れそうな消耗品を先に足すとき"),
+        "problem": (
+            pain.problem
+            if pain
+            else "切れてから買うと、いちばん忙しいタイミングで余計な寄り道が発生する"
+        ),
+        "benefit": (
+            pain.benefit
+            if pain
+            else "先にストックしておけば、夜の自分が助かって生活が止まらない"
+        ),
         "buy_reason": (
-            pain.buy_reason if pain else "切れてから走るより、先にストックした方が楽"
+            pain.buy_reason if pain else "切れてから走るより、先に足した方が共働きは楽"
         ),
         "avoid": (pain.avoid if pain else "サイズ・香り・容量を見ずに掴む失敗を避ける"),
     }
