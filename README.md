@@ -180,11 +180,12 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 枠の種別は `config.py` の `ITEM_SLOTS` / `DIGEST_SLOTS` / `VALUE_SLOTS` で変更できます。CLI では `--item` / `--value` / `--digest` で種別を強制、`--value-id` や `--digest-format`（top3 / quiz / sleeper）で内容を指定できます。
 
-ジャンルは `config.py` の `GENRES` を日付×slot でローテします。ペルソナ A の初期値:
+ジャンルは `config.py` の `GENRES` を日付×slot でローテします。ペルソナ A の主戦場:
 
 - 日用品 (`100939`)
 - キッチン (`551167`)
-- ドリンク (`100227`)
+
+商品紹介はさらに `PAIN_INTENTS`（洗剤切れ・水が重い等）で悩みキーワード検索して選びます。水などは悩み側でジャンル `100227` を個別指定。
 
 ※ 総合ランキングは美容・ガジェットが混ざるため使わない。
 
@@ -198,10 +199,11 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 ### 商品紹介（slot 1 / 7）
 
-1. **本投稿** … URLなし。1行目は42字以内の家庭のあるあるフック（商品名から入らない）→ 買う理由の具体 →「リプ見て👇」→ **問いかけで締める**
-2. **自分リプ** … 1行目 `#PR` → 価格・レビュー → 家庭の買い足し候補である旨 → （5と0のつく日・セール中なら「今日買う理由」を自動追記）→ `affiliateUrl`
+1. **本投稿** … URLなし（⑥商品画像は本投稿に添付）。悩みフック → 使用シーン / 買う理由 / 失敗回避 →「リプ見て👇」
+2. **自分リプ** … 1行目 `#PR` → 価格・レビュー・買う理由 → （ポイント倍率気配・5と0の日・セール）→ `affiliateUrl`
 
-テンプレは `hook-stock` / `hook-heavy` / `hook-tonight` / `hook-reason` の4種を商品×日付で自動選択。すべて「日用品の買い時メモ」の脱力・正直トーンで統一しています。
+選定は `PAIN_INTENTS` の悩みキーワード検索が先で、取れなければランキングへフォールバック。  
+テンプレは `hook-stock` / `hook-heavy` / `hook-tonight` / `hook-reason`（悩みごとに既定あり）。
 
 ### ランキングダイジェスト（slot 3 / 5 / 6 / 9）
 

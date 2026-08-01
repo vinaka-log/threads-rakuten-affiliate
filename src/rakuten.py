@@ -29,6 +29,10 @@ class RakutenItem:
     shop_name: str
     genre_id: str
     rank: Optional[int] = None
+    image_url: str = ""
+    point_rate: int = 0
+    postage_flag: int = 0  # 1=送料込の表記がある場合あり
+    shop_of_the_year_flag: int = 0
 
     @property
     def short_name(self) -> str:
@@ -136,6 +140,27 @@ class RakutenClient:
             return data
 
     @staticmethod
+    def _first_image_url(item: dict) -> str:
+        """mediumImageUrls から投稿向けURLを1つ取る。可能なら解像度を上げる。"""
+        for key in ("mediumImageUrls", "smallImageUrls"):
+            arr = item.get(key) or []
+            if not isinstance(arr, list) or not arr:
+                continue
+            first = arr[0]
+            if isinstance(first, dict):
+                url = str(first.get("imageUrl") or "").strip()
+            else:
+                url = str(first or "").strip()
+            if not url:
+                continue
+            # 128x128 / 64x64 を大きめに（Threads掲載向け）
+            url = re.sub(r"/128x128\.", "/400x400.", url)
+            url = re.sub(r"/64x64\.", "/400x400.", url)
+            url = re.sub(r"_ex=128x128", "_ex=400x400", url)
+            return url
+        return ""
+
+    @staticmethod
     def _parse_item(raw: dict, *, rank: Optional[int] = None) -> Optional[RakutenItem]:
         item = raw.get("Item") if "Item" in raw else raw
         if not isinstance(item, dict):
@@ -162,6 +187,18 @@ class RakutenClient:
             review_count = int(item.get("reviewCount") or 0)
         except (TypeError, ValueError):
             review_count = 0
+        try:
+            point_rate = int(float(item.get("pointRate") or 0))
+        except (TypeError, ValueError):
+            point_rate = 0
+        try:
+            postage_flag = int(item.get("postageFlag") or 0)
+        except (TypeError, ValueError):
+            postage_flag = 0
+        try:
+            soy = int(item.get("shopOfTheYearFlag") or 0)
+        except (TypeError, ValueError):
+            soy = 0
         rank_val = rank
         if rank_val is None and str(item.get("rank") or "").isdigit():
             rank_val = int(item["rank"])
@@ -176,6 +213,10 @@ class RakutenClient:
             shop_name=str(item.get("shopName") or "").strip(),
             genre_id=str(item.get("genreId") or "").strip(),
             rank=rank_val,
+            image_url=RakutenClient._first_image_url(item),
+            point_rate=point_rate,
+            postage_flag=postage_flag,
+            shop_of_the_year_flag=soy,
         )
 
     def fetch_ranking(
@@ -206,8 +247,9 @@ class RakutenClient:
         *,
         hits: int = 10,
         sort: str = "-reviewCount",
+        genre_id: Optional[str] = None,
     ) -> List[RakutenItem]:
-        """キーワードで商品検索（補助用）。"""
+        """キーワードで商品検索（悩み起点の選定用）。"""
         params = self._base_params()
         params.update(
             {
@@ -216,6 +258,8 @@ class RakutenClient:
                 "sort": sort,
             }
         )
+        if genre_id:
+            params["genreId"] = genre_id
         data = self._get(config.RAKUTEN_SEARCH_URL, params)
         items_raw = data.get("Items") or []
         result: List[RakutenItem] = []

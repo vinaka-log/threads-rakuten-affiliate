@@ -34,48 +34,56 @@ class ComposedPost:
     template_id: str
 
 
-# 本投稿テンプレ: {short_name} {category} {rank} {review_avg} {review_count} {price}
+# 本投稿テンプレ: {pain} {scene} {buy_reason} {avoid} {short_name} ...
 # 方針（ペルソナ A: 家庭の消耗品・時短買い）:
-#   - 1行目は42文字以内の「家庭のあるある・買い足し悩み」フック（商品名から入らない）
-#   - 「買う理由」がすぐ浮かぶ具体を本文に1つ入れる
+#   - 1行目は悩みフック（商品名から入らない）
+#   - 使用シーン / 買う理由 / 失敗回避を本文に入れる（⑩）
 #   - シロクマの脱力・正直トーンで統一
 #   - 最後は問いかけで締めて返信を促す
 _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
     (
         "hook-stock",
-        "ストック、切れてから買う派になってない?\n\n"
-        "今日の{category}ランキング、家庭の買い足し枠で目立ってたのがこれ🐻‍❄️\n"
-        "レビュー{review_count}件・{review_avg}点。切れそうになる前に置く系。\n\n"
-        "「{short_name}」\n\n"
+        "{pain}\n\n"
+        "{scene}に効くのがこれ🐻‍❄️\n"
+        "買う理由: {buy_reason}\n"
+        "注意: {avoid}\n\n"
+        "「{short_name}」\n"
+        "{price}円 / レビュー{review_avg}点（{review_count}件）\n\n"
         "詳細はリプに置いとくね👇\n"
         "同じのリピしてる人いる？",
     ),
     (
         "hook-heavy",
-        "重い日用品、まだ店で運んでる?\n\n"
-        "楽天の{category}で、宅配に任せたくなる枠にいたのがこれ🐻‍❄️\n"
-        "{price}円・レビュー{review_avg}点（{review_count}件）。\n\n"
-        "「{short_name}」\n\n"
+        "{pain}\n\n"
+        "重いものは宅配に寄せる派なんだよね🐻‍❄️\n"
+        "シーン: {scene}\n"
+        "買う理由: {buy_reason}\n\n"
+        "「{short_name}」\n"
+        "{price}円・レビュー{review_avg}点。\n"
+        "注意: {avoid}\n\n"
         "リプに詳細まとめた👇\n"
         "もうネット買いしてる人、感想教えて",
     ),
     (
         "hook-tonight",
-        "今夜の買い足し、迷ってる人へ🐻‍❄️\n\n"
-        "{category}でここ最近ずっと上位にいるのが\n"
+        "{pain}\n\n"
+        "今夜の買い足し候補として見てきた🐻‍❄️\n"
         "「{short_name}」\n\n"
-        "レビュー{review_avg}点（{review_count}件）。\n"
-        "「また同じの切れそう」ってときの候補になりそう。\n\n"
+        "Before: 切れがちで毎回慌てる\n"
+        "After: {buy_reason}\n"
+        "注意: {avoid}\n\n"
         "気になる人はリプ見て👇\n"
         "家の定番、他にもあったら教えて",
     ),
     (
         "hook-reason",
-        "買う理由がすぐ浮かぶやつ、探してきた🐻‍❄️\n\n"
-        "楽天の{category}ランキングで見つけた\n"
+        "{pain}\n\n"
+        "買う理由がすぐ浮かぶやつ、探してきた🐻‍❄️\n"
         "「{short_name}」\n\n"
-        "{price}円でレビュー{review_count}件。\n"
-        "点数より「また買う」が多そうな空気。\n\n"
+        "・シーン: {scene}\n"
+        "・理由: {buy_reason}\n"
+        "・回避: {avoid}\n"
+        "・{price}円 / レビュー{review_count}件\n\n"
         "スペックはリプに整理した👇\n"
         "使ってる人いたら、実際どう？",
     ),
@@ -89,6 +97,8 @@ _REPLY_TEMPLATE = (
     "・レビュー: {review_avg}点（{review_count}件）\n"
     "{rank_line}"
     "・ショップ: {shop_name}\n"
+    "・悩み: {pain_short}\n"
+    "・買う理由: {buy_reason}\n"
     "・向き: 家庭の買い足し・ストック候補\n"
     "{sale_block}"
     "\n気になった人はこちら↓\n"
@@ -134,13 +144,21 @@ def _validate(texts: List[str]) -> None:
 def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost:
     item = pick.item
     on = date.fromisoformat(pick.posted_on)
-    tid = template_id or _pick_template_id(item.item_code, on, pick.slot)
+    pain = pick.pain
+    if template_id:
+        tid = template_id
+    elif pain and pain.template_id:
+        tid = pain.template_id
+    else:
+        tid = _pick_template_id(item.item_code, on, pick.slot)
     templates = {k: v for k, v in _MAIN_TEMPLATES}
     if tid not in templates:
         raise ValueError(f"未知の template_id: {tid}")
 
-    lines = sale_lines(on)
-    sale_block = "".join(f"\n{line}" for line in lines) + ("\n" if lines else "")
+    from sale import item_deal_lines
+
+    deal_lines = item_deal_lines(item, on)
+    sale_block = "".join(f"\n{line}" for line in deal_lines) + ("\n" if deal_lines else "")
 
     fields = {
         "short_name": item.short_name,
@@ -153,6 +171,13 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
         "affiliate_url": item.affiliate_url,
         "rank_line": f"・ランキング: {item.rank}位付近\n" if item.rank else "",
         "sale_block": sale_block,
+        "pain": (pain.pain if pain else "今夜の買い足し、迷ってる人へ"),
+        "pain_short": (pain.pain.rstrip("？?") if pain else "家庭の買い足し"),
+        "scene": (pain.scene if pain else "切れそうな消耗品を先に足すとき"),
+        "buy_reason": (
+            pain.buy_reason if pain else "切れてから走るより、先にストックした方が楽"
+        ),
+        "avoid": (pain.avoid if pain else "サイズ・香り・容量を見ずに掴む失敗を避ける"),
     }
 
     main = _truncate(templates[tid].format(**fields))

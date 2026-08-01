@@ -76,7 +76,18 @@ def build_parser() -> argparse.ArgumentParser:
         "--genre",
         type=str,
         default=None,
-        help="楽天 genreId を直接指定（省略時は日付×slot でローテ）",
+        help="楽天 genreId を直接指定（省略時は悩み/日付ローテ）",
+    )
+    p.add_argument(
+        "--pain",
+        type=str,
+        default=None,
+        help="悩みIDを直接指定（config.PAIN_INTENTS の id）",
+    )
+    p.add_argument(
+        "--no-image",
+        action="store_true",
+        help="商品画像を付けない（既定は ATTACH_ITEM_IMAGE）",
     )
     p.add_argument(
         "--date",
@@ -146,12 +157,14 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
-def _print_preview(pick, composed, *, dry_run: bool) -> None:
+def _print_preview(pick, composed, *, dry_run: bool, image_url: str = "") -> None:
     label = config.SLOT_LABELS[pick.slot] if 0 <= pick.slot < len(config.SLOT_LABELS) else "?"
     print("=== Threads × Rakuten preview ===")
     print(f"mode: {'dry-run' if dry_run else 'publish'}")
     print(f"date: {pick.posted_on}  slot: {pick.slot} ({label})")
     print(f"genre: {pick.genre.id} / {pick.genre.label}")
+    if pick.pain:
+        print(f"pain: {pick.pain.id} / {pick.pain.pain}")
     print(f"item: {pick.item.item_code}")
     print(f"name: {pick.item.item_name}")
     print(
@@ -159,6 +172,8 @@ def _print_preview(pick, composed, *, dry_run: bool) -> None:
         f"review: {pick.item.review_average:.1f} ({pick.item.review_count:,})  "
         f"rank: {pick.item.rank}"
     )
+    if image_url:
+        print(f"image: {image_url}")
     print(f"template: {composed.template_id}")
     print("---")
     for i, text in enumerate(composed.texts):
@@ -168,12 +183,12 @@ def _print_preview(pick, composed, *, dry_run: bool) -> None:
         print("---")
 
 
-async def _publish(texts):
+async def _publish(texts, *, image_url: str | None = None):
     client = ThreadsClient(
         access_token=os.environ.get("THREADS_ACCESS_TOKEN", ""),
         user_id=os.environ.get("THREADS_USER_ID", ""),
     )
-    return await client.publish_thread(texts, dry_run=False)
+    return await client.publish_thread(texts, image_url=image_url, dry_run=False)
 
 
 async def _sync_insights() -> int:
@@ -202,6 +217,9 @@ def main(argv: list[str] | None = None) -> int:
     if args.list_genres:
         for g in config.GENRES:
             print(f"{g.id}\t{g.short}\t{g.label}")
+        print("--- pains ---")
+        for p in config.PAIN_INTENTS:
+            print(f"{p.id}\t{p.genre_id}\t{p.keyword}\t{p.pain}")
         return 0
 
     if args.list_reuse:
@@ -255,7 +273,7 @@ def main(argv: list[str] | None = None) -> int:
         kind = "value"
     elif args.digest:
         kind = "digest"
-    elif args.item or args.genre or args.template:
+    elif args.item or args.genre or args.template or args.pain:
         kind = "item"
     elif slot in config.VALUE_SLOTS:
         kind = "value"
@@ -322,19 +340,38 @@ def main(argv: list[str] | None = None) -> int:
         print(f"ledger updated: {config.LEDGER_PATH}")
         return 0
 
-    genre_preview = args.genre or genre_for_slot(slot, on).id
-    print(f"resolving item for slot={slot} genre={genre_preview} date={on.isoformat()}")
+    from picker import pain_for_slot
+
+    pain_preview = args.pain or (pain_for_slot(slot, on).id if slot in config.ITEM_SLOTS else "-")
+    genre_preview = args.genre or (
+        next((p.genre_id for p in config.PAIN_INTENTS if p.id == args.pain), None)
+        if args.pain
+        else None
+    ) or genre_for_slot(slot, on).id
+    print(
+        f"resolving item for slot={slot} genre={genre_preview} "
+        f"pain={pain_preview} date={on.isoformat()}"
+    )
 
     rakuten = RakutenClient()
-    pick = pick_item(rakuten, slot=slot, genre_id=args.genre, on=on)
+    pick = pick_item(
+        rakuten,
+        slot=slot,
+        genre_id=args.genre,
+        pain_id=args.pain,
+        on=on,
+    )
     composed = compose(pick, template_id=args.template)
-    _print_preview(pick, composed, dry_run=dry_run)
+    image_url = ""
+    if config.ATTACH_ITEM_IMAGE and not args.no_image:
+        image_url = pick.item.image_url or ""
+    _print_preview(pick, composed, dry_run=dry_run, image_url=image_url)
 
     if dry_run:
         print("dry-run: not publishing, ledger unchanged")
         return 0
 
-    result = asyncio.run(_publish(composed.texts))
+    result = asyncio.run(_publish(composed.texts, image_url=image_url or None))
     if result.warnings:
         for w in result.warnings:
             print(f"WARNING: {w}", file=sys.stderr)
