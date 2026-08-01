@@ -21,8 +21,16 @@ LEDGER_PATH = DATA_DIR / "posted.json"
 PERSONA_ID = "household-stock"
 PERSONA_LABEL = "家庭の消耗品・時短買い"
 PERSONA_AUDIENCE = "共働き〜子育て世帯の日々の買い足し担当"
-PERSONA_PROMISE = "これ、今買う？の答え合わせ"
-
+PERSONA_PROMISE = "また切れた…を減らす日用品の買い時メモ"
+PERSONA_DISPLAY_NAME = "かいものくま｜日用品の買い時メモ"
+PERSONA_BIO = (
+    "╲また切れた…を減らしたい共働きへ╱\n"
+    "日用品とキッチンの買い時を毎日メモ\n"
+    "・売れ筋ランキングの定点観測\n"
+    "・重いもの・ストック補充の候補\n"
+    "・ポイント日・セールの目安\n"
+    "PR・アフィリエイトリンクを含みます"
+)
 # Threads 投稿の文字数上限（余裕を持って短めに）
 MAX_TEXT_LEN = 480
 
