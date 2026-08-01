@@ -78,6 +78,14 @@ class RakutenClient:
         if not self.affiliate_id:
             raise ValueError("RAKUTEN_AFFILIATE_ID が未設定です")
         self.timeout_sec = timeout_sec
+        # 楽天のアプリ登録で許可した Allowed websites と一致させる必要がある
+        self.referer = (
+            os.environ.get("RAKUTEN_REFERER") or "https://www.nisa-simulation.com/"
+        ).strip()
+
+    def _headers(self) -> Dict[str, str]:
+        origin = self.referer.rstrip("/")
+        return {"Referer": self.referer, "Origin": origin}
 
     def _base_params(self) -> Dict[str, str]:
         return {
@@ -88,7 +96,7 @@ class RakutenClient:
         }
 
     def _get(self, url: str, params: Dict[str, Any]) -> dict:
-        with httpx.Client(timeout=self.timeout_sec) as client:
+        with httpx.Client(timeout=self.timeout_sec, headers=self._headers()) as client:
             response = client.get(url, params=params)
             try:
                 data = response.json() if response.content else {}
@@ -165,15 +173,15 @@ class RakutenClient:
         data = self._get(config.RAKUTEN_RANKING_URL, params)
         items_raw = data.get("Items") or []
         result: List[RakutenItem] = []
-        for index, raw in enumerate(items_raw):
+        for raw in items_raw:
             if not isinstance(raw, dict):
                 continue
-            parsed = self._parse_item(raw, rank=index + 1)
+            # API応答は順位順とは限らないので、item自身の rank を使う
+            parsed = self._parse_item(raw)
             if parsed:
                 result.append(parsed)
-            if len(result) >= hits:
-                break
-        return result
+        result.sort(key=lambda i: i.rank if i.rank is not None else 999)
+        return result[:hits]
 
     def search_items(
         self,
