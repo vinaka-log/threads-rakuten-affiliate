@@ -206,6 +206,89 @@ class PickerFilterTests(unittest.TestCase):
         filtered = _filter_candidates([case, pack, soft], used=set(), pain=tissue)
         self.assertEqual(filtered, [pack, soft])
 
+    def test_postage_included_preferred_over_separate(self) -> None:
+        from picker import is_postage_included
+
+        detergent = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
+        paid = _item(
+            code="det:paid",
+            name="アタック 液体洗剤 つめかえ用 2900g",
+            price=1980,
+            review_count=500,
+        )
+        # dataclass replace postage via object.__new__ pattern - rebuild
+        paid = RakutenItem(
+            item_code="det:paid",
+            item_name="アタック 液体洗剤 つめかえ用 2900g",
+            item_price=1980,
+            affiliate_url="https://example.com/a",
+            item_url="https://example.com/i",
+            review_average=4.5,
+            review_count=500,
+            shop_name="test",
+            genre_id="100939",
+            postage_flag=1,  # 送料別
+        )
+        free = RakutenItem(
+            item_code="det:free",
+            item_name="アタック 液体洗剤 つめかえ用 2500g",
+            item_price=2100,
+            affiliate_url="https://example.com/a",
+            item_url="https://example.com/i",
+            review_average=4.5,
+            review_count=200,  # 件数は少なくても送料込を優先
+            shop_name="test",
+            genre_id="100939",
+            postage_flag=0,  # 送料込
+        )
+        self.assertFalse(is_postage_included(paid))
+        self.assertTrue(is_postage_included(free))
+        filtered = _filter_candidates([paid, free], used=set(), pain=detergent)
+        self.assertEqual([i.item_code for i in filtered], ["det:free"])
+
+    def test_timesave_slot_uses_timesave_pains(self) -> None:
+        from datetime import date
+        from picker import pain_for_slot
+
+        on = date(2026, 8, 3)
+        slot = config.TIMESAVE_ITEM_SLOTS[0]
+        pain = pain_for_slot(slot, on)
+        self.assertTrue(pain.timesave)
+        # 通常商品枠は時短カウンタと独立
+        regular = [s for s in config.ITEM_SLOTS if s not in config.TIMESAVE_ITEM_SLOTS]
+        self.assertGreaterEqual(len(regular), 2)
+        p6 = pain_for_slot(regular[0], on)
+        p7 = pain_for_slot(regular[1], on)
+        self.assertNotEqual(p6.id, p7.id)
+
+    def test_floor_wiper_sheet_ok_body_rejected(self) -> None:
+        pain = next(p for p in config.all_pain_intents() if p.id == "floor-wiper")
+        sheet = _item(
+            code="fw:sheet",
+            name="クイックルワイパー 取り替え用ドライシート 40枚",
+            price=680,
+        )
+        body = _item(
+            code="fw:body",
+            name="クイックルワイパー 本体 フロア用ハンドル",
+            price=980,
+        )
+        self.assertTrue(_matches_pain(sheet, pain))
+        self.assertFalse(_matches_pain(body, pain))
+
+    def test_regular_item_rotation_unchanged_length(self) -> None:
+        """時短専用悩みを足しても通常枠のローテ（トイレットペーパー等）はずれない。"""
+        from datetime import date
+        from picker import pain_for_slot
+
+        on = date(2026, 8, 3)
+        regular = [s for s in config.ITEM_SLOTS if s not in config.TIMESAVE_ITEM_SLOTS]
+        self.assertEqual(
+            [pain_for_slot(s, on).id for s in regular],
+            ["toilet-paper", "tissue"],
+        )
+        self.assertEqual(pain_for_slot(config.TIMESAVE_ITEM_SLOTS[0], on).id, "floor-wiper")
+
 
 if __name__ == "__main__":
     unittest.main()

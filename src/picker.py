@@ -109,15 +109,30 @@ def genre_by_id(genre_id: str) -> Optional[config.Genre]:
 
 
 def pain_for_slot(slot: int, on: Optional[date] = None) -> config.PainIntent:
-    """日付×商品枠の通し番号で悩みをローテ。"""
+    """日付×商品枠の通し番号で悩みをローテ。
+
+    TIMESAVE_ITEM_SLOTS は時短悩みだけを回す（通常枠のローテ長は変えない）。
+    """
     on = on or today_jst()
-    intents = config.PAIN_INTENTS
-    # 商品枠だけを進める（価値/ダイジェスト枠では使わない想定）
-    item_index = 0
-    if slot in config.ITEM_SLOTS:
-        item_index = config.ITEM_SLOTS.index(slot)
     day_i = on.toordinal()
-    idx = (day_i * max(1, len(config.ITEM_SLOTS)) + item_index) % len(intents)
+    timesave_slots = tuple(getattr(config, "TIMESAVE_ITEM_SLOTS", ()) or ())
+    if slot in timesave_slots:
+        intents = config.timesave_pain_intents()
+        if not intents:
+            intents = config.PAIN_INTENTS
+        k = timesave_slots.index(slot)
+        idx = (day_i * max(1, len(timesave_slots)) + k) % len(intents)
+        return intents[idx]
+
+    intents = config.PAIN_INTENTS
+    # 通常の商品枠だけを進める（時短枠は別カウンタ）
+    regular_slots = tuple(s for s in config.ITEM_SLOTS if s not in timesave_slots)
+    item_index = 0
+    if slot in regular_slots:
+        item_index = regular_slots.index(slot)
+    elif slot in config.ITEM_SLOTS:
+        item_index = config.ITEM_SLOTS.index(slot)
+    idx = (day_i * max(1, len(regular_slots) or 1) + item_index) % len(intents)
     return intents[idx]
 
 
@@ -140,8 +155,13 @@ def is_blocked(item: RakutenItem) -> bool:
     return any(h.lower() in name for h in config.BLOCK_NAME_HINTS)
 
 
+def is_postage_included(item: RakutenItem) -> bool:
+    """応答 postageFlag: 0=送料込 / 1=送料別（公式ドキュメント準拠）。"""
+    return int(getattr(item, "postage_flag", 1) or 0) == 0
+
+
 def passes_quality(item: RakutenItem) -> bool:
-    return (
+    ok = (
         item.review_average >= config.MIN_REVIEW_AVERAGE
         and item.review_count >= config.MIN_REVIEW_COUNT
         and bool(item.affiliate_url)
@@ -149,6 +169,11 @@ def passes_quality(item: RakutenItem) -> bool:
         and item.item_price <= int(config.MAX_ITEM_PRICE)
         and not is_blocked(item)
     )
+    if not ok:
+        return False
+    if getattr(config, "REQUIRE_POSTAGE_INCLUDED", False) and not is_postage_included(item):
+        return False
+    return True
 
 
 def _name_matches(item: RakutenItem, hints: tuple[str, ...]) -> bool:
@@ -174,6 +199,22 @@ def _matches_pain(item: RakutenItem, pain: config.PainIntent) -> bool:
     return True
 
 
+def _sort_candidates(items: List[RakutenItem]) -> List[RakutenItem]:
+    """送料込 → レビュー件数 → 評価 → 安い順。"""
+    prefer = bool(getattr(config, "PREFER_POSTAGE_INCLUDED", True))
+
+    def key(i: RakutenItem) -> tuple:
+        postage_rank = 0 if (not prefer or is_postage_included(i)) else 1
+        return (
+            postage_rank,
+            -int(i.review_count or 0),
+            -float(i.review_average or 0),
+            int(i.item_price or 0),
+        )
+
+    return sorted(items, key=key)
+
+
 def _filter_candidates(
     items: List[RakutenItem],
     *,
@@ -189,8 +230,17 @@ def _filter_candidates(
     if band:
         banded = [i for i in quality if _in_band(i, band)]
         if banded:
-            return banded
-    return quality
+            quality = banded
+    if not quality:
+        return []
+    # 送料込を優先。候補が両方あるときは送料込だけに絞る（敬遠されやすい送料別を避ける）
+    if getattr(config, "PREFER_POSTAGE_INCLUDED", True) and not getattr(
+        config, "REQUIRE_POSTAGE_INCLUDED", False
+    ):
+        included = [i for i in quality if is_postage_included(i)]
+        if included:
+            quality = included
+    return _sort_candidates(quality)
 
 
 def _search_pain_items(
@@ -198,6 +248,7 @@ def _search_pain_items(
     pain: config.PainIntent,
     *,
     genre_id: Optional[str],
+    postage_flag: Optional[int] = None,
 ) -> List[RakutenItem]:
     return client.search_items(
         pain.keyword,
@@ -206,6 +257,7 @@ def _search_pain_items(
         genre_id=genre_id,
         max_price=int(config.MAX_ITEM_PRICE),
         pages=3,
+        postage_flag=postage_flag,
     )
 
 
@@ -216,16 +268,29 @@ def _candidates_for_pain(
     used: Set[str],
     band: tuple[int, int],
 ) -> List[RakutenItem]:
-    """1つの悩みについて検索→ジャンルランキングの順で厳格マッチ候補を返す。"""
+    """1つの悩みについて検索→ジャンルランキングの順で厳格マッチ候補を返す。
+
+    送料込を先に取り、取れなければ送料条件なしで再検索する。
+    """
+    prefer = bool(getattr(config, "PREFER_POSTAGE_INCLUDED", True))
+    require = bool(getattr(config, "REQUIRE_POSTAGE_INCLUDED", False))
+    # リクエスト postageFlag=1 → 送料込/送料無料のみ
+    postage_attempts: List[Optional[int]] = [1, None] if prefer else [None]
+    if require:
+        postage_attempts = [1]
+
     # ジャンル指定 → ジャンルなし、の順。maxPrice 付きで高レビュー商品を拾う。
-    for genre_id in (pain.genre_id, None):
-        try:
-            searched = _search_pain_items(client, pain, genre_id=genre_id)
-            found = _filter_candidates(searched, used=used, pain=pain)
-            if found:
-                return found
-        except Exception:
-            continue
+    for postage_flag in postage_attempts:
+        for genre_id in (pain.genre_id, None):
+            try:
+                searched = _search_pain_items(
+                    client, pain, genre_id=genre_id, postage_flag=postage_flag
+                )
+                found = _filter_candidates(searched, used=used, pain=pain)
+                if found:
+                    return found
+            except Exception:
+                continue
 
     genre = genre_by_id(pain.genre_id)
     assert genre is not None
@@ -253,8 +318,9 @@ def pick_item(
     """
     on = on or today_jst()
     primary_pain: Optional[config.PainIntent] = None
+    all_pains = list(config.all_pain_intents())
     if pain_id:
-        primary_pain = next((p for p in config.PAIN_INTENTS if p.id == pain_id), None)
+        primary_pain = next((p for p in all_pains if p.id == pain_id), None)
         if primary_pain is None:
             raise ValueError(f"未知の pain_id: {pain_id}")
     elif genre_id is None:
@@ -287,11 +353,11 @@ def pick_item(
     pains: List[config.PainIntent] = []
     if primary_pain is not None:
         pains.append(primary_pain)
-        for p in config.PAIN_INTENTS:
+        for p in all_pains:
             if p.id != primary_pain.id:
                 pains.append(p)
     else:
-        pains = list(config.PAIN_INTENTS)
+        pains = list(all_pains)
 
     last_genre = genre_for_slot(slot, on)
     for pain in pains:

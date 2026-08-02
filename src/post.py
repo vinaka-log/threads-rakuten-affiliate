@@ -218,8 +218,9 @@ def main(argv: list[str] | None = None) -> int:
         for g in config.GENRES:
             print(f"{g.id}\t{g.short}\t{g.label}")
         print("--- pains ---")
-        for p in config.PAIN_INTENTS:
-            print(f"{p.id}\t{p.genre_id}\t{p.keyword}\t{p.pain}")
+        for p in config.all_pain_intents():
+            tag = "timesave" if p.timesave else "regular"
+            print(f"{p.id}\t{p.genre_id}\t{tag}\t{p.keyword}\t{p.pain}")
         return 0
 
     if args.list_reuse:
@@ -344,7 +345,7 @@ def main(argv: list[str] | None = None) -> int:
 
     pain_preview = args.pain or (pain_for_slot(slot, on).id if slot in config.ITEM_SLOTS else "-")
     genre_preview = args.genre or (
-        next((p.genre_id for p in config.PAIN_INTENTS if p.id == args.pain), None)
+        next((p.genre_id for p in config.all_pain_intents() if p.id == args.pain), None)
         if args.pain
         else None
     ) or genre_for_slot(slot, on).id

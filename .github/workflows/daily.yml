@@ -4,31 +4,31 @@ name: Threads Rakuten daily post
 # ペルソナ A（家庭の消耗品・時短買い）向け。売り込みより共感を厚くしつつ、雑談で人間味を残す。
 #   共働きリアル苦悩 5本: 07:00 / 12:00 / 17:00 / 21:00 / 22:00
 #   どうでもいい雑談 2本: 08:00 / 15:00
-#   攻略・保存ネタ 1本: 18:00
+#   時短アイテム(消耗品) 1本: 18:00
 #   商品紹介(アフィリンク付き) 2本: 19:00 / 20:00
 #   ※ 17:00 (slot 4) は再利用キュー優先
 
 on:
   schedule:
-    # 07:00 JST = 22:00 UTC (previous day) : slot 0 value
+    # 07:00 JST = 22:00 UTC (previous day) : slot 0 struggle
     - cron: "0 22 * * *"
-    # 08:00 JST = 23:00 UTC (previous day) : slot 1 item
+    # 08:00 JST = 23:00 UTC (previous day) : slot 1 chitchat
     - cron: "0 23 * * *"
-    # 12:00 JST = 03:00 UTC : slot 2 value
+    # 12:00 JST = 03:00 UTC : slot 2 struggle
     - cron: "0 3 * * *"
-    # 15:00 JST = 06:00 UTC : slot 3 digest
+    # 15:00 JST = 06:00 UTC : slot 3 chitchat
     - cron: "0 6 * * *"
-    # 17:00 JST = 08:00 UTC : slot 4 value
+    # 17:00 JST = 08:00 UTC : slot 4 struggle (reuse priority)
     - cron: "0 8 * * *"
-    # 18:00 JST = 09:00 UTC : slot 5 digest
+    # 18:00 JST = 09:00 UTC : slot 5 timesave item
     - cron: "0 9 * * *"
-    # 19:00 JST = 10:00 UTC : slot 6 digest
+    # 19:00 JST = 10:00 UTC : slot 6 item
     - cron: "0 10 * * *"
     # 20:00 JST = 11:00 UTC : slot 7 item
     - cron: "0 11 * * *"
-    # 21:00 JST = 12:00 UTC : slot 8 value
+    # 21:00 JST = 12:00 UTC : slot 8 struggle
     - cron: "0 12 * * *"
-    # 22:00 JST = 13:00 UTC : slot 9 digest
+    # 22:00 JST = 13:00 UTC : slot 9 struggle
     - cron: "0 13 * * *"
   workflow_dispatch:
     inputs:
@@ -37,7 +37,7 @@ on:
         type: boolean
         default: true
       slot:
-        description: "0..9 (see config.SLOT_LABELS; 1/7=item, 3/5/6/9=digest, others=value)"
+        description: "0..9 (see config.SLOT_LABELS; 5/6/7=item, others=value)"
         required: false
         default: ""
       genre:

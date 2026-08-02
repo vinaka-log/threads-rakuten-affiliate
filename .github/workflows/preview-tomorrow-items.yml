@@ -2,7 +2,7 @@ name: Preview tomorrow item picks
 
 on:
   push:
-    branches: [cursor/exclude-tp-accessories-1864]
+    branches: [cursor/timesave-item-postage-1864]
     paths:
       - ".github/workflows/preview-tomorrow-items.yml"
   workflow_dispatch:
@@ -32,8 +32,11 @@ jobs:
           pip install -r requirements.txt
       - name: Dry-run tomorrow item slots (2026-08-03)
         run: |
-          echo "===== slot 6 (19:00) toilet-paper ====="
+          echo "===== slot 5 (18:00) timesave ====="
+          python src/post.py --dry-run --slot 5 --item --date 2026-08-03
+          echo
+          echo "===== slot 6 (19:00) ====="
           python src/post.py --dry-run --slot 6 --item --date 2026-08-03
           echo
-          echo "===== slot 7 (20:00) tissue ====="
+          echo "===== slot 7 (20:00) ====="
           python src/post.py --dry-run --slot 7 --item --date 2026-08-03

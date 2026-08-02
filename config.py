@@ -43,6 +43,10 @@ MIN_REVIEW_AVERAGE = 4.3
 MIN_REVIEW_COUNT = 100
 # 消耗品の時短買い向け。高額美容・家電を混ぜない
 MAX_ITEM_PRICE = 3000
+# 送料別は敬遠されやすいので、送料込を優先（取れなければ送料別も可）
+PREFER_POSTAGE_INCLUDED = True
+# True にすると送料込以外を候補から除外（品薄時は投稿失敗しうる）
+REQUIRE_POSTAGE_INCLUDED = False
 
 # 商品名に含まれていたら除外（ペルソナ外）
 # 注意: 「香水」「コスメ」「クリーム」は「香水調」「アットコスメ」等に誤爆するため使わない
@@ -145,6 +149,8 @@ class PainIntent:
     exclude_name_hints: Tuple[str, ...] = ()
     # 容量表記（2900g / 1285mL 等）を必須にするか
     require_size_token: bool = False
+    # 時短アイテム枠（TIMESAVE_ITEM_SLOTS）のローテ対象か
+    timesave: bool = False
 
 
 _CONSUMABLE_STORAGE_EXCLUDES: Tuple[str, ...] = (
@@ -280,6 +286,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         buy_reason="水は「買う商品」より「運ばなくていい仕組み」",
         avoid="置き場所（箱の高さ）を測ってから決める",
         template_id="hook-benefit",
+        timesave=True,
     ),
     PainIntent(
         id="wrap",
@@ -293,6 +300,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         buy_reason="朝に効く消耗品は、前夜の自分への投資",
         avoid="幅（22cm/30cm）の取り違えに注意",
         template_id="hook-benefit",
+        timesave=True,
     ),
     PainIntent(
         id="dish-sponge",
@@ -319,6 +327,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         buy_reason="食洗機は洗剤があって初めて時短装置になる",
         avoid="機種の専用指定（粉/タブ/ジェル）を確認",
         template_id="hook-benefit",
+        timesave=True,
     ),
     PainIntent(
         id="kitchen-paper",
@@ -335,18 +344,65 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     ),
 )
 
+# 時短枠専用（通常の商品ローテ長をずらさない）。ガジェット本体ではなく替え消耗品。
+TIMESAVE_ONLY_INTENTS: Tuple[PainIntent, ...] = (
+    PainIntent(
+        id="floor-wiper",
+        pain="床掃除、水拭きまで手が回ってる？",
+        keyword="フローリングワイパー 取り替えシート",
+        name_hints=(
+            "フローリングワイパー",
+            "フロアワイパー",
+            "取り替えシート",
+            "ドライシート",
+            "ウェットシート",
+        ),
+        genre_id="100939",
+        scene="帰ってすぐに床の砂や髪が気になる夜",
+        problem="本格掃除まで溜めると休日が掃除デーになり、休みが消える",
+        benefit="替えシートがあればさっと拭けて、夜の片付けが5分で終わる",
+        buy_reason="時短は道具本体より、替えが切れていないことが本体",
+        avoid="ドライ/ウェットの使い分けと対応本体サイズを確認",
+        template_id="hook-benefit",
+        require_name_hints=("シート", "取り替え", "詰替", "つめかえ", "替え"),
+        exclude_name_hints=(
+            "本体",
+            "ハンドル",
+            "ヘッド",
+            "スタンド",
+            "収納",
+            "ケース",
+            "ホルダー",
+        ),
+        require_size_token=True,
+        timesave=True,
+    ),
+)
+
+
+def all_pain_intents() -> Tuple[PainIntent, ...]:
+    """通常悩み + 時短専用悩み。"""
+    return tuple(PAIN_INTENTS) + tuple(TIMESAVE_ONLY_INTENTS)
+
+
+def timesave_pain_intents() -> Tuple[PainIntent, ...]:
+    """時短枠ローテ用（timesave フラグ + 時短専用）。"""
+    marked = tuple(p for p in PAIN_INTENTS if p.timesave)
+    return marked + tuple(TIMESAVE_ONLY_INTENTS)
+
 # 商品投稿に楽天の商品画像を付ける（⑥）
 ATTACH_ITEM_IMAGE = True
 
-# 日内枠（JST）。1日10投稿 = 共感5 + どうでもいい雑談2 + 商品紹介2 + 攻略1。
+# 日内枠（JST）。1日10投稿 = 共感5 + どうでもいい雑談2 + 商品紹介3。
 # 共感ばかりだとAIっぽく見えるので、無関係な雑談を混ぜる。
+# 商品3本のうち1本は時短消耗品（ガジェットではなく替えシート等）。
 SLOT_LABELS: Tuple[str, ...] = (
     "07:00",  # 0: 共働きリアル苦悩
     "08:00",  # 1: どうでもいい雑談
     "12:00",  # 2: 共働きリアル苦悩
     "15:00",  # 3: どうでもいい雑談
     "17:00",  # 4: 共働きリアル苦悩（再利用優先）
-    "18:00",  # 5: 価値投稿（攻略・保存ネタ）
+    "18:00",  # 5: 時短アイテム（消耗品）
     "19:00",  # 6: 商品紹介
     "20:00",  # 7: 商品紹介（ゴールデン）
     "21:00",  # 8: 共働きリアル苦悩
@@ -355,13 +411,15 @@ SLOT_LABELS: Tuple[str, ...] = (
 POSTS_PER_DAY = len(SLOT_LABELS)
 
 # 商品紹介は夕方以降にまとめる（朝から売り込みすぎない）。
-ITEM_SLOTS: Tuple[int, ...] = (6, 7)
+ITEM_SLOTS: Tuple[int, ...] = (5, 6, 7)
+# 時短アイテム枠（ITEM_SLOTS の部分集合）。timesave=True の悩みだけ回す。
+TIMESAVE_ITEM_SLOTS: Tuple[int, ...] = (5,)
 
 # ランキングダイジェストは一旦停止（共感つぶやき優先）。
 DIGEST_SLOTS: Tuple[int, ...] = ()
 
 # 静的な価値投稿（value_posts.py）。
-VALUE_SLOTS: Tuple[int, ...] = (0, 1, 2, 3, 4, 5, 8, 9)
+VALUE_SLOTS: Tuple[int, ...] = (0, 1, 2, 3, 4, 8, 9)
 
 # 共働きリアル苦悩（共感つぶやき）。
 STRUGGLE_SLOTS: Tuple[int, ...] = (0, 2, 4, 8, 9)
