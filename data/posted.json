@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T19:26:19+09:00",
+  "updated_at": "2026-08-02T20:13:36+09:00",
   "entries": [
     {
       "item_code": "value:chat-repeat",
@@ -134,6 +134,17 @@
       "threads_post_ids": [
         "18012847643738769",
         "18097773758357037"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:sleeper:100939",
+      "item_name": "価値投稿 sleeper:100939",
+      "kind": "value",
+      "slot": 6,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "17868592053634620"
       ],
       "reused": false
     },
