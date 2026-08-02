@@ -140,10 +140,14 @@ def pick_reuse_value(
     ]
     if not due:
         return None
-    # 存在しない ID はスキップ
+    # 存在しない ID・雑談（一度きり）はスキップ
     valid: List[ReuseCandidate] = []
     for c in due:
         try:
+            from value_posts import is_chitchat_id
+
+            if is_chitchat_id(c.value_id):
+                continue
             _find(c.value_id)
             valid.append(c)
         except KeyError:
@@ -163,7 +167,11 @@ def register_value_post(
     priority: int = 0,
     path: Path = config.REUSE_PATH,
 ) -> ReuseCandidate:
-    """価値投稿を再利用キューに登録/更新。"""
+    """価値投稿を再利用キューに登録/更新。雑談は登録しない。"""
+    from value_posts import is_chitchat_id
+
+    if is_chitchat_id(value_id):
+        raise ValueError(f"chitchat is one-shot and cannot enter reuse queue: {value_id}")
     _find(value_id)  # 存在確認
     candidates = load_reuse(path)
     existing = next((c for c in candidates if c.value_id == value_id), None)
