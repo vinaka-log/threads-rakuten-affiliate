@@ -179,7 +179,14 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         avoid="香りが強すぎる・容量を見ずに小さい方を掴む失敗を避ける",
         template_id="hook-benefit",
         require_name_hints=("つめかえ", "詰め替え", "詰替", "ジェルボール", "ゲルボール"),
-        exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES,
+        exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES
+        + (
+            "漂白剤",
+            "漂白",
+            "ハイター",
+            "衣料用漂白剤",
+            "洗たく槽",
+        ),
         require_size_token=True,
     ),
     PainIntent(

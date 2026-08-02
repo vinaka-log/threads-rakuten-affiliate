@@ -99,6 +99,19 @@ class PickerFilterTests(unittest.TestCase):
         filtered = _filter_candidates([item], used=set(), pain=detergent)
         self.assertEqual(filtered, [item])
 
+    def test_bleach_rejected_for_detergent(self) -> None:
+        item = _item(
+            code="daily-shop:10000211",
+            name="ワイドハイターEXパワー 4.5L 詰め替え用 業務用 衣料用漂白剤 洗濯洗剤 つめかえ",
+            price=2650,
+            review_count=367,
+            review_average=4.8,
+        )
+        detergent = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
+        self.assertFalse(_matches_pain(item, detergent))
+        filtered = _filter_candidates([item], used=set(), pain=detergent)
+        self.assertEqual(filtered, [])
+
     def test_detergent_storage_rejected(self) -> None:
         item = _item(
             code="roomy:10014969",
