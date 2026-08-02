@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T08:58:22+09:00",
+  "updated_at": "2026-08-02T10:16:25+09:00",
   "entries": [
     {
       "item_code": "value:chat-repeat",
@@ -27,6 +27,22 @@
       "rank": 4,
       "pain_id": "detergent",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/lancome/cabinet/12611101/12611109/13646792/imgrc0138028575.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "mon-o-tone:10000064",
+      "item_name": "洗濯洗剤用詰め替えボトル",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 1,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "18086099210392042",
+        "18047047418628601"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00rrexn.x8u2b0e6.g00rrexn.x8u2ca8b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmon-o-tone%2F10000113%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmon-o-tone%2Fi%2F10000064%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "detergent",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/mon-o-tone/cabinet/kanban/03740559/11756245/imgrc0103626469.jpg?_ex=400x400"
     },
     {
       "item_code": "nuthyougo:10000672",
