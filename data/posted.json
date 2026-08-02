@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T21:07:40+09:00",
+  "updated_at": "2026-08-02T21:55:55+09:00",
   "entries": [
     {
       "item_code": "value:chat-repeat",
@@ -163,6 +163,17 @@
       "rank": null,
       "pain_id": "softener",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/n-raffine/cabinet/06559667/08756022/umi-ro.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-drugstore-overtime",
+      "item_name": "価値投稿 struggle-drugstore-overtime",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "18086767466181565"
+      ],
+      "reused": false
     },
     {
       "item_code": "nuthyougo:10000672",

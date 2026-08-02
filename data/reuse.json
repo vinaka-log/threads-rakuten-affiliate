@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-08-01T00:00:00+09:00",
+  "updated_at": "2026-08-02T21:55:55+09:00",
   "candidates": [
     {
-      "value_id": "stock-buy",
-      "last_posted_on": "2026-07-28",
+      "value_id": "heavy-items",
+      "last_posted_on": "2026-07-27",
       "reuse_count": 0,
       "priority": 8,
       "views": 0,
@@ -13,8 +13,8 @@
       "threads_post_id": ""
     },
     {
-      "value_id": "heavy-items",
-      "last_posted_on": "2026-07-27",
+      "value_id": "stock-buy",
+      "last_posted_on": "2026-07-28",
       "reuse_count": 0,
       "priority": 8,
       "views": 0,
@@ -35,6 +35,17 @@
       "threads_post_id": ""
     },
     {
+      "value_id": "fail-double",
+      "last_posted_on": "2026-07-24",
+      "reuse_count": 0,
+      "priority": 6,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "seed",
+      "threads_post_id": ""
+    },
+    {
       "value_id": "39-shop",
       "last_posted_on": "2026-07-25",
       "reuse_count": 0,
@@ -46,15 +57,15 @@
       "threads_post_id": ""
     },
     {
-      "value_id": "fail-double",
-      "last_posted_on": "2026-07-24",
+      "value_id": "struggle-drugstore-overtime",
+      "last_posted_on": "2026-08-02",
       "reuse_count": 0,
-      "priority": 6,
+      "priority": 0,
       "views": 0,
       "likes": 0,
       "replies": 0,
-      "source": "seed",
-      "threads_post_id": ""
+      "source": "auto",
+      "threads_post_id": "18086767466181565"
     }
   ]
 }
