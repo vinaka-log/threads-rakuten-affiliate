@@ -191,9 +191,12 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 品質フィルタ（`config.py`）:
 
-- レビュー平均 `>= 4.0`
+- レビュー平均 `>= 4.3`
 - レビュー件数 `>= 100`
+- 価格 `> 0` かつ **`<= ¥3,000`**（`MAX_ITEM_PRICE`）
 - 直近30日に投稿済みの `itemCode` は除外
+- **悩み一致は必須**: 商品名が `PAIN_INTENTS.name_hints` にヒットしないものは載せない（洗剤コピーに美容液が乗る事故を防ぐ）
+- 美容・ガジェット等は `BLOCK_NAME_HINTS` で除外
 
 ## 投稿フォーマット
 

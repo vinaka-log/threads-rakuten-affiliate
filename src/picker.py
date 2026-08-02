@@ -126,16 +126,26 @@ def _in_band(item: RakutenItem, band: tuple[int, int]) -> bool:
     return band[0] <= item.rank <= band[1]
 
 
+def is_blocked(item: RakutenItem) -> bool:
+    """ペルソナ外（美容・ガジェット等）を商品名で弾く。"""
+    name = item.item_name.lower()
+    return any(h.lower() in name for h in config.BLOCK_NAME_HINTS)
+
+
 def passes_quality(item: RakutenItem) -> bool:
     return (
         item.review_average >= config.MIN_REVIEW_AVERAGE
         and item.review_count >= config.MIN_REVIEW_COUNT
         and bool(item.affiliate_url)
         and item.item_price > 0
+        and item.item_price <= int(config.MAX_ITEM_PRICE)
+        and not is_blocked(item)
     )
 
 
 def _name_matches(item: RakutenItem, hints: tuple[str, ...]) -> bool:
+    if not hints:
+        return False
     name = item.item_name.lower()
     return any(h.lower() in name for h in hints)
 
@@ -146,16 +156,47 @@ def _filter_candidates(
     used: Set[str],
     pain: Optional[config.PainIntent] = None,
     band: Optional[tuple[int, int]] = None,
+    require_pain_match: bool = True,
 ) -> List[RakutenItem]:
+    """品質・価格・ブロックを満たす候補。pain があるときは name_hints 一致を必須にする。"""
     quality = [i for i in items if i.item_code not in used and passes_quality(i)]
-    if pain:
-        hinted = [i for i in quality if _name_matches(i, pain.name_hints)]
-        quality = hinted or quality
+    if pain is not None and require_pain_match:
+        quality = [i for i in quality if _name_matches(i, pain.name_hints)]
     if band:
         banded = [i for i in quality if _in_band(i, band)]
         if banded:
             return banded
     return quality
+
+
+def _candidates_for_pain(
+    client: RakutenClient,
+    pain: config.PainIntent,
+    *,
+    used: Set[str],
+    band: tuple[int, int],
+) -> List[RakutenItem]:
+    """1つの悩みについて検索→ジャンルランキングの順で厳格マッチ候補を返す。"""
+    try:
+        searched = client.search_items(
+            pain.keyword,
+            hits=config.RANKING_HITS,
+            sort="-reviewCount",
+            genre_id=pain.genre_id,
+        )
+        found = _filter_candidates(searched, used=used, pain=pain)
+        if found:
+            return found
+    except Exception:
+        pass
+
+    genre = genre_by_id(pain.genre_id)
+    assert genre is not None
+    try:
+        ranking = client.fetch_ranking(genre.id, hits=config.RANKING_HITS)
+    except Exception:
+        return []
+    return _filter_candidates(ranking, used=used, pain=pain, band=band)
 
 
 def pick_item(
@@ -167,73 +208,73 @@ def pick_item(
     pain_id: Optional[str] = None,
     ledger_path: Path = config.LEDGER_PATH,
 ) -> PickResult:
-    """悩みキーワード起点で商品を1件選ぶ。取れなければランキングへフォールバック。"""
+    """悩みキーワード起点で商品を1件選ぶ。
+
+    悩みが決まったら name_hints 不一致の商品は絶対に選ばない。
+    主悩みで取れなければ他の悩みへローテし、それでも無ければ失敗する
+    （無関係商品のフォールバックはしない）。
+    """
     on = on or today_jst()
-    pain: Optional[config.PainIntent] = None
+    primary_pain: Optional[config.PainIntent] = None
     if pain_id:
-        pain = next((p for p in config.PAIN_INTENTS if p.id == pain_id), None)
-        if pain is None:
+        primary_pain = next((p for p in config.PAIN_INTENTS if p.id == pain_id), None)
+        if primary_pain is None:
             raise ValueError(f"未知の pain_id: {pain_id}")
     elif genre_id is None:
-        pain = pain_for_slot(slot, on)
-
-    if genre_id:
-        genre = genre_by_id(genre_id)
-        assert genre is not None
-    elif pain is not None:
-        genre = genre_by_id(pain.genre_id)
-        assert genre is not None
-    else:
-        genre = genre_for_slot(slot, on)
+        primary_pain = pain_for_slot(slot, on)
 
     entries = load_ledger(ledger_path)
     used = recent_item_codes(entries, on=on)
     band = rank_band_for(on)
 
-    candidates: List[RakutenItem] = []
-    if pain is not None:
-        try:
-            searched = client.search_items(
-                pain.keyword,
-                hits=config.RANKING_HITS,
-                sort="-reviewCount",
-                genre_id=pain.genre_id,
-            )
-            candidates = _filter_candidates(searched, used=used, pain=pain)
-        except Exception:
-            candidates = []
-
-    if not candidates:
+    # 明示 genre のみ（悩みなし）: 品質・価格・ブロックだけ
+    if primary_pain is None and genre_id:
+        genre = genre_by_id(genre_id)
+        assert genre is not None
         ranking = client.fetch_ranking(genre.id, hits=config.RANKING_HITS)
-        candidates = _filter_candidates(ranking, used=used, pain=pain, band=band)
+        candidates = _filter_candidates(ranking, used=used, pain=None, band=band)
         if not candidates:
-            soft = [
-                i
-                for i in ranking
-                if i.item_code not in used
-                and i.review_average >= config.MIN_REVIEW_AVERAGE
-                and i.review_count >= max(20, config.MIN_REVIEW_COUNT // 2)
-                and i.affiliate_url
-            ]
-            if pain:
-                soft = [i for i in soft if _name_matches(i, pain.name_hints)] or soft
-            candidates = soft
-        if not candidates:
-            candidates = [i for i in ranking if i.item_code not in used and i.affiliate_url]
-
-    if not candidates:
-        raise RuntimeError(
-            f"投稿可能な商品がありません genre={genre.id}({genre.label}) "
-            f"pain={pain.id if pain else '-'} used={len(used)}"
+            raise RuntimeError(
+                f"投稿可能な商品がありません genre={genre.id}({genre.label}) "
+                f"pain=- used={len(used)} max_price={config.MAX_ITEM_PRICE}"
+            )
+        return PickResult(
+            item=candidates[0],
+            genre=genre,
+            slot=slot,
+            posted_on=on.isoformat(),
+            pain=None,
         )
 
-    item = candidates[0]
-    return PickResult(
-        item=item,
-        genre=genre,
-        slot=slot,
-        posted_on=on.isoformat(),
-        pain=pain,
+    # 悩みローテ: 主悩み → 残り（順序を保ったまま一周）
+    pains: List[config.PainIntent] = []
+    if primary_pain is not None:
+        pains.append(primary_pain)
+        for p in config.PAIN_INTENTS:
+            if p.id != primary_pain.id:
+                pains.append(p)
+    else:
+        pains = list(config.PAIN_INTENTS)
+
+    last_genre = genre_for_slot(slot, on)
+    for pain in pains:
+        genre = genre_by_id(pain.genre_id)
+        assert genre is not None
+        last_genre = genre
+        candidates = _candidates_for_pain(client, pain, used=used, band=band)
+        if candidates:
+            return PickResult(
+                item=candidates[0],
+                genre=genre,
+                slot=slot,
+                posted_on=on.isoformat(),
+                pain=pain,
+            )
+
+    raise RuntimeError(
+        f"投稿可能な商品がありません genre={last_genre.id}({last_genre.label}) "
+        f"pain={primary_pain.id if primary_pain else '-'} used={len(used)} "
+        f"max_price={config.MAX_ITEM_PRICE}（悩み不一致・高額・低評価のフォールバックは禁止）"
     )
 
 
