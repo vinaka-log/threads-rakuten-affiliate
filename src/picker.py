@@ -15,8 +15,9 @@ from rakuten import RakutenClient, RakutenItem
 JST = timezone(timedelta(hours=9))
 
 # 消耗品らしい容量・個数表記（収納グッズを落とす）
+# 紙類は ロール / 組 / 箱、長さは 30m などを許容
 _SIZE_TOKEN_RE = re.compile(
-    r"\d+(?:\.\d+)?\s*(?:g|kg|ml|ｍl|ｌ|l|個|袋|本|パック|枚)",
+    r"\d+(?:\.\d+)?\s*(?:g|kg|ml|ｍl|ｌ|l|個|袋|本|パック|枚|ロール|組|箱|セット|巻|[mｍ])",
     re.IGNORECASE,
 )
 

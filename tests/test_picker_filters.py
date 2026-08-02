@@ -156,6 +156,47 @@ class PickerFilterTests(unittest.TestCase):
         filtered = _filter_candidates([other], used=set(), pain=detergent)
         self.assertEqual(filtered, [])
 
+    def test_toilet_paper_pack_ok_case_rejected(self) -> None:
+        tp = next(p for p in config.PAIN_INTENTS if p.id == "toilet-paper")
+        pack = _item(
+            code="tp:pack",
+            name="ネピア トイレットペーパー ダブル 30m 12ロール",
+            price=1280,
+        )
+        case = _item(
+            code="tp:case",
+            name="ティッシュケース トイレットペーパー ペーパーポット カバー",
+            price=2970,
+            review_count=11888,
+            review_average=4.7,
+        )
+        self.assertTrue(_matches_pain(pack, tp))
+        self.assertFalse(_matches_pain(case, tp))
+        self.assertEqual(_filter_candidates([case, pack], used=set(), pain=tp), [pack])
+
+    def test_tissue_pack_ok_case_rejected(self) -> None:
+        tissue = next(p for p in config.PAIN_INTENTS if p.id == "tissue")
+        pack = _item(
+            code="ti:pack",
+            name="ネピア ボックスティッシュ 200組×5個パック",
+            price=470,
+        )
+        soft = _item(
+            code="ti:soft",
+            name="エリエール ティシュー ソフトパック 150組×5",
+            price=890,
+        )
+        case = _item(
+            code="ti:case",
+            name="おしゃれ ティッシュケース ボックス型 収納",
+            price=1980,
+        )
+        self.assertTrue(_matches_pain(pack, tissue))
+        self.assertTrue(_matches_pain(soft, tissue))
+        self.assertFalse(_matches_pain(case, tissue))
+        filtered = _filter_candidates([case, pack, soft], used=set(), pain=tissue)
+        self.assertEqual(filtered, [pack, soft])
+
 
 if __name__ == "__main__":
     unittest.main()
