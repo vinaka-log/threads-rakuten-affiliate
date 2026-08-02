@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T21:55:55+09:00",
+  "updated_at": "2026-08-02T23:26:57+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -66,6 +66,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18086767466181565"
+    },
+    {
+      "value_id": "struggle-weekend-errands",
+      "last_posted_on": "2026-08-02",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "17986500422852112"
     }
   ]
 }
