@@ -16,6 +16,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date
+from pathlib import Path
 from typing import Sequence
 
 import config
@@ -900,6 +901,36 @@ def chitchat_pool() -> Sequence[ValuePost]:
     return _CHITCHAT_POOL
 
 
+def _chitchat_ids() -> set[str]:
+    return {p.value_id for p in _CHITCHAT_POOL}
+
+
+def used_chitchat_ids(ledger_path: Path | None = None) -> set[str]:
+    """台帳に一度でも載った雑談ID（二度と使わない）。"""
+    from picker import load_ledger
+
+    path = ledger_path or config.LEDGER_PATH
+    known = _chitchat_ids()
+    used: set[str] = set()
+    for e in load_ledger(path):
+        code = str(e.get("item_code") or "")
+        if not code.startswith("value:"):
+            continue
+        vid = code.split(":", 1)[-1]
+        if vid in known:
+            used.add(vid)
+    return used
+
+
+def unused_chitchat_posts(ledger_path: Path | None = None) -> list[ValuePost]:
+    used = used_chitchat_ids(ledger_path)
+    return [p for p in _CHITCHAT_POOL if p.value_id not in used]
+
+
+def is_chitchat_id(value_id: str) -> bool:
+    return value_id in _chitchat_ids()
+
+
 def _non_tip_slots() -> tuple[int, ...]:
     return tuple(config.STRUGGLE_SLOTS) + tuple(getattr(config, "CHITCHAT_SLOTS", ()) or ())
 
@@ -928,11 +959,31 @@ def _static_position(slot: int) -> int:
     return slot % max(1, len(config.VALUE_SLOTS))
 
 
+def _pick_chitchat(on: date, slot: int) -> ValuePost:
+    """雑談は一度きり。未使用だけから選び、尽きたら苦悩へフォールバック。"""
+    unused = unused_chitchat_posts()
+    if not unused:
+        print(
+            "WARNING: chitchat pool exhausted (all used once); "
+            "falling back to struggle post. Add new chat-* drafts.",
+            flush=True,
+        )
+        k = 0
+        idx = (on.toordinal() * max(1, len(config.STRUGGLE_SLOTS)) + k) % len(_STRUGGLE_POOL)
+        return _STRUGGLE_POOL[idx]
+    k = _chitchat_position(slot)
+    # 日付×枠で未使用プール内をローテ（同じ文の再掲はしない）
+    idx = (on.toordinal() * max(1, len(getattr(config, "CHITCHAT_SLOTS", ()) or (0,))) + k) % len(
+        unused
+    )
+    return unused[idx]
+
+
 def pick_value_post(on: date, slot: int = 0) -> ValuePost:
     """日付×枠ローテで価値投稿を1本選ぶ。
 
     STRUGGLE_SLOTS → 共働きリアル苦悩
-    CHITCHAT_SLOTS → テーマ無関係の雑談
+    CHITCHAT_SLOTS → テーマ無関係の雑談（一度きり・再利用禁止）
     それ以外の VALUE_SLOTS → 攻略・保存ネタ（セール時は先頭枠だけ優先）
     """
     chitchat_slots = tuple(getattr(config, "CHITCHAT_SLOTS", ()) or ())
@@ -941,9 +992,7 @@ def pick_value_post(on: date, slot: int = 0) -> ValuePost:
         idx = (on.toordinal() * len(config.STRUGGLE_SLOTS) + k) % len(_STRUGGLE_POOL)
         return _STRUGGLE_POOL[idx]
     if slot in chitchat_slots:
-        k = _chitchat_position(slot)
-        idx = (on.toordinal() * len(chitchat_slots) + k) % len(_CHITCHAT_POOL)
-        return _CHITCHAT_POOL[idx]
+        return _pick_chitchat(on, slot)
 
     label = active_sale_label(on)
     priority: ValuePost | None = None
