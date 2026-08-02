@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -12,6 +13,12 @@ import config
 from rakuten import RakutenClient, RakutenItem
 
 JST = timezone(timedelta(hours=9))
+
+# 消耗品らしい容量・個数表記（収納グッズを落とす）
+_SIZE_TOKEN_RE = re.compile(
+    r"\d+(?:\.\d+)?\s*(?:g|kg|ml|ｍl|ｌ|l|個|袋|本|パック|枚)",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True)
@@ -150,6 +157,22 @@ def _name_matches(item: RakutenItem, hints: tuple[str, ...]) -> bool:
     return any(h.lower() in name for h in hints)
 
 
+def _matches_pain(item: RakutenItem, pain: config.PainIntent) -> bool:
+    """悩みの name_hints / require / exclude / 容量表記をすべて満たすか。"""
+    name = item.item_name
+    if not _name_matches(item, pain.name_hints):
+        return False
+    require = tuple(pain.require_name_hints or ())
+    if require and not _name_matches(item, require):
+        return False
+    exclude = tuple(pain.exclude_name_hints or ())
+    if exclude and any(h.lower() in name.lower() for h in exclude):
+        return False
+    if pain.require_size_token and not _SIZE_TOKEN_RE.search(name):
+        return False
+    return True
+
+
 def _filter_candidates(
     items: List[RakutenItem],
     *,
@@ -161,7 +184,7 @@ def _filter_candidates(
     """品質・価格・ブロックを満たす候補。pain があるときは name_hints 一致を必須にする。"""
     quality = [i for i in items if i.item_code not in used and passes_quality(i)]
     if pain is not None and require_pain_match:
-        quality = [i for i in quality if _name_matches(i, pain.name_hints)]
+        quality = [i for i in quality if _matches_pain(i, pain)]
     if band:
         banded = [i for i in quality if _in_band(i, band)]
         if banded:

@@ -11,7 +11,13 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
 import config
-from picker import _filter_candidates, _name_matches, is_blocked, passes_quality
+from picker import (
+    _filter_candidates,
+    _matches_pain,
+    _name_matches,
+    is_blocked,
+    passes_quality,
+)
 from rakuten import RakutenItem
 
 
@@ -70,7 +76,7 @@ class PickerFilterTests(unittest.TestCase):
         """「香水調」「アットコスメ」だけで柔軟剤を落とさない。"""
         item = _item(
             code="soft:1",
-            name="ファーファ 液体 柔軟剤 香水調 クリスタルムスク 詰め替え アットコスメ",
+            name="ファーファ 液体 柔軟剤 香水調 クリスタルムスク 詰め替え 1440ml アットコスメ",
             price=1980,
             review_count=250,
             review_average=4.5,
@@ -78,20 +84,33 @@ class PickerFilterTests(unittest.TestCase):
         softener = next(p for p in config.PAIN_INTENTS if p.id == "softener")
         self.assertFalse(is_blocked(item))
         self.assertTrue(passes_quality(item))
-        self.assertTrue(_name_matches(item, softener.name_hints))
+        self.assertTrue(_matches_pain(item, softener))
 
     def test_detergent_under_3000_ok(self) -> None:
         item = _item(
             code="shop:1",
-            name="アタック 洗濯洗剤 詰め替え 超特大",
+            name="アタック 洗濯洗剤 液体 つめかえ用 2900g",
             price=1980,
         )
         detergent = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
         self.assertFalse(is_blocked(item))
         self.assertTrue(passes_quality(item))
-        self.assertTrue(_name_matches(item, detergent.name_hints))
+        self.assertTrue(_matches_pain(item, detergent))
         filtered = _filter_candidates([item], used=set(), pain=detergent)
         self.assertEqual(filtered, [item])
+
+    def test_detergent_storage_rejected(self) -> None:
+        item = _item(
+            code="roomy:10014969",
+            name="マグネット洗濯洗剤ボールストッカー タワー 山崎実業 詰め替え用 洗面所収納",
+            price=2420,
+            review_count=536,
+            review_average=4.8,
+        )
+        detergent = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
+        self.assertTrue(is_blocked(item) or not _matches_pain(item, detergent))
+        filtered = _filter_candidates([item], used=set(), pain=detergent)
+        self.assertEqual(filtered, [])
 
     def test_price_over_3000_rejected(self) -> None:
         item = _item(
