@@ -127,7 +127,7 @@ def _in_band(item: RakutenItem, band: tuple[int, int]) -> bool:
 
 
 def is_blocked(item: RakutenItem) -> bool:
-    """ペルソナ外（美容・ガジェット等）を商品名で弾く。"""
+    """ペルソナ外（美容・ガジェット・詰め替えボトル等）を商品名で弾く。"""
     name = item.item_name.lower()
     return any(h.lower() in name for h in config.BLOCK_NAME_HINTS)
 

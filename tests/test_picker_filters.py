@@ -52,6 +52,20 @@ class PickerFilterTests(unittest.TestCase):
         filtered = _filter_candidates([item], used=set(), pain=detergent)
         self.assertEqual(filtered, [])
 
+    def test_refill_bottle_blocked_for_detergent(self) -> None:
+        item = _item(
+            code="mon-o-tone:10000064",
+            name="洗濯洗剤用詰め替えボトル",
+            price=650,
+            review_count=2783,
+            review_average=4.5,
+        )
+        detergent = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
+        self.assertTrue(is_blocked(item))
+        self.assertFalse(passes_quality(item))
+        filtered = _filter_candidates([item], used=set(), pain=detergent)
+        self.assertEqual(filtered, [])
+
     def test_softener_perfume_like_word_not_blocked(self) -> None:
         """「香水調」「アットコスメ」だけで柔軟剤を落とさない。"""
         item = _item(
