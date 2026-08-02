@@ -169,8 +169,8 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="detergent",
         pain="洗剤、また切れそうになってない？",
-        keyword="洗濯洗剤 つめかえ",
-        name_hints=("洗濯洗剤", "衣料用洗剤", "液体洗剤", "粉洗剤", "洗たく洗剤"),
+        keyword="液体洗剤 つめかえ",
+        name_hints=("液体洗剤", "衣料用洗剤", "粉洗剤", "洗たく洗剤", "ジェルボール", "ゲルボール"),
         genre_id="100939",
         scene="洗濯しようとしたらボトルが軽い夜",
         problem="切れた瞬間に洗濯が止まり、残業後のドラッグストア行きが発生する",
@@ -179,7 +179,14 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         avoid="香りが強すぎる・容量を見ずに小さい方を掴む失敗を避ける",
         template_id="hook-benefit",
         require_name_hints=("つめかえ", "詰め替え", "詰替", "ジェルボール", "ゲルボール"),
-        exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES,
+        exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES
+        + (
+            "漂白剤",
+            "漂白",
+            "ハイター",
+            "衣料用漂白剤",
+            "洗たく槽",
+        ),
         require_size_token=True,
     ),
     PainIntent(
