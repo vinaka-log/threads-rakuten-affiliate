@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import os
 import re
+import time
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
@@ -116,28 +117,41 @@ class RakutenClient:
             "format": "json",
         }
 
-    def _get(self, url: str, params: Dict[str, Any]) -> dict:
+    def _get(self, url: str, params: Dict[str, Any], *, retries: int = 3) -> dict:
+        last_err: Optional[Exception] = None
         with httpx.Client(timeout=self.timeout_sec, headers=self._headers()) as client:
-            response = client.get(url, params=params)
-            try:
-                data = response.json() if response.content else {}
-            except Exception:
-                data = {"raw": response.text}
-            if response.status_code >= 400:
-                raise RakutenApiError(
-                    f"楽天API失敗 {response.status_code}: {data}",
-                    status_code=response.status_code,
-                    payload=data,
-                )
-            if isinstance(data, dict) and data.get("error"):
-                raise RakutenApiError(
-                    f"楽天APIエラー: {data.get('error_description') or data.get('error')}",
-                    status_code=response.status_code,
-                    payload=data,
-                )
-            if not isinstance(data, dict):
-                raise RakutenApiError("楽天APIの応答が不正です", payload=data)
-            return data
+            for attempt in range(retries):
+                response = client.get(url, params=params)
+                try:
+                    data = response.json() if response.content else {}
+                except Exception:
+                    data = {"raw": response.text}
+                if response.status_code == 429:
+                    last_err = RakutenApiError(
+                        f"楽天API失敗 429: {data}",
+                        status_code=429,
+                        payload=data,
+                    )
+                    # 短く待ってリトライ（連続検索でのレート制限対策）
+                    time.sleep(1.2 * (attempt + 1))
+                    continue
+                if response.status_code >= 400:
+                    raise RakutenApiError(
+                        f"楽天API失敗 {response.status_code}: {data}",
+                        status_code=response.status_code,
+                        payload=data,
+                    )
+                if isinstance(data, dict) and data.get("error"):
+                    raise RakutenApiError(
+                        f"楽天APIエラー: {data.get('error_description') or data.get('error')}",
+                        status_code=response.status_code,
+                        payload=data,
+                    )
+                if not isinstance(data, dict):
+                    raise RakutenApiError("楽天APIの応答が不正です", payload=data)
+                return data
+        assert last_err is not None
+        raise last_err
 
     @staticmethod
     def _first_image_url(item: dict) -> str:
@@ -248,25 +262,47 @@ class RakutenClient:
         hits: int = 10,
         sort: str = "-reviewCount",
         genre_id: Optional[str] = None,
+        max_price: Optional[int] = None,
+        pages: int = 3,
     ) -> List[RakutenItem]:
-        """キーワードで商品検索（悩み起点の選定用）。"""
-        params = self._base_params()
-        params.update(
-            {
-                "keyword": keyword,
-                "hits": min(max(hits, 1), 30),
-                "sort": sort,
-            }
-        )
-        if genre_id:
-            params["genreId"] = genre_id
-        data = self._get(config.RAKUTEN_SEARCH_URL, params)
-        items_raw = data.get("Items") or []
+        """キーワードで商品検索（悩み起点の選定用）。
+
+        価格上限・複数ページを取り、クライアント側でもレビュー件数順に並べる。
+        （APIの -reviewCount が薄い新規SKUを返すことがあるため）
+        """
+        per_page = min(max(hits, 1), 30)
+        page_count = min(max(pages, 1), 5)
+        seen: set[str] = set()
         result: List[RakutenItem] = []
-        for raw in items_raw:
-            if not isinstance(raw, dict):
-                continue
-            parsed = self._parse_item(raw)
-            if parsed:
+        for page in range(1, page_count + 1):
+            params: Dict[str, Any] = self._base_params()
+            params.update(
+                {
+                    "keyword": keyword,
+                    "hits": per_page,
+                    "page": page,
+                    "sort": sort,
+                }
+            )
+            if genre_id:
+                params["genreId"] = genre_id
+            if max_price is not None and max_price > 0:
+                params["maxPrice"] = int(max_price)
+                params["minPrice"] = 1
+            data = self._get(config.RAKUTEN_SEARCH_URL, params)
+            items_raw = data.get("Items") or []
+            if not items_raw:
+                break
+            for raw in items_raw:
+                if not isinstance(raw, dict):
+                    continue
+                parsed = self._parse_item(raw)
+                if not parsed or parsed.item_code in seen:
+                    continue
+                seen.add(parsed.item_code)
                 result.append(parsed)
+        result.sort(
+            key=lambda i: (i.review_count, i.review_average, -i.item_price),
+            reverse=True,
+        )
         return result

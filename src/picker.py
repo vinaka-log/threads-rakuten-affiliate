@@ -169,6 +169,22 @@ def _filter_candidates(
     return quality
 
 
+def _search_pain_items(
+    client: RakutenClient,
+    pain: config.PainIntent,
+    *,
+    genre_id: Optional[str],
+) -> List[RakutenItem]:
+    return client.search_items(
+        pain.keyword,
+        hits=config.RANKING_HITS,
+        sort="-reviewCount",
+        genre_id=genre_id,
+        max_price=int(config.MAX_ITEM_PRICE),
+        pages=3,
+    )
+
+
 def _candidates_for_pain(
     client: RakutenClient,
     pain: config.PainIntent,
@@ -177,18 +193,15 @@ def _candidates_for_pain(
     band: tuple[int, int],
 ) -> List[RakutenItem]:
     """1つの悩みについて検索→ジャンルランキングの順で厳格マッチ候補を返す。"""
-    try:
-        searched = client.search_items(
-            pain.keyword,
-            hits=config.RANKING_HITS,
-            sort="-reviewCount",
-            genre_id=pain.genre_id,
-        )
-        found = _filter_candidates(searched, used=used, pain=pain)
-        if found:
-            return found
-    except Exception:
-        pass
+    # ジャンル指定 → ジャンルなし、の順。maxPrice 付きで高レビュー商品を拾う。
+    for genre_id in (pain.genre_id, None):
+        try:
+            searched = _search_pain_items(client, pain, genre_id=genre_id)
+            found = _filter_candidates(searched, used=used, pain=pain)
+            if found:
+                return found
+        except Exception:
+            continue
 
     genre = genre_by_id(pain.genre_id)
     assert genre is not None
