@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T10:20:57+09:00",
+  "updated_at": "2026-08-02T10:22:55+09:00",
   "entries": [
     {
       "item_code": "value:chat-repeat",
@@ -75,6 +75,22 @@
       "rank": null,
       "pain_id": "detergent",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/daily-shop/cabinet/35/4901301509819-tg0.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "at-life:10050691",
+      "item_name": "【お試し・初回購入限定】　ライオン　トップ クリアリキッド 500g　詰め替え　衣料用洗濯洗剤 ( 液体洗剤　詰替 ) ( 4903301355618) ※初めの購入者限定価格　お一人様1回限り パッケージ変更の場合あり",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 1,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "18090321071426986",
+        "17881975053478481"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00ru0on.x8u2b04e.g00ru0on.x8u2c390/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fat-life%2F4903301224563%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fat-life%2Fi%2F10050691%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "detergent",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/d/ddd/20173307_0.jpg?_ex=400x400"
     },
     {
       "item_code": "nuthyougo:10000672",
