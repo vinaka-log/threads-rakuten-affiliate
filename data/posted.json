@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T10:22:55+09:00",
+  "updated_at": "2026-08-02T15:05:40+09:00",
   "entries": [
     {
       "item_code": "value:chat-repeat",
@@ -91,6 +91,17 @@
       "rank": null,
       "pain_id": "detergent",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/d/ddd/20173307_0.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-empty-fridge",
+      "item_name": "価値投稿 struggle-empty-fridge",
+      "kind": "value",
+      "slot": 2,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "18090061994641414"
+      ],
+      "reused": false
     },
     {
       "item_code": "nuthyougo:10000672",
