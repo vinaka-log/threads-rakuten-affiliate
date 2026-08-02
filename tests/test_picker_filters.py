@@ -268,12 +268,18 @@ class PickerFilterTests(unittest.TestCase):
             name="クイックルワイパー 取り替え用ドライシート 40枚",
             price=680,
         )
+        wet = _item(
+            code="fw:wet",
+            name="クイックルワイパー 立体吸着ウエットシート 32枚",
+            price=520,
+        )
         body = _item(
             code="fw:body",
-            name="クイックルワイパー 本体 フロア用ハンドル",
+            name="クイックルワイパー 本体セット フロア用ハンドル",
             price=980,
         )
         self.assertTrue(_matches_pain(sheet, pain))
+        self.assertTrue(_matches_pain(wet, pain))
         self.assertFalse(_matches_pain(body, pain))
 
     def test_regular_item_rotation_unchanged_length(self) -> None:

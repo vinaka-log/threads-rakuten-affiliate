@@ -350,14 +350,21 @@ def pick_item(
         )
 
     # 悩みローテ: 主悩み → 残り（順序を保ったまま一周）
+    # 時短枠は時短悩みだけに閉じる（柔軟剤など通常枠へ落とさない）
+    timesave_slots = tuple(getattr(config, "TIMESAVE_ITEM_SLOTS", ()) or ())
+    pool = (
+        list(config.timesave_pain_intents())
+        if slot in timesave_slots
+        else list(all_pains)
+    )
     pains: List[config.PainIntent] = []
     if primary_pain is not None:
         pains.append(primary_pain)
-        for p in all_pains:
+        for p in pool:
             if p.id != primary_pain.id:
                 pains.append(p)
     else:
-        pains = list(all_pains)
+        pains = list(pool)
 
     last_genre = genre_for_slot(slot, on)
     for pain in pains:
