@@ -349,11 +349,12 @@ TIMESAVE_ONLY_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="floor-wiper",
         pain="床掃除、水拭きまで手が回ってる？",
-        keyword="クイックルワイパー 取り替えシート",
+        keyword="クイックルワイパー シート",
         name_hints=(
             "フローリングワイパー",
             "フロアワイパー",
             "クイックルワイパー",
+            "クイックル",
             "取り替えシート",
             "ドライシート",
             "ウェットシート",
@@ -366,15 +367,13 @@ TIMESAVE_ONLY_INTENTS: Tuple[PainIntent, ...] = (
         buy_reason="時短は道具本体より、替えが切れていないことが本体",
         avoid="ドライ/ウェットの使い分けと対応本体サイズを確認",
         template_id="hook-benefit",
-        require_name_hints=("シート", "取り替え", "詰替", "つめかえ", "替え"),
+        require_name_hints=("シート",),
         exclude_name_hints=(
             "本体セット",
-            "本体+ ",
-            "ハンドル",
+            "ハンドル付き",
             "伸縮ポール",
-            "スタンド",
         ),
-        require_size_token=True,
+        require_size_token=False,
         timesave=True,
     ),
 )
@@ -386,9 +385,9 @@ def all_pain_intents() -> Tuple[PainIntent, ...]:
 
 
 def timesave_pain_intents() -> Tuple[PainIntent, ...]:
-    """時短枠ローテ用（timesave フラグ + 時短専用）。"""
+    """時短枠ローテ用（時短専用を先に、続けて timesave フラグ）。"""
     marked = tuple(p for p in PAIN_INTENTS if p.timesave)
-    return marked + tuple(TIMESAVE_ONLY_INTENTS)
+    return tuple(TIMESAVE_ONLY_INTENTS) + marked
 
 # 商品投稿に楽天の商品画像を付ける（⑥）
 ATTACH_ITEM_IMAGE = True

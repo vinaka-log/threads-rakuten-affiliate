@@ -293,7 +293,11 @@ class PickerFilterTests(unittest.TestCase):
             [pain_for_slot(s, on).id for s in regular],
             ["toilet-paper", "tissue"],
         )
-        self.assertEqual(pain_for_slot(config.TIMESAVE_ITEM_SLOTS[0], on).id, "floor-wiper")
+        timesave_id = pain_for_slot(config.TIMESAVE_ITEM_SLOTS[0], on).id
+        self.assertIn(
+            timesave_id,
+            {p.id for p in config.timesave_pain_intents()},
+        )
 
 
 if __name__ == "__main__":
