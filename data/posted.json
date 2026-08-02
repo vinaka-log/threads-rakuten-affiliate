@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T20:13:36+09:00",
+  "updated_at": "2026-08-02T21:07:40+09:00",
   "entries": [
     {
       "item_code": "value:chat-repeat",
@@ -147,6 +147,22 @@
         "17868592053634620"
       ],
       "reused": false
+    },
+    {
+      "item_code": "n-raffine:10010334",
+      "item_name": "【特典付】【公式】【メール便1個までOK】( 海へ… Fukii 詰め替え 1個 ) がんこ 本舗 洗濯 洗剤 中性 柔軟剤 不要 すすぎ0 節約 節水 時短 ラベンダー エッセンシャル オイル 抗菌 部屋干し エコ 子供 赤ちゃん アレルギー",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 7,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "18037341713817549",
+        "18050355482571649"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00py1en.x8u2bce1.g00py1en.x8u2cb11/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fn-raffine%2Fumi-fukki-232214-1set%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fn-raffine%2Fi%2F10010334%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "softener",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/n-raffine/cabinet/06559667/08756022/umi-ro.jpg?_ex=400x400"
     },
     {
       "item_code": "nuthyougo:10000672",
