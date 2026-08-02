@@ -65,7 +65,7 @@ BLOCK_NAME_HINTS: Tuple[str, ...] = (
     "スマホ",
     "iphone",
     "ipad",
-    # 消耗品本体ではなく周辺グッズ（洗剤コピーにボトル単体が載る事故防止）
+    # 消耗品本体ではなく周辺グッズ（洗剤コピーにボトル/収納が載る事故防止）
     "詰め替えボトル",
     "洗剤ボトル",
     "ディスペンサー",
@@ -73,6 +73,11 @@ BLOCK_NAME_HINTS: Tuple[str, ...] = (
     "空容器",
     "ポンプボトル",
     "ボトル単品",
+    "ストッカー",
+    "洗剤入れ",
+    "ボールストッカー",
+    "洗面所収納",
+    "ランドリー収納",
 )
 
 # ランキング取得件数（上位からフィルタ）
@@ -134,6 +139,27 @@ class PainIntent:
     avoid: str
     # 本投稿テンプレ固定（空なら自動）
     template_id: str = ""
+    # 追加でどれか必須（つめかえ/容量など消耗品らしい語）
+    require_name_hints: Tuple[str, ...] = ()
+    # 含まれていたら除外（収納グッズ等）
+    exclude_name_hints: Tuple[str, ...] = ()
+    # 容量表記（2900g / 1285mL 等）を必須にするか
+    require_size_token: bool = False
+
+
+_CONSUMABLE_STORAGE_EXCLUDES: Tuple[str, ...] = (
+    "ストッカー",
+    "収納",
+    "ホルダー",
+    "スタンド",
+    "ラック",
+    "ディスペンサー",
+    "ボトル",
+    "容器",
+    "洗剤入れ",
+    "マグネット",
+    "山崎実業",
+)
 
 
 # 家庭の買い足し悩み。日付×商品枠でローテ。
@@ -143,7 +169,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="detergent",
         pain="洗剤、また切れそうになってない？",
-        keyword="洗濯洗剤 詰め替え",
+        keyword="洗濯洗剤 つめかえ",
         name_hints=("洗濯洗剤", "衣料用洗剤", "液体洗剤", "粉洗剤", "洗たく洗剤"),
         genre_id="100939",
         scene="洗濯しようとしたらボトルが軽い夜",
@@ -152,11 +178,14 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         buy_reason="共働きの平日は「切れてから買う」が一番高いコスト",
         avoid="香りが強すぎる・容量を見ずに小さい方を掴む失敗を避ける",
         template_id="hook-benefit",
+        require_name_hints=("つめかえ", "詰め替え", "詰替", "ジェルボール", "ゲルボール"),
+        exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES,
+        require_size_token=True,
     ),
     PainIntent(
         id="softener",
         pain="柔軟剤、ボトル空になってから慌ててない？",
-        keyword="柔軟剤 詰め替え",
+        keyword="柔軟剤 つめかえ",
         name_hints=("柔軟剤",),
         genre_id="100939",
         scene="洗濯カゴが溜まってるのにボトルが空の平日",
@@ -165,6 +194,9 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         buy_reason="柔軟剤切れは家事全体の詰まりに直結する",
         avoid="匂い残りの合わない香りをリピする前にレビューの不満も見る",
         template_id="hook-benefit",
+        require_name_hints=("つめかえ", "詰め替え", "詰替"),
+        exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES,
+        require_size_token=True,
     ),
     PainIntent(
         id="toilet-paper",
