@@ -45,19 +45,17 @@ MIN_REVIEW_COUNT = 100
 MAX_ITEM_PRICE = 3000
 
 # 商品名に含まれていたら除外（ペルソナ外）
+# 注意: 「香水」「コスメ」「クリーム」は「香水調」「アットコスメ」等に誤爆するため使わない
 BLOCK_NAME_HINTS: Tuple[str, ...] = (
     "美容液",
     "セラム",
     "化粧水",
     "乳液",
-    "クリーム",
     "日焼け止め",
     "ファンデーション",
     "シャンプー",
     "トリートメント",
-    "化粧",
-    "コスメ",
-    "香水",
+    "化粧品",
     "サプリ",
     "プロテイン",
     "炊飯器",
@@ -163,7 +161,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="toilet-paper",
         pain="トイレットペーパー、残り何個か把握してる？",
-        keyword="トイレットペーパー まとめ買い",
+        keyword="トイレットペーパー",
         name_hints=("トイレットペーパー", "トイレロール"),
         genre_id="100939",
         scene="夜中に芯だけを発見したくないとき",
@@ -176,7 +174,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="tissue",
         pain="ティッシュ、箱ごとに買い足してない？",
-        keyword="ティッシュペーパー ボックス まとめ",
+        keyword="ティッシュペーパー",
         name_hints=("ティッシュペーパー", "ボックスティッシュ", "ティシュー"),
         genre_id="100939",
         scene="リビングと寝室で同時に空になるパターン",
@@ -202,7 +200,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="water-case",
         pain="水、まだ店で抱えて帰ってる？",
-        keyword="天然水 ケース ラベルレス 2L",
+        keyword="天然水 ラベルレス",
         name_hints=("天然水", "ラベルレス", "ミネラルウォーター"),
         genre_id="100227",
         scene="買い出し帰りが重くてしんどい日",
@@ -215,7 +213,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="wrap",
         pain="ラップ、引き出しの奥で切れかけてない？",
-        keyword="サランラップ 詰め替え",
+        keyword="サランラップ",
         name_hints=("サランラップ", "食品用ラップ", "ラップフィルム"),
         genre_id="551167",
         scene="お弁当や作り置きの朝",
@@ -242,7 +240,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         id="dishwasher-tab",
         pain="食洗機の洗剤、残り少なくない？",
         keyword="食洗機 洗剤 タブレット",
-        name_hints=("食洗機用", "食器洗い機用", "食洗機 洗剤", "食洗機洗剤"),
+        name_hints=("食洗機用", "食器洗い機用", "食洗機洗剤", "食洗機用洗剤"),
         genre_id="551167",
         scene="食洗機を回すたびに減っていくストック",
         problem="切れると手洗い戻りが発生し、共働きの夜が一気に重くなる",
@@ -254,7 +252,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="kitchen-paper",
         pain="キッチンペーパー、料理中に切れたことない？",
-        keyword="キッチンペーパー 詰め替え",
+        keyword="キッチンペーパー",
         name_hints=("キッチンペーパー", "クッキングペーパー"),
         genre_id="551167",
         scene="揚げ物や肉の下処理の最中",
