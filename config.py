@@ -39,8 +39,35 @@ MAX_TEXT_LEN = 480
 DEDUP_DAYS = 30
 
 # 紹介品質フィルタ
-MIN_REVIEW_AVERAGE = 4.0
+MIN_REVIEW_AVERAGE = 4.3
 MIN_REVIEW_COUNT = 100
+# 消耗品の時短買い向け。高額美容・家電を混ぜない
+MAX_ITEM_PRICE = 3000
+
+# 商品名に含まれていたら除外（ペルソナ外）
+BLOCK_NAME_HINTS: Tuple[str, ...] = (
+    "美容液",
+    "セラム",
+    "化粧水",
+    "乳液",
+    "クリーム",
+    "日焼け止め",
+    "ファンデーション",
+    "シャンプー",
+    "トリートメント",
+    "化粧",
+    "コスメ",
+    "香水",
+    "サプリ",
+    "プロテイン",
+    "炊飯器",
+    "掃除機",
+    "エアコン",
+    "テレビ",
+    "スマホ",
+    "iphone",
+    "ipad",
+)
 
 # ランキング取得件数（上位からフィルタ）
 RANKING_HITS = 30
@@ -105,12 +132,13 @@ class PainIntent:
 
 # 家庭の買い足し悩み。日付×商品枠でローテ。
 # problem / benefit で「買うとその人にどう役立つか」を必ず言えるようにする。
+# name_hints は誤マッチしやすい汎用語（詰め替え等）を避け、商品固有語のみにする。
 PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="detergent",
         pain="洗剤、また切れそうになってない？",
         keyword="洗濯洗剤 詰め替え",
-        name_hints=("洗剤", "詰め替え", "液体洗剤"),
+        name_hints=("洗濯洗剤", "衣料用洗剤", "液体洗剤", "粉洗剤", "洗たく洗剤"),
         genre_id="100939",
         scene="洗濯しようとしたらボトルが軽い夜",
         problem="切れた瞬間に洗濯が止まり、残業後のドラッグストア行きが発生する",
@@ -123,7 +151,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         id="softener",
         pain="柔軟剤、ボトル空になってから慌ててない？",
         keyword="柔軟剤 詰め替え",
-        name_hints=("柔軟剤", "詰替", "詰め替え"),
+        name_hints=("柔軟剤",),
         genre_id="100939",
         scene="洗濯カゴが溜まってるのにボトルが空の平日",
         problem="空だと洗濯コースが止まり、衣類が部屋に滞留する",
@@ -136,7 +164,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         id="toilet-paper",
         pain="トイレットペーパー、残り何個か把握してる？",
         keyword="トイレットペーパー まとめ買い",
-        name_hints=("トイレットペーパー", "トイレ", "シングル", "ダブル"),
+        name_hints=("トイレットペーパー", "トイレロール"),
         genre_id="100939",
         scene="夜中に芯だけを発見したくないとき",
         problem="切れに気づくのが最悪のタイミングで、誰かが深夜に走る羽目になる",
@@ -148,8 +176,8 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="tissue",
         pain="ティッシュ、箱ごとに買い足してない？",
-        keyword="ティッシュ ボックス まとめ",
-        name_hints=("ティッシュ", "ボックスティッシュ", "ソフトパック"),
+        keyword="ティッシュペーパー ボックス まとめ",
+        name_hints=("ティッシュペーパー", "ボックスティッシュ", "ティシュー"),
         genre_id="100939",
         scene="リビングと寝室で同時に空になるパターン",
         problem="箱ごとに買うと単価も手間も増え、気づくたびに小さなストレスが積もる",
@@ -162,7 +190,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         id="trash-bag",
         pain="ゴミ袋、レジ袋で凌いでない？",
         keyword="ゴミ袋 半透明",
-        name_hints=("ゴミ袋", "ポリ袋", "ごみ袋"),
+        name_hints=("ゴミ袋", "ごみ袋"),
         genre_id="100939",
         scene="ゴミの日の朝に指定袋がないとき",
         problem="朝の出発が遅れ、最悪ゴミを一週間持ち越す",
@@ -174,8 +202,8 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="water-case",
         pain="水、まだ店で抱えて帰ってる？",
-        keyword="水 ケース ラベルレス",
-        name_hints=("水", "ラベルレス", "天然水", "2L", "ケース"),
+        keyword="天然水 ケース ラベルレス 2L",
+        name_hints=("天然水", "ラベルレス", "ミネラルウォーター"),
         genre_id="100227",
         scene="買い出し帰りが重くてしんどい日",
         problem="重い水を運ぶたびに疲れが残り、他の家事まで崩れる",
@@ -188,7 +216,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         id="wrap",
         pain="ラップ、引き出しの奥で切れかけてない？",
         keyword="サランラップ 詰め替え",
-        name_hints=("ラップ", "サランラップ", "保鲜膜"),
+        name_hints=("サランラップ", "食品用ラップ", "ラップフィルム"),
         genre_id="551167",
         scene="お弁当や作り置きの朝",
         problem="朝いちで切れると準備が止まり、出発が全体的に遅れる",
@@ -200,8 +228,8 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="dish-sponge",
         pain="スポンジ、ヌメってきたら替え時だよ",
-        keyword="キッチン スポンジ 抗菌",
-        name_hints=("スポンジ", "キッチンスポンジ", "食器洗い"),
+        keyword="キッチンスポンジ 抗菌",
+        name_hints=("キッチンスポンジ", "食器洗いスポンジ", "スポンジたわし"),
         genre_id="551167",
         scene="洗い物のたびに衛生感が気になるとき",
         problem="替え時を逃すと気持ち悪さと洗い残し不安が毎日続く",
@@ -214,7 +242,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         id="dishwasher-tab",
         pain="食洗機の洗剤、残り少なくない？",
         keyword="食洗機 洗剤 タブレット",
-        name_hints=("食洗機", "タブレット", "ジェル", "フィニッシュ", "キュキュット"),
+        name_hints=("食洗機用", "食器洗い機用", "食洗機 洗剤", "食洗機洗剤"),
         genre_id="551167",
         scene="食洗機を回すたびに減っていくストック",
         problem="切れると手洗い戻りが発生し、共働きの夜が一気に重くなる",
