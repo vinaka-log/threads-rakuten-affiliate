@@ -89,7 +89,7 @@ class PickerFilterTests(unittest.TestCase):
     def test_detergent_under_3000_ok(self) -> None:
         item = _item(
             code="shop:1",
-            name="アタック 洗濯洗剤 液体 つめかえ用 2900g",
+            name="アタック 液体洗剤 つめかえ用 2900g",
             price=1980,
         )
         detergent = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
