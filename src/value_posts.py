@@ -5,11 +5,11 @@
 
 ペルソナ A（家庭の消耗品・時短買い）向け:
   ストック補充・重い日用品の宅配・ポイント日のまとめ買いが主語。
-  1日7本は「30代共働きのリアル苦悩」共感つぶやき（STRUGGLE_SLOTS）。
-  攻略ネタは残りの tip 枠のみ。
+  共感つぶやき（STRUGGLE_SLOTS）と、テーマ無関係の雑談（CHITCHAT_SLOTS）を混ぜる。
+  攻略ネタは tip 枠のみ。
 
 1日に config.VALUE_SLOTS の数だけ静的投稿が出る。
-攻略ネタは tip 枠、苦悩は struggle 枠で別プールをローテする。
+tip / struggle / chitchat で別プールをローテする。
 """
 
 from __future__ import annotations
@@ -422,6 +422,7 @@ _POOL: Sequence[ValuePost] = (
 #   - 具体物（冷凍パスタ、牛乳、指定袋）を入れる
 #   - 「学び」「比喩」「まとめ」で締めない。気になって聞く感じで終わる
 #   - URLなし / ハート絵文字なし
+#   - AIっぽい言い回し禁止例: クエスト / 在庫管理ゲー / ヒーローイベント / 可視化
 _STRUGGLE_POOL: Sequence[ValuePost] = (
     ValuePost(
         "struggle-dinner-war",
@@ -698,6 +699,194 @@ _STRUGGLE_POOL: Sequence[ValuePost] = (
 )
 
 
+# テーマ無関係のどうでもいい雑談（リンクなし・PRなし）。
+# CHITCHAT_SLOTS（1日2本）専用。
+# 家計・日用品・共働きあるあるに寄せない。中の人が人間に見えるためのブレ。
+_CHITCHAT_POOL: Sequence[ValuePost] = (
+    ValuePost(
+        "chat-phone-battery",
+        "朝起きたらスマホ12%で焦った\n\n"
+        "寝る前充電したつもりだったんだけど\n"
+        "ケーブル挿したフリして寝てたらしい\n\n"
+        "あるあるすぎる…",
+    ),
+    ValuePost(
+        "chat-wrong-room",
+        "リビング来たのに\n"
+        "何しに来たか忘れた\n\n"
+        "冷蔵庫開けて、閉じて、\n"
+        "またリビングの真ん中で固まるやつ\n\n"
+        "これ年齢？ただの忙しさ？",
+    ),
+    ValuePost(
+        "chat-ac-office",
+        "会社のエアコン寒すぎ問題\n\n"
+        "外は暑いのに中は薄手の羽織必須\n"
+        "体温調節バグってる気がする\n\n"
+        "みんな席、どこらへん？",
+    ),
+    ValuePost(
+        "chat-sock-missing",
+        "片方の靴下、いつも消える\n\n"
+        "洗濯したら確実に1枚いなくなる\n"
+        "どこ行ってるの、教えてほしい\n\n"
+        "うちだけ？",
+    ),
+    ValuePost(
+        "chat-elevator",
+        "1階差なのにエレベーター待っちゃう\n\n"
+        "階段の方が早いくせに\n"
+        "体がボタン押しに行く\n\n"
+        "わかる人いる？",
+    ),
+    ValuePost(
+        "chat-banana",
+        "バナナ、買うと一気に茶色くなるの何\n\n"
+        "黄色いの選んだはずなのに\n"
+        "翌日から斑点祭り😂\n\n"
+        "うまく熟成させる人、どうしてる",
+    ),
+    ValuePost(
+        "chat-checkout-line",
+        "レジ列、なんでいつも\n"
+        "隣の方が早く減るの\n\n"
+        "移動したら移動したで\n"
+        "元の列が進む現象\n\n"
+        "呪いだと思う",
+    ),
+    ValuePost(
+        "chat-dream-weird",
+        "昨夜の夢、小学校の体育館で\n"
+        "会議してた\n\n"
+        "意味わからなすぎて\n"
+        "朝から疲れた\n\n"
+        "変な夢、最近みた？",
+    ),
+    ValuePost(
+        "chat-playlist",
+        "通勤の曲、選ぶのに時間かけすぎて\n"
+        "駅着いたことある\n\n"
+        "結局いつもの曲になるのに\n"
+        "毎回悩むのやめたい\n\n"
+        "みんな通勤、何聴いてる？",
+    ),
+    ValuePost(
+        "chat-keyboard-crumbs",
+        "キーボードにパンくず入ってるの\n"
+        "分かってるのに取れない\n\n"
+        "キーの間のあの感じ、\n"
+        "気になり出すと無理😂\n\n"
+        "掃除、どのくらいの頻度でしてる？",
+    ),
+    ValuePost(
+        "chat-remote",
+        "リモコン、ソファの隙間に\n"
+        "必ず落ちてる\n\n"
+        "探す時間のほうが長い\n"
+        "手伸ばす位置に置きたいのに\n\n"
+        "置き場所、固定できてる家ある？",
+    ),
+    ValuePost(
+        "chat-cicada",
+        "蝉の声、今年も元気すぎる\n\n"
+        "窓閉めても聞こえるし\n"
+        "朝からフルボリューム\n\n"
+        "夏って音から来るよね",
+    ),
+    ValuePost(
+        "chat-crossing",
+        "信号、青になるの遅い交差点あるある\n\n"
+        "待ってる間に\n"
+        "今日の予定全部思い出す\n\n"
+        "急いでるとき限って長くなる",
+    ),
+    ValuePost(
+        "chat-hair",
+        "寝癖、右だけ絶対立つ\n\n"
+        "水つけてもダメで\n"
+        "帽子で隠す日がある😂\n\n"
+        "寝癖、どっち側立つ？",
+    ),
+    ValuePost(
+        "chat-nap",
+        "土曜の午後、\n"
+        "気づいたら2時間寝てた\n\n"
+        "後悔はない。\n"
+        "むしろ必要だった\n\n"
+        "週末昼寝する派？",
+    ),
+    ValuePost(
+        "chat-ice-melt",
+        "コンビニの袋の氷、\n"
+        "家着く前に溶けてるのなんで\n\n"
+        "距離そんなないはずなのに\n"
+        "水面ができてる\n\n"
+        "夏の敗北感ある",
+    ),
+    ValuePost(
+        "chat-wrong-app",
+        "メール返そうとして\n"
+        "電卓開いた\n\n"
+        "指が勝手に動いてる\n"
+        "朝は特に多い\n\n"
+        "似たミス、する？",
+    ),
+    ValuePost(
+        "chat-train-smell",
+        "雨の日の電車の匂い、\n"
+        "独特すぎる\n\n"
+        "傘の水滴と湿気と\n"
+        "なんか甘いの混ざる\n\n"
+        "気になる人いる？気にならない人いる？",
+    ),
+    ValuePost(
+        "chat-knee-crack",
+        "立ち上がるとき膝鳴るの、\n"
+        "いつからだろう\n\n"
+        "痛いわけじゃないけど\n"
+        "音だけ立派\n\n"
+        "同じのいる？",
+    ),
+    ValuePost(
+        "chat-cloud",
+        "空見てたら雲が\n"
+        "なんか動物に見えて時間溶けた\n\n"
+        "子どもじゃないのにやってる\n\n"
+        "最近空、見上げた？",
+    ),
+    ValuePost(
+        "chat-miso",
+        "インスタント味噌汁、\n"
+        "朝の救世主なのに\n"
+        "なんか負けた気持ちになる\n\n"
+        "味は好きなんだよな\n\n"
+        "朝味噌汁、作る派？お湯入れる派？",
+    ),
+    ValuePost(
+        "chat-left-shoe",
+        "靴、左だけすぐ痛くなるの何\n\n"
+        "同じサイズなのに\n"
+        "左だけ文句言ってくる\n\n"
+        "これ、分かる人いる？",
+    ),
+    ValuePost(
+        "chat-notification",
+        "通知オフにしたアプリから\n"
+        "なぜかバッジだけ残ってる\n\n"
+        "気になって開くと\n"
+        "たいして重要じゃない\n\n"
+        "通知、どこまで切ってる？",
+    ),
+    ValuePost(
+        "chat-season-change",
+        "朝は涼しくて長袖、\n"
+        "昼で半袖に後悔する季節きた\n\n"
+        "カバンに一枚入れるの忘れる\n\n"
+        "今、朝と昼どっち基準で服選んでる？",
+    ),
+)
+
+
 
 def pool() -> Sequence[ValuePost]:
     return _POOL
@@ -707,6 +896,14 @@ def struggle_pool() -> Sequence[ValuePost]:
     return _STRUGGLE_POOL
 
 
+def chitchat_pool() -> Sequence[ValuePost]:
+    return _CHITCHAT_POOL
+
+
+def _non_tip_slots() -> tuple[int, ...]:
+    return tuple(config.STRUGGLE_SLOTS) + tuple(getattr(config, "CHITCHAT_SLOTS", ()) or ())
+
+
 def _struggle_position(slot: int) -> int:
     """その日の苦悩枠のうち何番目か（0始まり）。"""
     if slot in config.STRUGGLE_SLOTS:
@@ -714,9 +911,16 @@ def _struggle_position(slot: int) -> int:
     return 0
 
 
+def _chitchat_position(slot: int) -> int:
+    slots = tuple(getattr(config, "CHITCHAT_SLOTS", ()) or ())
+    if slot in slots:
+        return slots.index(slot)
+    return 0
+
+
 def _static_position(slot: int) -> int:
     """その日の攻略系価値枠のうち何番目か（0始まり）。"""
-    tip_slots = tuple(s for s in config.VALUE_SLOTS if s not in config.STRUGGLE_SLOTS)
+    tip_slots = tuple(s for s in config.VALUE_SLOTS if s not in _non_tip_slots())
     if slot in tip_slots:
         return tip_slots.index(slot)
     if slot in config.VALUE_SLOTS:
@@ -727,13 +931,19 @@ def _static_position(slot: int) -> int:
 def pick_value_post(on: date, slot: int = 0) -> ValuePost:
     """日付×枠ローテで価値投稿を1本選ぶ。
 
-    STRUGGLE_SLOTS は共働きリアル苦悩プールから選ぶ。
-    それ以外は攻略・保存ネタプール。セール時は攻略枠の先頭だけ優先。
+    STRUGGLE_SLOTS → 共働きリアル苦悩
+    CHITCHAT_SLOTS → テーマ無関係の雑談
+    それ以外の VALUE_SLOTS → 攻略・保存ネタ（セール時は先頭枠だけ優先）
     """
+    chitchat_slots = tuple(getattr(config, "CHITCHAT_SLOTS", ()) or ())
     if slot in config.STRUGGLE_SLOTS:
         k = _struggle_position(slot)
         idx = (on.toordinal() * len(config.STRUGGLE_SLOTS) + k) % len(_STRUGGLE_POOL)
         return _STRUGGLE_POOL[idx]
+    if slot in chitchat_slots:
+        k = _chitchat_position(slot)
+        idx = (on.toordinal() * len(chitchat_slots) + k) % len(_CHITCHAT_POOL)
+        return _CHITCHAT_POOL[idx]
 
     label = active_sale_label(on)
     priority: ValuePost | None = None
@@ -742,7 +952,7 @@ def pick_value_post(on: date, slot: int = 0) -> ValuePost:
     elif label and "スーパーセール" in label:
         priority = _find("regret-checklist")
 
-    tip_slots = tuple(s for s in config.VALUE_SLOTS if s not in config.STRUGGLE_SLOTS)
+    tip_slots = tuple(s for s in config.VALUE_SLOTS if s not in _non_tip_slots())
     k = _static_position(slot)
     if priority is not None and k == 0:
         return priority
@@ -759,6 +969,9 @@ def _find(value_id: str) -> ValuePost:
         if p.value_id == value_id:
             return p
     for p in _STRUGGLE_POOL:
+        if p.value_id == value_id:
+            return p
+    for p in _CHITCHAT_POOL:
         if p.value_id == value_id:
             return p
     raise KeyError(value_id)
