@@ -163,6 +163,11 @@ class PickerFilterTests(unittest.TestCase):
             name="ネピア トイレットペーパー ダブル 30m 12ロール",
             price=1280,
         )
+        elleair = _item(
+            code="tp:elleair",
+            name="エリエール トイレットティシュー コンパクト ダブル 82.5m 8ロール ケース",
+            price=1980,
+        )
         case = _item(
             code="tp:case",
             name="ティッシュケース トイレットペーパー ペーパーポット カバー",
@@ -171,8 +176,12 @@ class PickerFilterTests(unittest.TestCase):
             review_average=4.7,
         )
         self.assertTrue(_matches_pain(pack, tp))
+        self.assertTrue(_matches_pain(elleair, tp))
         self.assertFalse(_matches_pain(case, tp))
-        self.assertEqual(_filter_candidates([case, pack], used=set(), pain=tp), [pack])
+        self.assertEqual(
+            _filter_candidates([case, pack, elleair], used=set(), pain=tp),
+            [pack, elleair],
+        )
 
     def test_tissue_pack_ok_case_rejected(self) -> None:
         tissue = next(p for p in config.PAIN_INTENTS if p.id == "tissue")
