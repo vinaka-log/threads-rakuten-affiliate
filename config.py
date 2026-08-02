@@ -344,6 +344,10 @@ STRUGGLE_SLOTS: Tuple[int, ...] = (0, 2, 4, 8, 9)
 
 # テーマ無関係のどうでもいい雑談（中の人が人間に見えるためのブレ）。
 CHITCHAT_SLOTS: Tuple[int, ...] = (1, 3)
+# 雑談プール（自動補充先）。一度投稿したら台帳で消費し再利用しない。
+CHITCHAT_POOL_PATH = DATA_DIR / "chitchat_pool.json"
+CHITCHAT_MIN_UNUSED = 6
+CHITCHAT_REFILL_COUNT = 10
 
 # 伸びた価値投稿の再利用（参考: 3日に1回）。
 # REUSE_SLOTS では通常ローテより再利用キューを優先する。

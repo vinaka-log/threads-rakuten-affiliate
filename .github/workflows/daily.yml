@@ -136,12 +136,12 @@ jobs:
       - name: Commit ledger if changed
         if: ${{ success() && (github.event_name == 'schedule' || inputs.dry_run == false) }}
         run: |
-          if git diff --quiet -- data/posted.json; then
-            echo "No ledger changes"
+          if git diff --quiet -- data/posted.json data/chitchat_pool.json data/reuse.json; then
+            echo "No data file changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/posted.json
-          git commit -m "chore: update posted ledger"
+          git add data/posted.json data/chitchat_pool.json data/reuse.json
+          git commit -m "chore: update posted ledger / chitchat pool"
           git push
