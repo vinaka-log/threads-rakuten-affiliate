@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T15:05:40+09:00",
+  "updated_at": "2026-08-02T17:29:22+09:00",
   "entries": [
     {
       "item_code": "value:chat-repeat",
@@ -100,6 +100,17 @@
       "posted_on": "2026-08-02",
       "threads_post_ids": [
         "18090061994641414"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:top3:551167",
+      "item_name": "価値投稿 top3:551167",
+      "kind": "value",
+      "slot": 3,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "17989916556002646"
       ],
       "reused": false
     },
