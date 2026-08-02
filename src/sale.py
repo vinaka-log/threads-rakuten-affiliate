@@ -47,10 +47,12 @@ def item_deal_lines(item: "RakutenItem", on: date) -> List[str]:
         lines.append(f"いまポイント{item.point_rate}倍表記あり。倍率は購入前に公式で再確認してね")
     if _COUPON_RE.search(item.item_name or ""):
         lines.append("商品名にクーポン/倍率の気配あり。取得ボタン押し忘れに注意")
-    if getattr(item, "postage_flag", None) == 0:
-        # postageFlag: 0=送料別 / 1=送料込 というドキュメントが多いが
-        # 実データ差があるため、送料込の断定はしない。別途39ショップ案内のみ。
-        pass
+    # 応答 postageFlag: 0=送料込 / 1=送料別（公式）。断定しすぎず表記ベースで触れる。
+    postage = getattr(item, "postage_flag", None)
+    if postage == 0:
+        lines.append("送料込表記の候補。支払総額が見えやすいのもポイント")
+    elif postage == 1:
+        lines.append("送料別表記あり。合計が3980円未満だと送料が乗る店もあるので要確認")
     if not lines:
         lines.append("急ぎでなければ、5と0のつく日かセールに寄せるのも手")
     return lines

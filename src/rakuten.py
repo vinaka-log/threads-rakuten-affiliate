@@ -32,7 +32,8 @@ class RakutenItem:
     rank: Optional[int] = None
     image_url: str = ""
     point_rate: int = 0
-    postage_flag: int = 0  # 1=送料込の表記がある場合あり
+    # 応答 postageFlag: 0=送料込 / 1=送料別（Ichiba Item Search 2026-07-01）
+    postage_flag: int = 0
     shop_of_the_year_flag: int = 0
 
     @property
@@ -264,11 +265,15 @@ class RakutenClient:
         genre_id: Optional[str] = None,
         max_price: Optional[int] = None,
         pages: int = 3,
+        postage_flag: Optional[int] = None,
     ) -> List[RakutenItem]:
         """キーワードで商品検索（悩み起点の選定用）。
 
         価格上限・複数ページを取り、クライアント側でもレビュー件数順に並べる。
         （APIの -reviewCount が薄い新規SKUを返すことがあるため）
+
+        postage_flag:
+          リクエスト側。1=送料込/送料無料のみ。None=指定なし（全件）。
         """
         per_page = min(max(hits, 1), 30)
         page_count = min(max(pages, 1), 5)
@@ -289,6 +294,8 @@ class RakutenClient:
             if max_price is not None and max_price > 0:
                 params["maxPrice"] = int(max_price)
                 params["minPrice"] = 1
+            if postage_flag is not None:
+                params["postageFlag"] = int(postage_flag)
             data = self._get(config.RAKUTEN_SEARCH_URL, params)
             items_raw = data.get("Items") or []
             if not items_raw:
