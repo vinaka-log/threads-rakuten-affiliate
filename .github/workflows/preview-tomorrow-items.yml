@@ -1,0 +1,39 @@
+name: Preview tomorrow item picks
+
+on:
+  push:
+    branches: [cursor/exclude-tp-accessories-1864]
+    paths:
+      - ".github/workflows/preview-tomorrow-items.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      RAKUTEN_APPLICATION_ID: ${{ secrets.RAKUTEN_APPLICATION_ID }}
+      RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+      RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+      TZ: Asia/Tokyo
+      PYTHONPATH: src:.
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Dry-run tomorrow item slots
+        run: |
+          echo "===== slot 6 (19:00) toilet-paper ====="
+          python src/post.py --dry-run --slot 6 --item --date 2026-08-03
+          echo
+          echo "===== slot 7 (20:00) tissue ====="
+          python src/post.py --dry-run --slot 7 --item --date 2026-08-03
