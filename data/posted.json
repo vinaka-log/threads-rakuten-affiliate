@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T10:18:31+09:00",
+  "updated_at": "2026-08-02T10:20:57+09:00",
   "entries": [
     {
       "item_code": "value:chat-repeat",
@@ -59,6 +59,22 @@
       "rank": null,
       "pain_id": "detergent",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/roomy/cabinet/500cart_all/500cart_11g/p5-3/ymz1200-mo031-0_gt01.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "daily-shop:10000211",
+      "item_name": "【衣料用漂白剤】ワイドハイターEXパワー 4.5L 詰め替え用 業務用 消臭 部屋干し 梅雨時期 洗たく槽防カビ（黄ばみ・シミ・ワイドハイターex・ワイドハイター・漂白剤・除菌成分配合・洗濯洗剤・詰め替え・つめかえ・衣料漂白剤）花王",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 1,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "18102813953239852",
+        "18106354946041178"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00rvhdn.x8u2bffa.g00rvhdn.x8u2c343/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdaily-shop%2F10000211%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fdaily-shop%2Fi%2F10000211%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "detergent",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/daily-shop/cabinet/35/4901301509819-tg0.jpg?_ex=400x400"
     },
     {
       "item_code": "nuthyougo:10000672",
