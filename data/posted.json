@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T17:29:22+09:00",
+  "updated_at": "2026-08-02T18:47:54+09:00",
   "entries": [
     {
       "item_code": "value:chat-repeat",
@@ -113,6 +113,17 @@
         "17989916556002646"
       ],
       "reused": false
+    },
+    {
+      "item_code": "value:stock-buy",
+      "item_name": "価値投稿 stock-buy",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-08-02",
+      "threads_post_ids": [
+        "17917816794423035"
+      ],
+      "reused": true
     },
     {
       "item_code": "nuthyougo:10000672",
