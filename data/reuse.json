@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-03T07:57:41+09:00",
+  "updated_at": "2026-08-03T15:26:36+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -88,6 +88,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18149822989511918"
+    },
+    {
+      "value_id": "struggle-delivery-box",
+      "last_posted_on": "2026-08-03",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18016171145708519"
     }
   ]
 }
