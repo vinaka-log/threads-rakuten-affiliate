@@ -184,6 +184,8 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
 
     deal_lines = item_deal_lines(item, on)
     sale_block = "".join(f"\n{line}" for line in deal_lines)
+    if sale_block:
+        sale_block += "\n"
 
     fields = {
         "short_name": _short_name_for_main(item.short_name),
