@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-08-03T23:13:47+09:00",
+  "updated_at": "2026-08-04T00:41:42+09:00",
   "entries": [
+    {
+      "item_code": "value:struggle-tiny-win",
+      "item_name": "価値投稿 struggle-tiny-win",
+      "kind": "value",
+      "slot": 9,
+      "posted_on": "2026-08-04",
+      "threads_post_ids": [
+        "18089566988438948"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:struggle-mental-stock",
       "item_name": "価値投稿 struggle-mental-stock",

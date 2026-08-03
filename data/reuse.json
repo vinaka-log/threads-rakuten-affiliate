@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-03T23:13:47+09:00",
+  "updated_at": "2026-08-04T00:41:42+09:00",
   "candidates": [
     {
       "value_id": "stock-buy",
@@ -110,6 +110,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18118908724850707"
+    },
+    {
+      "value_id": "struggle-tiny-win",
+      "last_posted_on": "2026-08-04",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18089566988438948"
     }
   ]
 }
