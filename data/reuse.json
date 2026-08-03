@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-03T20:11:53+09:00",
+  "updated_at": "2026-08-03T23:13:47+09:00",
   "candidates": [
     {
       "value_id": "stock-buy",
@@ -99,6 +99,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18016171145708519"
+    },
+    {
+      "value_id": "struggle-point-guilt",
+      "last_posted_on": "2026-08-03",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18118908724850707"
     }
   ]
 }

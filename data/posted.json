@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-03T22:45:04+09:00",
+  "updated_at": "2026-08-03T23:13:47+09:00",
   "entries": [
     {
       "item_code": "value:struggle-mental-stock",
@@ -87,6 +87,17 @@
       "rank": null,
       "pain_id": "tissue",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/kurashikenkou/cabinet/11848367/7263927.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-point-guilt",
+      "item_name": "価値投稿 struggle-point-guilt",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-08-03",
+      "threads_post_ids": [
+        "18118908724850707"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-repeat",
