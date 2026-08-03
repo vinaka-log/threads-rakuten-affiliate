@@ -5,6 +5,7 @@ on:
     branches: [cursor/biore-mist-affiliate-1864]
     paths:
       - ".github/workflows/manual-biore-post.yml"
+      - "scripts/publish_biore_mist.py"
 
 permissions:
   contents: read
@@ -29,50 +30,17 @@ jobs:
       - run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Publish Biore mist thread now
+      - name: Require Threads secrets
         run: |
-          python - <<'PY'
-          import asyncio
-          from threads_client import ThreadsClient
-
-          main = """暑がりの僕の夏の必須アイテム！
-これないと夏は乗り切れる気がしない。
-
-おすすめの使い方は、このスプレーを首後ろと両腕にプッシュした後に、ハンディファンで冷やすと、びっくりするくらい冷感が押し寄せてくるのでおすすめ！！
-騙されたと思って試してみて欲しい👍
-
-ビオレ 冷ハンディミスト
-リフレッシュサボンの香り 120ml
-
-気になる人はリプへ👇"""
-
-          reply = """▼商品はこちら
-https://hb.afl.rakuten.co.jp/hgc/g00qvyfn.x8u2b9d8.g00qvyfn.x8u2cc06/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsundrug%2F4901301413123%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsundrug%2Fi%2F10105761%2F
-
-※PR（アフィリエイトリンク）"""
-
-          texts = [main.strip() + "\n", reply.strip() + "\n"]
-          print("=== MAIN ===")
-          print(texts[0])
-          print("=== REPLY ===")
-          print(texts[1])
-
-          async def run():
-              client = ThreadsClient.from_env() if hasattr(ThreadsClient, "from_env") else None
-              if client is None:
-                  import os
-                  client = ThreadsClient(
-                      access_token=os.environ["THREADS_ACCESS_TOKEN"],
-                      user_id=os.environ["THREADS_USER_ID"],
-                  )
-              result = await client.publish_thread(texts, dry_run=False)
-              print(f"post_ids={result.post_ids}")
-              print(f"partial={result.partial}")
-              print(f"warnings={result.warnings}")
-              if not result.post_ids:
-                  raise SystemExit("publish failed: no post_ids")
-              if result.partial:
-                  print("WARNING: partial publish (main ok, reply may have failed)")
-
-          asyncio.run(run())
-          PY
+          missing=0
+          for key in THREADS_ACCESS_TOKEN THREADS_USER_ID; do
+            if [ -z "${!key}" ]; then
+              echo "Missing secret: $key"
+              missing=1
+            fi
+          done
+          if [ "$missing" = "1" ]; then
+            exit 1
+          fi
+      - name: Publish Biore mist thread now
+        run: python scripts/publish_biore_mist.py
