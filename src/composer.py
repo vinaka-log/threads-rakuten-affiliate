@@ -2,7 +2,7 @@
 
 制約（コードで強制）:
   - 本投稿に URL 禁止
-  - リンクリプの1行目は必ず #PR
+  - リンクリプに ※PR（アフィリエイトリンク） を含める（リンク直後）
   - MAX_TEXT_LEN 以下
   - ハート系絵文字なし
 """
@@ -96,8 +96,6 @@ _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
 )
 
 _REPLY_TEMPLATE = (
-    "#PR\n"
-    "アフィリエイトリンクを含みます\n\n"
     "【{short_name}】\n"
     "・悩み: {pain_short}\n"
     "・困り事: {problem}\n"
@@ -109,9 +107,12 @@ _REPLY_TEMPLATE = (
     "{rank_line}"
     "・ショップ: {shop_name}\n"
     "{sale_block}"
-    "\n気になった人はこちら↓\n"
-    "{affiliate_url}"
+    "\n▼商品はこちら\n"
+    "{affiliate_url}\n"
+    "\n※PR（アフィリエイトリンク）"
 )
+
+_PR_DISCLOSURE = "※PR（アフィリエイトリンク）"
 
 
 def _fmt_price(n: int) -> str:
@@ -138,8 +139,8 @@ def _validate(texts: List[str]) -> None:
     main, reply = texts[0], texts[1]
     if _URL_RE.search(main):
         raise ValueError("本投稿にURLを含められません")
-    if not reply.lstrip().startswith("#PR"):
-        raise ValueError("リンクリプの先頭は #PR である必要があります")
+    if _PR_DISCLOSURE not in reply:
+        raise ValueError(f"リンクリプに「{_PR_DISCLOSURE}」が必要です")
     for i, t in enumerate(texts):
         if _HEART_RE.search(t):
             raise ValueError(f"texts[{i}] にハート系絵文字があります")
