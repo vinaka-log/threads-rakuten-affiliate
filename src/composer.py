@@ -33,90 +33,94 @@ class ComposedPost:
     template_id: str
 
 
-# 本投稿テンプレ:
-#   悩み → 困り事(Before) → 買うとどう楽か(After) → 商品 → 問いかけ
-# 価格・レビューは主役にしない（⑩ / ベネフィット優先）
+# 本投稿テンプレ（人気投稿寄り）:
+#   1行目で状態/痛み → 短い共感 → 体験ベネフィット → 商品名 → 優しいリプ誘導
+#   価格・レビューは本投稿に置かない（売り込み感と離脱を増やすため）
+#   「このままだと:」「Before:」などラベル調は使わない
 _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
     (
-        "hook-benefit",
+        "hook-must",
         "{pain}\n\n"
-        "このままだと: {problem}\n"
-        "これを置くと: {benefit}🐻‍❄️\n\n"
-        "「{short_name}」\n"
-        "{price}円 / レビュー{review_avg}点（{review_count}件）\n\n"
-        "詳細はリプにまとめた👇\n"
-        "同じ悩みあった人、どうしてる？",
+        "これ、ないと地味に詰む。\n"
+        "{problem}\n\n"
+        "{benefit}\n\n"
+        "「{short_name}」\n\n"
+        "詳細はリプに👇\n"
+        "同じ悩みある人、どうしてる？",
     ),
     (
-        "hook-stock",
+        "hook-scene",
         "{pain}\n\n"
-        "{scene}あるあるだと思う。\n"
-        "困り: {problem}\n"
-        "解決: {benefit}\n\n"
-        "「{short_name}」🐻‍❄️\n"
-        "先に足しておくだけで、夜の自分が助かる。\n\n"
-        "リプに詳細置いとくね👇\n"
-        "切れそうストック、いま何がある？",
+        "{scene}、わかる人いる？\n"
+        "{problem}\n\n"
+        "うちはこれで凌いでる。\n"
+        "「{short_name}」\n\n"
+        "{benefit}\n\n"
+        "リプに置いとくね👇",
+    ),
+    (
+        "hook-tip",
+        "{pain}\n\n"
+        "おすすめは、切れる前に宅配で足しとくこと。\n"
+        "{benefit}\n\n"
+        "「{short_name}」\n\n"
+        "騙されたと思って一回ストックしてみて。\n"
+        "気になる人はリプへ👇",
+    ),
+    (
+        "hook-honest",
+        "{pain}\n\n"
+        "正直に言うと、{avoid}\n"
+        "でも切れてからの寄り道の方がキツい。\n\n"
+        "「{short_name}」\n"
+        "{benefit}\n\n"
+        "詳細はリプに👇\n"
+        "使ってる人いたら教えて",
     ),
     (
         "hook-heavy",
         "{pain}\n\n"
-        "重いものを店で運ぶコスト、見えてないだけで高い🐻‍❄️\n"
-        "困り: {problem}\n"
-        "買うと: {benefit}\n\n"
+        "店で抱えて帰るの、実はいちばんコスパ悪い。\n"
+        "{problem}\n\n"
         "「{short_name}」\n"
-        "{price}円。宅配に寄せる候補。\n\n"
+        "{benefit}\n\n"
         "リプ見てね👇\n"
-        "もうネット買いしてる人、楽になった？",
-    ),
-    (
-        "hook-tonight",
-        "{pain}\n\n"
-        "Before: {problem}\n"
-        "After: {benefit}\n\n"
-        "今夜の候補はこれ🐻‍❄️\n"
-        "「{short_name}」\n"
-        "注意: {avoid}\n\n"
-        "気になる人はリプ見て👇\n"
-        "うちの定番、他にもあったら教えて",
-    ),
-    (
-        "hook-reason",
-        "{pain}\n\n"
-        "買う意味がはっきりしてるやつ🐻‍❄️\n"
-        "・場面: {scene}\n"
-        "・困り: {problem}\n"
-        "・助かること: {benefit}\n"
-        "・補足: {buy_reason}\n\n"
-        "「{short_name}」\n"
-        "{price}円 / レビュー{review_count}件\n\n"
-        "スペックはリプに👇\n"
-        "使ってる人いたら、実際どう？",
+        "もうネットに寄せた人、楽になった？",
     ),
 )
 
+# リプは「続き置き場」。本編の繰り返しを避け、欠点の正直さ→価格→リンク→PR
 _REPLY_TEMPLATE = (
-    "【{short_name}】\n"
-    "・悩み: {pain_short}\n"
-    "・困り事: {problem}\n"
-    "・買うとこう助かる: {benefit}\n"
-    "・補足: {buy_reason}\n"
-    "・注意: {avoid}\n"
-    "・価格: {price}円\n"
-    "・レビュー: {review_avg}点（{review_count}件）\n"
+    "正直なところ、{avoid}\n\n"
+    "置くと助かるのはここ。\n"
+    "{benefit}\n\n"
+    "{price}円 / レビュー{review_avg}点（{review_count}件）\n"
     "{rank_line}"
-    "・ショップ: {shop_name}\n"
+    "{shop_name}\n"
     "{sale_block}"
     "\n▼商品はこちら\n"
     "{affiliate_url}\n"
     "\n※PR（アフィリエイトリンク）"
 )
 
+# 後方互換: 旧ID指定が来ても新テンプレへ寄せる
+_TEMPLATE_ALIASES = {
+    "hook-benefit": "hook-must",
+    "hook-stock": "hook-scene",
+    "hook-tonight": "hook-honest",
+    "hook-reason": "hook-tip",
+}
+
 _PR_DISCLOSURE = "※PR（アフィリエイトリンク）"
+_MAIN_NAME_LIMIT = 32
 
 
 def _fmt_price(n: int) -> str:
     return f"{n:,}"
+
+
+def _resolve_template_id(tid: str) -> str:
+    return _TEMPLATE_ALIASES.get(tid, tid)
 
 
 def _pick_template_id(item_code: str, on: date, slot: int) -> str:
@@ -133,6 +137,13 @@ def _truncate(text: str, limit: int = config.MAX_TEXT_LEN) -> str:
     return text[: limit - 1] + "…"
 
 
+def _short_name_for_main(name: str, limit: int = _MAIN_NAME_LIMIT) -> str:
+    name = (name or "").strip()
+    if len(name) <= limit:
+        return name
+    return name[: limit - 1] + "…"
+
+
 def _validate(texts: List[str]) -> None:
     if len(texts) < 2:
         raise ValueError("本投稿とリプの2本が必要です")
@@ -141,6 +152,10 @@ def _validate(texts: List[str]) -> None:
         raise ValueError("本投稿にURLを含められません")
     if _PR_DISCLOSURE not in reply:
         raise ValueError(f"リンクリプに「{_PR_DISCLOSURE}」が必要です")
+    # 本投稿に売り込みラベルが混ざっていないか（テンプレ退行検知）
+    for bad in ("このままだと:", "これを置くと:", "Before:", "After:", "困り:", "解決:"):
+        if bad in main:
+            raise ValueError(f"本投稿に機械的なラベル「{bad}」があります")
     for i, t in enumerate(texts):
         if _HEART_RE.search(t):
             raise ValueError(f"texts[{i}] にハート系絵文字があります")
@@ -160,6 +175,7 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
         tid = pain.template_id
     else:
         tid = _pick_template_id(item.item_code, on, pick.slot)
+    tid = _resolve_template_id(tid)
     templates = {k: v for k, v in _MAIN_TEMPLATES}
     if tid not in templates:
         raise ValueError(f"未知の template_id: {tid}")
@@ -167,10 +183,12 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
     from sale import item_deal_lines
 
     deal_lines = item_deal_lines(item, on)
-    sale_block = "".join(f"\n{line}" for line in deal_lines) + ("\n" if deal_lines else "")
+    sale_block = "".join(f"\n{line}" for line in deal_lines)
+    if sale_block:
+        sale_block += "\n"
 
     fields = {
-        "short_name": item.short_name,
+        "short_name": _short_name_for_main(item.short_name),
         "category": pick.genre.short,
         "rank": item.rank or "?",
         "review_avg": f"{item.review_average:.1f}",
@@ -178,7 +196,7 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
         "price": _fmt_price(item.item_price),
         "shop_name": item.shop_name or "楽天市場",
         "affiliate_url": item.affiliate_url,
-        "rank_line": f"・ランキング: {item.rank}位付近\n" if item.rank else "",
+        "rank_line": f"ランキング {item.rank}位付近\n" if item.rank else "",
         "sale_block": sale_block,
         "pain": (pain.pain if pain else "今夜の買い足し、迷ってる人へ"),
         "pain_short": (pain.pain.rstrip("？?") if pain else "家庭の買い足し"),
@@ -257,7 +275,7 @@ def compose_digest(client, on: date, slot: int, *, fmt: str | None = None) -> Co
     if fmt == "top3":
         comment = _DIGEST_COMMENTS[(on.toordinal() + slot) % len(_DIGEST_COMMENTS)]
         texts = [
-            f"今日の家庭向け{genre.short}ランキング、上位メモ🐻‍❄️\n\n"
+            f"今日の家庭向け{genre.short}ランキング、上位メモ\n\n"
             f"1位 {names[0]}\n"
             f"2位 {names[1]}\n"
             f"3位 {names[2]}\n\n"
@@ -267,14 +285,14 @@ def compose_digest(client, on: date, slot: int, *, fmt: str | None = None) -> Co
     elif fmt == "quiz":
         top = ranking[0]
         texts = [
-            f"【クイズ】今日の{genre.short}買い足しランキング🐻‍❄️\n\n"
+            f"【クイズ】今日の{genre.short}買い足しランキング\n\n"
             f"2位 {names[1]}\n"
             f"3位 {names[2]}\n\n"
             f"さて、1位はなんでしょう?\n"
             f"ヒント: レビュー{top.review_count:,}件のあれ。\n\n"
             f"答えはリプに置いとくね👇",
             f"正解は…\n\n"
-            f"「{names[0]}」でした🐻‍❄️\n"
+            f"「{names[0]}」でした\n"
             f"レビュー{top.review_average:.1f}点（{top.review_count:,}件）。\n\n"
             f"家で使ってる人、当たった？",
         ]
@@ -282,7 +300,7 @@ def compose_digest(client, on: date, slot: int, *, fmt: str | None = None) -> Co
         tail = ranking[-3:]
         lines = "\n".join(f"・{_shorten(i.short_name)}" for i in tail)
         texts = [
-            f"1位より「じわじわ買い足されてるゾーン」が好きなんだよね🐻‍❄️\n\n"
+            f"1位より「じわじわ買い足されてるゾーン」が好きなんだよね\n\n"
             f"今日の{genre.short}ランキング、\n"
             f"上位のすぐ下にいたのがこのへん。\n\n"
             f"{lines}\n\n"
