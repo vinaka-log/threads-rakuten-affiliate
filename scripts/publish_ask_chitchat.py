@@ -1,10 +1,11 @@
-"""One-shot: publish summer chitchat engagement posts (same style as ice cream hit).
+"""Publish ask-style engagement chitchat (ice-cream hit pattern).
+
+Daily extras at 11:00 / 16:00 JST via workflow. Mixes seasonal hooks with
+light trend/news seeds. No affiliate / no product pitch.
 
 Usage:
-  python scripts/publish_summer_chitchat.py --which 1
-  python scripts/publish_summer_chitchat.py --which 2
-
-Only runs on TARGET_DATE (JST) unless --force.
+  python scripts/publish_ask_chitchat.py --slot 1
+  python scripts/publish_ask_chitchat.py --slot 2 --dry-run
 """
 
 from __future__ import annotations
@@ -14,23 +15,18 @@ import asyncio
 import os
 import sys
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "src"))
+
+import config
+from ask_chitchat import ensure_ask_supply, pick_ask_post
+from picker import load_ledger, save_ledger
 from threads_client import ThreadsClient
 
 JST = timezone(timedelta(hours=9))
-TARGET_DATE = "2026-08-04"
-
-# 伸びたアイス投稿と同型: 短い夏ネタ + みんなのオススメ募集 + 自分の回答(しろくま)
-POSTS = {
-    "1": (
-        "chat-summer-kakigori-20260804",
-        "夏といえばかき氷だよね🍧 みんなのオススメの味教えて〜 僕はいちご一択🐻‍❄️",
-    ),
-    "2": (
-        "chat-summer-drink-20260804",
-        "夏の飲み物、みんな何飲む？推し教えて〜 僕は麦茶一択、しろくまも麦茶派🐻‍❄️",
-    ),
-}
 
 
 async def publish(text: str) -> list[str]:
@@ -49,18 +45,26 @@ async def publish(text: str) -> list[str]:
 
 def main() -> int:
     p = argparse.ArgumentParser()
-    p.add_argument("--which", choices=sorted(POSTS), required=True)
-    p.add_argument("--force", action="store_true", help="ignore TARGET_DATE check")
+    p.add_argument(
+        "--slot",
+        type=int,
+        choices=(1, 2),
+        required=True,
+        help="1=11:00 JST, 2=16:00 JST (salt for pool pick)",
+    )
     p.add_argument("--dry-run", action="store_true")
     args = p.parse_args()
 
     today = datetime.now(JST).date().isoformat()
-    if not args.force and today != TARGET_DATE:
-        print(f"skip: today={today} target={TARGET_DATE}")
-        return 0
+    ensure_ask_supply(refresh_trends=True)
+    picked = pick_ask_post(slot_salt=args.slot)
+    value_id = str(picked.get("id") or "")
+    text = str(picked.get("text") or "").strip()
+    if not value_id or not text:
+        raise RuntimeError("picked ask post is empty")
 
-    value_id, text = POSTS[args.which]
     print(f"value_id={value_id}")
+    print(f"source={picked.get('source')}")
     print("=== TEXT ===")
     print(text)
 
@@ -70,21 +74,14 @@ def main() -> int:
 
     post_ids = asyncio.run(publish(text))
 
-    # 台帳に雑談として記録（再利用キューには載せない）
     try:
-        import json
-        from pathlib import Path
-
-        import config
-        from picker import load_ledger, save_ledger
-
         entries = load_ledger()
         entries.append(
             {
                 "item_code": f"value:{value_id}",
                 "item_name": text[:40],
-                "kind": "chitchat",
-                "slot": 99,
+                "kind": "ask-chitchat",
+                "slot": 90 + int(args.slot),
                 "posted_on": today,
                 "threads_post_ids": post_ids,
                 "reused": False,
