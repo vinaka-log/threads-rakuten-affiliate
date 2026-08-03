@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-03T15:26:36+09:00",
+  "updated_at": "2026-08-03T18:53:23+09:00",
   "entries": [
     {
       "item_code": "value:struggle-mental-stock",
@@ -31,6 +31,17 @@
       "posted_on": "2026-08-03",
       "threads_post_ids": [
         "18016171145708519"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-umbrella",
+      "item_name": "価値投稿 chat-umbrella",
+      "kind": "chitchat",
+      "slot": 3,
+      "posted_on": "2026-08-03",
+      "threads_post_ids": [
+        "18146212294533947"
       ],
       "reused": false
     },
