@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-03T21:13:41+09:00",
+  "updated_at": "2026-08-03T22:45:04+09:00",
   "entries": [
     {
       "item_code": "value:struggle-mental-stock",
@@ -71,6 +71,22 @@
       "rank": null,
       "pain_id": "dishwasher-tab",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/good-item/cabinet/10833108/compass1729847368.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "kurashikenkou:10219116",
+      "item_name": "ティッシュ ソフトパック コンパクト ティッシュペーパー ソフトパックティッシュ 150組×40個 備蓄 箱なし 大容量 お得パック 業務用 日用品 ティッシュペーパー 防災[G0]",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 7,
+      "posted_on": "2026-08-03",
+      "threads_post_ids": [
+        "17951314278018544",
+        "18098958446211670"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00qhoan.x8u2b37e.g00qhoan.x8u2ca9e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkurashikenkou%2F7263927%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkurashikenkou%2Fi%2F10219116%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "tissue",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/kurashikenkou/cabinet/11848367/7263927.jpg?_ex=400x400"
     },
     {
       "item_code": "value:chat-repeat",
