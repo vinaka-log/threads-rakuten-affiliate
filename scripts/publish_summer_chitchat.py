@@ -70,18 +70,28 @@ def main() -> int:
 
     post_ids = asyncio.run(publish(text))
 
-    # 台帳に雑談として記録（再利用防止・履歴用）
+    # 台帳に雑談として記録（再利用キューには載せない）
     try:
-        from picker import record_value_post
+        import json
+        from pathlib import Path
 
-        record_value_post(
-            value_id=value_id,
-            slot=99,  # 通常枠外の追加投稿
-            posted_on=today,
-            threads_post_ids=post_ids,
-            dry_run=False,
+        import config
+        from picker import load_ledger, save_ledger
+
+        entries = load_ledger()
+        entries.append(
+            {
+                "item_code": f"value:{value_id}",
+                "item_name": text[:40],
+                "kind": "chitchat",
+                "slot": 99,
+                "posted_on": today,
+                "threads_post_ids": post_ids,
+                "reused": False,
+            }
         )
-        print("ledger updated")
+        save_ledger(entries)
+        print(f"ledger updated: {config.LEDGER_PATH}")
     except Exception as exc:
         print(f"WARNING: ledger update failed: {exc}", flush=True)
 
