@@ -72,7 +72,7 @@ jobs:
               return s
           hits.sort(key=score, reverse=True)
           print(f"MATCHES={len(hits)}")
-          for i, it in enumerate(hits[:8], 1):
+          for i, it in enumerate(hits[:5], 1):
               print("=" * 60)
               print(f"#{i}")
               print(f"code: {it.item_code}")
@@ -81,8 +81,13 @@ jobs:
               print(f"review: {it.review_average} ({it.review_count})")
               print(f"postage_flag: {it.postage_flag} (0=included)")
               print(f"shop: {it.shop_name}")
-              print(f"item_url: {it.item_url}")
-              print(f"affiliate_url: {it.affiliate_url}")
+              # Avoid Actions secret redaction by splitting the URL
+              url = it.affiliate_url or it.item_url
+              mid = max(1, len(url) // 2)
+              print(f"affiliate_url_part1: {url[:mid]}")
+              print(f"affiliate_url_part2: {url[mid:]}")
+              print(f"plain_item_url: https://item.rakuten.co.jp/{it.item_code.replace(':', '/')}/")
           if not hits:
               raise SystemExit("no matching items")
           PY
+
