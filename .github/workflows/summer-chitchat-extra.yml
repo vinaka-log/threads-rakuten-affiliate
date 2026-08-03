@@ -1,0 +1,86 @@
+name: Extra summer chitchat (Aug 4)
+
+# 伸びたアイス雑談と同系統を、8/4 に通常枠とは別に2本追加する。
+# 11:00 JST / 16:00 JST（既存枠と被らない時間）
+
+on:
+  schedule:
+    # 11:00 JST = 02:00 UTC
+    - cron: "0 2 * * *"
+    # 16:00 JST = 07:00 UTC
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+    inputs:
+      which:
+        description: "1 or 2 (which post)"
+        required: true
+        default: "1"
+      force:
+        description: "Ignore date gate (publish even if not Aug 4)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: summer-chitchat-extra
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+      THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+      THREADS_PUBLISH_DELAY_SEC: "8"
+      PYTHONPATH: src:.
+      TZ: Asia/Tokyo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Resolve which post
+        id: pick
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "which=${{ inputs.which }}" >> "$GITHUB_OUTPUT"
+            if [ "${{ inputs.force }}" = "true" ]; then
+              echo "force=1" >> "$GITHUB_OUTPUT"
+            else
+              echo "force=0" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            case "${{ github.event.schedule }}" in
+              "0 2 * * *") echo "which=1" >> "$GITHUB_OUTPUT" ;;
+              "0 7 * * *") echo "which=2" >> "$GITHUB_OUTPUT" ;;
+              *) echo "Unknown schedule" >&2; exit 1 ;;
+            esac
+            echo "force=0" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish chitchat
+        run: |
+          ARGS=(--which "${{ steps.pick.outputs.which }}")
+          if [ "${{ steps.pick.outputs.force }}" = "1" ]; then
+            ARGS+=(--force)
+          fi
+          python scripts/publish_summer_chitchat.py "${ARGS[@]}"
+      - name: Commit ledger if changed
+        if: success()
+        run: |
+          if git diff --quiet -- data/posted.json; then
+            echo "No ledger changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/posted.json
+          git commit -m "chore: ledger summer chitchat extras"
+          git push
