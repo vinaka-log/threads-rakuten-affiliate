@@ -183,7 +183,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="詰め替えを先に置いておけば、洗濯が止まらず寄り道も減る",
         buy_reason="共働きの平日は「切れてから買う」が一番高いコスト",
         avoid="香りが強すぎる・容量を見ずに小さい方を掴む失敗を避ける",
-        template_id="hook-benefit",
+        template_id="",
         require_name_hints=("つめかえ", "詰め替え", "詰替", "ジェルボール", "ゲルボール"),
         exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES
         + (
@@ -206,7 +206,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="替えがあるだけで洗濯が回り続け、朝の着替えパニックが減る",
         buy_reason="柔軟剤切れは家事全体の詰まりに直結する",
         avoid="匂い残りの合わない香りをリピする前にレビューの不満も見る",
-        template_id="hook-benefit",
+        template_id="",
         require_name_hints=("つめかえ", "詰め替え", "詰替"),
         exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES,
         require_size_token=True,
@@ -223,7 +223,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="まとめ買い宅配なら重労働なしで、切れリスクを先に潰せる",
         buy_reason="重い消耗品ほど、店で抱えるより届けてもらう方が生活が楽",
         avoid="シングル/ダブルと芯ありなしの取り違えに注意",
-        template_id="hook-benefit",
+        template_id="",
         require_name_hints=("ロール", "シングル", "ダブル", "芯なし", "芯あり"),
         # 「ケース買い」など消耗品表記に誤爆しないよう、収納グッズ固有語だけ除外
         exclude_name_hints=(
@@ -249,7 +249,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="ケース買いなら補充回数が減り、単価も下がって家計と手間の両方助かる",
         buy_reason="毎日使うものほど、まとめが効く",
         avoid="ソフトパックと箱の置き場所を確認してから選ぶ",
-        template_id="hook-benefit",
+        template_id="",
         require_name_hints=("組", "箱", "個", "パック", "ソフトパック"),
         exclude_name_hints=(
             "ティッシュケース",
@@ -272,7 +272,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="指定サイズを先に積んでおけば、朝の慌てと持ち越しが消える",
         buy_reason="ゴミ袋切れは時間も気力も持っていく",
         avoid="自治体の色・厚さ指定を見落とさない",
-        template_id="hook-benefit",
+        template_id="",
     ),
     PainIntent(
         id="water-case",
@@ -285,7 +285,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="ケース水を宅配に寄せれば、腕も時間も空けて帰宅できる",
         buy_reason="水は「買う商品」より「運ばなくていい仕組み」",
         avoid="置き場所（箱の高さ）を測ってから決める",
-        template_id="hook-benefit",
+        template_id="",
         timesave=True,
     ),
     PainIntent(
@@ -299,7 +299,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="替え玉があれば朝の小パニックが消え、支度が止まらない",
         buy_reason="朝に効く消耗品は、前夜の自分への投資",
         avoid="幅（22cm/30cm）の取り違えに注意",
-        template_id="hook-benefit",
+        template_id="",
         timesave=True,
     ),
     PainIntent(
@@ -313,7 +313,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="まとめ買いしておけば迷わず交換でき、洗い物のストレスが下がる",
         buy_reason="安い消耗品ほど、決断コストをゼロにする価値がある",
         avoid="油汚れ用とグラス用を分けた方が持ちがいい",
-        template_id="hook-benefit",
+        template_id="",
     ),
     PainIntent(
         id="dishwasher-tab",
@@ -326,7 +326,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="大容量を先に置けば買い忘れが減り、時短家電が止まらない",
         buy_reason="食洗機は洗剤があって初めて時短装置になる",
         avoid="機種の専用指定（粉/タブ/ジェル）を確認",
-        template_id="hook-benefit",
+        template_id="",
         timesave=True,
     ),
     PainIntent(
@@ -340,7 +340,7 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="替えが1個あるだけで調理が止まらず、後片付けも楽になる",
         buy_reason="料理中の切れは、いちばん腹立たしい切れ方",
         avoid="ホルダーサイズに合うかだけ先に見る",
-        template_id="hook-benefit",
+        template_id="",
     ),
 )
 
@@ -366,7 +366,7 @@ TIMESAVE_ONLY_INTENTS: Tuple[PainIntent, ...] = (
         benefit="替えシートがあればさっと拭けて、夜の片付けが5分で終わる",
         buy_reason="時短は道具本体より、替えが切れていないことが本体",
         avoid="ドライ/ウェットの使い分けと対応本体サイズを確認",
-        template_id="hook-benefit",
+        template_id="",
         require_name_hints=("シート",),
         exclude_name_hints=(
             "本体セット",
