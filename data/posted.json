@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-03T20:11:53+09:00",
+  "updated_at": "2026-08-03T21:13:41+09:00",
   "entries": [
     {
       "item_code": "value:struggle-mental-stock",
@@ -55,6 +55,22 @@
         "17997701822994595"
       ],
       "reused": true
+    },
+    {
+      "item_code": "good-item:10000868",
+      "item_name": "ランキング1位！3冠達成！【送料無料】finish ビッグパック 大容量 150個入り フィニッシュ　タブレット 食洗機用洗剤 パワーキューブ ビッグパック 食器洗い機用洗剤 キッチン用洗剤 　食洗機用洗剤　 食器洗浄機用　洗剤　食器洗い機用 5g × 150粒 750g 台所用合成洗剤",
+      "genre_id": "551167",
+      "genre_label": "キッチン用品・食器・調理器具",
+      "slot": 5,
+      "posted_on": "2026-08-03",
+      "threads_post_ids": [
+        "18110996059960619",
+        "18147587920516528"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00smopn.x8u2bd3a.g00smopn.x8u2c141/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fgood-item%2Fco-126%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fgood-item%2Fi%2F10000868%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "dishwasher-tab",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/good-item/cabinet/10833108/compass1729847368.jpg?_ex=400x400"
     },
     {
       "item_code": "value:chat-repeat",
