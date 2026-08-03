@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-03T18:53:23+09:00",
+  "updated_at": "2026-08-03T20:11:53+09:00",
   "entries": [
     {
       "item_code": "value:struggle-mental-stock",
@@ -44,6 +44,17 @@
         "18146212294533947"
       ],
       "reused": false
+    },
+    {
+      "item_code": "value:heavy-items",
+      "item_name": "価値投稿 heavy-items",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-08-03",
+      "threads_post_ids": [
+        "17997701822994595"
+      ],
+      "reused": true
     },
     {
       "item_code": "value:chat-repeat",
