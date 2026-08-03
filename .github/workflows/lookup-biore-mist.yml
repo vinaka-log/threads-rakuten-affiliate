@@ -1,0 +1,88 @@
+name: Lookup Biore mist affiliate link
+
+on:
+  push:
+    branches: [cursor/biore-mist-affiliate-1864]
+    paths:
+      - ".github/workflows/lookup-biore-mist.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      RAKUTEN_APPLICATION_ID: ${{ secrets.RAKUTEN_APPLICATION_ID }}
+      RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+      RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+      PYTHONPATH: src:.
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Search Biore cold handy mist
+        run: |
+          python - <<'PY'
+          from rakuten import RakutenClient
+          client = RakutenClient()
+          queries = [
+              "ビオレ 冷ハンディミスト リフレッシュサボン",
+              "ビオレ 冷ハンディミスト 120ml",
+              "Bioré 冷ハンディミスト リフレッシュサボン",
+          ]
+          seen = set()
+          hits = []
+          for q in queries:
+              items = client.search_items(q, hits=30, pages=2, sort="-reviewCount")
+              for it in items:
+                  if it.item_code in seen:
+                      continue
+                  seen.add(it.item_code)
+                  name = it.item_name
+                  if "冷ハンディ" not in name and "ハンディミスト" not in name:
+                      continue
+                  if "ビオレ" not in name and "Bioré" not in name and "Biore" not in name and "bioré" not in name.lower():
+                      # allow 花王 / ビオレ表記ゆれ
+                      if "花王" not in name:
+                          continue
+                  hits.append(it)
+          # Prefer exact scent / size
+          def score(it):
+              n = it.item_name
+              s = 0
+              if "リフレッシュサボン" in n or "サボン" in n:
+                  s += 50
+              if "120" in n:
+                  s += 20
+              if "冷ハンディミスト" in n:
+                  s += 30
+              s += min(it.review_count, 5000) / 100.0
+              s += it.review_average
+              # prefer postage included (response 0)
+              if it.postage_flag == 0:
+                  s += 5
+              return s
+          hits.sort(key=score, reverse=True)
+          print(f"MATCHES={len(hits)}")
+          for i, it in enumerate(hits[:8], 1):
+              print("=" * 60)
+              print(f"#{i}")
+              print(f"code: {it.item_code}")
+              print(f"name: {it.item_name}")
+              print(f"price: {it.item_price}")
+              print(f"review: {it.review_average} ({it.review_count})")
+              print(f"postage_flag: {it.postage_flag} (0=included)")
+              print(f"shop: {it.shop_name}")
+              print(f"item_url: {it.item_url}")
+              print(f"affiliate_url: {it.affiliate_url}")
+          if not hits:
+              raise SystemExit("no matching items")
+          PY
