@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T21:00:57+09:00",
+  "updated_at": "2026-08-04T22:06:34+09:00",
   "entries": [
     {
       "item_code": "value:struggle-tiny-win",
@@ -120,6 +120,22 @@
       "rank": null,
       "pain_id": "trash-bag",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/poly-stadium/cabinet/ecotaibox/bx/45l/bx-530n_2k.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "biyoudou:10000164",
+      "item_name": "【2,380円→SALE 2,299円(350ml対象)｜4日20:00～11日9:59】BIYOUDO 水 シリカ水 500ml×42本 350ml×48本 ナチュラルミネラルウォーター ラベルレス 軟水 美容ミネラル シリカ含有 天然水 飲むシリカ 500 保存料なし 酵素ドリンク 等にも 保存水 国産 日本製 美陽堂 公式",
+      "genre_id": "100227",
+      "genre_label": "genre:100227",
+      "slot": 7,
+      "posted_on": "2026-08-04",
+      "threads_post_ids": [
+        "17960467767178877",
+        "18162122749415455"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00rkpvn.x8u2b795.g00rkpvn.x8u2cf7c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbiyoudou%2F10000164%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fbiyoudou%2Fi%2F10000164%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "water-case",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/biyoudou/cabinet/salethumb/imgrc0105029580.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-mental-stock",
