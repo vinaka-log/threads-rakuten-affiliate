@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T18:37:34+09:00",
+  "updated_at": "2026-08-04T19:26:52+09:00",
   "entries": [
     {
       "item_code": "value:struggle-tiny-win",
@@ -77,6 +77,17 @@
         "17899232613480979"
       ],
       "reused": false
+    },
+    {
+      "item_code": "value:stock-buy",
+      "item_name": "価値投稿 stock-buy",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-08-04",
+      "threads_post_ids": [
+        "18097745102576605"
+      ],
+      "reused": true
     },
     {
       "item_code": "value:struggle-mental-stock",
