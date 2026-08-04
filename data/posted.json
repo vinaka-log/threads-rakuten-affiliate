@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T09:08:55+09:00",
+  "updated_at": "2026-08-04T14:20:10+09:00",
   "entries": [
     {
       "item_code": "value:struggle-tiny-win",
@@ -31,6 +31,17 @@
       "posted_on": "2026-08-04",
       "threads_post_ids": [
         "18074826005686790"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-summer-kakigori-20260804",
+      "item_name": "夏といえばかき氷だよね🍧 みんなのオススメの味教えて〜 僕はいちご一択🐻‍❄️",
+      "kind": "chitchat",
+      "slot": 99,
+      "posted_on": "2026-08-04",
+      "threads_post_ids": [
+        "17927041608379537"
       ],
       "reused": false
     },
