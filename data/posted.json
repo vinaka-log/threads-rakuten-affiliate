@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-05T00:22:26+09:00",
+  "updated_at": "2026-08-05T08:04:58+09:00",
   "entries": [
     {
       "item_code": "value:struggle-bento-morning",
@@ -9,6 +9,17 @@
       "posted_on": "2026-08-05",
       "threads_post_ids": [
         "18114054700740453"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-dinner-side-dish",
+      "item_name": "価値投稿 struggle-dinner-side-dish",
+      "kind": "value",
+      "slot": 0,
+      "posted_on": "2026-08-05",
+      "threads_post_ids": [
+        "17905944420464994"
       ],
       "reused": false
     },
