@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T19:26:52+09:00",
+  "updated_at": "2026-08-04T20:16:36+09:00",
   "entries": [
     {
       "item_code": "value:struggle-tiny-win",
@@ -88,6 +88,22 @@
         "18097745102576605"
       ],
       "reused": true
+    },
+    {
+      "item_code": "roomy:10015933",
+      "item_name": "山崎実業 フローリングワイパースタンド フローリングワイパー収納 クイックルワイパー フローリングシート 掃除用品 床掃除 おしゃれ スリム 北欧 スリム リビング 掃除グッズ yamazaki 7579 7580【送料無料】［ デュオ フローリングワイパースタンド ］ 公式",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 5,
+      "posted_on": "2026-08-04",
+      "threads_post_ids": [
+        "17995960752004990",
+        "18083769884229955"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00qb0ln.x8u2b1f3.g00qb0ln.x8u2cf0e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Froomy%2Fy50607579%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Froomy%2Fi%2F10015933%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "floor-wiper",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/roomy/cabinet/500cart_all/500cart_11g/p5-5/ymz5506-07579-0_gt01.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-mental-stock",
