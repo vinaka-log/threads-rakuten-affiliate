@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T17:43:54+09:00",
+  "updated_at": "2026-08-04T18:37:34+09:00",
   "entries": [
     {
       "item_code": "value:struggle-tiny-win",
@@ -64,6 +64,17 @@
       "posted_on": "2026-08-04",
       "threads_post_ids": [
         "18064731767740723"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-summer-drink-20260804",
+      "item_name": "夏の飲み物、みんな何飲む？推し教えて〜 僕は麦茶一択、しろくまも麦茶派🐻‍❄️",
+      "kind": "chitchat",
+      "slot": 99,
+      "posted_on": "2026-08-04",
+      "threads_post_ids": [
+        "17899232613480979"
       ],
       "reused": false
     },
