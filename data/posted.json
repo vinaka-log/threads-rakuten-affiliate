@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T14:50:15+09:00",
+  "updated_at": "2026-08-04T17:43:54+09:00",
   "entries": [
     {
       "item_code": "value:struggle-tiny-win",
@@ -53,6 +53,17 @@
       "posted_on": "2026-08-04",
       "threads_post_ids": [
         "18170762275449347"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-hair",
+      "item_name": "価値投稿 chat-hair",
+      "kind": "chitchat",
+      "slot": 3,
+      "posted_on": "2026-08-04",
+      "threads_post_ids": [
+        "18064731767740723"
       ],
       "reused": false
     },
