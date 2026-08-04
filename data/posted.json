@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-08-04T22:44:36+09:00",
+  "updated_at": "2026-08-05T00:22:26+09:00",
   "entries": [
+    {
+      "item_code": "value:struggle-bento-morning",
+      "item_name": "価値投稿 struggle-bento-morning",
+      "kind": "value",
+      "slot": 9,
+      "posted_on": "2026-08-05",
+      "threads_post_ids": [
+        "18114054700740453"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:struggle-tiny-win",
       "item_name": "価値投稿 struggle-tiny-win",

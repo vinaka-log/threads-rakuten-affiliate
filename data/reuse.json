@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T22:44:36+09:00",
+  "updated_at": "2026-08-05T00:22:26+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -154,6 +154,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18117504460898873"
+    },
+    {
+      "value_id": "struggle-bento-morning",
+      "last_posted_on": "2026-08-05",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18114054700740453"
     }
   ]
 }
