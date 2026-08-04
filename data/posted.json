@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T22:06:34+09:00",
+  "updated_at": "2026-08-04T22:44:36+09:00",
   "entries": [
     {
       "item_code": "value:struggle-tiny-win",
@@ -136,6 +136,17 @@
       "rank": null,
       "pain_id": "water-case",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/biyoudou/cabinet/salethumb/imgrc0105029580.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-compare",
+      "item_name": "価値投稿 struggle-compare",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-08-04",
+      "threads_post_ids": [
+        "18117504460898873"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-mental-stock",
