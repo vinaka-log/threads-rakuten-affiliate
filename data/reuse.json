@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T08:02:20+09:00",
+  "updated_at": "2026-08-04T14:50:15+09:00",
   "candidates": [
     {
       "value_id": "stock-buy",
@@ -132,6 +132,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18096390836640088"
+    },
+    {
+      "value_id": "struggle-salary-day",
+      "last_posted_on": "2026-08-04",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18170762275449347"
     }
   ]
 }
