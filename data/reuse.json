@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-05T19:23:51+09:00",
+  "updated_at": "2026-08-05T22:40:43+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -187,6 +187,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18016638674714059"
+    },
+    {
+      "value_id": "struggle-late-home-dinner",
+      "last_posted_on": "2026-08-05",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18041286644811195"
     }
   ]
 }

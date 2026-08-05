@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-05T21:59:20+09:00",
+  "updated_at": "2026-08-05T22:40:43+09:00",
   "entries": [
     {
       "item_code": "value:struggle-bento-morning",
@@ -114,6 +114,17 @@
       "rank": null,
       "pain_id": "dish-sponge",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/yamatoya-d/cabinet/09731461/2-m2.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-late-home-dinner",
+      "item_name": "価値投稿 struggle-late-home-dinner",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-08-05",
+      "threads_post_ids": [
+        "18041286644811195"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-tiny-win",
