@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-05T14:48:42+09:00",
+  "updated_at": "2026-08-05T17:42:12+09:00",
   "entries": [
     {
       "item_code": "value:struggle-bento-morning",
@@ -42,6 +42,17 @@
       "posted_on": "2026-08-05",
       "threads_post_ids": [
         "18016638674714059"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-left-shoe",
+      "item_name": "価値投稿 chat-left-shoe",
+      "kind": "chitchat",
+      "slot": 3,
+      "posted_on": "2026-08-05",
+      "threads_post_ids": [
+        "18104480513144497"
       ],
       "reused": false
     },
