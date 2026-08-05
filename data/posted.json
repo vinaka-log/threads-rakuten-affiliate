@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-05T19:23:51+09:00",
+  "updated_at": "2026-08-05T20:12:43+09:00",
   "entries": [
     {
       "item_code": "value:struggle-bento-morning",
@@ -66,6 +66,22 @@
         "18431836189132813"
       ],
       "reused": true
+    },
+    {
+      "item_code": "mizuomoi:10000002",
+      "item_name": "【365日最短当日出荷！】国産 天然水 500ml 42本 水 送料無料 ナチュラルミネラルウォーター 水想い ラベルレス 名峰 蔵王 軟水 宮城県 日本製 ローリングストック ペットボトル 500ミリリットル 備蓄",
+      "genre_id": "100227",
+      "genre_label": "genre:100227",
+      "slot": 5,
+      "posted_on": "2026-08-05",
+      "threads_post_ids": [
+        "18060390902751705",
+        "17974240974085175"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00t98en.x8u2bc35.g00t98en.x8u2cfd4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmizuomoi%2F4571461293004%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmizuomoi%2Fi%2F10000002%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "water-case",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/mizuomoi/cabinet/06216210/salethumb/500ml_sale.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-tiny-win",
