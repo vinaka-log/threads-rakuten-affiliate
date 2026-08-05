@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-05T08:04:58+09:00",
+  "updated_at": "2026-08-05T14:48:42+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -176,6 +176,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "17905944420464994"
+    },
+    {
+      "value_id": "struggle-frozen-guilt",
+      "last_posted_on": "2026-08-05",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18016638674714059"
     }
   ]
 }
