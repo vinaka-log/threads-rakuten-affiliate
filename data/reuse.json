@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-05T14:48:42+09:00",
+  "updated_at": "2026-08-05T19:23:51+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -25,14 +25,14 @@
     },
     {
       "value_id": "zero-five-basics",
-      "last_posted_on": "2026-07-26",
-      "reuse_count": 0,
+      "last_posted_on": "2026-08-05",
+      "reuse_count": 1,
       "priority": 7,
       "views": 0,
       "likes": 0,
       "replies": 0,
       "source": "seed",
-      "threads_post_id": ""
+      "threads_post_id": "18431836189132813"
     },
     {
       "value_id": "fail-double",
