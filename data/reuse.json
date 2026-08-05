@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-06T00:11:33+09:00",
+  "updated_at": "2026-08-06T08:00:47+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -209,6 +209,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18126741430774648"
+    },
+    {
+      "value_id": "struggle-milk-again",
+      "last_posted_on": "2026-08-06",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18030166530191153"
     }
   ]
 }

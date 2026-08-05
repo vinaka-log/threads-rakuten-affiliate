@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-06T00:11:33+09:00",
+  "updated_at": "2026-08-06T08:00:47+09:00",
   "entries": [
     {
       "item_code": "value:struggle-delivery-dinner",
@@ -9,6 +9,17 @@
       "posted_on": "2026-08-06",
       "threads_post_ids": [
         "18126741430774648"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-milk-again",
+      "item_name": "価値投稿 struggle-milk-again",
+      "kind": "value",
+      "slot": 0,
+      "posted_on": "2026-08-06",
+      "threads_post_ids": [
+        "18030166530191153"
       ],
       "reused": false
     },
