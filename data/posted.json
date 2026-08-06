@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-06T17:43:01+09:00",
+  "updated_at": "2026-08-06T19:25:55+09:00",
   "entries": [
     {
       "item_code": "value:struggle-delivery-dinner",
@@ -55,6 +55,17 @@
         "17949763770238300"
       ],
       "reused": false
+    },
+    {
+      "item_code": "value:heavy-items",
+      "item_name": "価値投稿 heavy-items",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-08-06",
+      "threads_post_ids": [
+        "17899782354538446"
+      ],
+      "reused": true
     },
     {
       "item_code": "value:struggle-bento-morning",

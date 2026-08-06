@@ -1,17 +1,6 @@
 {
-  "updated_at": "2026-08-06T14:52:12+09:00",
+  "updated_at": "2026-08-06T19:25:55+09:00",
   "candidates": [
-    {
-      "value_id": "heavy-items",
-      "last_posted_on": "2026-08-03",
-      "reuse_count": 1,
-      "priority": 8,
-      "views": 0,
-      "likes": 0,
-      "replies": 0,
-      "source": "seed",
-      "threads_post_id": "17997701822994595"
-    },
     {
       "value_id": "stock-buy",
       "last_posted_on": "2026-08-04",
@@ -22,6 +11,17 @@
       "replies": 0,
       "source": "seed",
       "threads_post_id": "18097745102576605"
+    },
+    {
+      "value_id": "heavy-items",
+      "last_posted_on": "2026-08-06",
+      "reuse_count": 2,
+      "priority": 8,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "seed",
+      "threads_post_id": "17899782354538446"
     },
     {
       "value_id": "zero-five-basics",
