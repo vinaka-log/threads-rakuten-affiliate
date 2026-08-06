@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-06T14:52:12+09:00",
+  "updated_at": "2026-08-06T17:43:01+09:00",
   "entries": [
     {
       "item_code": "value:struggle-delivery-dinner",
@@ -42,6 +42,17 @@
       "posted_on": "2026-08-06",
       "threads_post_ids": [
         "17875786179534898"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-nap",
+      "item_name": "価値投稿 chat-nap",
+      "kind": "chitchat",
+      "slot": 3,
+      "posted_on": "2026-08-06",
+      "threads_post_ids": [
+        "17949763770238300"
       ],
       "reused": false
     },
