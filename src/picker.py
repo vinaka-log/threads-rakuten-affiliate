@@ -112,6 +112,7 @@ def pain_for_slot(slot: int, on: Optional[date] = None) -> config.PainIntent:
     """日付×商品枠の通し番号で悩みをローテ。
 
     TIMESAVE_ITEM_SLOTS は時短悩みだけを回す（通常枠のローテ長は変えない）。
+    時短枠が空のときは all_pain_intents（時短専用含む）を通常ローテに混ぜる。
     """
     on = on or today_jst()
     day_i = on.toordinal()
@@ -124,7 +125,12 @@ def pain_for_slot(slot: int, on: Optional[date] = None) -> config.PainIntent:
         idx = (day_i * max(1, len(timesave_slots)) + k) % len(intents)
         return intents[idx]
 
-    intents = config.PAIN_INTENTS
+    # 時短専用枠が無いときは floor-wiper 等も通常ローテへ含める
+    intents = (
+        config.all_pain_intents()
+        if not timesave_slots
+        else config.PAIN_INTENTS
+    )
     # 通常の商品枠だけを進める（時短枠は別カウンタ）
     regular_slots = tuple(s for s in config.ITEM_SLOTS if s not in timesave_slots)
     item_index = 0
