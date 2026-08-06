@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-06T22:00:32+09:00",
+  "updated_at": "2026-08-06T22:38:59+09:00",
   "entries": [
     {
       "item_code": "value:struggle-delivery-dinner",
@@ -114,6 +114,17 @@
       "rank": null,
       "pain_id": "kitchen-paper",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/roomy/cabinet/500cart_all/500cart_11g/p5-4/ymz5505-np023-0_gt01.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-weekend-meal-prep",
+      "item_name": "価値投稿 struggle-weekend-meal-prep",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-08-06",
+      "threads_post_ids": [
+        "17991043065034627"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-bento-morning",
