@@ -12,8 +12,10 @@ sys.path.insert(0, str(ROOT / "src"))
 
 import config
 from composer import (
+    _MAIN_TEMPLATES,
     _PR_DISCLOSURE,
-    _REPLY_TEMPLATE,
+    _SOFT_MAIN_LIMIT,
+    _SOFT_REPLY_LIMIT,
     _resolve_template_id,
     _validate,
     compose,
@@ -37,13 +39,14 @@ def _pick(**kwargs) -> PickResult:
         shop_name="test-shop",
         genre_id="100939",
         postage_flag=0,
+        rank=3,
     )
     pain = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
     return PickResult(
         item=item,
         genre=config.GENRES[0],
         slot=6,
-        posted_on="2026-08-03",
+        posted_on="2026-08-06",
         pain=pain,
     )
 
@@ -61,18 +64,41 @@ class ItemCopyStructureTests(unittest.TestCase):
         self.assertNotIn("このままだと:", main)
         self.assertNotIn("Before:", main)
         self.assertIn("リプ", main)
-        self.assertLessEqual(len(main), 280)
+        self.assertLessEqual(len(main), _SOFT_MAIN_LIMIT)
 
-    def test_reply_is_short_and_ends_with_disclosure(self) -> None:
+    def test_all_templates_stay_short(self) -> None:
+        for tid, _ in _MAIN_TEMPLATES:
+            composed = compose(_pick(), template_id=tid)
+            main, reply = composed.texts
+            self.assertLessEqual(len(main), _SOFT_MAIN_LIMIT, msg=f"{tid} main too long")
+            self.assertLessEqual(len(reply), _SOFT_REPLY_LIMIT, msg=f"{tid} reply too long")
+            # 本投稿は CTA を1系統に絞る（「詳細はリプ」+別問いの二重締めを避ける）
+            self.assertLessEqual(main.count("👇"), 1, msg=f"{tid} too many CTAs")
+
+    def test_reply_is_facts_only_and_ends_with_disclosure(self) -> None:
         composed = compose(_pick(), template_id="hook-honest")
-        reply = composed.texts[1]
-        self.assertIn("正直なところ", reply)
+        main, reply = composed.texts
+        self.assertIn("正直、", reply)
         self.assertIn("▼商品はこちら", reply)
         self.assertIn("https://example.com/aff", reply)
         self.assertTrue(reply.rstrip().endswith(_PR_DISCLOSURE))
         self.assertNotIn("・悩み:", reply)
         self.assertNotIn("・困り事:", reply)
-        self.assertLessEqual(len(reply), 420)
+        # リプで本編ベネフィットを繰り返さない
+        benefit = next(p for p in config.PAIN_INTENTS if p.id == "detergent").benefit
+        self.assertNotIn(benefit, reply)
+        # ショップ名の羅列はしない（ノイズ）
+        self.assertNotIn("test-shop", reply)
+        self.assertLessEqual(len(reply), _SOFT_REPLY_LIMIT)
+        # hook-honest は本投稿側に avoid があるので、リプは事実中心で十分短いこと
+        self.assertLess(len(main), 140)
+
+    def test_pain_copy_stays_compact(self) -> None:
+        for pain in config.all_pain_intents():
+            self.assertLessEqual(len(pain.problem), 32, msg=pain.id)
+            self.assertLessEqual(len(pain.benefit), 28, msg=pain.id)
+            self.assertLessEqual(len(pain.avoid), 28, msg=pain.id)
+            self.assertLessEqual(len(pain.scene), 24, msg=pain.id)
 
     def test_pains_rotate_templates(self) -> None:
         """悩み側で template_id を固定しない（単調なAI感を避ける）。"""

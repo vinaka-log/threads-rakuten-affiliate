@@ -33,9 +33,10 @@ class ComposedPost:
     template_id: str
 
 
-# 本投稿テンプレ（人気投稿寄り）:
-#   1行目で状態/痛み → 短い共感 → 体験ベネフィット → 商品名 → 優しいリプ誘導
-#   価格・レビューは本投稿に置かない（売り込み感と離脱を増やすため）
+# 本投稿テンプレ（人気投稿寄り・短め）:
+#   痛み1行 → 短い共感/困り 1〜2行 → 商品名 → リプ誘導1つ
+#   価格・レビュー・注意点は本投稿に置かない
+#   benefit は本投稿かリプのどちらか一方（リプでは繰り返さない）
 #   「このままだと:」「Before:」などラベル調は使わない
 _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
     (
@@ -43,19 +44,15 @@ _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
         "{pain}\n\n"
         "これ、ないと地味に詰む。\n"
         "{problem}\n\n"
-        "{benefit}\n\n"
         "「{short_name}」\n\n"
-        "詳細はリプに👇\n"
-        "同じ悩みある人、どうしてる？",
+        "気になる人はリプに👇",
     ),
     (
         "hook-scene",
         "{pain}\n\n"
         "{scene}、わかる人いる？\n"
-        "{problem}\n\n"
-        "うちはこれで凌いでる。\n"
-        "「{short_name}」\n\n"
         "{benefit}\n\n"
+        "「{short_name}」\n\n"
         "リプに置いとくね👇",
     ),
     (
@@ -64,41 +61,33 @@ _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
         "おすすめは、切れる前に宅配で足しとくこと。\n"
         "{benefit}\n\n"
         "「{short_name}」\n\n"
-        "騙されたと思って一回ストックしてみて。\n"
         "気になる人はリプへ👇",
     ),
     (
         "hook-honest",
         "{pain}\n\n"
-        "正直に言うと、{avoid}\n"
-        "でも切れてからの寄り道の方がキツい。\n\n"
-        "「{short_name}」\n"
+        "完璧な商品じゃないけど、切れてからの寄り道の方がキツい。\n"
         "{benefit}\n\n"
-        "詳細はリプに👇\n"
-        "使ってる人いたら教えて",
+        "「{short_name}」\n\n"
+        "使ってる人いたら教えて👇",
     ),
     (
         "hook-heavy",
         "{pain}\n\n"
-        "店で抱えて帰るの、実はいちばんコスパ悪い。\n"
+        "店で抱えて帰るの、いちばんコスパ悪い。\n"
         "{problem}\n\n"
-        "「{short_name}」\n"
-        "{benefit}\n\n"
-        "リプ見てね👇\n"
-        "もうネットに寄せた人、楽になった？",
+        "「{short_name}」\n\n"
+        "もうネット寄せた人、楽になった？👇",
     ),
 )
 
-# リプは「続き置き場」。本編の繰り返しを避け、欠点の正直さ→価格→リンク→PR
+# リプは「続き置き場」。本編の繰り返しなし。注意点→価格→リンク→PR
 _REPLY_TEMPLATE = (
-    "正直なところ、{avoid}\n\n"
-    "置くと助かるのはここ。\n"
-    "{benefit}\n\n"
-    "{price}円 / レビュー{review_avg}点（{review_count}件）\n"
+    "正直、{avoid}\n\n"
+    "{price}円 / レビュー{review_avg}点（{review_count}件）"
     "{rank_line}"
-    "{shop_name}\n"
     "{sale_block}"
-    "\n▼商品はこちら\n"
+    "\n\n▼商品はこちら\n"
     "{affiliate_url}\n"
     "\n※PR（アフィリエイトリンク）"
 )
@@ -112,7 +101,11 @@ _TEMPLATE_ALIASES = {
 }
 
 _PR_DISCLOSURE = "※PR（アフィリエイトリンク）"
-_MAIN_NAME_LIMIT = 32
+# 本投稿の商品名は短く（長い正式名は離脱しやすい）
+_MAIN_NAME_LIMIT = 24
+# ソフト上限（ハードは MAX_TEXT_LEN）。テストと運用の目安
+_SOFT_MAIN_LIMIT = 140
+_SOFT_REPLY_LIMIT = 360
 
 
 def _fmt_price(n: int) -> str:
@@ -183,9 +176,8 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
     from sale import item_deal_lines
 
     deal_lines = item_deal_lines(item, on)
-    sale_block = "".join(f"\n{line}" for line in deal_lines)
-    if sale_block:
-        sale_block += "\n"
+    # リプは短く保つ。セール行は最大2本まで
+    sale_block = "".join(f"\n{line}" for line in deal_lines[:2])
 
     fields = {
         "short_name": _short_name_for_main(item.short_name),
@@ -196,7 +188,8 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
         "price": _fmt_price(item.item_price),
         "shop_name": item.shop_name or "楽天市場",
         "affiliate_url": item.affiliate_url,
-        "rank_line": f"ランキング {item.rank}位付近\n" if item.rank else "",
+        # 順位は補足。無ければ行ごと省略
+        "rank_line": f" / {item.rank}位付近" if item.rank else "",
         "sale_block": sale_block,
         "pain": (pain.pain if pain else "今夜の買い足し、迷ってる人へ"),
         "pain_short": (pain.pain.rstrip("？?") if pain else "家庭の買い足し"),
@@ -204,17 +197,17 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
         "problem": (
             pain.problem
             if pain
-            else "切れてから買うと、いちばん忙しいタイミングで余計な寄り道が発生する"
+            else "切れてから買うと、忙しい夜に余計な寄り道が発生する"
         ),
         "benefit": (
             pain.benefit
             if pain
-            else "先にストックしておけば、夜の自分が助かって生活が止まらない"
+            else "先にストックしておけば、夜の自分が助かる"
         ),
         "buy_reason": (
-            pain.buy_reason if pain else "切れてから走るより、先に足した方が共働きは楽"
+            pain.buy_reason if pain else "切れてから走るより、先に足した方が楽"
         ),
-        "avoid": (pain.avoid if pain else "サイズ・香り・容量を見ずに掴む失敗を避ける"),
+        "avoid": (pain.avoid if pain else "サイズ・香り・容量は要確認"),
     }
 
     main = _truncate(templates[tid].format(**fields))
