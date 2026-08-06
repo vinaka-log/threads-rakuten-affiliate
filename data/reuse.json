@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-06T22:38:59+09:00",
+  "updated_at": "2026-08-07T00:11:08+09:00",
   "candidates": [
     {
       "value_id": "stock-buy",
@@ -242,6 +242,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "17991043065034627"
+    },
+    {
+      "value_id": "struggle-morning-rush-food",
+      "last_posted_on": "2026-08-07",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "17906873421463215"
     }
   ]
 }
