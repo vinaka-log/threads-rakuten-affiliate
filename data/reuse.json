@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-07T10:30:32+09:00",
+  "updated_at": "2026-08-07T13:56:55+09:00",
   "candidates": [
     {
       "value_id": "stock-buy",
@@ -264,6 +264,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18109354384833111"
+    },
+    {
+      "value_id": "struggle-supermarket-crowd",
+      "last_posted_on": "2026-08-07",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18074646437359499"
     }
   ]
 }

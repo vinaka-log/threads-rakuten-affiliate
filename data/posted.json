@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-07T10:41:43+09:00",
+  "updated_at": "2026-08-07T13:56:55+09:00",
   "entries": [
     {
       "item_code": "value:struggle-morning-rush-food",
@@ -31,6 +31,17 @@
       "posted_on": "2026-08-07",
       "threads_post_ids": [
         "18604697278052983"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-supermarket-crowd",
+      "item_name": "価値投稿 struggle-supermarket-crowd",
+      "kind": "value",
+      "slot": 2,
+      "posted_on": "2026-08-07",
+      "threads_post_ids": [
+        "18074646437359499"
       ],
       "reused": false
     },
