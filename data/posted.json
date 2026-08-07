@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-07T16:22:17+09:00",
+  "updated_at": "2026-08-07T17:45:32+09:00",
   "entries": [
     {
       "item_code": "value:struggle-morning-rush-food",
@@ -55,6 +55,17 @@
         "17872902528628474"
       ],
       "reused": false
+    },
+    {
+      "item_code": "value:stock-buy",
+      "item_name": "価値投稿 stock-buy",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-08-07",
+      "threads_post_ids": [
+        "18097656827005267"
+      ],
+      "reused": true
     },
     {
       "item_code": "value:struggle-delivery-dinner",
