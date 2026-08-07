@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-08-07T23:10:52+09:00",
+  "updated_at": "2026-08-08T07:37:13+09:00",
   "entries": [
+    {
+      "item_code": "value:struggle-receipt-stack",
+      "item_name": "価値投稿 struggle-receipt-stack",
+      "kind": "value",
+      "slot": 0,
+      "posted_on": "2026-08-08",
+      "threads_post_ids": [
+        "18064620020495652"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:struggle-morning-rush-food",
       "item_name": "価値投稿 struggle-morning-rush-food",
