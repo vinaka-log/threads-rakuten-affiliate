@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-07T18:52:25+09:00",
+  "updated_at": "2026-08-07T21:38:10+09:00",
   "entries": [
     {
       "item_code": "value:struggle-morning-rush-food",
@@ -82,6 +82,17 @@
       "rank": null,
       "pain_id": "dishwasher-tab",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/mk-mart2/cabinet/imgrc0134616185.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-tired-talk",
+      "item_name": "価値投稿 struggle-tired-talk",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-08-07",
+      "threads_post_ids": [
+        "18015574550871185"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-delivery-dinner",

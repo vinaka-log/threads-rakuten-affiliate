@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-07T17:45:32+09:00",
+  "updated_at": "2026-08-07T21:38:10+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -275,6 +275,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18074646437359499"
+    },
+    {
+      "value_id": "struggle-tired-talk",
+      "last_posted_on": "2026-08-07",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18015574550871185"
     }
   ]
 }
