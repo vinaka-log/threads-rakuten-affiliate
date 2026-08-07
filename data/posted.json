@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-08T07:37:13+09:00",
+  "updated_at": "2026-08-08T08:33:18+09:00",
   "entries": [
     {
       "item_code": "value:struggle-receipt-stack",
@@ -9,6 +9,17 @@
       "posted_on": "2026-08-08",
       "threads_post_ids": [
         "18064620020495652"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-knee-crack",
+      "item_name": "価値投稿 chat-knee-crack",
+      "kind": "chitchat",
+      "slot": 1,
+      "posted_on": "2026-08-08",
+      "threads_post_ids": [
+        "18063490631751250"
       ],
       "reused": false
     },
