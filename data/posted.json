@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-07T00:11:08+09:00",
+  "updated_at": "2026-08-07T10:30:32+09:00",
   "entries": [
     {
       "item_code": "value:struggle-morning-rush-food",
@@ -9,6 +9,17 @@
       "posted_on": "2026-08-07",
       "threads_post_ids": [
         "17906873421463215"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-kids-leftover",
+      "item_name": "価値投稿 struggle-kids-leftover",
+      "kind": "value",
+      "slot": 0,
+      "posted_on": "2026-08-07",
+      "threads_post_ids": [
+        "18109354384833111"
       ],
       "reused": false
     },
