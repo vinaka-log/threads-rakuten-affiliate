@@ -27,6 +27,7 @@ from sale import active_sale_label
 class ValuePost:
     value_id: str
     text: str
+    poll_options: tuple[str, ...] = ()
 
 
 # 各投稿の方針:
@@ -818,13 +819,14 @@ def _pick_chitchat(on: date, slot: int) -> ValuePost:
 
 
 def _pick_ask(on: date, slot: int) -> ValuePost:
-    """アンケート（問いかけ）は一度きり。足りなければ自動補充。"""
+    """公式4択アンケートは一度きり。足りなければ自動補充。"""
     from ask_chitchat import pick_ask_post
 
     ask_slots = tuple(getattr(config, "ASK_CHITCHAT_SLOTS", ()) or ())
     salt = ask_slots.index(slot) if slot in ask_slots else 0
     row = pick_ask_post(slot_salt=salt + on.toordinal() % 7)
-    return ValuePost(str(row["id"]), str(row["text"]))
+    opts = tuple(str(o) for o in (row.get("options") or []) if str(o).strip())
+    return ValuePost(str(row["id"]), str(row["text"]), poll_options=opts)
 
 
 def pick_value_post(on: date, slot: int = 0) -> ValuePost:
@@ -894,5 +896,7 @@ def _find(value_id: str) -> ValuePost:
             if isinstance(row, dict) and str(row.get("id") or "") == value_id:
                 text = str(row.get("text") or "").strip()
                 if text:
-                    return ValuePost(value_id, text)
+                    return ValuePost(value_id, text, poll_options=tuple(
+                        str(o) for o in (row.get("options") or []) if str(o).strip()
+                    )[:4])
     raise KeyError(value_id)

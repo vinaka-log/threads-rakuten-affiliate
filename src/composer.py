@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date
 from typing import List, Sequence, Tuple
 
@@ -31,6 +31,7 @@ class ComposedPost:
     item_code: str
     genre_id: str
     template_id: str
+    poll_options: List[str] = field(default_factory=list)
 
 
 # 本投稿テンプレ（競合調査ベース）:
@@ -318,7 +319,7 @@ def compose_digest(client, on: date, slot: int, *, fmt: str | None = None) -> Co
 
 
 def compose_value(on: date, slot: int = 0, *, value_id: str | None = None) -> ComposedPost:
-    """価値投稿（リンクなし・単発）を組み立てる。"""
+    """価値投稿（リンクなし・単発）を組み立てる。アンケート枠は poll_options 付き。"""
     if value_id:
         from value_posts import _find
 
@@ -332,9 +333,16 @@ def compose_value(on: date, slot: int = 0, *, value_id: str | None = None) -> Co
         raise ValueError("価値投稿にハート系絵文字があります")
     if not text.strip():
         raise ValueError("価値投稿が空です")
+    poll = [str(o).strip() for o in (post.poll_options or ()) if str(o).strip()]
+    if poll and (len(poll) < 2 or len(poll) > 4):
+        raise ValueError(f"poll_options は 2〜4 個必要です: {poll}")
+    for opt in poll:
+        if len(opt) > 25:
+            raise ValueError(f"poll option が25字超: {opt}")
     return ComposedPost(
         texts=[text],
         item_code=f"value:{post.value_id}",
         genre_id="",
         template_id=f"value-{post.value_id}",
+        poll_options=poll,
     )

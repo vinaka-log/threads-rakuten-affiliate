@@ -1,4 +1,4 @@
-"""問いかけ型雑談（季節 + 軽いトレンド）の単体テスト。"""
+"""問いかけ型雑談（公式4択アンケート）の単体テスト。"""
 
 from __future__ import annotations
 
@@ -17,7 +17,6 @@ import config
 from ask_chitchat import (
     _soften_trend_topic,
     generate_ask_posts,
-    load_pool,
     pick_ask_post,
     save_pool,
     unused_ask_posts,
@@ -48,15 +47,19 @@ class SoftenTrendTests(unittest.TestCase):
 class AskPoolTests(unittest.TestCase):
     def test_generate_without_network(self) -> None:
         with mock.patch("ask_chitchat.load_trend_seeds", return_value=["プロ野球結果 巨人勝利"]):
-            with mock.patch("ask_chitchat.refresh_trend_seeds", return_value=["プロ野球結果 巨人勝利"]):
+            with mock.patch(
+                "ask_chitchat.refresh_trend_seeds",
+                return_value=["プロ野球結果 巨人勝利"],
+            ):
                 posts = generate_ask_posts(6, existing_ids=set())
         self.assertGreaterEqual(len(posts), 4)
         for row in posts:
             text = row["text"]
-            self.assertIn("🐻‍❄️", text)
+            opts = row["options"]
+            self.assertEqual(len(opts), 4)
             self.assertNotIn("http", text.lower())
             self.assertNotIn("※PR", text)
-            self.assertLessEqual(len(text), 140)
+            self.assertTrue(all(1 <= len(o) <= 25 for o in opts))
 
     def test_used_ids_and_pick(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -66,12 +69,14 @@ class AskPoolTests(unittest.TestCase):
             items = [
                 {
                     "id": "ask-aaa",
-                    "text": "夏といえばアイスだよね🍨 みんなのオススメ教えて〜 僕はしろくまくん🐻‍❄️",
+                    "text": "夏といえばアイス、推しは？",
+                    "options": ["しろくまくん", "ガリガリ君", "ハーゲンダッツ", "その他"],
                     "source": "seed",
                 },
                 {
                     "id": "ask-bbb",
-                    "text": "夏といえばかき氷だよね🍧 みんなのオススメ教えて〜 僕はいちご一択🐻‍❄️",
+                    "text": "かき氷の味、どれ派？",
+                    "options": ["いちご", "宇治金時", "レモン", "その他"],
                     "source": "seed",
                 },
             ]
@@ -96,7 +101,6 @@ class AskPoolTests(unittest.TestCase):
             try:
                 config.LEDGER_PATH = ledger
                 config.ASK_CHITCHAT_POOL_PATH = pool_path
-                # module-level paths were bound at import; patch those too
                 import ask_chitchat as ac
 
                 old_ask = ac.ASK_POOL_PATH
@@ -108,6 +112,7 @@ class AskPoolTests(unittest.TestCase):
                 with mock.patch.object(ac, "ensure_ask_supply", return_value=0):
                     picked = pick_ask_post(slot_salt=1)
                 self.assertEqual(picked["id"], "ask-bbb")
+                self.assertEqual(len(picked["options"]), 4)
             finally:
                 config.LEDGER_PATH = old_ledger
                 config.ASK_CHITCHAT_POOL_PATH = old_pool
@@ -115,18 +120,16 @@ class AskPoolTests(unittest.TestCase):
 
 
 class AskSlotsWiringTests(unittest.TestCase):
-    def test_morning_slots_are_ask_surveys(self) -> None:
+    def test_morning_slots_are_native_polls(self) -> None:
         from datetime import date
-        from value_posts import is_ask_chitchat_id, pick_value_post
+        from composer import compose_value
+        from value_posts import is_ask_chitchat_id
 
         self.assertEqual(config.ASK_CHITCHAT_SLOTS, (0, 1))
         for slot in (0, 1):
-            picked = pick_value_post(date(2026, 8, 7), slot)
-            self.assertTrue(is_ask_chitchat_id(picked.value_id), msg=picked.value_id)
-            self.assertTrue(
-                any(k in picked.text for k in ("教えて", "どう思う", "何派", "いる？", "？")),
-                msg=picked.text,
-            )
+            composed = compose_value(date(2026, 8, 7), slot)
+            self.assertTrue(is_ask_chitchat_id(composed.item_code.split(":", 1)[1]))
+            self.assertEqual(len(composed.poll_options), 4)
 
 
 if __name__ == "__main__":

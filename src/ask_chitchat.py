@@ -1,10 +1,9 @@
-"""問いかけ型雑談（アイス投稿と同系統）の生成・プール。
+"""Threads公式4択アンケート用の問いかけプール。
 
-伸びた型:
-  短い季節/話題フック → みんなのオススメ募集 → 自分の回答(しろくま)
+型:
+  短い質問テキスト + option_a..d（各1〜25字）
 
-通常の chitchat_pool とは別。日用品・商品紹介は禁止。
-絵文字は軽く残してよい（ヒット投稿に合わせて）。
+通常の chitchat_pool とは別。日用品・商品紹介・PRは禁止。
 """
 
 from __future__ import annotations
@@ -26,87 +25,85 @@ ASK_POOL_PATH = getattr(config, "ASK_CHITCHAT_POOL_PATH", config.DATA_DIR / "ask
 TREND_SEEDS_PATH = getattr(config, "TREND_SEEDS_PATH", config.DATA_DIR / "trend_seeds.json")
 MIN_UNUSED = int(getattr(config, "ASK_CHITCHAT_MIN_UNUSED", 6))
 REFILL_COUNT = int(getattr(config, "ASK_CHITCHAT_REFILL_COUNT", 10))
+POLL_OPTION_MAX = 25
 
-# 月別の季節ネタ (topic, emoji, my_answer)
-_SEASONAL: dict[int, Sequence[Tuple[str, str, str]]] = {
+# (question, (opt_a, opt_b, opt_c, opt_d))
+_SEASONAL_POLLS: dict[int, Sequence[Tuple[str, Tuple[str, str, str, str]]]] = {
     1: (
-        ("おでんの具", "🍢", "大根一択"),
-        ("冬の飲み物", "☕", "ホットミルクティー"),
-        ("こたつで食べるもの", "🍊", "みかん"),
+        ("おでんの具、いちばん好きなのは？", ("大根", "卵", "はんぺん", "その他")),
+        ("冬の飲み物、何派？", ("ホットミルクティー", "ココア", "カフェラテ", "その他")),
+        ("こたつで食べるものといえば？", ("みかん", "アイスクリーム", "おもち", "その他")),
     ),
     2: (
-        ("バレンタインのお返し", "🎁", "特に何も期待してない"),
-        ("冬の夜食", "🍜", "カップ麺"),
-        ("節分の恵方巻き", "🍣", "普通に切って食べる派"),
+        ("バレンタインのお返し、どうする？", ("お返しする", "特になし", "義理だけ", "まだ迷ってる")),
+        ("冬の夜食、何食べる？", ("カップ麺", "おにぎり", "アイス", "食べない")),
+        ("恵方巻き、どう食べる？", ("丸かぶり", "切って食べる", "買わない", "その他")),
     ),
     3: (
-        ("桜より先に思い浮かぶ春のもの", "🌸", "花粉症…"),
-        ("新生活で買うもの", "🎒", "とりあえずティッシュ"),
-        ("春のおやつ", "🍓", "いちご狩りしたい気持ち"),
+        ("春といえば、先に思い浮かぶのは？", ("桜", "花粉症", "新生活", "いちご")),
+        ("新生活で先に買うものある？", ("ティッシュ", "洗剤", "ゴミ袋", "まだ何も")),
+        ("春のおやつ、推しは？", ("いちごスイーツ", "さくら餅", "どら焼き", "その他")),
     ),
     4: (
-        ("お花見のお供", "🍡", "だんご"),
-        ("春のコンビニスイーツ", "🧁", "その場の衝動買い"),
-        ("GWの過ごし方", "🏠", "家でゴロゴロ"),
+        ("お花見のお供、何持っていく？", ("だんご", "お弁当", "コンビニ", "行かない")),
+        ("GWの過ごし方、どれに近い？", ("家でゴロゴロ", "旅行", "帰省", "まだ未定")),
+        ("春のコンビニスイーツ、買う？", ("衝動買いがち", "計画的に買う", "たまに", "ほぼ買わない")),
     ),
     5: (
-        ("初夏の匂い", "🌿", "雨上がりのアスファルト"),
-        ("こどもの日といえば", "🎏", "かしわもち"),
-        ("梅雨入り前にやりたいこと", "☀️", "布団干し"),
+        ("こどもの日といえば？", ("かしわもち", "ちまき", "特になし", "その他")),
+        ("梅雨入り前にやりたいことある？", ("布団干し", "大掃除", "旅行", "特になし")),
+        ("初夏の匂いといえば？", ("雨上がり", "芝生", "日焼け止め", "その他")),
     ),
     6: (
-        ("梅雨のストレス発散", "☔", "ホットケーキ"),
-        ("あじさいより好きな紫", "", "ぶどうジュース"),
-        ("湿気との戦い方", "🌀", "風呂上がりすぐエアコン"),
+        ("梅雨のストレス発散、何する？", ("ホットケーキ", "昼寝", "買い物", "その他")),
+        ("湿気との戦い、どうしてる？", ("すぐエアコン", "除湿機", "我慢", "その他")),
+        ("あじさいシーズン、外出する？", ("見る派", "家にいる", "写真だけ", "興味薄い")),
     ),
     7: (
-        ("夏といえばアイス", "🍨", "しろくまくん"),
-        ("かき氷の味", "🍧", "いちご一択"),
-        ("夏の飲み物", "", "麦茶一択"),
-        ("花火より好きな夏の夜の過ごし方", "🎆", "アイス食べながら動画"),
+        ("夏といえばアイス、推しは？", ("しろくまくん", "ガリガリ君", "ハーゲンダッツ", "その他")),
+        ("かき氷の味、どれ派？", ("いちご", "宇治金時", "レモン", "その他")),
+        ("夏の飲み物、いちばん飲むのは？", ("麦茶", "水", "炭酸", "その他")),
+        ("夏の夜の過ごし方は？", ("アイス＋動画", "花火", "コンビニ", "早めに寝る")),
     ),
     8: (
-        ("夏といえばアイス", "🍨", "しろくまくん"),
-        ("かき氷の味", "🍧", "いちご一択"),
-        ("夏の飲み物", "", "麦茶一択"),
-        ("スイカの食べ方", "🍉", "塩かけて食べる派"),
-        ("夏休みの思い出おやつ", "🍦", "やっぱりアイス"),
-        ("夏の夜のコンビニ", "🏪", "アイス売り場で長居"),
+        ("夏といえばアイス、推しは？", ("しろくまくん", "ガリガリ君", "ハーゲンダッツ", "その他")),
+        ("かき氷の味、どれ派？", ("いちご", "宇治金時", "メロン", "その他")),
+        ("夏の飲み物、いちばん飲むのは？", ("麦茶", "水", "炭酸", "その他")),
+        ("スイカ、どう食べる？", ("塩かける", "そのまま", "冷凍する", "あまり食べない")),
+        ("夏の夜のコンビニ、何買う？", ("アイス", "飲み物", "おやつ", "ほぼ行かない")),
+        ("今年の暑さ対策、メインは？", ("麦茶と日陰", "エアコン", "冷感グッズ", "まだ模索中")),
     ),
     9: (
-        ("秋といえば食欲", "🍂", "焼き芋"),
-        ("敬老の日のお土産候補", "🎁", "お茶セット無難説"),
-        ("残暑のアイス", "🍨", "まだしろくまくん引退できない"),
+        ("秋といえば食欲、何が食べたい？", ("焼き芋", "さんま", "きのこ", "その他")),
+        ("残暑でもアイス食べる？", ("まだ食べる", "もう卒業", "たまに", "季節無関係")),
+        ("敬老の日のお土産、何が無難？", ("お茶セット", "お菓子", "花", "まだ決めてない")),
     ),
     10: (
-        ("秋の味覚", "🍠", "焼き芋一択"),
-        ("ハロウィンのお菓子", "🎃", "そのまま自分で食べる"),
-        ("秋の夜長に見たいもの", "📺", "サスペンス"),
+        ("秋の味覚、いちばん好きなのは？", ("焼き芋", "栗", "ぶどう", "その他")),
+        ("ハロウィンのお菓子、どうする？", ("自分で食べる", "配る", "買わない", "その他")),
+        ("秋の夜長に見たいものは？", ("サスペンス", "アニメ", "バラエティ", "その他")),
     ),
     11: (
-        ("鍋の具材", "🍲", "白菜と豚肉"),
-        ("秋冬のコンビニホットスナック", "🍟", "フライドチキン"),
-        ("年末に向けてやめたい癖", "", "スヌーズ連打"),
+        ("鍋の具材、絶対入れるのは？", ("白菜と豚肉", "キムチ", "海鮮", "その他")),
+        ("コンビニのホットスナック、推しは？", ("フライドチキン", "肉まん", "中華まん", "その他")),
+        ("年末に向けてやめたい癖ある？", ("スヌーズ連打", "夜ふかし", "衝動買い", "特になし")),
     ),
     12: (
-        ("冬といえばこれ", "❄️", "こたつみかん"),
-        ("年越しそば派？うどん派？", "🍜", "そば"),
-        ("クリスマスより大事な冬の楽しみ", "🎄", "イルミネーション見て帰る"),
+        ("冬といえばこれ、どれ派？", ("こたつみかん", "おでん", "鍋", "その他")),
+        ("年越しはそば？うどん？", ("そば", "うどん", "どっちも", "まだ決めてない")),
+        ("クリスマスより大事な冬の楽しみは？", ("イルミネーション", "帰省", "鍋パーティー", "その他")),
     ),
 }
 
-# トレンド/ニュースっぽいが重くない話題（RSS失敗時の保険）
-_EVERGREEN_TRENDS: Sequence[Tuple[str, str, str]] = (
-    ("最近の朝ドラ", "📺", "途中から追いつきたい派"),
-    ("今季のアニメ", "✨", "まだ何見るか迷ってる"),
-        ("プロ野球、今年の注目", "⚾", "しばらく見てるだけ"),
-    ("台風くる前にやること", "🌀", "とりあえず入浴剤買う"),
-    ("新作ポテトチップス", "🥔", "一回は試す"),
-    ("今のスマホケース流行り", "📱", "クリア派から動けない"),
-    ("最近のコンビニ新作", "🏪", "見た瞬間カゴに入れがち"),
-    ("今バズってる曲", "🎵", "サビだけ知ってる"),
-    ("SNSの新機能", "📱", "使い方わかる人教えて"),
-    ("今の天気予報アプリ", "🌦️", "標準のままで十分派"),
+_EVERGREEN_POLLS: Sequence[Tuple[str, Tuple[str, str, str, str]]] = (
+    ("最近の朝ドラ、見てる？", ("毎日見てる", "追いつきたい", "途中離脱", "見てない")),
+    ("今季のアニメ、何見る？", ("もう決めた", "迷ってる", "まだ見てない", "アニメ見ない")),
+    ("プロ野球、今年の推しある？", ("ある", "特にない", "たまに見る", "見てない")),
+    ("新作ポテチ、試す派？", ("一回は試す", "定番だけ", "見かけたら買う", "興味薄い")),
+    ("最近のコンビニ新作、買う？", ("見た瞬間買う", "たまに", "ほぼ買わない", "チェックしない")),
+    ("今バズってる曲、知ってる？", ("フルで知ってる", "サビだけ", "名前だけ", "知らない")),
+    ("天気予報アプリ、何使ってる？", ("標準のまま", "専用アプリ", "Yahoo系", "あまり見ない")),
+    ("SNSの新機能、使いこなせる？", ("すぐ使う", "様子見", "わからない", "興味ない")),
 )
 
 
@@ -116,6 +113,35 @@ def _now_stamp() -> str:
 
 def _today() -> datetime:
     return datetime.now(JST)
+
+
+def _clip_option(text: str, limit: int = POLL_OPTION_MAX) -> str:
+    text = re.sub(r"\s+", " ", str(text or "").strip())
+    if len(text) > limit:
+        text = text[:limit]
+    return text
+
+
+def normalize_poll_options(options: Sequence[str]) -> list[str]:
+    out: list[str] = []
+    seen: set[str] = set()
+    for raw in options:
+        opt = _clip_option(raw)
+        if not opt or opt in seen:
+            continue
+        seen.add(opt)
+        out.append(opt)
+        if len(out) >= 4:
+            break
+    while len(out) < 4:
+        filler = f"その他{len(out)}" if "その他" in seen else "その他"
+        filler = _clip_option(filler)
+        if filler not in seen:
+            seen.add(filler)
+            out.append(filler)
+        else:
+            out.append(_clip_option(f"選択肢{len(out)+1}"))
+    return out[:4]
 
 
 def load_pool(path: Path | None = None) -> dict[str, Any]:
@@ -163,30 +189,18 @@ def save_trend_seeds(seeds: list[str], path: Path | None = None) -> None:
     p.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def _make_id(text: str) -> str:
-    digest = hashlib.sha1(text.encode("utf-8")).hexdigest()[:10]
+def _make_id(text: str, options: Sequence[str]) -> str:
+    digest = hashlib.sha1(f"{text}|{'|'.join(options)}".encode("utf-8")).hexdigest()[:10]
     return f"ask-{digest}"
 
 
-def _normalize(text: str) -> str:
+def _normalize_question(text: str) -> str:
     text = text.replace("\r\n", "\n").strip()
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text
 
 
-def _render_ask(topic: str, emoji: str, answer: str) -> str:
-    emo = f"{emoji} " if emoji else ""
-    patterns = [
-        f"{topic}だよね{emo}みんなのオススメ教えて〜 僕は{answer}🐻‍❄️",
-        f"{topic}、みんな何派？教えて〜 僕は{answer}🐻‍❄️",
-        f"最近気になってるんだけど、{topic}のおすすめ教えて〜 僕は{answer}🐻‍❄️",
-        f"{topic}といえば？みんなの推しください 僕は{answer}、しろくまも賛成🐻‍❄️",
-    ]
-    return _normalize(random.choice(patterns))
-
-
 def _soften_trend_topic(seed: str) -> str:
-    """長い見出しを問いかけ向けの短い話題に落とす。"""
     raw = seed.strip("。．!！?？ \n「」『』")
     seed = re.sub(r"^【[^】]*】", "", raw).strip()
     if "プロ野球結果" in raw or ("プロ野球" in raw and ("勝ち" in seed or "敗" in seed)):
@@ -196,27 +210,26 @@ def _soften_trend_topic(seed: str) -> str:
     if "ピッチクロック" in raw:
         return "プロ野球のピッチクロック"
     if "Jリーグ" in raw or ("サッカー" in raw and "開幕" in raw):
-        return "今のサッカー開幕ムード"
+        return "今のサッカー"
     if "五輪" in raw:
-        return "五輪まわりの話題"
+        return "五輪まわり"
     if "バレー" in raw:
-        return "最近のバレー日本代表"
+        return "バレー日本代表"
     if "バスケ" in raw or "八村" in raw:
         return "バスケ日本代表"
     if "猛暑" in raw or "酷暑" in raw or "熱中症" in raw or "暑熱" in raw:
         return "今年の暑さ対策"
     if "ラベルレス" in raw:
-        return "ラベルレスの水・飲料"
+        return "ラベルレス飲料"
     if "コンビニ" in raw:
-        return "最近のコンビニ新作"
+        return "コンビニ新作"
     if "殿堂" in raw and "サッカー" in raw:
-        return "サッカー殿堂入りの話題"
-    # スポーツ結果は種目名に寄せる（テンプレ側に「最近」があるので先頭に付けない）
+        return "サッカー殿堂入り"
     for key, label in (
         ("プロ野球", "プロ野球"),
         ("サッカー", "サッカー"),
         ("バスケ", "バスケ"),
-        ("バレー", "バレー日本代表"),
+        ("バレー", "バレー"),
     ):
         if key in raw:
             return label
@@ -225,101 +238,27 @@ def _soften_trend_topic(seed: str) -> str:
     return seed or "今のニュース"
 
 
-def _render_trend_ask(seed: str) -> str:
-    topic = _soften_trend_topic(seed)
-    patterns = [
-        f"最近『{topic}』が気になるんだけど、みんなの感想教えて〜 僕はまだふわっとしか知らない🐻‍❄️",
-        f"『{topic}』、キャッチアップできてる人いる？推しポイント教えて〜 しろくまは様子見中🐻‍❄️",
-        f"今っぽい話だけど『{topic}』、気になってる人〜？みんなはどう思う？🐻‍❄️",
-    ]
-    return _normalize(random.choice(patterns))
-
-
-# 重いニュースはアカウントのトーンに合わないので除外。
 _TREND_BLOCK = (
-    "死亡",
-    "殺人",
-    "事故死",
-    "戦争",
-    "爆撃",
-    "津波",
-    "震災",
-    "地震",
-    "爆発",
-    "殺害",
-    "犠牲",
-    "被災",
-    "避難",
-    "火災",
-    "火事",
-    "人権侵害",
-    "介入",
-    "減税",
-    "自民",
-    "首相",
-    "閣議",
-    "攻撃",
-    "過激",
-    "容疑",
-    "逮捕",
-    "裁判",
-    "訃報",
-    "死去",
-    "死ぬ",
-    "遺族",
+    "死亡", "殺人", "事故死", "戦争", "爆撃", "津波", "震災", "地震", "爆発", "殺害",
+    "犠牲", "被災", "避難", "火災", "火事", "人権侵害", "介入", "減税", "自民", "首相",
+    "閣議", "攻撃", "過激", "容疑", "逮捕", "裁判", "訃報", "死去", "死ぬ", "遺族",
 )
-
-# 軽い話題だけ拾う（スポーツ・季節・生活・エンタメ寄り）。
 _TREND_ALLOW = (
-    "プロ野球",
-    "サッカー",
-    "バスケ",
-    "バレー",
-    "大谷",
-    "侍ジャパン",
-    "Jリーグ",
-    "五輪",
-    "猛暑",
-    "酷暑",
-    "熱中症",
-    "台風",
-    "ラベルレス",
-    "コンビニ",
-    "アニメ",
-    "映画",
-    "ドラマ",
-    "朝ドラ",
-    "ミュージック",
-    "音楽",
-    "フェス",
-    "新作",
-    "発売",
-    "グルメ",
-    "アイス",
-    "かき氷",
-    "夏",
-    "花火",
-    "祭り",
-    "動物園",
-    "水族館",
-    "宇宙",
-    "JAXA",
-    "はやぶさ",
+    "プロ野球", "サッカー", "バスケ", "バレー", "大谷", "侍ジャパン", "Jリーグ", "五輪",
+    "猛暑", "酷暑", "熱中症", "台風", "ラベルレス", "コンビニ", "アニメ", "映画", "ドラマ",
+    "朝ドラ", "ミュージック", "音楽", "フェス", "新作", "発売", "グルメ", "アイス",
+    "かき氷", "夏", "花火", "祭り", "動物園", "水族館", "宇宙", "JAXA", "はやぶさ",
 )
 
 
 def fetch_trend_seeds_from_rss(*, limit: int = 12) -> list[str]:
-    """軽いニュース見出しをRSSから取得（失敗したら空）。
-
-    主要ニュースは事故・政治が混ざりやすいので、スポーツ優先 + allow単語フィルタ。
-    """
     import httpx
 
     feeds = (
-        "https://www.nhk.or.jp/rss/news/cat7.xml",  # スポーツ
-        "https://www.nhk.or.jp/rss/news/cat2.xml",  # 文化・エンタメ（混在あり）
-        "https://www.nhk.or.jp/rss/news/cat3.xml",  # 科学・医療（軽い科学ネタ）
-        "https://www.nhk.or.jp/rss/news/cat0.xml",  # 主要（allowのみ）
+        "https://www.nhk.or.jp/rss/news/cat7.xml",
+        "https://www.nhk.or.jp/rss/news/cat2.xml",
+        "https://www.nhk.or.jp/rss/news/cat3.xml",
+        "https://www.nhk.or.jp/rss/news/cat0.xml",
     )
     titles: list[str] = []
     try:
@@ -354,18 +293,45 @@ def refresh_trend_seeds() -> list[str]:
     return seeds or load_trend_seeds()
 
 
-def _topic_candidates(now: Optional[datetime] = None) -> list[Tuple[str, str, str]]:
+def _render_poll(question: str, options: Sequence[str]) -> dict[str, Any]:
+    text = _normalize_question(question)
+    opts = normalize_poll_options(options)
+    return {
+        "id": _make_id(text, opts),
+        "text": text,
+        "options": opts,
+        "source": "ask-poll",
+        "created_at": _now_stamp(),
+    }
+
+
+def _render_trend_poll(seed: str) -> dict[str, Any]:
+    topic = _soften_trend_topic(seed)
+    question = random.choice(
+        (
+            f"『{topic}』、みんなどう思う？",
+            f"『{topic}』、キャッチアップできてる？",
+            f"今っぽい話だけど『{topic}』、気になる？",
+        )
+    )
+    options = ("めっちゃ気になる", "ちょっと気になる", "まだよく知らない", "興味ない")
+    row = _render_poll(question, options)
+    row["source"] = "ask-trend-poll"
+    return row
+
+
+def _topic_candidates(now: Optional[datetime] = None) -> list[Tuple[str, Tuple[str, str, str, str]]]:
     now = now or _today()
     month = now.month
-    out: list[Tuple[str, str, str]] = []
-    out.extend(list(_SEASONAL.get(month, ())))
-    out.extend(list(_SEASONAL.get(month % 12 + 1, ()))[:2])
-    out.extend(list(_EVERGREEN_TRENDS))
+    out: list[Tuple[str, Tuple[str, str, str, str]]] = []
+    out.extend(list(_SEASONAL_POLLS.get(month, ())))
+    out.extend(list(_SEASONAL_POLLS.get(month % 12 + 1, ()))[:2])
+    out.extend(list(_EVERGREEN_POLLS))
     random.shuffle(out)
     return out
 
 
-def _generate_ask_via_llm(
+def _generate_poll_via_llm(
     n: int,
     *,
     existing_ids: set[str],
@@ -389,17 +355,13 @@ def _generate_ask_via_llm(
     month = _today().strftime("%Y年%m月")
     trends = " / ".join(trend_seeds) if trend_seeds else "（特になし）"
     system = (
-        "日本人の普通のThreadsユーザーとして、短い問いかけ投稿を書いてください。"
-        "型: 話題フック → みんなのオススメ/感想を聞く → 自分の答え（しろくま/🐻‍❄️ を自然に）。"
-        "1投稿は1〜3行。売り込み・楽天・日用品・ポイント・節約術は禁止。"
-        "重い政治・事件・事故のネタは禁止。季節と軽いトレンド中心。"
-        "絵文字は0〜2個まで。ハッシュタグ禁止。"
-        "出力はJSON配列のみ。各要素は {\"text\": \"...\"}。"
+        "日本人の普通のThreadsユーザーとして、公式4択アンケート投稿を作ってください。"
+        "各要素は {\"text\": \"質問\", \"options\": [\"A\",\"B\",\"C\",\"D\"]}。"
+        "textは1〜2行の短い質問。optionsは必ず4つ、各1〜25文字。"
+        "売り込み・楽天・日用品PR・ハッシュタグ禁止。重い政治・事件禁止。"
+        "出力はJSON配列のみ。"
     )
-    user = (
-        f"{n}本作って。いまは{month}。参考トレンド見出し: {trends}\n"
-        "例: 夏といえばアイスだよね🍨 みんなのオススメアイスを教えて〜 僕はしろくまくん Polar"
-    ).replace(" Polar", "🐻‍❄️")
+    user = f"{n}本作って。いまは{month}。参考トレンド: {trends}"
     try:
         with httpx.Client(timeout=60.0) as client:
             res = client.post(
@@ -417,7 +379,7 @@ def _generate_ask_via_llm(
             res.raise_for_status()
             content = res.json()["choices"][0]["message"]["content"].strip()
     except Exception as exc:
-        print(f"WARNING: ask llm failed: {exc}", flush=True)
+        print(f"WARNING: ask poll llm failed: {exc}", flush=True)
         return []
     if content.startswith("```"):
         content = re.sub(r"^```(?:json)?\s*", "", content)
@@ -432,10 +394,11 @@ def _generate_ask_via_llm(
     for row in data:
         if not isinstance(row, dict):
             continue
-        text = _normalize(str(row.get("text") or ""))
-        if len(text) < 10:
+        text = _normalize_question(str(row.get("text") or ""))
+        opts = normalize_poll_options(row.get("options") or [])
+        if len(text) < 6 or len(opts) != 4:
             continue
-        vid = _make_id(text)
+        vid = _make_id(text, opts)
         if vid in existing_ids:
             continue
         existing_ids.add(vid)
@@ -443,7 +406,8 @@ def _generate_ask_via_llm(
             {
                 "id": vid,
                 "text": text,
-                "source": "ask-llm",
+                "options": opts,
+                "source": "ask-poll-llm",
                 "created_at": _now_stamp(),
             }
         )
@@ -460,44 +424,29 @@ def generate_ask_posts(n: int, *, existing_ids: set[str] | None = None) -> List[
     seeds = load_trend_seeds() or refresh_trend_seeds()
     random.shuffle(seeds)
     for seed in seeds:
-        if len(out) >= max(1, n // 2):
+        if len(out) >= max(1, n // 3):
             break
-        text = _render_trend_ask(seed)
-        vid = _make_id(text)
-        if vid in existing_ids or text in seen_text:
+        row = _render_trend_poll(seed)
+        if row["id"] in existing_ids or row["text"] in seen_text:
             continue
-        existing_ids.add(vid)
-        seen_text.add(text)
-        out.append(
-            {
-                "id": vid,
-                "text": text,
-                "source": "ask-trend",
-                "created_at": _now_stamp(),
-            }
-        )
+        existing_ids.add(row["id"])
+        seen_text.add(row["text"])
+        out.append(row)
 
-    for topic, emoji, answer in _topic_candidates():
+    for question, options in _topic_candidates():
         if len(out) >= n:
             break
-        text = _render_ask(topic, emoji, answer)
-        vid = _make_id(text)
-        if vid in existing_ids or text in seen_text:
+        row = _render_poll(question, options)
+        row["source"] = "ask-season-poll"
+        if row["id"] in existing_ids or row["text"] in seen_text:
             continue
-        existing_ids.add(vid)
-        seen_text.add(text)
-        out.append(
-            {
-                "id": vid,
-                "text": text,
-                "source": "ask-season",
-                "created_at": _now_stamp(),
-            }
-        )
+        existing_ids.add(row["id"])
+        seen_text.add(row["text"])
+        out.append(row)
 
     if len(out) < n:
         out.extend(
-            _generate_ask_via_llm(
+            _generate_poll_via_llm(
                 n - len(out),
                 existing_ids=existing_ids,
                 trend_seeds=seeds[:8],
@@ -517,7 +466,6 @@ def used_ask_ids(ledger_path: Path | None = None) -> set[str]:
             continue
         vid = code.split(":", 1)[1]
         kind = str(e.get("kind") or "")
-        # 問いかけ枠と旧夏ワンショットのみ（通常 chitchat は別プール）
         if vid.startswith("ask-") or vid.startswith("chat-summer-") or kind == "ask-chitchat":
             used.add(vid)
     return used
@@ -532,9 +480,11 @@ def unused_ask_posts() -> list[dict[str, Any]]:
             continue
         vid = str(row.get("id") or "")
         text = str(row.get("text") or "").strip()
+        opts = normalize_poll_options(row.get("options") or [])
         if not vid or not text or vid in used:
             continue
-        out.append(row)
+        # 旧テキスト専用シードは選択肢を補完して使えるようにする
+        out.append({**row, "text": text, "options": opts})
     return out
 
 
@@ -562,17 +512,18 @@ def ensure_ask_supply(
     need = max(refill_count, min_unused - unused_n)
     fresh = generate_ask_posts(need * 2, existing_ids=existing)
     added = 0
-    seen_text = {_normalize(str(i.get("text") or "")) for i in items if isinstance(i, dict)}
+    seen_text = {_normalize_question(str(i.get("text") or "")) for i in items if isinstance(i, dict)}
     for row in fresh:
-        t = _normalize(str(row.get("text") or ""))
-        if not t or t in seen_text:
+        t = _normalize_question(str(row.get("text") or ""))
+        opts = normalize_poll_options(row.get("options") or [])
+        if not t or t in seen_text or len(opts) != 4:
             continue
         seen_text.add(t)
-        vid = _make_id(t)
+        vid = _make_id(t, opts)
         if vid in existing:
             continue
         existing.add(vid)
-        items.append({**row, "id": vid, "text": t})
+        items.append({**row, "id": vid, "text": t, "options": opts})
         added += 1
         if added >= need:
             break
@@ -590,13 +541,17 @@ def pick_ask_post(*, slot_salt: int = 0) -> dict[str, Any]:
         raise RuntimeError("ask-chitchat pool is empty")
     day = _today().toordinal()
     idx = (day * 5 + int(slot_salt)) % len(unused)
-    return unused[idx]
+    row = unused[idx]
+    return {
+        **row,
+        "options": normalize_poll_options(row.get("options") or []),
+    }
 
 
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="問いかけ型雑談プールを補充")
+    parser = argparse.ArgumentParser(description="公式4択アンケートプールを補充")
     parser.add_argument("--min-unused", type=int, default=MIN_UNUSED)
     parser.add_argument("--count", type=int, default=REFILL_COUNT)
     parser.add_argument("--refresh-trends", action="store_true")
