@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-07T13:56:55+09:00",
+  "updated_at": "2026-08-07T16:22:17+09:00",
   "entries": [
     {
       "item_code": "value:struggle-morning-rush-food",
@@ -42,6 +42,17 @@
       "posted_on": "2026-08-07",
       "threads_post_ids": [
         "18074646437359499"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-wrong-app",
+      "item_name": "価値投稿 chat-wrong-app",
+      "kind": "chitchat",
+      "slot": 3,
+      "posted_on": "2026-08-07",
+      "threads_post_ids": [
+        "17872902528628474"
       ],
       "reused": false
     },
