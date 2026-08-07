@@ -5,9 +5,8 @@
 **ペルソナ A（固定）**: 共働き〜子育て世帯の「家庭の消耗品・時短買い」担当向け。  
 日用品 / キッチンに絞り、悩みキーワード（洗剤切れ・水が重い等）で商品を選ぶ。美容・ファッション・ガジェット総合は扱わない。
 
-- スケジュール: **毎日3投稿 JST**（共感1 : 雑談1 : 商品紹介1）※ Actions無料枠節約
-  - **共働きリアル苦悩 1本（08:00）**: 生活実感・あるある吐露（再利用優先）
-  - **どうでもいい雑談 1本（15:00）**: テーマ無関係（中の人が人間に見えるためのブレ）
+- スケジュール: **毎日3投稿 JST**（アンケート2 : 商品紹介1）※ Actions無料枠節約
+  - **アンケート 2本（08:00 / 15:00）**: アイス投稿と同型の問いかけ。季節＋軽いトレンド。商品・PRなし
   - **商品紹介 1本（20:00）**: 本投稿は商品名なし＋問いかけ。自分リプで答え合わせ（商品名＋アフィURL＋`※PR`）
   - ランキングダイジェストは停止
   - ※ 旧10投稿/日から削減（月2000分の Actions 枠対策）
@@ -146,17 +145,14 @@ PYTHONPATH=src:. python src/post.py --dry-run --slot 0
 PYTHONPATH=src:. python src/post.py --list-genres
 PYTHONPATH=src:. python src/post.py --dry-run --genre 100939
 
-# 価値投稿（slot 0 / 1。楽天 env 不要）
+# 価値投稿 / アンケート（slot 0 / 1。楽天 env 不要）
 PYTHONPATH=src:. python src/post.py --dry-run --slot 0
-PYTHONPATH=src:. python src/post.py --dry-run --value --value-id marathon-basics
-
-# 再利用枠（slot 0=08:00）。期限到来の候補があれば優先
-PYTHONPATH=src:. python src/post.py --dry-run --slot 0
-PYTHONPATH=src:. python src/post.py --list-reuse
-PYTHONPATH=src:. python src/post.py --mark-reuse stock-buy
+PYTHONPATH=src:. python src/post.py --dry-run --slot 1
 
 # 商品紹介（slot 2=20:00。楽天 env 必要）
 PYTHONPATH=src:. python src/post.py --dry-run --slot 2
+PYTHONPATH=src:. python src/post.py --list-reuse
+PYTHONPATH=src:. python src/post.py --mark-reuse stock-buy
 
 # 本番投稿（要 Threads env）
 export THREADS_ACCESS_TOKEN=...
@@ -168,8 +164,8 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 | slot | 時刻(JST) | 内容 |
 |------|-----------|------|
-| 0 | 08:00 | **共働きリアル苦悩**（再利用優先） |
-| 1 | 15:00 | **どうでもいい雑談** |
+| 0 | 08:00 | **アンケート**（問いかけ・季節/トレンド） |
+| 1 | 15:00 | **アンケート**（問いかけ・季節/トレンド） |
 | 2 | 20:00 | **商品紹介**（答え合わせ型） |
 
 枠の種別は `config.py` の `ITEM_SLOTS` / `TIMESAVE_ITEM_SLOTS` / `DIGEST_SLOTS` / `VALUE_SLOTS` / `STRUGGLE_SLOTS` / `CHITCHAT_SLOTS` で変更できます。CLI では `--item` / `--value` / `--digest` で種別を強制、`--value-id` や `--digest-format`（top3 / quiz / sleeper）で内容を指定できます。
@@ -209,18 +205,17 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 現状は枠を停止中（`DIGEST_SLOTS` 空）。再開する場合は `config.py` で枠を戻す。形式は `top3` / `quiz` / `sleeper`。
 
-### 価値投稿（slot 0 / 1）
+### 価値投稿（slot 0 / 1 = アンケート）
 
-リンク・PRなしの単発投稿。
+リンク・PRなしの問いかけ投稿（伸びたアイス投稿と同型）。
 
-- **slot 0（08:00）**: **共働きリアル苦悩**。夜ご飯・寄り道・消耗品など生活実感の吐露（再利用優先）
-- **slot 1（15:00）**: **どうでもいい雑談**。日用品と無関係。**一度出したら二度と使わない**。未使用が減ったら `chitchat_gen` が自動で草稿を `data/chitchat_pool.json` に追加
+- **slot 0 / 1（08:00 / 15:00）**: **アンケート**。季節フック or 軽いトレンド → みんなのオススメ/感想募集 → 自分の答え（しろくま）。`data/ask_chitchat_pool.json` から一度きり消費し、減ったら自動補充
+- 重い事件・政治ネタは除外
 
-### 再利用（slot 0 = 08:00 優先）
+### 再利用
 
-参考運用の「伸びた投稿を3日に1回再利用」に対応。`data/reuse.json` のキューから、前回投稿から3日以上経過した価値投稿を優先投下します。
+アンケート枠では再利用しない（一度きり）。商品以外の価値投稿を手動で再利用したい場合は `python src/post.py --mark-reuse …` を使う。
 
-- 通常の価値投稿は自動でキュー登録
 - 伸びた投稿は手動で優先度アップ: `python src/post.py --mark-reuse stock-buy`
 - Insights 権限がある場合: `python src/post.py --sync-insights` で views/likes を取り込み
 - キュー確認: `python src/post.py --list-reuse`

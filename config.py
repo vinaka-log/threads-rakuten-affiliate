@@ -412,12 +412,12 @@ def timesave_pain_intents() -> Tuple[PainIntent, ...]:
 # 商品投稿に楽天の商品画像を付ける（⑥）
 ATTACH_ITEM_IMAGE = True
 
-# 日内枠（JST）。1日3投稿 = 共感1 + 雑談1 + 商品紹介1。
+# 日内枠（JST）。1日3投稿 = アンケート2 + 商品紹介1。
 # GitHub Actions 無料枠（月2000分）節約のため、投稿密度を抑える。
-# PRはアルゴ上リーチが落ちやすいのでゴールデン帯に1本だけ。
+# 08:00 / 15:00 はアイス投稿と同型の問いかけ（アンケート）。20:00 のみ商品。
 SLOT_LABELS: Tuple[str, ...] = (
-    "08:00",  # 0: 共働きリアル苦悩（再利用優先）
-    "15:00",  # 1: どうでもいい雑談
+    "08:00",  # 0: アンケート（問いかけ雑談）
+    "15:00",  # 1: アンケート（問いかけ雑談）
     "20:00",  # 2: 商品紹介（答え合わせ型）
 )
 POSTS_PER_DAY = len(SLOT_LABELS)
@@ -427,28 +427,32 @@ ITEM_SLOTS: Tuple[int, ...] = (2,)
 # 時短専用枠は当面停止（timesave 悩みは通常ローテ側で扱う）。
 TIMESAVE_ITEM_SLOTS: Tuple[int, ...] = ()
 
-# ランキングダイジェストは一旦停止（共感つぶやき優先）。
+# ランキングダイジェストは一旦停止。
 DIGEST_SLOTS: Tuple[int, ...] = ()
 
-# 静的な価値投稿（value_posts.py）。
+# 価値投稿枠（リンクなし）。中身は ASK_CHITCHAT_SLOTS でアンケートに寄せる。
 VALUE_SLOTS: Tuple[int, ...] = (0, 1)
 
-# 共働きリアル苦悩（共感つぶやき）。
-STRUGGLE_SLOTS: Tuple[int, ...] = (0,)
+# 共働きリアル苦悩は当面停止（アンケート優先）。
+STRUGGLE_SLOTS: Tuple[int, ...] = ()
 
-# テーマ無関係のどうでもいい雑談（中の人が人間に見えるためのブレ）。
-CHITCHAT_SLOTS: Tuple[int, ...] = (1,)
-# 雑談プール（自動補充先）。一度投稿したら台帳で消費し再利用しない。
+# 旧どうでもいい雑談枠は停止（アンケートに統合）。
+CHITCHAT_SLOTS: Tuple[int, ...] = ()
 CHITCHAT_POOL_PATH = DATA_DIR / "chitchat_pool.json"
 CHITCHAT_MIN_UNUSED = 6
 CHITCHAT_REFILL_COUNT = 10
 
-# 伸びた価値投稿の再利用（参考: 3日に1回）。
-# REUSE_SLOTS では通常ローテより再利用キューを優先する。
+# アンケート（問いかけ）枠。アイス投稿と同型。季節 + 軽いトレンド。商品・PRなし。
+ASK_CHITCHAT_SLOTS: Tuple[int, ...] = (0, 1)
+ASK_CHITCHAT_POOL_PATH = DATA_DIR / "ask_chitchat_pool.json"
+TREND_SEEDS_PATH = DATA_DIR / "trend_seeds.json"
+ASK_CHITCHAT_MIN_UNUSED = 6
+ASK_CHITCHAT_REFILL_COUNT = 10
+
+# 伸びた価値投稿の再利用。アンケートは一度きりなので枠は空。
 REUSE_INTERVAL_DAYS = 3
-REUSE_SLOTS: Tuple[int, ...] = (0,)  # 08:00 苦悩枠で再利用
+REUSE_SLOTS: Tuple[int, ...] = ()
 REUSE_PATH = DATA_DIR / "reuse.json"
-# Insights 連携時、この views 以上を「伸びた」とみなして優先度を上げる
 REUSE_WINNER_MIN_VIEWS = 500
 
 # 楽天 API エンドポイント（2025年以降の新仕様）

@@ -441,7 +441,7 @@ def record_value_post(
         {
             "item_code": f"value:{value_id}",
             "item_name": f"価値投稿 {value_id}",
-            "kind": "chitchat" if _is_chitchat(value_id) else "value",
+            "kind": _value_kind(value_id),
             "slot": slot,
             "posted_on": posted_on,
             "threads_post_ids": threads_post_ids,
@@ -449,8 +449,8 @@ def record_value_post(
         }
     )
     save_ledger(entries, ledger_path)
-    # 雑談は一度きり。再利用キューに載せない。
-    if _is_chitchat(value_id):
+    # 雑談・アンケートは一度きり。再利用キューに載せない。
+    if _is_oneshot(value_id):
         return
     try:
         from reuse import register_value_post
@@ -464,6 +464,28 @@ def record_value_post(
     except Exception:
         # キュー更新失敗で投稿自体は落とさない
         pass
+
+
+def _value_kind(value_id: str) -> str:
+    try:
+        from value_posts import is_ask_chitchat_id, is_chitchat_id
+
+        if is_ask_chitchat_id(value_id):
+            return "ask-chitchat"
+        if is_chitchat_id(value_id):
+            return "chitchat"
+    except Exception:
+        pass
+    return "value"
+
+
+def _is_oneshot(value_id: str) -> bool:
+    try:
+        from value_posts import is_oneshot_value_id
+
+        return is_oneshot_value_id(value_id)
+    except Exception:
+        return value_id.startswith(("ask-", "chat-auto-", "chat-summer-"))
 
 
 def _is_chitchat(value_id: str) -> bool:

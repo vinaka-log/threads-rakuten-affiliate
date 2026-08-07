@@ -110,9 +110,9 @@ class ItemCopyStructureTests(unittest.TestCase):
     def test_one_item_slot_per_day(self) -> None:
         self.assertEqual(config.POSTS_PER_DAY, 3)
         self.assertEqual(config.ITEM_SLOTS, (2,))
-        self.assertEqual(config.TIMESAVE_ITEM_SLOTS, ())
-        self.assertEqual(config.STRUGGLE_SLOTS, (0,))
-        self.assertEqual(config.CHITCHAT_SLOTS, (1,))
+        self.assertEqual(config.ASK_CHITCHAT_SLOTS, (0, 1))
+        self.assertEqual(config.STRUGGLE_SLOTS, ())
+        self.assertEqual(config.CHITCHAT_SLOTS, ())
         self.assertNotIn(2, config.VALUE_SLOTS)
 
     def test_wrap_rejects_holder_gadgets(self) -> None:
