@@ -53,7 +53,7 @@ class PrDisclosureTests(unittest.TestCase):
         pick = PickResult(
             item=item,
             genre=config.GENRES[0],
-            slot=7,
+            slot=2,
             posted_on="2026-08-06",
             pain=pain,
         )

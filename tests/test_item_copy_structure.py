@@ -45,7 +45,7 @@ def _pick(**kwargs) -> PickResult:
     return PickResult(
         item=item,
         genre=config.GENRES[0],
-        slot=7,
+        slot=2,
         posted_on="2026-08-06",
         pain=pain,
     )
@@ -108,11 +108,12 @@ class ItemCopyStructureTests(unittest.TestCase):
         self.assertEqual(fixed, [])
 
     def test_one_item_slot_per_day(self) -> None:
-        self.assertEqual(config.ITEM_SLOTS, (7,))
+        self.assertEqual(config.POSTS_PER_DAY, 3)
+        self.assertEqual(config.ITEM_SLOTS, (2,))
         self.assertEqual(config.TIMESAVE_ITEM_SLOTS, ())
-        self.assertIn(5, config.STRUGGLE_SLOTS)
-        self.assertIn(6, config.STRUGGLE_SLOTS)
-        self.assertNotIn(7, config.VALUE_SLOTS)
+        self.assertEqual(config.STRUGGLE_SLOTS, (0,))
+        self.assertEqual(config.CHITCHAT_SLOTS, (1,))
+        self.assertNotIn(2, config.VALUE_SLOTS)
 
     def test_wrap_rejects_holder_gadgets(self) -> None:
         pain = next(p for p in config.PAIN_INTENTS if p.id == "wrap")

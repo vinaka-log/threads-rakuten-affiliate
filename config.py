@@ -412,25 +412,18 @@ def timesave_pain_intents() -> Tuple[PainIntent, ...]:
 # 商品投稿に楽天の商品画像を付ける（⑥）
 ATTACH_ITEM_IMAGE = True
 
-# 日内枠（JST）。1日10投稿 = 共感7 + 雑談2 + 商品紹介1。
-# PR投稿はアルゴ上リーチが落ちやすいので、当面はゴールデン帯に1本だけ。
-# 時短消耗品は通常ローテに混ぜる（専用枠は一旦停止）。
+# 日内枠（JST）。1日3投稿 = 共感1 + 雑談1 + 商品紹介1。
+# GitHub Actions 無料枠（月2000分）節約のため、投稿密度を抑える。
+# PRはアルゴ上リーチが落ちやすいのでゴールデン帯に1本だけ。
 SLOT_LABELS: Tuple[str, ...] = (
-    "07:00",  # 0: 共働きリアル苦悩
-    "08:00",  # 1: どうでもいい雑談
-    "12:00",  # 2: 共働きリアル苦悩
-    "15:00",  # 3: どうでもいい雑談
-    "17:00",  # 4: 共働きリアル苦悩（再利用優先）
-    "18:00",  # 5: 共働きリアル苦悩
-    "19:00",  # 6: 共働きリアル苦悩
-    "20:00",  # 7: 商品紹介（1本のみ・ゴールデン）
-    "21:00",  # 8: 共働きリアル苦悩
-    "22:00",  # 9: 共働きリアル苦悩
+    "08:00",  # 0: 共働きリアル苦悩（再利用優先）
+    "15:00",  # 1: どうでもいい雑談
+    "20:00",  # 2: 商品紹介（答え合わせ型）
 )
 POSTS_PER_DAY = len(SLOT_LABELS)
 
-# 商品紹介は1日1本（20:00）。リーチ回復を優先。
-ITEM_SLOTS: Tuple[int, ...] = (7,)
+# 商品紹介は1日1本（20:00）。
+ITEM_SLOTS: Tuple[int, ...] = (2,)
 # 時短専用枠は当面停止（timesave 悩みは通常ローテ側で扱う）。
 TIMESAVE_ITEM_SLOTS: Tuple[int, ...] = ()
 
@@ -438,13 +431,13 @@ TIMESAVE_ITEM_SLOTS: Tuple[int, ...] = ()
 DIGEST_SLOTS: Tuple[int, ...] = ()
 
 # 静的な価値投稿（value_posts.py）。
-VALUE_SLOTS: Tuple[int, ...] = (0, 1, 2, 3, 4, 5, 6, 8, 9)
+VALUE_SLOTS: Tuple[int, ...] = (0, 1)
 
 # 共働きリアル苦悩（共感つぶやき）。
-STRUGGLE_SLOTS: Tuple[int, ...] = (0, 2, 4, 5, 6, 8, 9)
+STRUGGLE_SLOTS: Tuple[int, ...] = (0,)
 
 # テーマ無関係のどうでもいい雑談（中の人が人間に見えるためのブレ）。
-CHITCHAT_SLOTS: Tuple[int, ...] = (1, 3)
+CHITCHAT_SLOTS: Tuple[int, ...] = (1,)
 # 雑談プール（自動補充先）。一度投稿したら台帳で消費し再利用しない。
 CHITCHAT_POOL_PATH = DATA_DIR / "chitchat_pool.json"
 CHITCHAT_MIN_UNUSED = 6
@@ -453,7 +446,7 @@ CHITCHAT_REFILL_COUNT = 10
 # 伸びた価値投稿の再利用（参考: 3日に1回）。
 # REUSE_SLOTS では通常ローテより再利用キューを優先する。
 REUSE_INTERVAL_DAYS = 3
-REUSE_SLOTS: Tuple[int, ...] = (4,)  # 17:00 帰宅帯（苦悩枠でも伸びた投稿を再利用）
+REUSE_SLOTS: Tuple[int, ...] = (0,)  # 08:00 苦悩枠で再利用
 REUSE_PATH = DATA_DIR / "reuse.json"
 # Insights 連携時、この views 以上を「伸びた」とみなして優先度を上げる
 REUSE_WINNER_MIN_VIEWS = 500

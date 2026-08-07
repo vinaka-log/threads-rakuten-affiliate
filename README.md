@@ -5,13 +5,12 @@
 **ペルソナ A（固定）**: 共働き〜子育て世帯の「家庭の消耗品・時短買い」担当向け。  
 日用品 / キッチンに絞り、悩みキーワード（洗剤切れ・水が重い等）で商品を選ぶ。美容・ファッション・ガジェット総合は扱わない。
 
-- スケジュール: **毎日10投稿 JST**（共感7 : 雑談2 : 商品紹介1）
-  - **共働きリアル苦悩 7本**: 生活実感・あるある吐露
-  - **どうでもいい雑談 2本**: テーマ無関係（中の人が人間に見えるためのブレ）
-  - **商品紹介 1本（20:00のみ）**: 本投稿は商品名なし＋問いかけ。自分リプで答え合わせ（商品名＋アフィURL＋`※PR`）
-  - ランキングダイジェストは一旦停止
-  - 17:00 は再利用キュー優先
-  - ※ PRはリーチが落ちやすいため、当面は1日1本に抑制
+- スケジュール: **毎日3投稿 JST**（共感1 : 雑談1 : 商品紹介1）※ Actions無料枠節約
+  - **共働きリアル苦悩 1本（08:00）**: 生活実感・あるある吐露（再利用優先）
+  - **どうでもいい雑談 1本（15:00）**: テーマ無関係（中の人が人間に見えるためのブレ）
+  - **商品紹介 1本（20:00）**: 本投稿は商品名なし＋問いかけ。自分リプで答え合わせ（商品名＋アフィURL＋`※PR`）
+  - ランキングダイジェストは停止
+  - ※ 旧10投稿/日から削減（月2000分の Actions 枠対策）
 - 重複防止: `data/posted.json`（直近30日は同一 `itemCode` を再投稿しない）
 - rank帯ローテ: 偶数日=1〜10位 / 奇数日=11〜30位（競合アカウントとの商品被りを回避）
 - 送料: 送料込（postageFlag）を優先。送料別は候補が送料込だけのときは採用しない
@@ -147,18 +146,17 @@ PYTHONPATH=src:. python src/post.py --dry-run --slot 0
 PYTHONPATH=src:. python src/post.py --list-genres
 PYTHONPATH=src:. python src/post.py --dry-run --genre 100939
 
-# 価値投稿（slot 0 / 2 / 4 / 8 は自動で価値投稿になる。楽天 env 不要）
+# 価値投稿（slot 0 / 1。楽天 env 不要）
 PYTHONPATH=src:. python src/post.py --dry-run --slot 0
 PYTHONPATH=src:. python src/post.py --dry-run --value --value-id marathon-basics
 
-# 再利用枠（slot 4=17:00）。期限到来の候補があれば優先
-PYTHONPATH=src:. python src/post.py --dry-run --slot 4
+# 再利用枠（slot 0=08:00）。期限到来の候補があれば優先
+PYTHONPATH=src:. python src/post.py --dry-run --slot 0
 PYTHONPATH=src:. python src/post.py --list-reuse
 PYTHONPATH=src:. python src/post.py --mark-reuse stock-buy
 
-# ランキングダイジェスト（slot 3/5/6/9。楽天 env 必要）
-PYTHONPATH=src:. python src/post.py --dry-run --slot 3
-PYTHONPATH=src:. python src/post.py --dry-run --digest --digest-format quiz
+# 商品紹介（slot 2=20:00。楽天 env 必要）
+PYTHONPATH=src:. python src/post.py --dry-run --slot 2
 
 # 本番投稿（要 Threads env）
 export THREADS_ACCESS_TOKEN=...
@@ -170,16 +168,9 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 | slot | 時刻(JST) | 内容 |
 |------|-----------|------|
-| 0 | 07:00 | **共働きリアル苦悩** |
-| 1 | 08:00 | **どうでもいい雑談** |
-| 2 | 12:00 | **共働きリアル苦悩** |
-| 3 | 15:00 | **どうでもいい雑談** |
-| 4 | 17:00 | **共働きリアル苦悩**（再利用優先） |
-| 5 | 18:00 | **共働きリアル苦悩** |
-| 6 | 19:00 | **共働きリアル苦悩** |
-| 7 | 20:00 | **商品紹介**（1日1本・答え合わせ型） |
-| 8 | 21:00 | **共働きリアル苦悩** |
-| 9 | 22:00 | **共働きリアル苦悩** |
+| 0 | 08:00 | **共働きリアル苦悩**（再利用優先） |
+| 1 | 15:00 | **どうでもいい雑談** |
+| 2 | 20:00 | **商品紹介**（答え合わせ型） |
 
 枠の種別は `config.py` の `ITEM_SLOTS` / `TIMESAVE_ITEM_SLOTS` / `DIGEST_SLOTS` / `VALUE_SLOTS` / `STRUGGLE_SLOTS` / `CHITCHAT_SLOTS` で変更できます。CLI では `--item` / `--value` / `--digest` で種別を強制、`--value-id` や `--digest-format`（top3 / quiz / sleeper）で内容を指定できます。
 
@@ -204,7 +195,7 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 ## 投稿フォーマット
 
-### 商品紹介（slot 7 = 20:00・1日1本）
+### 商品紹介（slot 2 = 20:00）
 
 1. **本投稿** … URLなし・**商品名なし**（目安〜120字）。痛み → 短い共感 → **返信を誘う問い**。価格・レビューも出さない
 2. **自分リプ** … `正体はこれ。` + 商品名 → 正直な注意点 → 価格・レビュー → 送料短文 → `▼商品はこちら` + URL → `※PR（アフィリエイトリンク）`

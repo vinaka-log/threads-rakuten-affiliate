@@ -252,9 +252,9 @@ class PickerFilterTests(unittest.TestCase):
         from picker import pain_for_slot
 
         self.assertEqual(config.TIMESAVE_ITEM_SLOTS, ())
-        self.assertEqual(config.ITEM_SLOTS, (7,))
+        self.assertEqual(config.ITEM_SLOTS, (2,))
         on = date(2026, 8, 3)
-        pain = pain_for_slot(7, on)
+        pain = pain_for_slot(2, on)
         # all_pain_intents ローテに時短専用も含む
         self.assertIn(pain.id, {p.id for p in config.all_pain_intents()})
 
@@ -284,7 +284,7 @@ class PickerFilterTests(unittest.TestCase):
         from datetime import date
         from picker import pain_for_slot
 
-        ids = [pain_for_slot(7, date(2026, 8, d)).id for d in range(1, 12)]
+        ids = [pain_for_slot(2, date(2026, 8, d)).id for d in range(1, 12)]
         self.assertGreaterEqual(len(set(ids)), 5)
 
 
