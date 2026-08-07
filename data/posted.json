@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-07T17:45:32+09:00",
+  "updated_at": "2026-08-07T18:52:25+09:00",
   "entries": [
     {
       "item_code": "value:struggle-morning-rush-food",
@@ -66,6 +66,22 @@
         "18097656827005267"
       ],
       "reused": true
+    },
+    {
+      "item_code": "mk-mart2:10000705",
+      "item_name": "フィニッシュ タブレット 150 食洗機 洗剤 食洗機用洗剤 食洗機洗剤 食洗機洗剤フィニッシュ パワーキューブ 150個 1袋 タブレット洗剤 食洗器 業務用 セット Finish 食洗器洗剤 150 凝縮キューブ 送料無料",
+      "genre_id": "551167",
+      "genre_label": "キッチン用品・食器・調理器具",
+      "slot": 5,
+      "posted_on": "2026-08-07",
+      "threads_post_ids": [
+        "18193166002377301",
+        "18088824137648847"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00udivn.x8u2ba57.g00udivn.x8u2c1eb/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmk-mart2%2Ffinish-150%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmk-mart2%2Fi%2F10000705%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "dishwasher-tab",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/mk-mart2/cabinet/imgrc0134616185.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-delivery-dinner",
