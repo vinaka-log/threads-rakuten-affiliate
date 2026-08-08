@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-08T14:34:58+09:00",
+  "updated_at": "2026-08-08T16:39:57+09:00",
   "entries": [
     {
       "item_code": "value:struggle-receipt-stack",
@@ -61,6 +61,23 @@
         "18104759297602868"
       ],
       "reused": false
+    },
+    {
+      "item_code": "yamatoya-d:10000209",
+      "item_name": "最短翌日 ダスキンスポンジ カラー モノトーン 6個セット キッチン 台所用 抗菌 送料無料 プレゼント 母の日 ポイント消費 ハードタイプ ダスキン スポンジ ポイント消化 送料無 ダスキンのスポンジ ダスキンスポンジ送料無料 3個入り ダスキン食器洗いスポンジ 食器用",
+      "genre_id": "551167",
+      "genre_label": "キッチン用品・食器・調理器具",
+      "slot": 5,
+      "posted_on": "2026-08-08",
+      "threads_post_ids": [
+        "17978807238102915",
+        "18106530449465053",
+        "18066791972495463"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00u5q5n.x8u2b7cf.g00u5q5n.x8u2cdf3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyamatoya-d%2Fdus-spo6-new-cm%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fyamatoya-d%2Fi%2F10000209%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "dish-sponge",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/yamatoya-d/cabinet/09731461/2-cm.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-morning-rush-food",
