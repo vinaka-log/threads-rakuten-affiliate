@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-08T18:27:24+09:00",
+  "updated_at": "2026-08-08T20:01:46+09:00",
   "entries": [
     {
       "item_code": "value:struggle-receipt-stack",
@@ -87,6 +87,17 @@
       "posted_on": "2026-08-08",
       "threads_post_ids": [
         "18100695362260519"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-c2f828f32f",
+      "item_name": "価値投稿 ask-c2f828f32f",
+      "kind": "ask-chitchat",
+      "slot": 7,
+      "posted_on": "2026-08-08",
+      "threads_post_ids": [
+        "17962736319158836"
       ],
       "reused": false
     },
