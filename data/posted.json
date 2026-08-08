@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-08T11:41:24+09:00",
+  "updated_at": "2026-08-08T13:35:14+09:00",
   "entries": [
     {
       "item_code": "value:struggle-receipt-stack",
@@ -39,6 +39,17 @@
       "rank": null,
       "pain_id": "dish-sponge",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/pia-konodai/cabinet/09168499/mm_sam_2604.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-fb33e24c29",
+      "item_name": "価値投稿 ask-fb33e24c29",
+      "kind": "ask-chitchat",
+      "slot": 3,
+      "posted_on": "2026-08-08",
+      "threads_post_ids": [
+        "18145330645531913"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-morning-rush-food",
