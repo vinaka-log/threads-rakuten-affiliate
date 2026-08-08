@@ -430,6 +430,13 @@ CHITCHAT_POOL_PATH = DATA_DIR / "chitchat_pool.json"
 CHITCHAT_MIN_UNUSED = 6
 CHITCHAT_REFILL_COUNT = 10
 
+# 問いかけ型雑談（伸びたアイス投稿と同系統）。通常枠とは別に 11:00 / 16:00 で追加投稿。
+# 季節ネタ + 軽いトレンド/ニュース見出し（RSS）を混ぜる。商品・PRなし。
+ASK_CHITCHAT_POOL_PATH = DATA_DIR / "ask_chitchat_pool.json"
+TREND_SEEDS_PATH = DATA_DIR / "trend_seeds.json"
+ASK_CHITCHAT_MIN_UNUSED = 6
+ASK_CHITCHAT_REFILL_COUNT = 10
+
 # 伸びた価値投稿の再利用（参考: 3日に1回）。
 # REUSE_SLOTS では通常ローテより再利用キューを優先する。
 REUSE_INTERVAL_DAYS = 3
