@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-08T21:36:04+09:00",
+  "updated_at": "2026-08-08T22:46:50+09:00",
   "entries": [
     {
       "item_code": "value:struggle-receipt-stack",
@@ -111,6 +111,23 @@
         "17907291249285832"
       ],
       "reused": false
+    },
+    {
+      "item_code": "rakuten24:10928453",
+      "item_name": "特大100回分 フィニッシュ 凝縮 パワーキューブ 食洗機用 タブレット洗剤 L(100個入)【フィニッシュ】",
+      "genre_id": "551167",
+      "genre_label": "キッチン用品・食器・調理器具",
+      "slot": 9,
+      "posted_on": "2026-08-08",
+      "threads_post_ids": [
+        "17896379736568475",
+        "17902116282334561",
+        "18332849350282257"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00r136n.x8u2bf50.g00r136n.x8u2c6a7/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4906156500776%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F10928453%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "dishwasher-tab",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24/cabinet/776/4906156500776.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-morning-rush-food",
