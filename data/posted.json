@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-08T16:39:57+09:00",
+  "updated_at": "2026-08-08T18:27:24+09:00",
   "entries": [
     {
       "item_code": "value:struggle-receipt-stack",
@@ -78,6 +78,17 @@
       "rank": null,
       "pain_id": "dish-sponge",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/yamatoya-d/cabinet/09731461/2-cm.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-chihiro-detergent",
+      "item_name": "価値投稿 ogiri-chihiro-detergent",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-08-08",
+      "threads_post_ids": [
+        "18100695362260519"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-morning-rush-food",
