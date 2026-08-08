@@ -5,11 +5,12 @@
 **ペルソナ A（固定）**: 共働き〜子育て世帯の「家庭の消耗品・時短買い」担当向け。  
 日用品 / キッチンに絞り、悩みキーワード（洗剤切れ・水が重い等）で商品を選ぶ。美容・ファッション・ガジェット総合は扱わない。
 
-- スケジュール: **毎日3投稿 JST**（公式4択アンケート2 : 商品紹介1）※ Actions無料枠節約
-  - **アンケート 2本（08:00 / 15:00）**: Threads標準の4択ポール。季節＋軽いトレンド。商品・PRなし
-  - **商品紹介 1本（20:00）**: 本投稿は商品名なし＋問いかけ。自分リプで答え合わせ（商品名＋アフィURL＋`※PR`）
+- スケジュール: **毎日10投稿 JST**（repo は public のため Actions 枠は消費しない）
+  - **アンケート 3本（08:00 / 12:30 / 19:30）**: Threads標準の4択ポール。季節＋軽いトレンド。商品・PRなし
+  - **雑談 3本（09:30 / 14:00 / 21:00）**: テーマ無関係の一度きり雑談
+  - **ジブリ大喜利 2本（11:00 / 18:00）**: 公式場面写真＋買い足しあるある（URL・PRなし）
+  - **商品紹介 2本（16:00 / 22:00）**: 本投稿は商品名なし＋問いかけ。自分リプで答え合わせ（商品名＋アフィURL＋`※PR`）
   - ランキングダイジェストは停止
-  - ※ 旧10投稿/日から削減（月2000分の Actions 枠対策）
 - 重複防止: `data/posted.json`（直近30日は同一 `itemCode` を再投稿しない）
 - rank帯ローテ: 偶数日=1〜10位 / 奇数日=11〜30位（競合アカウントとの商品被りを回避）
 - 送料: 送料込（postageFlag）を優先。送料別は候補が送料込だけのときは採用しない
@@ -126,7 +127,7 @@ Repo → **Settings → Secrets and variables → Actions**:
 1. Actions → **Threads Rakuten daily post** → **Run workflow**
 2. まず `dry_run = true` で本文ログを確認
 3. 問題なければ `dry_run = false` で1回投稿
-4. 以降は毎日3回のスケジュールに任せる
+4. 以降は毎日10回のスケジュールに任せる
 
 ## ローカル
 
@@ -145,12 +146,13 @@ PYTHONPATH=src:. python src/post.py --dry-run --slot 0
 PYTHONPATH=src:. python src/post.py --list-genres
 PYTHONPATH=src:. python src/post.py --dry-run --genre 100939
 
-# 価値投稿 / アンケート（slot 0 / 1。楽天 env 不要）
+# アンケート / 雑談 / 大喜利（楽天 env 不要）
 PYTHONPATH=src:. python src/post.py --dry-run --slot 0
 PYTHONPATH=src:. python src/post.py --dry-run --slot 1
-
-# 商品紹介（slot 2=20:00。楽天 env 必要）
 PYTHONPATH=src:. python src/post.py --dry-run --slot 2
+
+# 商品紹介（slot 5 / 9。楽天 env 必要）
+PYTHONPATH=src:. python src/post.py --dry-run --slot 5
 PYTHONPATH=src:. python src/post.py --list-reuse
 PYTHONPATH=src:. python src/post.py --mark-reuse stock-buy
 
@@ -164,11 +166,18 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 | slot | 時刻(JST) | 内容 |
 |------|-----------|------|
-| 0 | 08:00 | **公式4択アンケート**（季節/トレンド） |
-| 1 | 15:00 | **公式4択アンケート**（季節/トレンド） |
-| 2 | 20:00 | **商品紹介**（答え合わせ型） |
+| 0 | 08:00 | **公式4択アンケート** |
+| 1 | 09:30 | **雑談** |
+| 2 | 11:00 | **ジブリ大喜利** |
+| 3 | 12:30 | **公式4択アンケート** |
+| 4 | 14:00 | **雑談** |
+| 5 | 16:00 | **商品紹介** |
+| 6 | 18:00 | **ジブリ大喜利** |
+| 7 | 19:30 | **公式4択アンケート** |
+| 8 | 21:00 | **雑談** |
+| 9 | 22:00 | **商品紹介** |
 
-枠の種別は `config.py` の `ITEM_SLOTS` / `TIMESAVE_ITEM_SLOTS` / `DIGEST_SLOTS` / `VALUE_SLOTS` / `STRUGGLE_SLOTS` / `CHITCHAT_SLOTS` で変更できます。CLI では `--item` / `--value` / `--digest` で種別を強制、`--value-id` や `--digest-format`（top3 / quiz / sleeper）で内容を指定できます。
+枠の種別は `config.py` の `ITEM_SLOTS` / `OGIRI_SLOTS` / `TIMESAVE_ITEM_SLOTS` / `DIGEST_SLOTS` / `VALUE_SLOTS` / `STRUGGLE_SLOTS` / `CHITCHAT_SLOTS` / `ASK_CHITCHAT_SLOTS` で変更できます。CLI では `--item` / `--value` / `--ogiri` / `--digest` で種別を強制、`--value-id` や `--digest-format`（top3 / quiz / sleeper）で内容を指定できます。
 
 ジャンルは `config.py` の `GENRES` を日付×slot でローテします。ペルソナ A の主戦場:
 
@@ -191,7 +200,7 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 ## 投稿フォーマット
 
-### 商品紹介（slot 2 = 20:00）
+### 商品紹介（slot 5 / 9 = 16:00 / 22:00）
 
 1. **本投稿** … URLなし・**商品名なし**（目安〜120字）。痛み → 短い共感 → **返信を誘う問い**。価格・レビューも出さない
 2. **自分リプ** … `正体はこれ。` + 商品名 → 正直な注意点 → 価格・レビュー → 送料短文 → `▼商品はこちら` + URL → `※PR（アフィリエイトリンク）`
@@ -205,12 +214,14 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 現状は枠を停止中（`DIGEST_SLOTS` 空）。再開する場合は `config.py` で枠を戻す。形式は `top3` / `quiz` / `sleeper`。
 
-### 価値投稿（slot 0 / 1 = 公式4択アンケート）
+### 価値投稿（アンケート / 雑談 / 大喜利）
 
 Threads API の `poll_attachment`（option_a〜d、各25字以内）を使ったネイティブ投票。
 
-- **slot 0 / 1（08:00 / 15:00）**: 短い質問文 + 4択。`data/ask_chitchat_pool.json` から一度きり消費し、減ったら自動補充
-- 商品・PR・外部リンクなし。重い事件・政治ネタは除外
+- **アンケート（08:00 / 12:30 / 19:30）**: 短い質問文 + 4択。`data/ask_chitchat_pool.json` から一度きり消費し、減ったら自動補充
+- **雑談（09:30 / 14:00 / 21:00）**: テーマ無関係の一度きり雑談。`data/chitchat_pool.json`
+- **ジブリ大喜利（11:00 / 18:00）**: 公式場面写真＋買い足しあるある。URL・PRなし
+- 商品・PR・外部リンクなし（商品枠以外）。重い事件・政治ネタは除外
 - 投票UIが使えない場合はテキスト投稿へフォールバック（警告ログ）
 
 例:

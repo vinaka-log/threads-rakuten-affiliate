@@ -767,6 +767,7 @@ def _non_tip_slots() -> tuple[int, ...]:
         tuple(config.STRUGGLE_SLOTS)
         + tuple(getattr(config, "CHITCHAT_SLOTS", ()) or ())
         + tuple(getattr(config, "ASK_CHITCHAT_SLOTS", ()) or ())
+        + tuple(getattr(config, "OGIRI_SLOTS", ()) or ())
     )
 
 
@@ -876,7 +877,11 @@ def is_ask_chitchat_id(value_id: str) -> bool:
 
 def is_oneshot_value_id(value_id: str) -> bool:
     """一度きり投稿（再利用キュー禁止）。"""
-    return is_chitchat_id(value_id) or is_ask_chitchat_id(value_id)
+    return (
+        is_chitchat_id(value_id)
+        or is_ask_chitchat_id(value_id)
+        or value_id.startswith("ogiri-")
+    )
 
 
 def _find(value_id: str) -> ValuePost:

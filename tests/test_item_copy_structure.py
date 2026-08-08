@@ -108,12 +108,14 @@ class ItemCopyStructureTests(unittest.TestCase):
         self.assertEqual(fixed, [])
 
     def test_one_item_slot_per_day(self) -> None:
-        self.assertEqual(config.POSTS_PER_DAY, 3)
-        self.assertEqual(config.ITEM_SLOTS, (2,))
-        self.assertEqual(config.ASK_CHITCHAT_SLOTS, (0, 1))
+        self.assertEqual(config.POSTS_PER_DAY, 10)
+        self.assertEqual(config.ITEM_SLOTS, (5, 9))
+        self.assertEqual(config.ASK_CHITCHAT_SLOTS, (0, 3, 7))
+        self.assertEqual(config.CHITCHAT_SLOTS, (1, 4, 8))
+        self.assertEqual(config.OGIRI_SLOTS, (2, 6))
         self.assertEqual(config.STRUGGLE_SLOTS, ())
-        self.assertEqual(config.CHITCHAT_SLOTS, ())
-        self.assertNotIn(2, config.VALUE_SLOTS)
+        self.assertNotIn(5, config.VALUE_SLOTS)
+        self.assertNotIn(9, config.VALUE_SLOTS)
 
     def test_wrap_rejects_holder_gadgets(self) -> None:
         pain = next(p for p in config.PAIN_INTENTS if p.id == "wrap")

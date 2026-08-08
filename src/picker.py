@@ -467,6 +467,8 @@ def record_value_post(
 
 
 def _value_kind(value_id: str) -> str:
+    if value_id.startswith("ogiri-"):
+        return "ogiri"
     try:
         from value_posts import is_ask_chitchat_id, is_chitchat_id
 
@@ -485,7 +487,7 @@ def _is_oneshot(value_id: str) -> bool:
 
         return is_oneshot_value_id(value_id)
     except Exception:
-        return value_id.startswith(("ask-", "chat-auto-", "chat-summer-"))
+        return value_id.startswith(("ask-", "chat-auto-", "chat-summer-", "ogiri-"))
 
 
 def _is_chitchat(value_id: str) -> bool:

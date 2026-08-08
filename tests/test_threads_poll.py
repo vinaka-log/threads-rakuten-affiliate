@@ -61,8 +61,8 @@ class NativePollAskTests(unittest.TestCase):
             self.assertNotIn("http", row["text"].lower())
 
     def test_slots_compose_with_poll(self) -> None:
-        self.assertEqual(config.ASK_CHITCHAT_SLOTS, (0, 1))
-        for slot in (0, 1):
+        self.assertEqual(config.ASK_CHITCHAT_SLOTS, (0, 3, 7))
+        for slot in (0, 3, 7):
             composed = compose_value(date(2026, 8, 7), slot)
             self.assertTrue(composed.item_code.startswith("value:ask-"))
             self.assertEqual(len(composed.poll_options), 4)

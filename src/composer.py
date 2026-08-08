@@ -32,6 +32,7 @@ class ComposedPost:
     genre_id: str
     template_id: str
     poll_options: List[str] = field(default_factory=list)
+    image_url: str = ""
 
 
 # 本投稿テンプレ（競合調査ベース）:
@@ -315,6 +316,28 @@ def compose_digest(client, on: date, slot: int, *, fmt: str | None = None) -> Co
         item_code=f"digest:{fmt}:{genre.id}",
         genre_id=genre.id,
         template_id=f"digest-{fmt}",
+    )
+
+
+def compose_ogiri(on: date, slot: int = 0) -> ComposedPost:
+    """ジブリ大喜利（画像＋短文・リンクなし）。"""
+    from ogiri_posts import pick_ogiri
+
+    row = pick_ogiri(on=on, slot=slot)
+    text = _truncate(str(row.get("text") or ""))
+    image_url = str(row.get("image_url") or "").strip()
+    pid = str(row.get("id") or "").strip() or "ogiri-unknown"
+    if not text:
+        raise ValueError("大喜利本文が空です")
+    if not image_url:
+        raise ValueError(f"大喜利画像がありません id={pid}")
+    _validate_generic([text])
+    return ComposedPost(
+        texts=[text],
+        item_code=f"value:{pid}",
+        genre_id="",
+        template_id=f"ogiri-{pid}",
+        image_url=image_url,
     )
 
 

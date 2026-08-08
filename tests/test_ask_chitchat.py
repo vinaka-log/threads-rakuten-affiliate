@@ -125,8 +125,8 @@ class AskSlotsWiringTests(unittest.TestCase):
         from composer import compose_value
         from value_posts import is_ask_chitchat_id
 
-        self.assertEqual(config.ASK_CHITCHAT_SLOTS, (0, 1))
-        for slot in (0, 1):
+        self.assertEqual(config.ASK_CHITCHAT_SLOTS, (0, 3, 7))
+        for slot in (0, 3, 7):
             composed = compose_value(date(2026, 8, 7), slot)
             self.assertTrue(is_ask_chitchat_id(composed.item_code.split(":", 1)[1]))
             self.assertEqual(len(composed.poll_options), 4)

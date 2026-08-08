@@ -247,14 +247,14 @@ class PickerFilterTests(unittest.TestCase):
         self.assertEqual([i.item_code for i in filtered], ["det:free"])
 
     def test_timesave_slot_optional(self) -> None:
-        """時短専用枠が空でも通常1枠で運用できる。"""
+        """時短専用枠が空でも通常商品枠で運用できる。"""
         from datetime import date
         from picker import pain_for_slot
 
         self.assertEqual(config.TIMESAVE_ITEM_SLOTS, ())
-        self.assertEqual(config.ITEM_SLOTS, (2,))
+        self.assertEqual(config.ITEM_SLOTS, (5, 9))
         on = date(2026, 8, 3)
-        pain = pain_for_slot(2, on)
+        pain = pain_for_slot(5, on)
         # all_pain_intents ローテに時短専用も含む
         self.assertIn(pain.id, {p.id for p in config.all_pain_intents()})
 
@@ -280,11 +280,11 @@ class PickerFilterTests(unittest.TestCase):
         self.assertFalse(_matches_pain(body, pain))
 
     def test_single_item_slot_rotates_across_days(self) -> None:
-        """商品1枠でも日付で悩みが回る。"""
+        """商品枠でも日付で悩みが回る。"""
         from datetime import date
         from picker import pain_for_slot
 
-        ids = [pain_for_slot(2, date(2026, 8, d)).id for d in range(1, 12)]
+        ids = [pain_for_slot(5, date(2026, 8, d)).id for d in range(1, 12)]
         self.assertGreaterEqual(len(set(ids)), 5)
 
 

@@ -412,38 +412,47 @@ def timesave_pain_intents() -> Tuple[PainIntent, ...]:
 # 商品投稿に楽天の商品画像を付ける（⑥）
 ATTACH_ITEM_IMAGE = True
 
-# 日内枠（JST）。1日3投稿 = アンケート2 + 商品紹介1。
-# GitHub Actions 無料枠（月2000分）節約のため、投稿密度を抑える。
-# 08:00 / 15:00 はアイス投稿と同型の問いかけ（アンケート）。20:00 のみ商品。
+# 日内枠（JST）。1日10投稿 = アンケート3 + 雑談3 + ジブリ大喜利2 + 商品紹介2。
+# repo は public のため Actions 枠は消費しない。ずらし複数 cron は使わない。
 SLOT_LABELS: Tuple[str, ...] = (
-    "08:00",  # 0: アンケート（問いかけ雑談）
-    "15:00",  # 1: アンケート（問いかけ雑談）
-    "20:00",  # 2: 商品紹介（答え合わせ型）
+    "08:00",  # 0: アンケート
+    "09:30",  # 1: 雑談
+    "11:00",  # 2: ジブリ大喜利
+    "12:30",  # 3: アンケート
+    "14:00",  # 4: 雑談
+    "16:00",  # 5: 商品紹介
+    "18:00",  # 6: ジブリ大喜利
+    "19:30",  # 7: アンケート
+    "21:00",  # 8: 雑談
+    "22:00",  # 9: 商品紹介
 )
 POSTS_PER_DAY = len(SLOT_LABELS)
 
-# 商品紹介は1日1本（20:00）。
-ITEM_SLOTS: Tuple[int, ...] = (2,)
+# 商品紹介は1日2本（16:00 / 22:00）。
+ITEM_SLOTS: Tuple[int, ...] = (5, 9)
 # 時短専用枠は当面停止（timesave 悩みは通常ローテ側で扱う）。
 TIMESAVE_ITEM_SLOTS: Tuple[int, ...] = ()
 
 # ランキングダイジェストは一旦停止。
 DIGEST_SLOTS: Tuple[int, ...] = ()
 
-# 価値投稿枠（リンクなし）。中身は ASK_CHITCHAT_SLOTS でアンケートに寄せる。
-VALUE_SLOTS: Tuple[int, ...] = (0, 1)
+# ジブリ大喜利（画像＋短文・PRなし）。家庭の買い足しあるある。
+OGIRI_SLOTS: Tuple[int, ...] = (2, 6)
+
+# 価値投稿枠（リンクなし）= アンケート + 雑談。大喜利は OGIRI_SLOTS。
+VALUE_SLOTS: Tuple[int, ...] = (0, 1, 3, 4, 7, 8)
 
 # 共働きリアル苦悩は当面停止（アンケート優先）。
 STRUGGLE_SLOTS: Tuple[int, ...] = ()
 
-# 旧どうでもいい雑談枠は停止（アンケートに統合）。
-CHITCHAT_SLOTS: Tuple[int, ...] = ()
+# テーマ無関係の雑談（一度きり・自動補充）。
+CHITCHAT_SLOTS: Tuple[int, ...] = (1, 4, 8)
 CHITCHAT_POOL_PATH = DATA_DIR / "chitchat_pool.json"
 CHITCHAT_MIN_UNUSED = 6
 CHITCHAT_REFILL_COUNT = 10
 
 # アンケート（問いかけ）枠。アイス投稿と同型。季節 + 軽いトレンド。商品・PRなし。
-ASK_CHITCHAT_SLOTS: Tuple[int, ...] = (0, 1)
+ASK_CHITCHAT_SLOTS: Tuple[int, ...] = (0, 3, 7)
 ASK_CHITCHAT_POOL_PATH = DATA_DIR / "ask_chitchat_pool.json"
 TREND_SEEDS_PATH = DATA_DIR / "trend_seeds.json"
 ASK_CHITCHAT_MIN_UNUSED = 6

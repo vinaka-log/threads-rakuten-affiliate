@@ -29,7 +29,7 @@ if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
 import config
-from composer import compose, compose_digest, compose_value
+from composer import compose, compose_digest, compose_ogiri, compose_value
 from picker import genre_for_slot, pick_item, record_post, record_value_post, today_jst
 from rakuten import RakutenClient
 from reuse import (
@@ -135,6 +135,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--item",
         action="store_true",
         help="商品紹介投稿を強制",
+    )
+    kind.add_argument(
+        "--ogiri",
+        action="store_true",
+        help="ジブリ大喜利（画像＋短文）を強制",
     )
     kind.add_argument(
         "--reuse",
@@ -273,14 +278,19 @@ def main(argv: list[str] | None = None) -> int:
     #   明示フラグ > slot 種別の自動割当
     #   REUSE_SLOTS では期限到来の再利用を優先
     reuse_candidate = None
+    ogiri_slots = tuple(getattr(config, "OGIRI_SLOTS", ()) or ())
     if args.reuse:
         kind = "reuse"
     elif args.value:
         kind = "value"
     elif args.digest:
         kind = "digest"
+    elif getattr(args, "ogiri", False):
+        kind = "ogiri"
     elif args.item or args.genre or args.template or args.pain:
         kind = "item"
+    elif slot in ogiri_slots:
+        kind = "ogiri"
     elif slot in config.VALUE_SLOTS:
         kind = "value"
         if slot in config.REUSE_SLOTS and not args.value_id:
@@ -291,6 +301,42 @@ def main(argv: list[str] | None = None) -> int:
         kind = "digest"
     else:
         kind = "item"
+
+    if kind == "ogiri":
+        composed = compose_ogiri(on, slot)
+        label = config.SLOT_LABELS[slot] if 0 <= slot < len(config.SLOT_LABELS) else "?"
+        print("=== Threads ogiri post preview ===")
+        print(f"mode: {'dry-run' if dry_run else 'publish'}")
+        print(f"date: {on.isoformat()}  slot: {slot} ({label})")
+        print(f"template: {composed.template_id}")
+        if composed.image_url:
+            print(f"image: {composed.image_url}")
+        print("---")
+        for i, text in enumerate(composed.texts):
+            title = "MAIN" if i == 0 else f"REPLY[{i}]"
+            print(f"[{title}] ({len(text)} chars)")
+            print(text)
+            print("---")
+        if dry_run:
+            print("dry-run: not publishing, ledger unchanged")
+            return 0
+        result = asyncio.run(
+            _publish(composed.texts, image_url=composed.image_url or None)
+        )
+        if result.warnings:
+            for w in result.warnings:
+                print(f"WARNING: {w}", file=sys.stderr)
+        print(f"published post_ids={result.post_ids} partial={result.partial}")
+        record_value_post(
+            value_id=composed.item_code.split(":", 1)[-1],
+            slot=slot,
+            posted_on=on.isoformat(),
+            threads_post_ids=result.post_ids,
+            dry_run=False,
+            reused=False,
+        )
+        print(f"ledger updated: {config.LEDGER_PATH}")
+        return 0
 
     if kind in ("value", "digest", "reuse"):
         reused = False
