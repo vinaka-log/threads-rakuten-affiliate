@@ -409,8 +409,8 @@ def timesave_pain_intents() -> Tuple[PainIntent, ...]:
     marked = tuple(p for p in PAIN_INTENTS if p.timesave)
     return tuple(TIMESAVE_ONLY_INTENTS) + marked
 
-# 商品投稿に楽天の商品画像を付ける（⑥）
-ATTACH_ITEM_IMAGE = True
+# 本投稿に楽天商品画像を付けない（カタログ／アフィ感が出る）。メモリプで商品名だけ出す。
+ATTACH_ITEM_IMAGE = False
 
 # 日内枠（JST）。1日10投稿 = アンケート3 + 雑談3 + ジブリ大喜利2 + 商品紹介2。
 # repo は public のため Actions 枠は消費しない。ずらし複数 cron は使わない。

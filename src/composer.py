@@ -1,8 +1,8 @@
 """商品データ → Threads 投稿文（テンプレート）。
 
 制約（コードで強制）:
-  - 本投稿に URL 禁止
-  - リンクリプに ※PR（アフィリエイトリンク） を含める（リンク直後）
+  - 本投稿・メモリプに URL 禁止（売り込みに見えない）
+  - リンクは最終リプのみ。末尾に ※PR（景表法の広告明示）
   - MAX_TEXT_LEN 以下
   - ハート系絵文字なし
 """
@@ -27,7 +27,7 @@ _HEART_RE = re.compile("[\u2764\u2765\u2665💕🧡💛💚💙💜🖤🤍🤎�
 
 @dataclass(frozen=True)
 class ComposedPost:
-    texts: List[str]  # [本投稿, 自分リプ]
+    texts: List[str]  # [本投稿, メモリプ, リンクリプ] or [単発]
     item_code: str
     genre_id: str
     template_id: str
@@ -35,60 +35,58 @@ class ComposedPost:
     image_url: str = ""
 
 
-# 本投稿テンプレ（競合調査ベース）:
-#   痛み/負の感情 → 短い共感 → 変化の匂わせ → 返信を誘う問い
-#   商品名は本投稿に出さない（リプで答え合わせ）。価格・レビューも本投稿禁止。
-#   「このままだと:」「Before:」などラベル調は使わない
+# 本投稿: 買い足しあるある＋問い。商品名・価格・URL・PR は出さない。
+# 「おすすめ」「コスパ」「答え合わせ」など売り口調は使わない。
 _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
     (
         "hook-must",
         "{pain}\n\n"
-        "これ、ないと地味に詰む。\n"
-        "{problem}\n\n"
-        "うちは先に置いとく派になった。\n"
-        "同じ悩みある人、どうしてる？",
+        "{problem}\n"
+        "うち、先に置いとくようにした。\n\n"
+        "同じことなってる人いる？",
     ),
     (
         "hook-scene",
         "{pain}\n\n"
-        "{scene}、わかる人いる？\n"
+        "{scene}、地味にキツい。\n"
         "{benefit}\n\n"
-        "みんなはどう凌いでる？教えて〜",
+        "みんなはどう凌いでる？",
     ),
     (
         "hook-tip",
         "{pain}\n\n"
-        "おすすめは、切れる前に宅配で足しとくこと。\n"
+        "切れてから走るの、いちばん疲れる。\n"
         "{benefit}\n\n"
-        "もう寄せた人いる？体験きかせて〜",
+        "先置き派、どれくらいいる？",
     ),
     (
         "hook-honest",
         "{pain}\n\n"
         "完璧じゃないけど、切れてからの寄り道の方がキツい。\n"
         "{benefit}\n\n"
-        "使ってる人いたら正直な感想教えて",
+        "正直なところ、どうしてる？",
     ),
     (
         "hook-heavy",
         "{pain}\n\n"
-        "店で抱えて帰るの、いちばんコスパ悪い。\n"
+        "店で抱えて帰るの、地味にきつい。\n"
         "{problem}\n\n"
-        "もうネット寄せた人、楽になった？",
+        "ネット寄せた人、楽になった？",
     ),
 )
 
-# リプで初めて商品を出す（答え合わせ）。注意点→商品名→価格→リンク→PR
-_REPLY_TEMPLATE = (
-    "正体はこれ。\n"
-    "「{short_name}」\n\n"
-    "正直、{avoid}\n\n"
-    "{price}円 / レビュー{review_avg}点（{review_count}件）"
-    "{rank_line}"
+# リプ1: うちのストックメモ（会話の続き）。リンク・PR・価格なし。
+_REPLY_MEMO = (
+    "うちのストックはこれ。\n"
+    "{short_name}\n\n"
+    "{avoid}"
     "{sale_block}"
-    "\n\n▼商品はこちら\n"
+)
+
+# リプ2: 欲しい人だけ。URL + ※PR（景表法の広告明示はここだけ）
+_REPLY_LINK = (
     "{affiliate_url}\n"
-    "\n※PR（アフィリエイトリンク）"
+    "※PR"
 )
 
 # 後方互換: 旧ID指定が来ても新テンプレへ寄せる
@@ -99,16 +97,15 @@ _TEMPLATE_ALIASES = {
     "hook-reason": "hook-tip",
 }
 
-_PR_DISCLOSURE = "※PR（アフィリエイトリンク）"
+_PR_DISCLOSURE = "※PR"
 # リプ内の商品名表示上限
 _REPLY_NAME_LIMIT = 28
 # ソフト上限（ハードは MAX_TEXT_LEN）。テストと運用の目安
 _SOFT_MAIN_LIMIT = 120
-_SOFT_REPLY_LIMIT = 380
-
-
-def _fmt_price(n: int) -> str:
-    return f"{n:,}"
+_SOFT_MEMO_LIMIT = 180
+_SOFT_LINK_LIMIT = 120
+# 後方互換
+_SOFT_REPLY_LIMIT = _SOFT_MEMO_LIMIT
 
 
 def _resolve_template_id(tid: str) -> str:
@@ -137,22 +134,28 @@ def _short_name_for_reply(name: str, limit: int = _REPLY_NAME_LIMIT) -> str:
 
 
 def _validate(texts: List[str]) -> None:
-    if len(texts) < 2:
-        raise ValueError("本投稿とリプの2本が必要です")
-    main, reply = texts[0], texts[1]
-    if _URL_RE.search(main):
-        raise ValueError("本投稿にURLを含められません")
-    if _PR_DISCLOSURE not in reply:
+    if len(texts) < 3:
+        raise ValueError("本投稿・メモリプ・リンクリプの3本が必要です")
+    main, memo, link = texts[0], texts[1], texts[2]
+    if _URL_RE.search(main) or _URL_RE.search(memo):
+        raise ValueError("本投稿・メモリプにURLを含められません")
+    if _PR_DISCLOSURE not in link:
         raise ValueError(f"リンクリプに「{_PR_DISCLOSURE}」が必要です")
-    if "▼商品はこちら" not in reply:
-        raise ValueError("リンクリプに「▼商品はこちら」が必要です")
-    if "正体はこれ" not in reply:
-        raise ValueError("リンクリプで商品の答え合わせ（正体はこれ）が必要です")
+    if not _URL_RE.search(link):
+        raise ValueError("リンクリプにURLが必要です")
+    joined = "\n".join(texts)
+    for bad in ("正体はこれ", "▼商品はこちら", "アフィリエイトリンク", "#PR"):
+        if bad in joined:
+            raise ValueError(f"売り込み口調「{bad}」は使わない")
+    if "アフィリエイト" in joined:
+        raise ValueError("本文に「アフィリエイト」を出さない")
+    if _PR_DISCLOSURE in main or _PR_DISCLOSURE in memo:
+        raise ValueError("※PR は最終リプのみ")
     # 本投稿に売り込みラベル / 商品名の先出しが混ざっていないか
     for bad in ("このままだと:", "これを置くと:", "Before:", "After:", "困り:", "解決:", "「", "」"):
         if bad in main:
             raise ValueError(f"本投稿に機械的なラベル/商品名括弧「{bad}」があります")
-    for bad in ("円", "レビュー", "※PR", "アフィリエイト"):
+    for bad in ("円", "レビュー", "おすすめ", "コスパ"):
         if bad in main:
             raise ValueError(f"本投稿に売り込み語「{bad}」があります")
     for i, t in enumerate(texts):
@@ -179,23 +182,16 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
     if tid not in templates:
         raise ValueError(f"未知の template_id: {tid}")
 
-    from sale import item_deal_lines
+    from sale import sale_lines
 
-    deal_lines = item_deal_lines(item, on)
-    # リプは短く保つ。セール行は最大2本まで
-    sale_block = "".join(f"\n{line}" for line in deal_lines[:2])
+    # カレンダー上の今日買う理由だけ。送料込・クーポン気配はカタログ感が出るので入れない。
+    deal = sale_lines(on)[:1]
+    sale_block = f"\n{deal[0]}" if deal else ""
 
     fields = {
         "short_name": _short_name_for_reply(item.short_name),
         "category": pick.genre.short,
-        "rank": item.rank or "?",
-        "review_avg": f"{item.review_average:.1f}",
-        "review_count": f"{item.review_count:,}",
-        "price": _fmt_price(item.item_price),
-        "shop_name": item.shop_name or "楽天市場",
         "affiliate_url": item.affiliate_url,
-        # 順位は補足。無ければ行ごと省略
-        "rank_line": f" / {item.rank}位付近" if item.rank else "",
         "sale_block": sale_block,
         "pain": (pain.pain if pain else "今夜の買い足し、迷ってる人へ"),
         "pain_short": (pain.pain.rstrip("？?") if pain else "家庭の買い足し"),
@@ -217,8 +213,9 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
     }
 
     main = _truncate(templates[tid].format(**fields))
-    reply = _truncate(_REPLY_TEMPLATE.format(**fields))
-    texts = [main, reply]
+    memo = _truncate(_REPLY_MEMO.format(**fields))
+    link = _truncate(_REPLY_LINK.format(**fields))
+    texts = [main, memo, link]
     _validate(texts)
     return ComposedPost(
         texts=texts,

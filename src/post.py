@@ -87,7 +87,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument(
         "--no-image",
         action="store_true",
-        help="商品画像を付けない（既定は ATTACH_ITEM_IMAGE）",
+        help="商品画像を付けない（既定は付けない。ATTACH_ITEM_IMAGE で変更可）",
     )
     p.add_argument(
         "--date",

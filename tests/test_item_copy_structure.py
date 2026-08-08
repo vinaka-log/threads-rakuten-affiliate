@@ -14,8 +14,9 @@ import config
 from composer import (
     _MAIN_TEMPLATES,
     _PR_DISCLOSURE,
+    _SOFT_LINK_LIMIT,
     _SOFT_MAIN_LIMIT,
-    _SOFT_REPLY_LIMIT,
+    _SOFT_MEMO_LIMIT,
     _resolve_template_id,
     _validate,
     compose,
@@ -45,7 +46,7 @@ def _pick(**kwargs) -> PickResult:
     return PickResult(
         item=item,
         genre=config.GENRES[0],
-        slot=2,
+        slot=5,
         posted_on="2026-08-06",
         pain=pain,
     )
@@ -58,15 +59,16 @@ class ItemCopyStructureTests(unittest.TestCase):
 
     def test_main_hides_product_and_price(self) -> None:
         composed = compose(_pick(), template_id="hook-must")
-        main, reply = composed.texts
+        main, memo, link = composed.texts
         self.assertNotIn("円", main)
         self.assertNotIn("レビュー", main)
         self.assertNotIn("「", main)
         self.assertNotIn("」", main)
         self.assertNotIn("アタック", main)
         self.assertNotIn("このままだと:", main)
+        self.assertNotIn("おすすめ", main)
+        self.assertNotIn("コスパ", main)
         self.assertLessEqual(len(main), _SOFT_MAIN_LIMIT)
-        # 返信を誘う問いかけ
         self.assertTrue(
             any(k in main for k in ("？", "教えて", "どうしてる", "いる？")),
             msg=main,
@@ -75,26 +77,34 @@ class ItemCopyStructureTests(unittest.TestCase):
     def test_all_templates_stay_short(self) -> None:
         for tid, _ in _MAIN_TEMPLATES:
             composed = compose(_pick(), template_id=tid)
-            main, reply = composed.texts
+            main, memo, link = composed.texts
             self.assertLessEqual(len(main), _SOFT_MAIN_LIMIT, msg=f"{tid} main too long")
-            self.assertLessEqual(len(reply), _SOFT_REPLY_LIMIT, msg=f"{tid} reply too long")
+            self.assertLessEqual(len(memo), _SOFT_MEMO_LIMIT, msg=f"{tid} memo too long")
+            self.assertLessEqual(len(link), _SOFT_LINK_LIMIT, msg=f"{tid} link too long")
             self.assertNotIn("「", main)
-            self.assertIn("正体はこれ", reply)
-            self.assertIn("アタック", reply)
+            self.assertIn("うちのストックはこれ", memo)
+            self.assertIn("アタック", memo)
+            self.assertNotIn("http", memo.lower())
+            self.assertNotIn(_PR_DISCLOSURE, memo)
+            self.assertNotIn("円", memo)
+            self.assertNotIn("レビュー", memo)
 
     def test_reply_reveals_product_and_ends_with_disclosure(self) -> None:
         composed = compose(_pick(), template_id="hook-honest")
-        main, reply = composed.texts
-        self.assertIn("正体はこれ", reply)
-        self.assertIn("正直、", reply)
-        self.assertIn("▼商品はこちら", reply)
-        self.assertIn("https://example.com/aff", reply)
-        self.assertTrue(reply.rstrip().endswith(_PR_DISCLOSURE))
-        self.assertNotIn("・悩み:", reply)
-        benefit = next(p for p in config.PAIN_INTENTS if p.id == "detergent").benefit
-        self.assertNotIn(benefit, reply)
-        self.assertNotIn("test-shop", reply)
-        self.assertLessEqual(len(reply), _SOFT_REPLY_LIMIT)
+        main, memo, link = composed.texts
+        self.assertEqual(len(composed.texts), 3)
+        self.assertIn("うちのストックはこれ", memo)
+        self.assertIn("アタック", memo)
+        self.assertNotIn("正体はこれ", memo)
+        self.assertNotIn("▼商品はこちら", memo)
+        self.assertNotIn("レビュー", memo)
+        self.assertNotIn("円", memo)
+        self.assertIn("https://example.com/aff", link)
+        self.assertTrue(link.rstrip().endswith(_PR_DISCLOSURE))
+        self.assertNotIn("アフィリエイト", link)
+        self.assertNotIn("test-shop", memo)
+        self.assertNotIn("test-shop", link)
+        self.assertLessEqual(len(memo), _SOFT_MEMO_LIMIT)
 
     def test_pain_copy_stays_compact(self) -> None:
         for pain in config.all_pain_intents():
@@ -114,6 +124,7 @@ class ItemCopyStructureTests(unittest.TestCase):
         self.assertEqual(config.CHITCHAT_SLOTS, (1, 4, 8))
         self.assertEqual(config.OGIRI_SLOTS, (2, 6))
         self.assertEqual(config.STRUGGLE_SLOTS, ())
+        self.assertFalse(config.ATTACH_ITEM_IMAGE)
         self.assertNotIn(5, config.VALUE_SLOTS)
         self.assertNotIn(9, config.VALUE_SLOTS)
 
@@ -180,7 +191,8 @@ class ItemCopyStructureTests(unittest.TestCase):
             _validate(
                 [
                     "洗剤切れ？\n\nこのままだと: 困る\nこれを置くと: 助かる",
-                    f"正体はこれ。\n「x」\n\n▼商品はこちら\nhttps://example.com/a\n\n{_PR_DISCLOSURE}",
+                    "うちのストックはこれ。\nx",
+                    f"https://example.com/a\n{_PR_DISCLOSURE}",
                 ]
             )
 

@@ -11,30 +11,29 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
 
 import config
-from composer import _PR_DISCLOSURE, _REPLY_TEMPLATE, _validate, compose
+from composer import _PR_DISCLOSURE, _REPLY_LINK, _REPLY_MEMO, _validate, compose
 from picker import PickResult
 from rakuten import RakutenItem
 
 
 class PrDisclosureTests(unittest.TestCase):
     def test_reply_template_ends_with_new_disclosure(self) -> None:
-        self.assertIn("▼商品はこちら", _REPLY_TEMPLATE)
-        self.assertTrue(_REPLY_TEMPLATE.rstrip().endswith(_PR_DISCLOSURE))
-        self.assertNotIn("#PR", _REPLY_TEMPLATE)
-        self.assertNotIn("アフィリエイトリンクを含みます", _REPLY_TEMPLATE)
+        self.assertTrue(_REPLY_LINK.rstrip().endswith(_PR_DISCLOSURE))
+        self.assertNotIn("▼商品はこちら", _REPLY_LINK)
+        self.assertNotIn("正体はこれ", _REPLY_MEMO)
+        self.assertNotIn("#PR", _REPLY_LINK)
+        self.assertNotIn("アフィリエイト", _REPLY_LINK)
+        self.assertNotIn("アフィリエイト", _REPLY_MEMO)
 
     def test_validate_requires_disclosure_phrase(self) -> None:
         main = "洗剤、また切れそう？\n\nみんなはどうしてる？"
-        reply_ok = (
-            "正体はこれ。\n"
-            "【テスト商品】\n"
-            "▼商品はこちら\n"
-            "https://example.com/a\n"
-            "\n※PR（アフィリエイトリンク）"
-        )
-        _validate([main, reply_ok])
+        memo = "うちのストックはこれ。\nテスト商品"
+        reply_ok = f"https://example.com/a\n{_PR_DISCLOSURE}"
+        _validate([main, memo, reply_ok])
         with self.assertRaises(ValueError):
-            _validate([main, "#PR\nアフィリエイトリンクを含みます\nhttps://example.com/a"])
+            _validate([main, memo, "#PR\nアフィリエイトリンクを含みます\nhttps://example.com/a"])
+        with self.assertRaises(ValueError):
+            _validate([main, f"{memo}\nhttps://example.com/a", reply_ok])
 
     def test_compose_includes_new_disclosure(self) -> None:
         item = RakutenItem(
@@ -53,18 +52,22 @@ class PrDisclosureTests(unittest.TestCase):
         pick = PickResult(
             item=item,
             genre=config.GENRES[0],
-            slot=2,
+            slot=5,
             posted_on="2026-08-06",
             pain=pain,
         )
         composed = compose(pick)
-        self.assertEqual(len(composed.texts), 2)
-        self.assertNotIn("http", composed.texts[0])
-        self.assertNotIn("「", composed.texts[0])
-        self.assertIn("正体はこれ", composed.texts[1])
-        self.assertIn("https://example.com/aff", composed.texts[1])
-        self.assertIn(_PR_DISCLOSURE, composed.texts[1])
-        self.assertFalse(composed.texts[1].lstrip().startswith("#PR"))
+        self.assertEqual(len(composed.texts), 3)
+        main, memo, link = composed.texts
+        self.assertNotIn("http", main.lower())
+        self.assertNotIn("http", memo.lower())
+        self.assertNotIn("「", main)
+        self.assertIn("うちのストックはこれ", memo)
+        self.assertIn("https://example.com/aff", link)
+        self.assertIn(_PR_DISCLOSURE, link)
+        self.assertTrue(link.rstrip().endswith(_PR_DISCLOSURE))
+        self.assertFalse(link.lstrip().startswith("#PR"))
+        self.assertNotIn("アフィリエイト", "\n".join(composed.texts))
 
 
 if __name__ == "__main__":
