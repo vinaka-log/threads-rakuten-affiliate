@@ -6,7 +6,6 @@ import json
 import sys
 import tempfile
 import unittest
-from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,7 +16,7 @@ import config
 from value_posts import (
     chitchat_pool,
     is_chitchat_id,
-    pick_value_post,
+    is_oneshot_value_id,
     unused_chitchat_posts,
     used_chitchat_ids,
 )
@@ -27,6 +26,10 @@ class ChitchatOneShotTests(unittest.TestCase):
     def test_is_chitchat_id(self) -> None:
         self.assertTrue(is_chitchat_id(chitchat_pool()[0].value_id))
         self.assertFalse(is_chitchat_id("chat-repeat"))  # tip pool
+
+    def test_ask_ids_are_oneshot(self) -> None:
+        self.assertTrue(is_oneshot_value_id("ask-abc123"))
+        self.assertTrue(is_oneshot_value_id("chat-summer-kakigori"))
 
     def test_used_ids_excluded(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -53,17 +56,6 @@ class ChitchatOneShotTests(unittest.TestCase):
             unused = unused_chitchat_posts(ledger)
             self.assertTrue(all(p.value_id != first for p in unused))
             self.assertTrue(any(p.value_id == second for p in unused))
-
-            # patch LEDGER_PATH for pick
-            old = config.LEDGER_PATH
-            try:
-                config.LEDGER_PATH = ledger
-                slot = config.CHITCHAT_SLOTS[0]
-                picked = pick_value_post(date(2026, 8, 2), slot)
-                self.assertNotEqual(picked.value_id, first)
-                self.assertTrue(is_chitchat_id(picked.value_id))
-            finally:
-                config.LEDGER_PATH = old
 
 
 if __name__ == "__main__":

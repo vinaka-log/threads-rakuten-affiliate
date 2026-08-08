@@ -26,11 +26,11 @@ def active_sale_label(on: date) -> Optional[str]:
 
 
 def sale_lines(on: date) -> list[str]:
-    """リプに追記するセール系の「今日買う理由」行。"""
+    """リプに追記するセール系の「今日買う理由」行（短め）。"""
     lines: list[str] = []
     label = active_sale_label(on)
     if label:
-        lines.append(f"いま{label}の期間中。買うならこのタイミングかも")
+        lines.append(f"いま{label}中")
     if is_zero_five_day(on):
         lines.append(config.ZERO_FIVE_DAY_LINE)
     return lines
@@ -40,19 +40,19 @@ _COUPON_RE = re.compile(r"クーポン|coupon|％OFF|%OFF|ポイント最大|P\d
 
 
 def item_deal_lines(item: "RakutenItem", on: date) -> List[str]:
-    """⑧ 商品ごとの今日買う理由（ポイント・送料・クーポン気配）。"""
+    """⑧ 商品ごとの今日買う理由（ポイント・送料・クーポン気配）。短文優先。"""
     lines: List[str] = []
     lines.extend(sale_lines(on))
     if getattr(item, "point_rate", 0) and item.point_rate >= 2:
-        lines.append(f"いまポイント{item.point_rate}倍表記あり。倍率は購入前に公式で再確認してね")
+        lines.append(f"ポイント{item.point_rate}倍表記あり（購入前に再確認）")
     if _COUPON_RE.search(item.item_name or ""):
-        lines.append("商品名にクーポン/倍率の気配あり。取得ボタン押し忘れに注意")
-    # 応答 postageFlag: 0=送料込 / 1=送料別（公式）。断定しすぎず表記ベースで触れる。
+        lines.append("クーポン気配あり。取得ボタン押し忘れ注意")
+    # 応答 postageFlag: 0=送料込 / 1=送料別（公式）
     postage = getattr(item, "postage_flag", None)
     if postage == 0:
-        lines.append("送料込表記の候補。支払総額が見えやすいのもポイント")
+        lines.append("送料込表記")
     elif postage == 1:
-        lines.append("送料別表記あり。合計が3980円未満だと送料が乗る店もあるので要確認")
+        lines.append("送料別表記あり・合計要確認")
     if not lines:
-        lines.append("急ぎでなければ、5と0のつく日かセールに寄せるのも手")
+        lines.append("急ぎじゃなければ5と0の日もアリ")
     return lines

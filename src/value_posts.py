@@ -27,6 +27,7 @@ from sale import active_sale_label
 class ValuePost:
     value_id: str
     text: str
+    poll_options: tuple[str, ...] = ()
 
 
 # 各投稿の方針:
@@ -762,7 +763,11 @@ def is_chitchat_id(value_id: str) -> bool:
 
 
 def _non_tip_slots() -> tuple[int, ...]:
-    return tuple(config.STRUGGLE_SLOTS) + tuple(getattr(config, "CHITCHAT_SLOTS", ()) or ())
+    return (
+        tuple(config.STRUGGLE_SLOTS)
+        + tuple(getattr(config, "CHITCHAT_SLOTS", ()) or ())
+        + tuple(getattr(config, "ASK_CHITCHAT_SLOTS", ()) or ())
+    )
 
 
 def _struggle_position(slot: int) -> int:
@@ -813,17 +818,34 @@ def _pick_chitchat(on: date, slot: int) -> ValuePost:
     return unused[idx]
 
 
+def _pick_ask(on: date, slot: int) -> ValuePost:
+    """公式4択アンケートは一度きり。足りなければ自動補充。"""
+    from ask_chitchat import pick_ask_post
+
+    ask_slots = tuple(getattr(config, "ASK_CHITCHAT_SLOTS", ()) or ())
+    salt = ask_slots.index(slot) if slot in ask_slots else 0
+    row = pick_ask_post(slot_salt=salt + on.toordinal() % 7)
+    opts = tuple(str(o) for o in (row.get("options") or []) if str(o).strip())
+    return ValuePost(str(row["id"]), str(row["text"]), poll_options=opts)
+
+
 def pick_value_post(on: date, slot: int = 0) -> ValuePost:
     """日付×枠ローテで価値投稿を1本選ぶ。
 
+    ASK_CHITCHAT_SLOTS → アンケート（問いかけ・一度きり）
     STRUGGLE_SLOTS → 共働きリアル苦悩
     CHITCHAT_SLOTS → テーマ無関係の雑談（一度きり・自動補充）
     それ以外の VALUE_SLOTS → 攻略・保存ネタ（セール時は先頭枠だけ優先）
     """
+    ask_slots = tuple(getattr(config, "ASK_CHITCHAT_SLOTS", ()) or ())
+    if slot in ask_slots:
+        return _pick_ask(on, slot)
+
     chitchat_slots = tuple(getattr(config, "CHITCHAT_SLOTS", ()) or ())
     if slot in config.STRUGGLE_SLOTS:
         k = _struggle_position(slot)
-        idx = (on.toordinal() * len(config.STRUGGLE_SLOTS) + k) % len(_STRUGGLE_POOL)
+        n = max(1, len(config.STRUGGLE_SLOTS))
+        idx = (on.toordinal() * n + k) % len(_STRUGGLE_POOL)
         return _STRUGGLE_POOL[idx]
     if slot in chitchat_slots:
         return _pick_chitchat(on, slot)
@@ -840,11 +862,21 @@ def pick_value_post(on: date, slot: int = 0) -> ValuePost:
     if priority is not None and k == 0:
         return priority
 
-    idx = (on.toordinal() * max(1, len(tip_slots)) + k) % len(_POOL)
+    pool_n = max(1, len(tip_slots) or 1)
+    idx = (on.toordinal() * pool_n + k) % len(_POOL)
     picked = _POOL[idx]
     if priority is not None and picked.value_id == priority.value_id:
         picked = _POOL[(idx + 1) % len(_POOL)]
     return picked
+
+
+def is_ask_chitchat_id(value_id: str) -> bool:
+    return value_id.startswith("ask-") or value_id.startswith("chat-summer-")
+
+
+def is_oneshot_value_id(value_id: str) -> bool:
+    """一度きり投稿（再利用キュー禁止）。"""
+    return is_chitchat_id(value_id) or is_ask_chitchat_id(value_id)
 
 
 def _find(value_id: str) -> ValuePost:
@@ -857,4 +889,14 @@ def _find(value_id: str) -> ValuePost:
     for p in chitchat_pool():
         if p.value_id == value_id:
             return p
+    if is_ask_chitchat_id(value_id):
+        from ask_chitchat import load_pool
+
+        for row in load_pool().get("items") or []:
+            if isinstance(row, dict) and str(row.get("id") or "") == value_id:
+                text = str(row.get("text") or "").strip()
+                if text:
+                    return ValuePost(value_id, text, poll_options=tuple(
+                        str(o) for o in (row.get("options") or []) if str(o).strip()
+                    )[:4])
     raise KeyError(value_id)

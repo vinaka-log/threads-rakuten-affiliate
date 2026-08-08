@@ -5,12 +5,11 @@
 **ペルソナ A（固定）**: 共働き〜子育て世帯の「家庭の消耗品・時短買い」担当向け。  
 日用品 / キッチンに絞り、悩みキーワード（洗剤切れ・水が重い等）で商品を選ぶ。美容・ファッション・ガジェット総合は扱わない。
 
-- スケジュール: **毎日10投稿 JST**（共感5 : 雑談2 : 商品紹介3）
-  - **共働きリアル苦悩 5本**: 生活実感・あるある吐露
-  - **どうでもいい雑談 2本**: テーマ無関係（中の人が人間に見えるためのブレ）
-  - 商品紹介 3本: 夕方以降のみ。うち1本は時短消耗品枠。本投稿リンクなし + 自分リプ（アフィリエイトURL + `※PR（アフィリエイトリンク）`）
-  - ランキングダイジェストは一旦停止
-  - 17:00 は再利用キュー優先
+- スケジュール: **毎日3投稿 JST**（公式4択アンケート2 : 商品紹介1）※ Actions無料枠節約
+  - **アンケート 2本（08:00 / 15:00）**: Threads標準の4択ポール。季節＋軽いトレンド。商品・PRなし
+  - **商品紹介 1本（20:00）**: 本投稿は商品名なし＋問いかけ。自分リプで答え合わせ（商品名＋アフィURL＋`※PR`）
+  - ランキングダイジェストは停止
+  - ※ 旧10投稿/日から削減（月2000分の Actions 枠対策）
 - 重複防止: `data/posted.json`（直近30日は同一 `itemCode` を再投稿しない）
 - rank帯ローテ: 偶数日=1〜10位 / 奇数日=11〜30位（競合アカウントとの商品被りを回避）
 - 送料: 送料込（postageFlag）を優先。送料別は候補が送料込だけのときは採用しない
@@ -146,18 +145,14 @@ PYTHONPATH=src:. python src/post.py --dry-run --slot 0
 PYTHONPATH=src:. python src/post.py --list-genres
 PYTHONPATH=src:. python src/post.py --dry-run --genre 100939
 
-# 価値投稿（slot 0 / 2 / 4 / 8 は自動で価値投稿になる。楽天 env 不要）
+# 価値投稿 / アンケート（slot 0 / 1。楽天 env 不要）
 PYTHONPATH=src:. python src/post.py --dry-run --slot 0
-PYTHONPATH=src:. python src/post.py --dry-run --value --value-id marathon-basics
+PYTHONPATH=src:. python src/post.py --dry-run --slot 1
 
-# 再利用枠（slot 4=17:00）。期限到来の候補があれば優先
-PYTHONPATH=src:. python src/post.py --dry-run --slot 4
+# 商品紹介（slot 2=20:00。楽天 env 必要）
+PYTHONPATH=src:. python src/post.py --dry-run --slot 2
 PYTHONPATH=src:. python src/post.py --list-reuse
 PYTHONPATH=src:. python src/post.py --mark-reuse stock-buy
-
-# ランキングダイジェスト（slot 3/5/6/9。楽天 env 必要）
-PYTHONPATH=src:. python src/post.py --dry-run --slot 3
-PYTHONPATH=src:. python src/post.py --dry-run --digest --digest-format quiz
 
 # 本番投稿（要 Threads env）
 export THREADS_ACCESS_TOKEN=...
@@ -169,16 +164,9 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 | slot | 時刻(JST) | 内容 |
 |------|-----------|------|
-| 0 | 07:00 | **共働きリアル苦悩** |
-| 1 | 08:00 | **どうでもいい雑談** |
-| 2 | 12:00 | **共働きリアル苦悩** |
-| 3 | 15:00 | **どうでもいい雑談** |
-| 4 | 17:00 | **共働きリアル苦悩**（再利用優先） |
-| 5 | 18:00 | **時短アイテム**（消耗品・`TIMESAVE_ITEM_SLOTS`） |
-| 6 | 19:00 | **商品紹介**（悩み×rank帯ローテ） |
-| 7 | 20:00 | **商品紹介**（悩み×rank帯ローテ） |
-| 8 | 21:00 | **共働きリアル苦悩** |
-| 9 | 22:00 | **共働きリアル苦悩** |
+| 0 | 08:00 | **公式4択アンケート**（季節/トレンド） |
+| 1 | 15:00 | **公式4択アンケート**（季節/トレンド） |
+| 2 | 20:00 | **商品紹介**（答え合わせ型） |
 
 枠の種別は `config.py` の `ITEM_SLOTS` / `TIMESAVE_ITEM_SLOTS` / `DIGEST_SLOTS` / `VALUE_SLOTS` / `STRUGGLE_SLOTS` / `CHITCHAT_SLOTS` で変更できます。CLI では `--item` / `--value` / `--digest` で種別を強制、`--value-id` や `--digest-format`（top3 / quiz / sleeper）で内容を指定できます。
 
@@ -187,7 +175,7 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 - 日用品 (`100939`)
 - キッチン (`551167`)
 
-商品紹介はさらに `PAIN_INTENTS`（洗剤切れ・水が重い等）で悩みキーワード検索して選びます。水などは悩み側でジャンル `100227` を個別指定。時短枠は `timesave=True` の悩み（食洗機タブ・ケース水・ラップ・フローリングシート等）だけを回す。
+商品紹介はさらに `PAIN_INTENTS`（洗剤切れ・水が重い等）で悩みキーワード検索して選びます。水などは悩み側でジャンル `100227` を個別指定。時短消耗品（食洗機タブ・ケース水・ラップ・フローリングシート等）も通常ローテに含めます。
 
 ※ 総合ランキングは美容・ガジェットが混ざるため使わない。ガジェット本体ではなく消耗品の替えを扱う。
 
@@ -203,10 +191,12 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 ## 投稿フォーマット
 
-### 商品紹介（slot 5 / 6 / 7）
+### 商品紹介（slot 2 = 20:00）
 
-1. **本投稿** … URLなし（商品画像添付可）。構成は **痛み/状態 → 短い共感 → 助かること → 商品名 → リプ誘導**。価格・レビューは本投稿に出さない
-2. **自分リプ** … 正直な注意点 → ベネフィット一言 → 価格・レビュー → （ポイント/送料/5と0の日）→ `▼商品はこちら` + `affiliateUrl` → `※PR（アフィリエイトリンク）`
+1. **本投稿** … URLなし・**商品名なし**（目安〜120字）。痛み → 短い共感 → **返信を誘う問い**。価格・レビューも出さない
+2. **自分リプ** … `正体はこれ。` + 商品名 → 正直な注意点 → 価格・レビュー → 送料短文 → `▼商品はこちら` + URL → `※PR（アフィリエイトリンク）`
+
+競合調査で伸びている型（答え合わせ＋会話誘発）に寄せています。収納ガジェットの誤マッチは `exclude_name_hints` / `BLOCK_NAME_HINTS` で除外。
 
 選定は `PAIN_INTENTS` の悩みキーワード検索が先。各悩みに `problem`（困り）と `benefit`（助かること）を持たせ、売り込みより「あるある→助かった」を先に伝える。  
 テンプレは `hook-must` / `hook-scene` / `hook-tip` / `hook-honest` / `hook-heavy` を日付×商品でローテ（旧IDは自動で新IDへ寄せる）。
@@ -215,18 +205,24 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 現状は枠を停止中（`DIGEST_SLOTS` 空）。再開する場合は `config.py` で枠を戻す。形式は `top3` / `quiz` / `sleeper`。
 
-### 価値投稿（slot 0 / 1 / 2 / 3 / 4 / 8 / 9）
+### 価値投稿（slot 0 / 1 = 公式4択アンケート）
 
-リンク・PRなしの単発投稿。
+Threads API の `poll_attachment`（option_a〜d、各25字以内）を使ったネイティブ投票。
 
-- **slot 0 / 2 / 4 / 8 / 9（5本）**: **共働きリアル苦悩**。夜ご飯・寄り道・消耗品など生活実感の吐露
-- **slot 1 / 3（2本）**: **どうでもいい雑談**。日用品と無関係。**一度出したら二度と使わない**。未使用が減ったら `chitchat_gen` が自動で草稿を `data/chitchat_pool.json` に追加（パーツ組み合わせ。`OPENAI_API_KEY` があれば LLM 生成を優先）
+- **slot 0 / 1（08:00 / 15:00）**: 短い質問文 + 4択。`data/ask_chitchat_pool.json` から一度きり消費し、減ったら自動補充
+- 商品・PR・外部リンクなし。重い事件・政治ネタは除外
+- 投票UIが使えない場合はテキスト投稿へフォールバック（警告ログ）
 
-### 再利用（slot 4 = 17:00 優先）
+例:
+```
+夏といえばアイス、推しは？
+[しろくまくん] [ガリガリ君] [ハーゲンダッツ] [その他]
+```
 
-参考運用の「伸びた投稿を3日に1回再利用」に対応。`data/reuse.json` のキューから、前回投稿から3日以上経過した価値投稿を優先投下します。
+### 再利用
 
-- 通常の価値投稿は自動でキュー登録
+アンケート枠では再利用しない（一度きり）。商品以外の価値投稿を手動で再利用したい場合は `python src/post.py --mark-reuse …` を使う。
+
 - 伸びた投稿は手動で優先度アップ: `python src/post.py --mark-reuse stock-buy`
 - Insights 権限がある場合: `python src/post.py --sync-insights` で views/likes を取り込み
 - キュー確認: `python src/post.py --list-reuse`

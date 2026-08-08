@@ -183,12 +183,17 @@ def _print_preview(pick, composed, *, dry_run: bool, image_url: str = "") -> Non
         print("---")
 
 
-async def _publish(texts, *, image_url: str | None = None):
+async def _publish(texts, *, image_url: str | None = None, poll_options=None):
     client = ThreadsClient(
         access_token=os.environ.get("THREADS_ACCESS_TOKEN", ""),
         user_id=os.environ.get("THREADS_USER_ID", ""),
     )
-    return await client.publish_thread(texts, image_url=image_url, dry_run=False)
+    return await client.publish_thread(
+        texts,
+        image_url=image_url,
+        poll_options=poll_options,
+        dry_run=False,
+    )
 
 
 async def _sync_insights() -> int:
@@ -322,10 +327,15 @@ def main(argv: list[str] | None = None) -> int:
             print(f"[{title}] ({len(text)} chars)")
             print(text)
             print("---")
+        if getattr(composed, "poll_options", None):
+            print(f"[POLL] {composed.poll_options}")
+            print("---")
         if dry_run:
             print("dry-run: not publishing, ledger unchanged")
             return 0
-        result = asyncio.run(_publish(composed.texts))
+        result = asyncio.run(
+            _publish(composed.texts, poll_options=getattr(composed, "poll_options", None) or None)
+        )
         if result.warnings:
             for w in result.warnings:
                 print(f"WARNING: {w}", file=sys.stderr)

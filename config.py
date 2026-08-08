@@ -82,6 +82,11 @@ BLOCK_NAME_HINTS: Tuple[str, ...] = (
     "ボールストッカー",
     "洗面所収納",
     "ランドリー収納",
+    # 消耗品の周辺ガジェット（悩みコピーにホルダー等が載る事故防止）
+    "ラップホルダー",
+    "ラップケース",
+    "ワイパースタンド",
+    "フローリングワイパースタンド",
 )
 
 # ランキング取得件数（上位からフィルタ）
@@ -100,7 +105,7 @@ RANK_BANDS: Tuple[Tuple[int, int], ...] = (
 SALE_PERIODS: Tuple[Tuple[str, str, str], ...] = ()
 
 # 「5と0のつく日」（毎月5,10,15,20,25,30日）はポイントアップ日として自動判定する。
-ZERO_FIVE_DAY_LINE = "きょうは5と0のつく日。楽天カード勢はポイントアップだよ"
+ZERO_FIVE_DAY_LINE = "きょうは5と0のつく日（楽天カード勢はポイントアップ）"
 
 
 @dataclass(frozen=True)
@@ -169,7 +174,7 @@ _CONSUMABLE_STORAGE_EXCLUDES: Tuple[str, ...] = (
 
 
 # 家庭の買い足し悩み。日付×商品枠でローテ。
-# problem / benefit で「買うとその人にどう役立つか」を必ず言えるようにする。
+# problem / benefit / avoid は短め口語（本投稿〜140字・リプ事実欄向け）。
 # name_hints は誤マッチしやすい汎用語（詰め替え等）を避け、商品固有語のみにする。
 PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
@@ -178,11 +183,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         keyword="液体洗剤 つめかえ",
         name_hints=("液体洗剤", "衣料用洗剤", "粉洗剤", "洗たく洗剤", "ジェルボール", "ゲルボール"),
         genre_id="100939",
-        scene="洗濯しようとしたらボトルが軽い夜",
-        problem="切れた瞬間に洗濯が止まり、残業後のドラッグストア行きが発生する",
-        benefit="詰め替えを先に置いておけば、洗濯が止まらず寄り道も減る",
-        buy_reason="共働きの平日は「切れてから買う」が一番高いコスト",
-        avoid="香りが強すぎる・容量を見ずに小さい方を掴む失敗を避ける",
+        scene="ボトルが軽い夜",
+        problem="切れた瞬間に洗濯止まって、残業後のドラ行きになる",
+        benefit="詰め替え先置きで、洗濯が止まらない",
+        buy_reason="切れてから買うのがいちばん高い",
+        avoid="香り強めもあるし、容量見ないと損しやすい",
         template_id="",
         require_name_hints=("つめかえ", "詰め替え", "詰替", "ジェルボール", "ゲルボール"),
         exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES
@@ -201,11 +206,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         keyword="柔軟剤 つめかえ",
         name_hints=("柔軟剤",),
         genre_id="100939",
-        scene="洗濯カゴが溜まってるのにボトルが空の平日",
-        problem="空だと洗濯コースが止まり、衣類が部屋に滞留する",
-        benefit="替えがあるだけで洗濯が回り続け、朝の着替えパニックが減る",
-        buy_reason="柔軟剤切れは家事全体の詰まりに直結する",
-        avoid="匂い残りの合わない香りをリピする前にレビューの不満も見る",
+        scene="カゴ溜まってるのにボトル空の平日",
+        problem="空だと洗濯止まって、着替えが詰まる",
+        benefit="替えがあれば朝のパニック減る",
+        buy_reason="柔軟剤切れは家事全体の詰まり",
+        avoid="香りの好みはレビュー見てからの方が安心",
         template_id="",
         require_name_hints=("つめかえ", "詰め替え", "詰替"),
         exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES,
@@ -218,11 +223,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         # 「トイレットティシュー」は主要ブランドの表記ゆれ
         name_hints=("トイレットペーパー", "トイレットティシュー", "トイレロール"),
         genre_id="100939",
-        scene="夜中に芯だけを発見したくないとき",
-        problem="切れに気づくのが最悪のタイミングで、誰かが深夜に走る羽目になる",
-        benefit="まとめ買い宅配なら重労働なしで、切れリスクを先に潰せる",
-        buy_reason="重い消耗品ほど、店で抱えるより届けてもらう方が生活が楽",
-        avoid="シングル/ダブルと芯ありなしの取り違えに注意",
+        scene="夜中に芯だけ発見したくないとき",
+        problem="最悪のタイミングで深夜に走ることになる",
+        benefit="まとめ買い宅配なら切れリスク先に潰せる",
+        buy_reason="重い消耗品は届けてもらう方が楽",
+        avoid="シングル/ダブルと芯ありなし、取り違え注意",
         template_id="",
         require_name_hints=("ロール", "シングル", "ダブル", "芯なし", "芯あり"),
         # 「ケース買い」など消耗品表記に誤爆しないよう、収納グッズ固有語だけ除外
@@ -244,11 +249,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         keyword="ティッシュペーパー ボックス",
         name_hints=("ティッシュペーパー", "ボックスティッシュ", "ティシュー"),
         genre_id="100939",
-        scene="リビングと寝室で同時に空になるパターン",
-        problem="箱ごとに買うと単価も手間も増え、気づくたびに小さなストレスが積もる",
-        benefit="ケース買いなら補充回数が減り、単価も下がって家計と手間の両方助かる",
+        scene="リビングと寝室が同時に空になる日",
+        problem="箱ごとに買うと単価も手間も増える",
+        benefit="ケース買いなら補充回数が減る",
         buy_reason="毎日使うものほど、まとめが効く",
-        avoid="ソフトパックと箱の置き場所を確認してから選ぶ",
+        avoid="箱かソフトパックか、置き場だけ先に確認",
         template_id="",
         require_name_hints=("組", "箱", "個", "パック", "ソフトパック"),
         exclude_name_hints=(
@@ -268,10 +273,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         name_hints=("ゴミ袋", "ごみ袋"),
         genre_id="100939",
         scene="ゴミの日の朝に指定袋がないとき",
-        problem="朝の出発が遅れ、最悪ゴミを一週間持ち越す",
-        benefit="指定サイズを先に積んでおけば、朝の慌てと持ち越しが消える",
+        problem="朝の出発が遅れて、最悪一週間持ち越す",
+        benefit="指定サイズ先積みで、朝の慌てが消える",
         buy_reason="ゴミ袋切れは時間も気力も持っていく",
-        avoid="自治体の色・厚さ指定を見落とさない",
+        avoid="自治体の色・厚さ指定は要チェック",
         template_id="",
     ),
     PainIntent(
@@ -281,10 +286,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         name_hints=("天然水", "ラベルレス", "ミネラルウォーター"),
         genre_id="100227",
         scene="買い出し帰りが重くてしんどい日",
-        problem="重い水を運ぶたびに疲れが残り、他の家事まで崩れる",
-        benefit="ケース水を宅配に寄せれば、腕も時間も空けて帰宅できる",
-        buy_reason="水は「買う商品」より「運ばなくていい仕組み」",
-        avoid="置き場所（箱の高さ）を測ってから決める",
+        problem="重い水を運ぶたびに、他の家事まで崩れる",
+        benefit="ケース水宅配なら、腕も時間も空く",
+        buy_reason="水は運ばなくていい仕組みが本体",
+        avoid="箱の高さ、置き場測ってからが無難",
         template_id="",
         timesave=True,
     ),
@@ -295,11 +300,22 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         name_hints=("サランラップ", "食品用ラップ", "ラップフィルム"),
         genre_id="551167",
         scene="お弁当や作り置きの朝",
-        problem="朝いちで切れると準備が止まり、出発が全体的に遅れる",
-        benefit="替え玉があれば朝の小パニックが消え、支度が止まらない",
+        problem="朝いちで切れると、支度が全部遅れる",
+        benefit="替え玉があれば朝の小パニック消える",
         buy_reason="朝に効く消耗品は、前夜の自分への投資",
-        avoid="幅（22cm/30cm）の取り違えに注意",
+        avoid="22cm/30cmの取り違え注意",
         template_id="",
+        # SEOで「サランラップ」が付いたホルダー/ケースを除外
+        exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES
+        + (
+            "ホルダー",
+            "ケース",
+            "ideaco",
+            "イデアコ",
+            "マグネット",
+            "収納",
+            "ラップカッター",
+        ),
         timesave=True,
     ),
     PainIntent(
@@ -308,11 +324,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         keyword="キッチンスポンジ 抗菌",
         name_hints=("キッチンスポンジ", "食器洗いスポンジ", "スポンジたわし"),
         genre_id="551167",
-        scene="洗い物のたびに衛生感が気になるとき",
-        problem="替え時を逃すと気持ち悪さと洗い残し不安が毎日続く",
-        benefit="まとめ買いしておけば迷わず交換でき、洗い物のストレスが下がる",
-        buy_reason="安い消耗品ほど、決断コストをゼロにする価値がある",
-        avoid="油汚れ用とグラス用を分けた方が持ちがいい",
+        scene="洗い物のたび衛生感が気になるとき",
+        problem="替え時逃すと、気持ち悪さが毎日続く",
+        benefit="まとめ買いなら迷わず交換できる",
+        buy_reason="安い消耗品ほど、決断コストをゼロに",
+        avoid="油用とグラス用、分けた方が持ちいい",
         template_id="",
     ),
     PainIntent(
@@ -321,11 +337,11 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         keyword="食洗機 洗剤 タブレット",
         name_hints=("食洗機用", "食器洗い機用", "食洗機洗剤", "食洗機用洗剤"),
         genre_id="551167",
-        scene="食洗機を回すたびに減っていくストック",
-        problem="切れると手洗い戻りが発生し、共働きの夜が一気に重くなる",
-        benefit="大容量を先に置けば買い忘れが減り、時短家電が止まらない",
-        buy_reason="食洗機は洗剤があって初めて時短装置になる",
-        avoid="機種の専用指定（粉/タブ/ジェル）を確認",
+        scene="回すたびに減っていくストック",
+        problem="切れると手洗い戻りで、夜が一気に重い",
+        benefit="大容量先置きで、時短家電が止まらない",
+        buy_reason="食洗機は洗剤があって初めて時短装置",
+        avoid="粉/タブ/ジェルの機種指定だけ確認",
         template_id="",
         timesave=True,
     ),
@@ -336,10 +352,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         name_hints=("キッチンペーパー", "クッキングペーパー"),
         genre_id="551167",
         scene="揚げ物や肉の下処理の最中",
-        problem="調理中に切れると手が止まり、油跳ねや片付けが雑になる",
-        benefit="替えが1個あるだけで調理が止まらず、後片付けも楽になる",
-        buy_reason="料理中の切れは、いちばん腹立たしい切れ方",
-        avoid="ホルダーサイズに合うかだけ先に見る",
+        problem="調理中に切れると、手が止まって片付け雑になる",
+        benefit="替え1個あるだけで調理が止まらない",
+        buy_reason="料理中の切れがいちばん腹立たしい",
+        avoid="ホルダーサイズ合うかだけ見て",
         template_id="",
     ),
 )
@@ -361,17 +377,21 @@ TIMESAVE_ONLY_INTENTS: Tuple[PainIntent, ...] = (
             "ウエットシート",
         ),
         genre_id="100939",
-        scene="帰ってすぐに床の砂や髪が気になる夜",
-        problem="本格掃除まで溜めると休日が掃除デーになり、休みが消える",
-        benefit="替えシートがあればさっと拭けて、夜の片付けが5分で終わる",
-        buy_reason="時短は道具本体より、替えが切れていないことが本体",
-        avoid="ドライ/ウェットの使い分けと対応本体サイズを確認",
+        scene="帰宅直後に床の砂や髪が気になる夜",
+        problem="溜めると休日が掃除デーになって消える",
+        benefit="替えシートあれば、夜の片付け5分で終わる",
+        buy_reason="時短は道具本体より、替えが切れないこと",
+        avoid="ドライ/ウェットと本体サイズ要確認",
         template_id="",
         require_name_hints=("シート",),
         exclude_name_hints=(
             "本体セット",
             "ハンドル付き",
             "伸縮ポール",
+            "スタンド",
+            "ホルダー",
+            "収納",
+            "山崎実業",
         ),
         require_size_token=False,
         timesave=True,
@@ -392,50 +412,47 @@ def timesave_pain_intents() -> Tuple[PainIntent, ...]:
 # 商品投稿に楽天の商品画像を付ける（⑥）
 ATTACH_ITEM_IMAGE = True
 
-# 日内枠（JST）。1日10投稿 = 共感5 + どうでもいい雑談2 + 商品紹介3。
-# 共感ばかりだとAIっぽく見えるので、無関係な雑談を混ぜる。
-# 商品3本のうち1本は時短消耗品（ガジェットではなく替えシート等）。
+# 日内枠（JST）。1日3投稿 = アンケート2 + 商品紹介1。
+# GitHub Actions 無料枠（月2000分）節約のため、投稿密度を抑える。
+# 08:00 / 15:00 はアイス投稿と同型の問いかけ（アンケート）。20:00 のみ商品。
 SLOT_LABELS: Tuple[str, ...] = (
-    "07:00",  # 0: 共働きリアル苦悩
-    "08:00",  # 1: どうでもいい雑談
-    "12:00",  # 2: 共働きリアル苦悩
-    "15:00",  # 3: どうでもいい雑談
-    "17:00",  # 4: 共働きリアル苦悩（再利用優先）
-    "18:00",  # 5: 時短アイテム（消耗品）
-    "19:00",  # 6: 商品紹介
-    "20:00",  # 7: 商品紹介（ゴールデン）
-    "21:00",  # 8: 共働きリアル苦悩
-    "22:00",  # 9: 共働きリアル苦悩
+    "08:00",  # 0: アンケート（問いかけ雑談）
+    "15:00",  # 1: アンケート（問いかけ雑談）
+    "20:00",  # 2: 商品紹介（答え合わせ型）
 )
 POSTS_PER_DAY = len(SLOT_LABELS)
 
-# 商品紹介は夕方以降にまとめる（朝から売り込みすぎない）。
-ITEM_SLOTS: Tuple[int, ...] = (5, 6, 7)
-# 時短アイテム枠（ITEM_SLOTS の部分集合）。timesave=True の悩みだけ回す。
-TIMESAVE_ITEM_SLOTS: Tuple[int, ...] = (5,)
+# 商品紹介は1日1本（20:00）。
+ITEM_SLOTS: Tuple[int, ...] = (2,)
+# 時短専用枠は当面停止（timesave 悩みは通常ローテ側で扱う）。
+TIMESAVE_ITEM_SLOTS: Tuple[int, ...] = ()
 
-# ランキングダイジェストは一旦停止（共感つぶやき優先）。
+# ランキングダイジェストは一旦停止。
 DIGEST_SLOTS: Tuple[int, ...] = ()
 
-# 静的な価値投稿（value_posts.py）。
-VALUE_SLOTS: Tuple[int, ...] = (0, 1, 2, 3, 4, 8, 9)
+# 価値投稿枠（リンクなし）。中身は ASK_CHITCHAT_SLOTS でアンケートに寄せる。
+VALUE_SLOTS: Tuple[int, ...] = (0, 1)
 
-# 共働きリアル苦悩（共感つぶやき）。
-STRUGGLE_SLOTS: Tuple[int, ...] = (0, 2, 4, 8, 9)
+# 共働きリアル苦悩は当面停止（アンケート優先）。
+STRUGGLE_SLOTS: Tuple[int, ...] = ()
 
-# テーマ無関係のどうでもいい雑談（中の人が人間に見えるためのブレ）。
-CHITCHAT_SLOTS: Tuple[int, ...] = (1, 3)
-# 雑談プール（自動補充先）。一度投稿したら台帳で消費し再利用しない。
+# 旧どうでもいい雑談枠は停止（アンケートに統合）。
+CHITCHAT_SLOTS: Tuple[int, ...] = ()
 CHITCHAT_POOL_PATH = DATA_DIR / "chitchat_pool.json"
 CHITCHAT_MIN_UNUSED = 6
 CHITCHAT_REFILL_COUNT = 10
 
-# 伸びた価値投稿の再利用（参考: 3日に1回）。
-# REUSE_SLOTS では通常ローテより再利用キューを優先する。
+# アンケート（問いかけ）枠。アイス投稿と同型。季節 + 軽いトレンド。商品・PRなし。
+ASK_CHITCHAT_SLOTS: Tuple[int, ...] = (0, 1)
+ASK_CHITCHAT_POOL_PATH = DATA_DIR / "ask_chitchat_pool.json"
+TREND_SEEDS_PATH = DATA_DIR / "trend_seeds.json"
+ASK_CHITCHAT_MIN_UNUSED = 6
+ASK_CHITCHAT_REFILL_COUNT = 10
+
+# 伸びた価値投稿の再利用。アンケートは一度きりなので枠は空。
 REUSE_INTERVAL_DAYS = 3
-REUSE_SLOTS: Tuple[int, ...] = (4,)  # 17:00 帰宅帯（苦悩枠でも伸びた投稿を再利用）
+REUSE_SLOTS: Tuple[int, ...] = ()
 REUSE_PATH = DATA_DIR / "reuse.json"
-# Insights 連携時、この views 以上を「伸びた」とみなして優先度を上げる
 REUSE_WINNER_MIN_VIEWS = 500
 
 # 楽天 API エンドポイント（2025年以降の新仕様）

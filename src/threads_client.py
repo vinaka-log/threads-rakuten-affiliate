@@ -13,7 +13,7 @@ from __future__ import annotations
 import asyncio
 import os
 from dataclasses import dataclass, field
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Sequence
 
 import httpx
 
@@ -48,12 +48,30 @@ class ThreadsPostResult:
     dry_run: bool
     image_urls: List[str] = field(default_factory=list)
     warnings: List[str] = field(default_factory=list)
+    poll_options: List[str] = field(default_factory=list)
 
     @property
     def partial(self) -> bool:
         """本投稿は出たが、リプ連鎖の一部が欠けている。"""
         return bool(self.post_ids) and len(self.post_ids) < len(self.texts)
 
+
+def _poll_attachment_payload(options: Sequence[str]) -> str:
+    """Threads poll_attachment JSON（option_a..d）。各選択肢は1〜25字。"""
+    import json
+
+    cleaned = [str(o).strip() for o in options if str(o).strip()]
+    if len(cleaned) < 2 or len(cleaned) > 4:
+        raise ValueError(f"poll options must be 2..4 items, got {len(cleaned)}")
+    keys = ("option_a", "option_b", "option_c", "option_d")
+    payload = {}
+    for key, opt in zip(keys, cleaned):
+        if len(opt) > 25:
+            opt = opt[:25]
+        if not opt:
+            raise ValueError("poll option is empty")
+        payload[key] = opt
+    return json.dumps(payload, ensure_ascii=False)
 
 def _env_float(name: str, default: float) -> float:
     raw = (os.environ.get(name) or "").strip()
@@ -168,6 +186,7 @@ class ThreadsClient:
         reply_to_id: Optional[str] = None,
         topic_tag: Optional[str] = None,
         image_url: Optional[str] = None,
+        poll_options: Optional[Sequence[str]] = None,
         client: Optional[httpx.AsyncClient] = None,
     ) -> str:
         params: dict = {
@@ -181,6 +200,12 @@ class ThreadsClient:
             params["reply_to_id"] = reply_to_id
         if topic_tag:
             params["topic_tag"] = topic_tag.lstrip("#")
+        if poll_options:
+            if image_url:
+                raise ValueError("poll_attachment は IMAGE と同時に使えません")
+            if reply_to_id:
+                raise ValueError("poll_attachment は返信には付けられません")
+            params["poll_attachment"] = _poll_attachment_payload(poll_options)
 
         data = await self._post_params(f"{self.user_id}/threads", params, client=client)
         return str(data["id"])
@@ -208,6 +233,7 @@ class ThreadsClient:
         reply_to_id: Optional[str] = None,
         topic_tag: Optional[str] = None,
         image_url: Optional[str] = None,
+        poll_options: Optional[Sequence[str]] = None,
         client: Optional[httpx.AsyncClient] = None,
     ) -> str:
         creation_id = await self.create_media_container(
@@ -215,6 +241,7 @@ class ThreadsClient:
             reply_to_id=reply_to_id,
             topic_tag=topic_tag,
             image_url=image_url,
+            poll_options=poll_options,
             client=client,
         )
         if self.publish_delay_sec:
@@ -272,17 +299,25 @@ class ThreadsClient:
         *,
         topic_tag: Optional[str] = None,
         image_url: Optional[str] = None,
+        poll_options: Optional[Sequence[str]] = None,
         dry_run: bool = False,
         allow_partial: bool = True,
     ) -> ThreadsPostResult:
         """本投稿→自分リプの連鎖。
 
         image_url がある場合、1本目のみ IMAGE 投稿（⑥）。リプは TEXT。
+        poll_options がある場合、1本目のみ TEXT+poll_attachment（公式4択）。
+        image と poll は同時不可。
         allow_partial=True: 2本目以降が失敗しても、親が出ていれば warnings 付きで返す。
         """
         cleaned = [t.strip() for t in texts if t and t.strip()]
         if not cleaned:
             raise ValueError("投稿コンテンツが空です")
+        poll = [str(o).strip() for o in (poll_options or []) if str(o).strip()]
+        if poll and image_url:
+            raise ValueError("poll_options と image_url は同時に指定できません")
+        if poll and (len(poll) < 2 or len(poll) > 4):
+            raise ValueError("poll_options は 2〜4 個必要です")
 
         if dry_run:
             return ThreadsPostResult(
@@ -290,11 +325,13 @@ class ThreadsClient:
                 post_ids=[],
                 dry_run=True,
                 image_urls=[image_url] if image_url else [],
+                poll_options=list(poll),
             )
 
         post_ids: List[str] = []
         warnings: List[str] = []
         used_image = image_url
+        used_poll = list(poll) if poll else None
         async with httpx.AsyncClient(timeout=self.timeout_sec) as http:
             reply_to: Optional[str] = None
             for index, text in enumerate(cleaned):
@@ -305,8 +342,9 @@ class ThreadsClient:
                         text,
                         reply_to_id=reply_to,
                         topic_tag=topic_tag if index == 0 else None,
-                        # 画像は本投稿のみ。IMAGE失敗時は TEXT にフォールバック
+                        # 画像/アンケートは本投稿のみ
                         image_url=used_image if index == 0 else None,
+                        poll_options=used_poll if index == 0 else None,
                         client=http,
                     )
                 except ThreadsApiError as exc:
@@ -319,6 +357,22 @@ class ThreadsClient:
                                 reply_to_id=None,
                                 topic_tag=topic_tag,
                                 image_url=None,
+                                poll_options=used_poll,
+                                client=http,
+                            )
+                        except ThreadsApiError:
+                            raise
+                    elif index == 0 and used_poll:
+                        # ポーリング権限や未対応時はテキストのみでフォールバック
+                        warnings.append(f"poll attach failed, fallback to TEXT: {exc}")
+                        used_poll = None
+                        try:
+                            post_id = await self.publish_item(
+                                text,
+                                reply_to_id=None,
+                                topic_tag=topic_tag,
+                                image_url=None,
+                                poll_options=None,
                                 client=http,
                             )
                         except ThreadsApiError:
@@ -345,4 +399,5 @@ class ThreadsClient:
             dry_run=False,
             image_urls=[image_url] if image_url and used_image else [],
             warnings=warnings,
+            poll_options=list(poll) if used_poll else [],
         )

@@ -24,8 +24,9 @@ class PrDisclosureTests(unittest.TestCase):
         self.assertNotIn("アフィリエイトリンクを含みます", _REPLY_TEMPLATE)
 
     def test_validate_requires_disclosure_phrase(self) -> None:
-        main = "テスト本投稿です。リプ見てね👇"
+        main = "洗剤、また切れそう？\n\nみんなはどうしてる？"
         reply_ok = (
+            "正体はこれ。\n"
             "【テスト商品】\n"
             "▼商品はこちら\n"
             "https://example.com/a\n"
@@ -52,13 +53,15 @@ class PrDisclosureTests(unittest.TestCase):
         pick = PickResult(
             item=item,
             genre=config.GENRES[0],
-            slot=6,
-            posted_on="2026-08-03",
+            slot=2,
+            posted_on="2026-08-06",
             pain=pain,
         )
         composed = compose(pick)
         self.assertEqual(len(composed.texts), 2)
         self.assertNotIn("http", composed.texts[0])
+        self.assertNotIn("「", composed.texts[0])
+        self.assertIn("正体はこれ", composed.texts[1])
         self.assertIn("https://example.com/aff", composed.texts[1])
         self.assertIn(_PR_DISCLOSURE, composed.texts[1])
         self.assertFalse(composed.texts[1].lstrip().startswith("#PR"))

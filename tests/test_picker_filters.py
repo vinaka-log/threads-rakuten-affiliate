@@ -246,20 +246,17 @@ class PickerFilterTests(unittest.TestCase):
         filtered = _filter_candidates([paid, free], used=set(), pain=detergent)
         self.assertEqual([i.item_code for i in filtered], ["det:free"])
 
-    def test_timesave_slot_uses_timesave_pains(self) -> None:
+    def test_timesave_slot_optional(self) -> None:
+        """時短専用枠が空でも通常1枠で運用できる。"""
         from datetime import date
         from picker import pain_for_slot
 
+        self.assertEqual(config.TIMESAVE_ITEM_SLOTS, ())
+        self.assertEqual(config.ITEM_SLOTS, (2,))
         on = date(2026, 8, 3)
-        slot = config.TIMESAVE_ITEM_SLOTS[0]
-        pain = pain_for_slot(slot, on)
-        self.assertTrue(pain.timesave)
-        # 通常商品枠は時短カウンタと独立
-        regular = [s for s in config.ITEM_SLOTS if s not in config.TIMESAVE_ITEM_SLOTS]
-        self.assertGreaterEqual(len(regular), 2)
-        p6 = pain_for_slot(regular[0], on)
-        p7 = pain_for_slot(regular[1], on)
-        self.assertNotEqual(p6.id, p7.id)
+        pain = pain_for_slot(2, on)
+        # all_pain_intents ローテに時短専用も含む
+        self.assertIn(pain.id, {p.id for p in config.all_pain_intents()})
 
     def test_floor_wiper_sheet_ok_body_rejected(self) -> None:
         pain = next(p for p in config.all_pain_intents() if p.id == "floor-wiper")
@@ -282,22 +279,13 @@ class PickerFilterTests(unittest.TestCase):
         self.assertTrue(_matches_pain(wet, pain))
         self.assertFalse(_matches_pain(body, pain))
 
-    def test_regular_item_rotation_unchanged_length(self) -> None:
-        """時短専用悩みを足しても通常枠のローテ（トイレットペーパー等）はずれない。"""
+    def test_single_item_slot_rotates_across_days(self) -> None:
+        """商品1枠でも日付で悩みが回る。"""
         from datetime import date
         from picker import pain_for_slot
 
-        on = date(2026, 8, 3)
-        regular = [s for s in config.ITEM_SLOTS if s not in config.TIMESAVE_ITEM_SLOTS]
-        self.assertEqual(
-            [pain_for_slot(s, on).id for s in regular],
-            ["toilet-paper", "tissue"],
-        )
-        timesave_id = pain_for_slot(config.TIMESAVE_ITEM_SLOTS[0], on).id
-        self.assertIn(
-            timesave_id,
-            {p.id for p in config.timesave_pain_intents()},
-        )
+        ids = [pain_for_slot(2, date(2026, 8, d)).id for d in range(1, 12)]
+        self.assertGreaterEqual(len(set(ids)), 5)
 
 
 if __name__ == "__main__":
