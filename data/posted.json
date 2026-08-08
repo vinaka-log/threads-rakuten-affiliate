@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-08T20:01:46+09:00",
+  "updated_at": "2026-08-08T21:36:04+09:00",
   "entries": [
     {
       "item_code": "value:struggle-receipt-stack",
@@ -98,6 +98,17 @@
       "posted_on": "2026-08-08",
       "threads_post_ids": [
         "17962736319158836"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-sock-missing",
+      "item_name": "価値投稿 chat-sock-missing",
+      "kind": "chitchat",
+      "slot": 8,
+      "posted_on": "2026-08-08",
+      "threads_post_ids": [
+        "17907291249285832"
       ],
       "reused": false
     },
