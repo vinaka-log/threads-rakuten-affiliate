@@ -1,0 +1,163 @@
+name: Lookup Sapporo Classic affiliate
+
+# 手動実行でサッポロクラシックの楽天アフィURLをログに出す。
+# Actions → この workflow → Run workflow
+# variant: summer（夏の爽快） / normal（通常） / both
+
+on:
+  workflow_dispatch:
+    inputs:
+      variant:
+        description: "summer / normal / both"
+        required: true
+        default: "normal"
+        type: choice
+        options:
+          - normal
+          - summer
+          - both
+      keyword:
+        description: "追加検索キーワード（任意）"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      RAKUTEN_APPLICATION_ID: ${{ secrets.RAKUTEN_APPLICATION_ID }}
+      RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+      RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+      PYTHONPATH: src:.
+      LOOKUP_VARIANT: ${{ inputs.variant }}
+      EXTRA_KEYWORD: ${{ inputs.keyword }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Require Rakuten secrets
+        run: |
+          missing=0
+          for key in RAKUTEN_APPLICATION_ID RAKUTEN_ACCESS_KEY RAKUTEN_AFFILIATE_ID; do
+            if [ -z "${!key}" ]; then
+              echo "Missing secret: $key"
+              missing=1
+            fi
+          done
+          if [ "$missing" = "1" ]; then
+            exit 1
+          fi
+
+      - name: Search Sapporo Classic
+        run: |
+          python - <<'PY'
+          import os
+          from rakuten import RakutenClient
+
+          client = RakutenClient()
+          variant = (os.environ.get("LOOKUP_VARIANT") or "normal").strip().lower()
+          extra = (os.environ.get("EXTRA_KEYWORD") or "").strip()
+
+          SUMMER_QUERIES = [
+              "サッポロクラシック 夏の爽快",
+              "サッポロ クラシック 夏の爽快 350ml",
+              "クラシック 夏の爽快 24本",
+          ]
+          NORMAL_QUERIES = [
+              "サッポロクラシック 350ml 24本",
+              "サッポロ クラシック 350ml×24",
+              "北海道限定 サッポロクラシック ケース",
+              "サッポロクラシック 500ml 24本",
+          ]
+
+          def run_search(label: str, queries: list[str], *, want_summer: bool) -> list:
+              qs = list(queries)
+              if extra:
+                  qs.insert(0, extra)
+              seen: set[str] = set()
+              hits = []
+              for q in qs:
+                  print(f"[{label}] query: {q}")
+                  for it in client.search_items(q, hits=30, pages=2, sort="-reviewCount"):
+                      if it.item_code in seen:
+                          continue
+                      name = it.item_name
+                      if "クラシック" not in name and "CLASSIC" not in name.upper():
+                          continue
+                      has_summer = "夏の爽快" in name
+                      if want_summer and not has_summer:
+                          continue
+                      if not want_summer and has_summer:
+                          continue
+                      # 通常検索では黒ラベル・エヴァ等の別商品を弱く除外
+                      if not want_summer:
+                          if "黒ラベル" in name or "エヴァンゲリオン" in name:
+                              continue
+                      seen.add(it.item_code)
+                      hits.append(it)
+
+              def score(it):
+                  n = it.item_name
+                  s = 0.0
+                  if want_summer and "夏の爽快" in n:
+                      s += 50
+                  if not want_summer and "夏の爽快" not in n:
+                      s += 20
+                  if "24" in n or "24本" in n:
+                      s += 15
+                  if "350" in n:
+                      s += 10
+                  if "500" in n:
+                      s += 5
+                  if "ギフト" in n or "お中元" in n or "御中元" in n:
+                      s -= 5
+                  if it.postage_flag == 0:
+                      s += 8
+                  s += min(it.review_count, 5000) / 100.0
+                  s += it.review_average
+                  return s
+
+              hits.sort(key=score, reverse=True)
+              print(f"[{label}] MATCHES={len(hits)}")
+              for i, it in enumerate(hits[:10], 1):
+                  url = it.affiliate_url or it.item_url
+                  mid = max(1, len(url) // 2)
+                  print("=" * 60)
+                  print(f"[{label}] #{i}")
+                  print(f"code: {it.item_code}")
+                  print(f"name: {it.item_name}")
+                  print(f"price: {it.item_price}")
+                  print(f"review: {it.review_average} ({it.review_count})")
+                  print(f"postage_flag: {it.postage_flag} (0=included)")
+                  print(f"shop: {it.shop_name}")
+                  print(f"item_url: {it.item_url}")
+                  print(f"affiliate_url_part1: {url[:mid]}")
+                  print(f"affiliate_url_part2: {url[mid:]}")
+              if not hits:
+                  raise SystemExit(f"no matching items for {label}")
+              return hits
+
+          any_hits = False
+          if variant in ("summer", "both"):
+              run_search("summer", SUMMER_QUERIES, want_summer=True)
+              any_hits = True
+          if variant in ("normal", "both"):
+              run_search("normal", NORMAL_QUERIES, want_summer=False)
+              any_hits = True
+          if not any_hits:
+              raise SystemExit(f"unknown variant: {variant}")
+          PY
