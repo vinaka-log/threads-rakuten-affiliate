@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-09T14:40:22+09:00",
+  "updated_at": "2026-08-09T16:44:11+09:00",
   "entries": [
     {
       "item_code": "value:ask-da2de66eeb",
@@ -55,6 +55,23 @@
         "18079017107689048"
       ],
       "reused": false
+    },
+    {
+      "item_code": "chikyukagu:10033234",
+      "item_name": "吊り下げ ティッシュケース おしゃれ 車 キッチン 北欧 壁掛け ペーパータオル マスク キッチンペーパー おしり拭き ウエットティッシュ 便利 PUレザー 1000円ポッキリ",
+      "genre_id": "551167",
+      "genre_label": "キッチン用品・食器・調理器具",
+      "slot": 5,
+      "posted_on": "2026-08-09",
+      "threads_post_ids": [
+        "17942875311291579",
+        "17869777938582070",
+        "18608985424031106"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00s5min.x8u2b513.g00s5min.x8u2c9d0/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fchikyukagu%2Ftshc0001%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fchikyukagu%2Fi%2F10033234%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "kitchen-paper",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/chikyukagu/cabinet/base2/tshc0001n2.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-receipt-stack",
