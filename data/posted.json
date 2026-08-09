@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-09T11:33:50+09:00",
+  "updated_at": "2026-08-09T12:26:57+09:00",
   "entries": [
     {
       "item_code": "value:ask-da2de66eeb",
@@ -20,6 +20,17 @@
       "posted_on": "2026-08-09",
       "threads_post_ids": [
         "18082083773281370"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-chihiro-bill",
+      "item_name": "価値投稿 ogiri-chihiro-bill",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-09",
+      "threads_post_ids": [
+        "17984492513865251"
       ],
       "reused": false
     },
