@@ -39,6 +39,10 @@ on:
         description: "Optional Rakuten genreId (empty = rotate by date+slot)"
         required: false
         default: ""
+      pain:
+        description: "Optional pain id for item posts (e.g. toilet-paper / water-case / tissue). Forces --item"
+        required: false
+        default: ""
 
 concurrency:
   group: threads-rakuten-daily
