@@ -74,11 +74,22 @@ class ItemCopyStructureTests(unittest.TestCase):
             msg=main,
         )
 
+    def test_main_has_rami_style_hook_and_after_benefit(self) -> None:
+        pain = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
+        for tid, _ in _MAIN_TEMPLATES:
+            composed = compose(_pick(), template_id=tid)
+            main, memo, _link = composed.texts
+            self.assertTrue(main.startswith("↓"), msg=f"{tid}: {main}")
+            self.assertIn("＼", main, msg=f"{tid}: {main}")
+            # 導入後の変化（benefit）が本投稿に入る
+            self.assertIn(pain.benefit, main, msg=f"{tid}: {main}")
+            self.assertIn("先置きしてからの方が楽", memo)
+
     def test_all_templates_stay_short(self) -> None:
         for tid, _ in _MAIN_TEMPLATES:
             composed = compose(_pick(), template_id=tid)
             main, memo, link = composed.texts
-            self.assertLessEqual(len(main), _SOFT_MAIN_LIMIT, msg=f"{tid} main too long")
+            self.assertLessEqual(len(main), _SOFT_MAIN_LIMIT, msg=f"{tid} main too long: {main}")
             self.assertLessEqual(len(memo), _SOFT_MEMO_LIMIT, msg=f"{tid} memo too long")
             self.assertLessEqual(len(link), _SOFT_LINK_LIMIT, msg=f"{tid} link too long")
             self.assertNotIn("「", main)
@@ -95,6 +106,7 @@ class ItemCopyStructureTests(unittest.TestCase):
         self.assertEqual(len(composed.texts), 3)
         self.assertIn("うちのストックはこれ", memo)
         self.assertIn("アタック", memo)
+        self.assertIn("先置きしてからの方が楽", memo)
         self.assertNotIn("正体はこれ", memo)
         self.assertNotIn("▼商品はこちら", memo)
         self.assertNotIn("レビュー", memo)

@@ -35,50 +35,57 @@ class ComposedPost:
     image_url: str = ""
 
 
-# 本投稿: 買い足しあるある＋問い。商品名・価格・URL・PR は出さない。
-# 「おすすめ」「コスパ」「答え合わせ」など売り口調は使わない。
+# 本投稿: らみ型（フック→キャッチ→場面→導入後の変化→問い）。
+# 商品名・価格・URL・PR は出さない。「おすすめ」「コスパ」等の売り口調も使わない。
 _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
     (
         "hook-must",
-        "{pain}\n\n"
-        "{problem}\n"
-        "うち、先に置いとくようにした。\n\n"
+        "↓また切れた…あるある↓\n\n"
+        "＼先に置いとくだけ／\n\n"
+        "{scene}、地味にキツい。\n"
+        "{benefit}。\n\n"
         "同じことなってる人いる？",
     ),
     (
         "hook-scene",
-        "{pain}\n\n"
+        "↓場所あるある↓\n\n"
+        "＼先置きメモ／\n\n"
         "{scene}、地味にキツい。\n"
-        "{benefit}\n\n"
+        "{benefit}。\n\n"
         "みんなはどう凌いでる？",
     ),
     (
         "hook-tip",
-        "{pain}\n\n"
-        "切れてから走るの、いちばん疲れる。\n"
-        "{benefit}\n\n"
+        "↓切れてから走る↓\n\n"
+        "＼先に置いとく／\n\n"
+        "{problem}。\n"
+        "{benefit}。\n\n"
         "先置き派、どれくらいいる？",
     ),
     (
         "hook-honest",
-        "{pain}\n\n"
-        "完璧じゃないけど、切れてからの寄り道の方がキツい。\n"
-        "{benefit}\n\n"
+        "↓完璧じゃなくていい↓\n\n"
+        "＼先置きで助かる／\n\n"
+        "{scene}、正直キツい。\n"
+        "{benefit}。\n\n"
         "正直なところ、どうしてる？",
     ),
     (
         "hook-heavy",
-        "{pain}\n\n"
-        "店で抱えて帰るの、地味にきつい。\n"
-        "{problem}\n\n"
+        "↓店で抱えて帰る↓\n\n"
+        "＼届けてもらう／\n\n"
+        "{problem}。\n"
+        "{benefit}。\n\n"
         "ネット寄せた人、楽になった？",
     ),
 )
 
 # リプ1: うちのストックメモ（会話の続き）。リンク・PR・価格なし。
+# 導入後の変化を1文入れて、本投稿の続きにする。
 _REPLY_MEMO = (
     "うちのストックはこれ。\n"
     "{short_name}\n\n"
+    "先置きしてからの方が楽。\n"
     "{avoid}"
     "{sale_block}"
 )
@@ -101,7 +108,8 @@ _PR_DISCLOSURE = "※PR"
 # リプ内の商品名表示上限
 _REPLY_NAME_LIMIT = 28
 # ソフト上限（ハードは MAX_TEXT_LEN）。テストと運用の目安
-_SOFT_MAIN_LIMIT = 120
+# らみ型フック＋導入後の変化を入れるため本投稿はやや余裕を持たせる
+_SOFT_MAIN_LIMIT = 140
 _SOFT_MEMO_LIMIT = 180
 _SOFT_LINK_LIMIT = 120
 # 後方互換
