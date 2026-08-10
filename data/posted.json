@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-10T17:20:52+09:00",
+  "updated_at": "2026-08-10T19:08:22+09:00",
   "entries": [
     {
       "item_code": "value:ask-a176405f18",
@@ -72,6 +72,17 @@
       "rank": null,
       "pain_id": "softener",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/n-susume/cabinet/10253794/umihan-01.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-totoro-rain",
+      "item_name": "価値投稿 ogiri-totoro-rain",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-08-10",
+      "threads_post_ids": [
+        "18141774133564896"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-da2de66eeb",
