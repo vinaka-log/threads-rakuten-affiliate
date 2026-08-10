@@ -131,6 +131,9 @@ jobs:
           if [ -n "${{ inputs.genre }}" ]; then
             ARGS+=(--genre "${{ inputs.genre }}")
           fi
+          if [ -n "${{ inputs.pain }}" ]; then
+            ARGS+=(--item --pain "${{ inputs.pain }}")
+          fi
           python src/post.py "${ARGS[@]}"
 
       - name: Commit ledger if changed
