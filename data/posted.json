@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-10T21:55:16+09:00",
+  "updated_at": "2026-08-10T22:53:58+09:00",
   "entries": [
     {
       "item_code": "value:ask-a176405f18",
@@ -105,6 +105,23 @@
         "18418553575148124"
       ],
       "reused": false
+    },
+    {
+      "item_code": "ocean-hkd:10000795",
+      "item_name": "【ポイント有】北海道 ビール サッポロクラシック350ml×24本　*1箱国産ビール",
+      "genre_id": "100316",
+      "genre_label": "genre:100316",
+      "slot": 9,
+      "posted_on": "2026-08-10",
+      "threads_post_ids": [
+        "18066729332755980",
+        "18090011741551653",
+        "18138547153578128"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzthn.x8u2b026.g00pzthn.x8u2c65c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Focean-hkd%2F670618383%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Focean-hkd%2Fi%2F10000795%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "beer-sapporo-classic",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/ocean-hkd/cabinet/io/beeeru/07101025/imgrc0115989824.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-da2de66eeb",
