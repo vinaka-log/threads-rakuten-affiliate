@@ -279,6 +279,40 @@ class PickerFilterTests(unittest.TestCase):
         self.assertTrue(_matches_pain(wet, pain))
         self.assertFalse(_matches_pain(body, pain))
 
+    def test_sapporo_classic_original_excludes_summer(self) -> None:
+        pain = next(p for p in config.all_pain_intents() if p.id == "beer-sapporo-classic")
+        original = _item(
+            code="beer:orig",
+            name="サッポロクラシック 350ml×24本",
+            price=4680,
+            review_count=800,
+            review_average=4.6,
+        )
+        summer = _item(
+            code="beer:summer",
+            name="サッポロクラシック 夏の爽快 350ml×24本 2026",
+            price=4980,
+            review_count=200,
+            review_average=4.5,
+        )
+        black = _item(
+            code="beer:black",
+            name="サッポロ黒ラベル 350ml×24本",
+            price=4500,
+            review_count=1200,
+            review_average=4.7,
+        )
+        self.assertTrue(_matches_pain(original, pain))
+        self.assertFalse(_matches_pain(summer, pain))
+        self.assertFalse(_matches_pain(black, pain))
+        # ケース買いなので既定MAX_ITEM_PRICE(3000)超でも pain.max_price で通る
+        self.assertFalse(passes_quality(original))
+        self.assertTrue(passes_quality(original, max_price=pain.max_price))
+        filtered = _filter_candidates(
+            [summer, black, original], used=set(), pain=pain
+        )
+        self.assertEqual([i.item_code for i in filtered], ["beer:orig"])
+
     def test_single_item_slot_rotates_across_days(self) -> None:
         """商品枠でも日付で悩みが回る。"""
         from datetime import date

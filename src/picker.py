@@ -166,13 +166,14 @@ def is_postage_included(item: RakutenItem) -> bool:
     return int(getattr(item, "postage_flag", 1) or 0) == 0
 
 
-def passes_quality(item: RakutenItem) -> bool:
+def passes_quality(item: RakutenItem, *, max_price: Optional[int] = None) -> bool:
+    price_limit = int(max_price) if max_price is not None else int(config.MAX_ITEM_PRICE)
     ok = (
         item.review_average >= config.MIN_REVIEW_AVERAGE
         and item.review_count >= config.MIN_REVIEW_COUNT
         and bool(item.affiliate_url)
         and item.item_price > 0
-        and item.item_price <= int(config.MAX_ITEM_PRICE)
+        and item.item_price <= price_limit
         and not is_blocked(item)
     )
     if not ok:
@@ -230,7 +231,12 @@ def _filter_candidates(
     require_pain_match: bool = True,
 ) -> List[RakutenItem]:
     """品質・価格・ブロックを満たす候補。pain があるときは name_hints 一致を必須にする。"""
-    quality = [i for i in items if i.item_code not in used and passes_quality(i)]
+    price_cap = getattr(pain, "max_price", None) if pain is not None else None
+    quality = [
+        i
+        for i in items
+        if i.item_code not in used and passes_quality(i, max_price=price_cap)
+    ]
     if pain is not None and require_pain_match:
         quality = [i for i in quality if _matches_pain(i, pain)]
     if band:
@@ -256,12 +262,13 @@ def _search_pain_items(
     genre_id: Optional[str],
     postage_flag: Optional[int] = None,
 ) -> List[RakutenItem]:
+    price_cap = pain.max_price if pain.max_price is not None else int(config.MAX_ITEM_PRICE)
     return client.search_items(
         pain.keyword,
         hits=config.RANKING_HITS,
         sort="-reviewCount",
         genre_id=genre_id,
-        max_price=int(config.MAX_ITEM_PRICE),
+        max_price=int(price_cap),
         pages=3,
         postage_flag=postage_flag,
     )

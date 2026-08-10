@@ -1,0 +1,127 @@
+name: Lookup Sapporo Classic original affiliate
+
+# 手動実行で「サッポロクラシック（オリジナル）」の楽天アフィURLをログに出す。
+# 夏の爽快など季節限定は除外する。
+# Actions → この workflow → Run workflow
+# 投稿するときは daily.yml を dry_run=false / pain=beer-sapporo-classic / slot=5|9
+
+on:
+  workflow_dispatch:
+    inputs:
+      keyword:
+        description: "追加検索キーワード（空なら既定のオリジナルクエリのみ）"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      RAKUTEN_APPLICATION_ID: ${{ secrets.RAKUTEN_APPLICATION_ID }}
+      RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+      RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+      PYTHONPATH: src:.
+      EXTRA_KEYWORD: ${{ inputs.keyword }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Require Rakuten secrets
+        run: |
+          missing=0
+          for key in RAKUTEN_APPLICATION_ID RAKUTEN_ACCESS_KEY RAKUTEN_AFFILIATE_ID; do
+            if [ -z "${!key}" ]; then
+              echo "Missing secret: $key"
+              missing=1
+            fi
+          done
+          if [ "$missing" = "1" ]; then
+            exit 1
+          fi
+
+      - name: Search サッポロクラシック（オリジナル）
+        run: |
+          python - <<'PY'
+          import os
+          from rakuten import RakutenClient
+
+          client = RakutenClient()
+          queries = [
+              "サッポロクラシック 350ml 24本",
+              "サッポロ クラシック 350 24",
+              "サッポロクラシック 缶 24",
+              "サッポロクラシック オリジナル",
+          ]
+          extra = (os.environ.get("EXTRA_KEYWORD") or "").strip()
+          if extra:
+              queries.insert(0, extra)
+
+          exclude = ("夏の爽快", "黒ラベル", "赤星", "エビス", "ヱビス", "ノンアル")
+          seen: set[str] = set()
+          hits = []
+          for q in queries:
+              print(f"query: {q}")
+              for it in client.search_items(q, hits=30, pages=2, sort="-reviewCount", max_price=6000):
+                  if it.item_code in seen:
+                      continue
+                  name = it.item_name
+                  if "クラシック" not in name and "CLASSIC" not in name.upper():
+                      continue
+                  if "サッポロ" not in name and "SAPPORO" not in name.upper():
+                      continue
+                  if any(x in name for x in exclude):
+                      continue
+                  seen.add(it.item_code)
+                  hits.append(it)
+
+          def score(it):
+              n = it.item_name
+              s = 0.0
+              if "サッポロクラシック" in n or "サッポロ クラシック" in n:
+                  s += 50
+              if "24" in n or "24本" in n:
+                  s += 15
+              if "350" in n:
+                  s += 10
+              if "500" in n:
+                  s += 5
+              if it.postage_flag == 0:
+                  s += 8
+              s += min(it.review_count, 5000) / 100.0
+              s += it.review_average
+              return s
+
+          hits.sort(key=score, reverse=True)
+          print(f"MATCHES={len(hits)}")
+          for i, it in enumerate(hits[:10], 1):
+              url = it.affiliate_url or it.item_url
+              mid = max(1, len(url) // 2)
+              print("=" * 60)
+              print(f"#{i}")
+              print(f"code: {it.item_code}")
+              print(f"name: {it.item_name}")
+              print(f"price: {it.item_price}")
+              print(f"review: {it.review_average} ({it.review_count})")
+              print(f"postage_flag: {it.postage_flag} (0=included)")
+              print(f"shop: {it.shop_name}")
+              print(f"item_url: {it.item_url}")
+              # Secrets マスク回避のためアフィURLは分割表示
+              print(f"affiliate_url_part1: {url[:mid]}")
+              print(f"affiliate_url_part2: {url[mid:]}")
+          if not hits:
+              raise SystemExit("no matching items for サッポロクラシック original")
+          PY

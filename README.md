@@ -186,13 +186,15 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 商品紹介はさらに `PAIN_INTENTS`（洗剤切れ・水が重い等）で悩みキーワード検索して選びます。水などは悩み側でジャンル `100227` を個別指定。時短消耗品（食洗機タブ・ケース水・ラップ・フローリングシート等）も通常ローテに含めます。
 
+サッポロクラシック（オリジナル）は `beer-sapporo-classic`。季節限定「夏の爽快」は除外し、ケース買い向けに `max_price=6000`。手動投稿は Actions の daily.yml で `pain=beer-sapporo-classic`、候補確認は `lookup-classic-original.yml`。
+
 ※ 総合ランキングは美容・ガジェットが混ざるため使わない。ガジェット本体ではなく消耗品の替えを扱う。
 
 品質フィルタ（`config.py`）:
 
 - レビュー平均 `>= 4.3`
 - レビュー件数 `>= 100`
-- 価格 `> 0` かつ **`<= ¥3,000`**（`MAX_ITEM_PRICE`）
+- 価格 `> 0` かつ **`<= ¥3,000`**（`MAX_ITEM_PRICE`。悩み単位で `max_price` 上書き可）
 - **送料込を優先**（検索 `postageFlag=1` → 応答 `postageFlag=0`）。送料込が取れるときは送料別を選ばない
 - 直近30日に投稿済みの `itemCode` は除外
 - **悩み一致は必須**: 商品名が `PAIN_INTENTS.name_hints` にヒットしないものは載せない（洗剤コピーに美容液が乗る事故を防ぐ）
