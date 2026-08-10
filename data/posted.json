@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-10T22:53:58+09:00",
+  "updated_at": "2026-08-10T23:21:28+09:00",
   "entries": [
     {
       "item_code": "value:ask-a176405f18",
@@ -122,6 +122,23 @@
       "rank": null,
       "pain_id": "beer-sapporo-classic",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/ocean-hkd/cabinet/io/beeeru/07101025/imgrc0115989824.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "kurashikenkou:10201844",
+      "item_name": "＼1本当たり51.7円！〜／水 天然水 500ml 48本 ラベルレス 備蓄水 お茶 緑茶 ミネラルウォーター 富士山の天然水 富士山 ケース バナジウム バナジウム天然水 バナジウム含有 アイリスオーヤマ 飲料水 送料無料 【代引き不可】",
+      "genre_id": "100227",
+      "genre_label": "genre:100227",
+      "slot": 9,
+      "posted_on": "2026-08-10",
+      "threads_post_ids": [
+        "18071930561409848",
+        "18125909827769361",
+        "18100077349987974"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00qhoan.x8u2b37e.g00qhoan.x8u2ca9e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkurashikenkou%2F310999%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkurashikenkou%2Fi%2F10201844%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "water-case",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/kurashikenkou/cabinet/11663202/13368735/imgrc0106162446.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-da2de66eeb",
