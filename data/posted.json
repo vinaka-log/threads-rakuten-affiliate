@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-10T14:06:09+09:00",
+  "updated_at": "2026-08-10T15:06:49+09:00",
   "entries": [
     {
       "item_code": "value:ask-a176405f18",
@@ -42,6 +42,17 @@
       "posted_on": "2026-08-10",
       "threads_post_ids": [
         "18144191656480770"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-lunch-decide",
+      "item_name": "価値投稿 chat-lunch-decide",
+      "kind": "chitchat",
+      "slot": 4,
+      "posted_on": "2026-08-10",
+      "threads_post_ids": [
+        "18083049296321564"
       ],
       "reused": false
     },
