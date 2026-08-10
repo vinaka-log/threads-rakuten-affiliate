@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 # リポジトリルート
 ROOT_DIR = Path(__file__).resolve().parent
@@ -156,6 +156,8 @@ class PainIntent:
     require_size_token: bool = False
     # 時短アイテム枠（TIMESAVE_ITEM_SLOTS）のローテ対象か
     timesave: bool = False
+    # 悩みごとの価格上限（空なら MAX_ITEM_PRICE）。ケース買いなど向け。
+    max_price: Optional[int] = None
 
 
 _CONSUMABLE_STORAGE_EXCLUDES: Tuple[str, ...] = (
@@ -292,6 +294,34 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         avoid="箱の高さ、置き場測ってからが無難",
         template_id="",
         timesave=True,
+    ),
+    PainIntent(
+        id="beer-sapporo-classic",
+        pain="ビール、また店でケース抱えてない？",
+        keyword="サッポロクラシック 350ml 24本",
+        name_hints=("サッポロクラシック", "サッポロ クラシック"),
+        genre_id="100316",
+        scene="週末前にケースが空の夜",
+        problem="重い缶を運ぶと他の買い物も崩れる",
+        benefit="宅配なら運ぶ手間が消える",
+        buy_reason="重い飲みものは届けてもらう前提",
+        avoid="季節限定と取り違え注意",
+        template_id="",
+        require_name_hints=("クラシック",),
+        exclude_name_hints=(
+            "夏の爽快",
+            "黒ラベル",
+            "赤星",
+            "エビス",
+            "ヱビス",
+            "プレミアムアルコールフリー",
+            "ノンアル",
+            "ジョッキ",
+            "グラス",
+            "サーバー",
+        ),
+        timesave=True,
+        max_price=6000,
     ),
     PainIntent(
         id="wrap",

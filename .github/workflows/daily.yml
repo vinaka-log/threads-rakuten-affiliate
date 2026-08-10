@@ -40,7 +40,7 @@ on:
         required: false
         default: ""
       pain:
-        description: "Optional pain id for item posts (e.g. toilet-paper / water-case / tissue). Forces --item"
+        description: "Optional pain id for item posts (e.g. beer-sapporo-classic / water-case / toilet-paper). Forces --item"
         required: false
         default: ""
 
