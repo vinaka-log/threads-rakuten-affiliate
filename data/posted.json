@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-11T17:02:41+09:00",
+  "updated_at": "2026-08-11T18:50:07+09:00",
   "entries": [
     {
       "item_code": "value:ask-099dd617f4",
@@ -72,6 +72,17 @@
       "rank": null,
       "pain_id": "softener",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/oujiseiyaku/cabinet/12025037/1040_rakuten.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-majo-empty",
+      "item_name": "価値投稿 ogiri-majo-empty",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-08-11",
+      "threads_post_ids": [
+        "18071095685439229"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-a176405f18",
