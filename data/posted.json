@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-11T14:46:23+09:00",
+  "updated_at": "2026-08-11T17:02:41+09:00",
   "entries": [
     {
       "item_code": "value:ask-099dd617f4",
@@ -55,6 +55,23 @@
         "18338138296268035"
       ],
       "reused": false
+    },
+    {
+      "item_code": "oujiseiyaku:10000218",
+      "item_name": "【楽天お買い物マラソン開催！】＜アフューム全種類セット＞ 柔軟剤入り洗濯洗剤 アフューム アモーレ ローズ エターナル リリー ジェルマジックボール 5in1 消臭 抗菌 香り持続 新生活 詰め替え 詰替 部屋干し マリンブリーズ25gおまけ付き エコバッグ付き",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 5,
+      "posted_on": "2026-08-11",
+      "threads_post_ids": [
+        "18121343917883290",
+        "17928323190388159",
+        "17908369353460931"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00uexxn.x8u2b511.g00uexxn.x8u2c6ee/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Foujiseiyaku%2Fro20r-ar20r-et6r-li6r-sbmb25%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Foujiseiyaku%2Fi%2F10000218%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "softener",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/oujiseiyaku/cabinet/12025037/1040_rakuten.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-a176405f18",
