@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-12T15:07:05+09:00",
+  "updated_at": "2026-08-12T17:09:04+09:00",
   "entries": [
     {
       "item_code": "value:ask-01e1cbad8a",
@@ -55,6 +55,23 @@
         "18112648216956308"
       ],
       "reused": false
+    },
+    {
+      "item_code": "pia-konodai:10000502",
+      "item_name": "【ヤマト運輸ネコポス追跡有】ダスキン 台所用スポンジ抗菌タイプ6個セットブラックカラー 送料無料 キッチンスポンジ 抗菌 食器用スポンジ まとめ買い ダスキンスポンジ 台所用スポンジ 食器用 スポンジ キッチン ギフト 黒 DUSKIN",
+      "genre_id": "551167",
+      "genre_label": "キッチン用品・食器・調理器具",
+      "slot": 5,
+      "posted_on": "2026-08-12",
+      "threads_post_ids": [
+        "17952993015226584",
+        "18089656799397825",
+        "17940606813342631"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00rj4rn.x8u2b7af.g00rj4rn.x8u2ccdc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpia-konodai%2F1000000655%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fpia-konodai%2Fi%2F10000502%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "dish-sponge",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/pia-konodai/cabinet/newmono/blacksp/bk_sam_2604.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-099dd617f4",
