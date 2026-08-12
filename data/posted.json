@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-12T20:23:17+09:00",
+  "updated_at": "2026-08-12T21:56:14+09:00",
   "entries": [
     {
       "item_code": "value:ask-01e1cbad8a",
@@ -92,6 +92,17 @@
       "posted_on": "2026-08-12",
       "threads_post_ids": [
         "18086061920206627"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-remote",
+      "item_name": "価値投稿 chat-remote",
+      "kind": "chitchat",
+      "slot": 8,
+      "posted_on": "2026-08-12",
+      "threads_post_ids": [
+        "17922296979416633"
       ],
       "reused": false
     },
