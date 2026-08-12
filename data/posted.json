@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-12T12:02:00+09:00",
+  "updated_at": "2026-08-12T12:59:32+09:00",
   "entries": [
     {
       "item_code": "value:ask-01e1cbad8a",
@@ -20,6 +20,17 @@
       "posted_on": "2026-08-12",
       "threads_post_ids": [
         "18100744997256093"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-howl-messy",
+      "item_name": "価値投稿 ogiri-howl-messy",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-12",
+      "threads_post_ids": [
+        "18330563437261160"
       ],
       "reused": false
     },
