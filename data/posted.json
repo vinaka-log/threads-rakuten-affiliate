@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-12T17:09:04+09:00",
+  "updated_at": "2026-08-12T18:53:27+09:00",
   "entries": [
     {
       "item_code": "value:ask-01e1cbad8a",
@@ -72,6 +72,17 @@
       "rank": null,
       "pain_id": "dish-sponge",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/pia-konodai/cabinet/newmono/blacksp/bk_sam_2604.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-howl-calc",
+      "item_name": "価値投稿 ogiri-howl-calc",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-08-12",
+      "threads_post_ids": [
+        "18479419708111255"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-099dd617f4",
