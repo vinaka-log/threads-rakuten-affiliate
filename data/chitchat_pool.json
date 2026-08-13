@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T12:40:00+09:00",
+  "updated_at": "2026-08-13T12:05:16+09:00",
   "items": [
     {
       "id": "chat-phone-battery",
@@ -150,6 +150,66 @@
       "id": "chat-lunch-decide",
       "text": "昼何食べるか決められず\n結局いつもの定食\n選ぶ気力なかっただけ",
       "source": "seed"
+    },
+    {
+      "id": "chat-auto-8d3a55a458",
+      "text": "髪乾かしながらぼーっとして時間溶けた",
+      "source": "auto-draft",
+      "created_at": "2026-08-13T12:05:16+09:00"
+    },
+    {
+      "id": "chat-auto-ab073116c3",
+      "text": "靴紐ほどけてたの、家着いてから気づいた",
+      "source": "auto-draft",
+      "created_at": "2026-08-13T12:05:16+09:00"
+    },
+    {
+      "id": "chat-auto-7cd681d591",
+      "text": "通知オフなのにバッジ残ってる\n気になって開いちゃう",
+      "source": "auto-draft",
+      "created_at": "2026-08-13T12:05:16+09:00"
+    },
+    {
+      "id": "chat-auto-a5e36f974d",
+      "text": "洗面台の水、止め忘れそうになって振り返った",
+      "source": "auto-draft",
+      "created_at": "2026-08-13T12:05:16+09:00"
+    },
+    {
+      "id": "chat-auto-a91ff492db",
+      "text": "充電したつもりで寝たのに朝ほぼゼロ\n自分で自分を裏切ってる",
+      "source": "auto-draft",
+      "created_at": "2026-08-13T12:05:16+09:00"
+    },
+    {
+      "id": "chat-auto-381f1810cb",
+      "text": "昼ごはん決められずいつもの定食\n選ぶのしんどい日",
+      "source": "auto-draft",
+      "created_at": "2026-08-13T12:05:16+09:00"
+    },
+    {
+      "id": "chat-auto-a456fc3e6b",
+      "text": "アイス買いすぎた自覚ある\nでも暑い",
+      "source": "auto-draft",
+      "created_at": "2026-08-13T12:05:16+09:00"
+    },
+    {
+      "id": "chat-auto-9660a40987",
+      "text": "切手貼る向き、毎回迷う",
+      "source": "auto-draft",
+      "created_at": "2026-08-13T12:05:16+09:00"
+    },
+    {
+      "id": "chat-auto-85dc8ce5b2",
+      "text": "ペットボトル開けたとたんこぼした\n机ぬれてる",
+      "source": "auto-draft",
+      "created_at": "2026-08-13T12:05:16+09:00"
+    },
+    {
+      "id": "chat-auto-f9b96d864b",
+      "text": "パスワード忘れて再設定→いつものやつだった\n何してたんだろ",
+      "source": "auto-draft",
+      "created_at": "2026-08-13T12:05:16+09:00"
     }
   ]
 }
