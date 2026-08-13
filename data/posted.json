@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-13T12:05:30+09:00",
+  "updated_at": "2026-08-13T13:04:31+09:00",
   "entries": [
     {
       "item_code": "value:ask-5375e0339d",
@@ -20,6 +20,17 @@
       "posted_on": "2026-08-13",
       "threads_post_ids": [
         "18130253176644951"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-mononoke-stare",
+      "item_name": "価値投稿 ogiri-mononoke-stare",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-13",
+      "threads_post_ids": [
+        "18112850380954385"
       ],
       "reused": false
     },
