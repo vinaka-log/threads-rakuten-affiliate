@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-13T21:57:02+09:00",
+  "updated_at": "2026-08-13T23:23:48+09:00",
   "entries": [
     {
       "item_code": "value:ask-5375e0339d",
@@ -105,6 +105,23 @@
         "18117338350928756"
       ],
       "reused": false
+    },
+    {
+      "item_code": "rakuten24:10136679",
+      "item_name": "クイックルワイパー 立体吸着ドライシート(40枚入)【tbn24】【イチオシ】【クイックルワイパー】",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 9,
+      "posted_on": "2026-08-13",
+      "threads_post_ids": [
+        "18094393601577558",
+        "18050917613577584",
+        "17890526043656184"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00r136n.x8u2bf50.g00r136n.x8u2c6a7/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2Fa002256000434%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F10136679%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "floor-wiper",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24/cabinet/999/4901301281999.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-01e1cbad8a",
