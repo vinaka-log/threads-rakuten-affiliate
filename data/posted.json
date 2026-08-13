@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-13T17:10:29+09:00",
+  "updated_at": "2026-08-13T18:53:32+09:00",
   "entries": [
     {
       "item_code": "value:ask-5375e0339d",
@@ -72,6 +72,17 @@
       "rank": null,
       "pain_id": "kitchen-paper",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/haconaka/cabinet/zakka/tshc0001.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-ponyo-ham",
+      "item_name": "価値投稿 ogiri-ponyo-ham",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-08-13",
+      "threads_post_ids": [
+        "18403342150091241"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-01e1cbad8a",
