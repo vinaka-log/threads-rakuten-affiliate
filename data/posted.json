@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-14T15:07:19+09:00",
+  "updated_at": "2026-08-14T17:07:15+09:00",
   "entries": [
     {
       "item_code": "value:ask-2a5be078fa",
@@ -55,6 +55,23 @@
         "18435955210135051"
       ],
       "reused": false
+    },
+    {
+      "item_code": "n-raffine:10009910",
+      "item_name": "【特典付】【10%OFFクーポン】( ジョンズブレンド ソフナー リフィル 2袋セット ) John's blend 正規品 詰め替え用 液体 柔軟剤 ランドリー 洗濯 部屋干し 浴室 室内 乾燥 洋服 衣類",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 5,
+      "posted_on": "2026-08-14",
+      "threads_post_ids": [
+        "18612697246029038",
+        "18025066859852217",
+        "18133310899618480"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00py1en.x8u2bce1.g00py1en.x8u2cb11/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fn-raffine%2Fjohn-softener-refill-2set-%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fn-raffine%2Fi%2F10009910%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "softener",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/n-raffine/cabinet/aromaitem/jb/sof-new-1.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-5375e0339d",
