@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-14T12:03:57+09:00",
+  "updated_at": "2026-08-14T13:00:35+09:00",
   "entries": [
     {
       "item_code": "value:ask-2a5be078fa",
@@ -20,6 +20,17 @@
       "posted_on": "2026-08-14",
       "threads_post_ids": [
         "17965575033163889"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-laputa-robot",
+      "item_name": "価値投稿 ogiri-laputa-robot",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-14",
+      "threads_post_ids": [
+        "18100920812584751"
       ],
       "reused": false
     },
