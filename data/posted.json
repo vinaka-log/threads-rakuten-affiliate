@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-14T21:53:18+09:00",
+  "updated_at": "2026-08-14T23:17:12+09:00",
   "entries": [
     {
       "item_code": "value:ask-2a5be078fa",
@@ -105,6 +105,23 @@
         "17867053134649333"
       ],
       "reused": false
+    },
+    {
+      "item_code": "nissansoap:10001160",
+      "item_name": "ファーファファインフレグランス　ボーテ　柔軟剤 詰め替え 500ml　ローズ　香水調　静電気　吸水　汗　花粉　抗菌　防臭870194A",
+      "genre_id": "100939",
+      "genre_label": "日用品・文房具・手芸",
+      "slot": 9,
+      "posted_on": "2026-08-14",
+      "threads_post_ids": [
+        "18120046820493277",
+        "17988984090031480",
+        "18084440483678934"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00psx0n.x8u2b4a1.g00psx0n.x8u2cd37/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnissansoap%2F10001160%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnissansoap%2Fi%2F10001160%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "softener",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/nissansoap/cabinet/9fa-fa/fafasoftner/finefragrance/imgrc0102568817.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-5375e0339d",
