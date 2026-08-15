@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-15T10:54:55+09:00",
+  "updated_at": "2026-08-15T11:46:15+09:00",
   "entries": [
     {
       "item_code": "value:ask-7d29e878b7",
@@ -20,6 +20,17 @@
       "posted_on": "2026-08-15",
       "threads_post_ids": [
         "18173858119429584"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-marnie-window",
+      "item_name": "価値投稿 ogiri-marnie-window",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-15",
+      "threads_post_ids": [
+        "17930036319400840"
       ],
       "reused": false
     },
