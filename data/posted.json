@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-15T16:21:23+09:00",
+  "updated_at": "2026-08-15T18:16:08+09:00",
   "entries": [
     {
       "item_code": "value:ask-7d29e878b7",
@@ -72,6 +72,17 @@
       "rank": null,
       "pain_id": "toilet-paper",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/kurashikenkou/cabinet/11663202/12096460/imgrc0098933470.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-nausicaa-wind",
+      "item_name": "価値投稿 ogiri-nausicaa-wind",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-08-15",
+      "threads_post_ids": [
+        "18112953082955773"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-2a5be078fa",
