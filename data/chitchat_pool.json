@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-13T12:05:16+09:00",
+  "updated_at": "2026-08-16T14:17:48+09:00",
   "items": [
     {
       "id": "chat-phone-battery",
@@ -210,6 +210,66 @@
       "text": "パスワード忘れて再設定→いつものやつだった\n何してたんだろ",
       "source": "auto-draft",
       "created_at": "2026-08-13T12:05:16+09:00"
+    },
+    {
+      "id": "chat-auto-7e819d700d",
+      "text": "会社寒すぎて羽織り必須\n外との気温差おかしい",
+      "source": "auto-draft",
+      "created_at": "2026-08-16T14:17:48+09:00"
+    },
+    {
+      "id": "chat-auto-0a7a2c2020",
+      "text": "信号長すぎて予定全部思い出してしまった",
+      "source": "auto-draft",
+      "created_at": "2026-08-16T14:17:48+09:00"
+    },
+    {
+      "id": "chat-auto-0f8aacc3da",
+      "text": "電車でうとうとして乗り過ごしそうになった\n心臓止まった",
+      "source": "auto-draft",
+      "created_at": "2026-08-16T14:17:48+09:00"
+    },
+    {
+      "id": "chat-auto-d406af6114",
+      "text": "蝉うるさい\n夏だなあ",
+      "source": "auto-draft",
+      "created_at": "2026-08-16T14:17:48+09:00"
+    },
+    {
+      "id": "chat-auto-fd11313052",
+      "text": "メール返そうとして別アプリ開いた\n朝の指、信用できない",
+      "source": "auto-draft",
+      "created_at": "2026-08-16T14:17:48+09:00"
+    },
+    {
+      "id": "chat-auto-775f7cc477",
+      "text": "膝鳴る\n痛くない。音だけ立派",
+      "source": "auto-draft",
+      "created_at": "2026-08-16T14:17:48+09:00"
+    },
+    {
+      "id": "chat-auto-b553df5cbc",
+      "text": "スマホ落としそうになって無言で握りしめた",
+      "source": "auto-draft",
+      "created_at": "2026-08-16T14:17:48+09:00"
+    },
+    {
+      "id": "chat-auto-5ec9c9ffcf",
+      "text": "コンビニの店員さんにありがとう連発してる自分いる",
+      "source": "auto-draft",
+      "created_at": "2026-08-16T14:17:48+09:00"
+    },
+    {
+      "id": "chat-auto-1331e73012",
+      "text": "キーボードのパンくず気になる\n取りたいけど面倒",
+      "source": "auto-draft",
+      "created_at": "2026-08-16T14:17:48+09:00"
+    },
+    {
+      "id": "chat-auto-801b6a2e37",
+      "text": "エアコンのリモコン電池切れ疑惑\n反応薄い\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-08-16T14:17:48+09:00"
     }
   ]
 }
