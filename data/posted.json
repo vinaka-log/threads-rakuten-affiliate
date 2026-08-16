@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-16T16:22:26+09:00",
+  "updated_at": "2026-08-16T18:17:40+09:00",
   "entries": [
     {
       "item_code": "value:ask-18806300f5",
@@ -72,6 +72,17 @@
       "rank": null,
       "pain_id": "trash-bag",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/sunshinepolymer/cabinet/withbaby01/09239333/compass1772689792.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-tanuki-shelf",
+      "item_name": "価値投稿 ogiri-tanuki-shelf",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-08-16",
+      "threads_post_ids": [
+        "18110156554827739"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-7d29e878b7",
