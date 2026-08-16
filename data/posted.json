@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-16T21:27:48+09:00",
+  "updated_at": "2026-08-16T22:32:54+09:00",
   "entries": [
     {
       "item_code": "value:ask-18806300f5",
@@ -105,6 +105,23 @@
         "17952131208208362"
       ],
       "reused": false
+    },
+    {
+      "item_code": "mizuomoi:10000004",
+      "item_name": "【365日最短当日出荷！】水想い ナチュラルミネラルウォーター 2L×9本 ラベルレス 水 2リットル 天然水 軟水 ローリングストック 防災 備蓄 水 国産 日本製 送料無料",
+      "genre_id": "100227",
+      "genre_label": "genre:100227",
+      "slot": 9,
+      "posted_on": "2026-08-16",
+      "threads_post_ids": [
+        "18110217881088770",
+        "18131863840642108",
+        "18179767933420414"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00t98en.x8u2bc35.g00t98en.x8u2cfd4/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmizuomoi%2F4571461292779%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fmizuomoi%2Fi%2F10000004%2F&rafcid=wsc_i_is_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": null,
+      "pain_id": "water-case",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/mizuomoi/cabinet/06216210/2l_renewal2024/12972467/imgrc0123212875.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-7d29e878b7",
