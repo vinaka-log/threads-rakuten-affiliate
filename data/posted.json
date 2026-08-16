@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-16T11:02:07+09:00",
+  "updated_at": "2026-08-16T11:54:05+09:00",
   "entries": [
     {
       "item_code": "value:ask-18806300f5",
@@ -20,6 +20,17 @@
       "posted_on": "2026-08-16",
       "threads_post_ids": [
         "18369267064209009"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-yamada-dinner",
+      "item_name": "価値投稿 ogiri-yamada-dinner",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-16",
+      "threads_post_ids": [
+        "18132689563732594"
       ],
       "reused": false
     },
