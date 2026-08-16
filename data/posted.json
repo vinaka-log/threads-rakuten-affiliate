@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-16T08:20:06+09:00",
+  "updated_at": "2026-08-16T11:02:07+09:00",
   "entries": [
     {
       "item_code": "value:ask-18806300f5",
@@ -9,6 +9,17 @@
       "posted_on": "2026-08-16",
       "threads_post_ids": [
         "18024984044890934"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-wrong-room",
+      "item_name": "価値投稿 chat-wrong-room",
+      "kind": "chitchat",
+      "slot": 1,
+      "posted_on": "2026-08-16",
+      "threads_post_ids": [
+        "18369267064209009"
       ],
       "reused": false
     },
