@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-18T10:56:09+09:00",
+  "updated_at": "2026-08-18T11:50:11+09:00",
   "entries": [
     {
       "item_code": "value:ask-f208683fdc",
@@ -20,6 +20,17 @@
       "posted_on": "2026-08-18",
       "threads_post_ids": [
         "17959477680192013"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-kazetachinu-desk",
+      "item_name": "価値投稿 ogiri-kazetachinu-desk",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-18",
+      "threads_post_ids": [
+        "17905662213311105"
       ],
       "reused": false
     },
