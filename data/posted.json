@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-19T10:57:33+09:00",
+  "updated_at": "2026-08-19T11:51:32+09:00",
   "entries": [
     {
       "item_code": "value:ask-8baa660e0f",
@@ -20,6 +20,17 @@
       "posted_on": "2026-08-19",
       "threads_post_ids": [
         "18001000874792041"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-tanuki-shelf",
+      "item_name": "価値投稿 ogiri-tanuki-shelf",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-19",
+      "threads_post_ids": [
+        "18118636544304684"
       ],
       "reused": false
     },
