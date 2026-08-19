@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-19T14:20:02+09:00",
+  "updated_at": "2026-08-19T18:22:59+09:00",
   "entries": [
     {
       "item_code": "value:ask-8baa660e0f",
@@ -53,6 +53,17 @@
       "posted_on": "2026-08-19",
       "threads_post_ids": [
         "18107632997586999"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-chihiro-detergent",
+      "item_name": "価値投稿 ogiri-chihiro-detergent",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-08-19",
+      "threads_post_ids": [
+        "18093795965641497"
       ],
       "reused": false
     },
