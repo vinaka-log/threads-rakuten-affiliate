@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-20T11:51:17+09:00",
+  "updated_at": "2026-08-20T13:07:25+09:00",
   "entries": [
     {
       "item_code": "value:ask-2c662448dd",
@@ -31,6 +31,17 @@
       "posted_on": "2026-08-20",
       "threads_post_ids": [
         "18016396964870406"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-38febdab19",
+      "item_name": "価値投稿 ask-38febdab19",
+      "kind": "ask-chitchat",
+      "slot": 3,
+      "posted_on": "2026-08-20",
+      "threads_post_ids": [
+        "17982140751064297"
       ],
       "reused": false
     },
