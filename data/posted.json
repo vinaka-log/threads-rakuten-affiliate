@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-20T10:56:45+09:00",
+  "updated_at": "2026-08-20T11:51:17+09:00",
   "entries": [
     {
       "item_code": "value:ask-2c662448dd",
@@ -20,6 +20,17 @@
       "posted_on": "2026-08-20",
       "threads_post_ids": [
         "18118130282509079"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-karigurashi-tiny",
+      "item_name": "価値投稿 ogiri-karigurashi-tiny",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-20",
+      "threads_post_ids": [
+        "18016396964870406"
       ],
       "reused": false
     },
