@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-21T08:25:17+09:00",
+  "updated_at": "2026-08-21T11:03:50+09:00",
   "entries": [
     {
       "item_code": "value:ask-f6743bcbef",
@@ -9,6 +9,17 @@
       "posted_on": "2026-08-21",
       "threads_post_ids": [
         "18614753128034682"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:chat-keyboard-crumbs",
+      "item_name": "価値投稿 chat-keyboard-crumbs",
+      "kind": "chitchat",
+      "slot": 1,
+      "posted_on": "2026-08-21",
+      "threads_post_ids": [
+        "17930950860380842"
       ],
       "reused": false
     },
