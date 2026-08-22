@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-22T14:17:35+09:00",
+  "updated_at": "2026-08-22T18:17:09+09:00",
   "entries": [
     {
       "item_code": "value:ask-c5b179bbe9",
@@ -53,6 +53,17 @@
       "posted_on": "2026-08-22",
       "threads_post_ids": [
         "18073213985707717"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-majo-empty",
+      "item_name": "価値投稿 ogiri-majo-empty",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-08-22",
+      "threads_post_ids": [
+        "17955525411199104"
       ],
       "reused": false
     },
