@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-25T10:57:30+09:00",
+  "updated_at": "2026-08-25T11:52:42+09:00",
   "entries": [
     {
       "item_code": "value:ask-3b9c6dc73f",
@@ -20,6 +20,17 @@
       "posted_on": "2026-08-25",
       "threads_post_ids": [
         "18621614131022399"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-howl-calc",
+      "item_name": "価値投稿 ogiri-howl-calc",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-25",
+      "threads_post_ids": [
+        "18058662773526984"
       ],
       "reused": false
     },
