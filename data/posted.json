@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-26T11:06:00+09:00",
+  "updated_at": "2026-08-26T11:58:53+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-065f9e4006",
@@ -9,6 +9,17 @@
       "posted_on": "2026-08-26",
       "threads_post_ids": [
         "18458090803137068"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-ponyo-ham",
+      "item_name": "価値投稿 ogiri-ponyo-ham",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-26",
+      "threads_post_ids": [
+        "18618178861035923"
       ],
       "reused": false
     },
