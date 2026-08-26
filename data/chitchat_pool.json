@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-23T11:06:21+09:00",
+  "updated_at": "2026-08-26T14:23:04+09:00",
   "items": [
     {
       "id": "chat-phone-battery",
@@ -390,6 +390,66 @@
       "text": "電車の中で眠気と戦いながら既読つけてる",
       "source": "auto-draft",
       "created_at": "2026-08-23T11:06:21+09:00"
+    },
+    {
+      "id": "chat-auto-9c1e3fb32d",
+      "text": "雨の日の電車の匂い、独特\n嫌いじゃないけど朝から強い",
+      "source": "auto-draft",
+      "created_at": "2026-08-26T14:23:04+09:00"
+    },
+    {
+      "id": "chat-auto-62d8f51276",
+      "text": "メモ帳アプリ開きすぎてどれが本題かわからん\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-08-26T14:23:04+09:00"
+    },
+    {
+      "id": "chat-auto-14d02856a5",
+      "text": "朝長袖、昼で暑い\n服装ミスった",
+      "source": "auto-draft",
+      "created_at": "2026-08-26T14:23:04+09:00"
+    },
+    {
+      "id": "chat-auto-7e54e68a39",
+      "text": "イヤホン片耳切れる\n歩きながら再接続してる\nまあいいか",
+      "source": "auto-draft",
+      "created_at": "2026-08-26T14:23:04+09:00"
+    },
+    {
+      "id": "chat-auto-862b699e2c",
+      "text": "通勤の曲選びで駅着いた\n結局いつもの曲なのに",
+      "source": "auto-draft",
+      "created_at": "2026-08-26T14:23:04+09:00"
+    },
+    {
+      "id": "chat-auto-c4aaaeca48",
+      "text": "スヌーズしすぎてギリギリ出勤コース",
+      "source": "auto-draft",
+      "created_at": "2026-08-26T14:23:04+09:00"
+    },
+    {
+      "id": "chat-auto-686aedadc0",
+      "text": "バナナ、黄色いの選んでも翌日斑点\n急がないでほしい",
+      "source": "auto-draft",
+      "created_at": "2026-08-26T14:23:04+09:00"
+    },
+    {
+      "id": "chat-auto-044ae139b6",
+      "text": "靴紐ほどけてたの、家着いてから気づいた\nまあいいか",
+      "source": "auto-draft",
+      "created_at": "2026-08-26T14:23:04+09:00"
+    },
+    {
+      "id": "chat-auto-862543912b",
+      "text": "蝉うるさい\n夏だなあ\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-08-26T14:23:04+09:00"
+    },
+    {
+      "id": "chat-auto-75f0dbd692",
+      "text": "キーボードのパンくず気になる\n取りたいけど面倒\nまあいいか",
+      "source": "auto-draft",
+      "created_at": "2026-08-26T14:23:04+09:00"
     }
   ]
 }
