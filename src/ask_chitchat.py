@@ -3,7 +3,7 @@
 型:
   短い質問テキスト + option_a..d（各1〜25字）
 
-通常の chitchat_pool とは別。日用品・商品紹介・PRは禁止。
+通常の chitchat_pool とは別。ベビー商品紹介・PRは禁止。
 """
 
 from __future__ import annotations

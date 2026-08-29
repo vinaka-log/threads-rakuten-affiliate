@@ -26,8 +26,8 @@ class PrDisclosureTests(unittest.TestCase):
         self.assertNotIn("アフィリエイト", _REPLY_MEMO)
 
     def test_validate_requires_disclosure_phrase(self) -> None:
-        main = "洗剤、また切れそう？\n\nみんなはどうしてる？"
-        memo = "うちのストックはこれ。\nテスト商品"
+        main = "急な雨、ベビーカーどうしてる？\n\nみんなはどうしてる？"
+        memo = "うちの候補はこれ。\nテスト商品"
         reply_ok = f"https://example.com/a\n{_PR_DISCLOSURE}"
         _validate([main, memo, reply_ok])
         with self.assertRaises(ValueError):
@@ -38,17 +38,17 @@ class PrDisclosureTests(unittest.TestCase):
     def test_compose_includes_new_disclosure(self) -> None:
         item = RakutenItem(
             item_code="shop:1",
-            item_name="アタック 液体洗剤 つめかえ用 2900g",
+            item_name="ベビーカー レインカバー 折りたたみタイプ",
             item_price=1980,
             affiliate_url="https://example.com/aff",
             item_url="https://example.com/item",
             review_average=4.5,
             review_count=200,
             shop_name="test-shop",
-            genre_id="100939",
+            genre_id="100533",
             postage_flag=0,
         )
-        pain = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
+        pain = next(p for p in config.PAIN_INTENTS if p.id == "stroller-rain")
         pick = PickResult(
             item=item,
             genre=config.GENRES[0],
@@ -62,7 +62,7 @@ class PrDisclosureTests(unittest.TestCase):
         self.assertNotIn("http", main.lower())
         self.assertNotIn("http", memo.lower())
         self.assertNotIn("「", main)
-        self.assertIn("うちのストックはこれ", memo)
+        self.assertIn("うちの候補はこれ", memo)
         self.assertIn("https://example.com/aff", link)
         self.assertIn(_PR_DISCLOSURE, link)
         self.assertTrue(link.rstrip().endswith(_PR_DISCLOSURE))

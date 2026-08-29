@@ -12,23 +12,23 @@ DATA_DIR = ROOT_DIR / "data"
 LEDGER_PATH = DATA_DIR / "posted.json"
 
 # ---------------------------------------------------------------------------
-# ペルソナ A（固定）
-#   誰に: 共働き〜小さな子どもがいる家庭で、日々の買い物を楽天に寄せている人
-#   何を: 消耗品・キッチンまわりの「また切れた」を減らす買い時メモ
-#   何の人か: 毎日ランキングを見て、買う理由だけ先に教えるしろくま
-#   表示名: かいものくま｜日用品の買い時メモ
-#   やらない: 美容・ファッション・ガジェット総合・なんでも売れ筋
+# ペルソナ B（固定）
+#   誰に: 妊娠中〜未就学（特に0〜2歳）の買い足し担当
+#   何を: ベビーグッズの「これから買う／買い直す」候補メモ
+#   何の人か: 売れ筋と口コミから、買う理由だけ先に教えるしろくま
+#   表示名: かいものくま｜0〜2歳の買い足しメモ
+#   やらない: 日用品総合・美容・ファッション・ガジェット・なんでも売れ筋
 # ---------------------------------------------------------------------------
-PERSONA_ID = "household-stock"
-PERSONA_LABEL = "家庭の消耗品・時短買い"
-PERSONA_AUDIENCE = "共働き〜子育て世帯の日々の買い足し担当"
-PERSONA_PROMISE = "また切れた…を減らす日用品の買い時メモ"
-PERSONA_DISPLAY_NAME = "かいものくま｜日用品の買い時メモ"
+PERSONA_ID = "baby-gear"
+PERSONA_LABEL = "0〜2歳のベビーグッズ買い"
+PERSONA_AUDIENCE = "妊娠中〜未就学（特に0〜2歳）の買い足し担当"
+PERSONA_PROMISE = "これから買うベビーグッズの買い足しメモ"
+PERSONA_DISPLAY_NAME = "かいものくま｜0〜2歳の買い足しメモ"
 PERSONA_BIO = (
-    "╲また切れた…を減らしたい共働きへ╱\n"
-    "日用品とキッチンの買い時を毎日メモ\n"
-    "・売れ筋ランキングの定点観測\n"
-    "・重いもの・ストック補充の候補\n"
+    "╲0〜2歳の買い足しを楽天に寄せたい人へ╱\n"
+    "ベビーグッズの買い時を毎日メモ\n"
+    "・お出かけ・ねんね・収納の候補\n"
+    "・売れ筋と口コミの定点観測\n"
     "・ポイント日・セールの目安\n"
     "PR・アフィリエイトリンクを含みます"
 )
@@ -40,16 +40,15 @@ DEDUP_DAYS = 30
 
 # 紹介品質フィルタ
 MIN_REVIEW_AVERAGE = 4.3
-MIN_REVIEW_COUNT = 100
-# 消耗品の時短買い向け。高額美容・家電を混ぜない
-MAX_ITEM_PRICE = 3000
+MIN_REVIEW_COUNT = 80
+# ベビーグッズは枕・収納などで消耗品より高い。超高額家電は除外
+MAX_ITEM_PRICE = 10000
 # 送料別は敬遠されやすいので、送料込を優先（取れなければ送料別も可）
 PREFER_POSTAGE_INCLUDED = True
 # True にすると送料込以外を候補から除外（品薄時は投稿失敗しうる）
 REQUIRE_POSTAGE_INCLUDED = False
 
 # 商品名に含まれていたら除外（ペルソナ外）
-# 注意: 「香水」「コスメ」「クリーム」は「香水調」「アットコスメ」等に誤爆するため使わない
 BLOCK_NAME_HINTS: Tuple[str, ...] = (
     "美容液",
     "セラム",
@@ -69,40 +68,29 @@ BLOCK_NAME_HINTS: Tuple[str, ...] = (
     "スマホ",
     "iphone",
     "ipad",
-    # 消耗品本体ではなく周辺グッズ（洗剤コピーにボトル/収納が載る事故防止）
-    "詰め替えボトル",
-    "洗剤ボトル",
-    "ディスペンサー",
-    "詰め替え容器",
-    "空容器",
-    "ポンプボトル",
-    "ボトル単品",
-    "ストッカー",
-    "洗剤入れ",
-    "ボールストッカー",
-    "洗面所収納",
-    "ランドリー収納",
-    # 消耗品の周辺ガジェット（悩みコピーにホルダー等が載る事故防止）
-    "ラップホルダー",
-    "ラップケース",
-    "ワイパースタンド",
-    "フローリングワイパースタンド",
+    "ノートパソコン",
+    "デスクトップ",
+    # 大人向け・ペルソナ外
+    "ワイン",
+    "ウイスキー",
+    "サッポロクラシック",
+    "液体洗剤",
+    "柔軟剤つめかえ",
 )
 
 # ランキング取得件数（上位からフィルタ）
 RANKING_HITS = 30
 
 # rank帯ローテ: 日替わりで「上位帯」と「準上位帯」を交互に紹介する。
-# 上位帯は競合アカウントと被りやすいため、準上位帯で差別化する。
 RANK_BANDS: Tuple[Tuple[int, int], ...] = (
-    (1, 10),   # 偶数日: 定番の売れ筋
-    (11, 30),  # 奇数日: みんな知らないけど売れてるもの
+    (1, 10),
+    (11, 30),
 )
 
 # セール期間（開始日, 終了日, 表示ラベル）。日付は両端含む。
-# お買い物マラソン/スーパーセールの日程が発表されたらここに追記する。
-# 例: ("2026-08-04", "2026-08-11", "お買い物マラソン"),
-SALE_PERIODS: Tuple[Tuple[str, str, str], ...] = ()
+SALE_PERIODS: Tuple[Tuple[str, str, str], ...] = (
+    ("2026-09-04", "2026-09-11", "楽天スーパーSALE"),
+)
 
 # 「5と0のつく日」（毎月5,10,15,20,25,30日）はポイントアップ日として自動判定する。
 ZERO_FIVE_DAY_LINE = "きょうは5と0のつく日（楽天カード勢はポイントアップ）"
@@ -116,10 +104,11 @@ class Genre:
     short: str
 
 
-# ペルソナ A の主戦場。総合は使わない。ドリンクは悩み「水が重い」側で個別指定。
+# ペルソナ B の主戦場。総合・日用品総合は使わない。
 GENRES: List[Genre] = [
-    Genre(id="100939", label="日用品・文房具・手芸", short="日用品"),
-    Genre(id="551167", label="キッチン用品・食器・調理器具", short="キッチン"),
+    Genre(id="100533", label="キッズ・ベビー・マタニティ", short="ベビー"),
+    Genre(id="200833", label="ベビーカー", short="お出かけ"),
+    Genre(id="200822", label="ベビー用寝具・ベッド", short="ねんね"),
 ]
 
 
@@ -148,285 +137,158 @@ class PainIntent:
     avoid: str
     # 本投稿テンプレ固定（空なら自動）
     template_id: str = ""
-    # 追加でどれか必須（つめかえ/容量など消耗品らしい語）
+    # 追加でどれか必須
     require_name_hints: Tuple[str, ...] = ()
-    # 含まれていたら除外（収納グッズ等）
+    # 含まれていたら除外
     exclude_name_hints: Tuple[str, ...] = ()
-    # 容量表記（2900g / 1285mL 等）を必須にするか
+    # 容量表記を必須にするか（消耗品向け。ベビーグッズは基本 False）
     require_size_token: bool = False
     # 時短アイテム枠（TIMESAVE_ITEM_SLOTS）のローテ対象か
     timesave: bool = False
-    # 悩みごとの価格上限（空なら MAX_ITEM_PRICE）。ケース買いなど向け。
+    # 悩みごとの価格上限（空なら MAX_ITEM_PRICE）
     max_price: Optional[int] = None
 
 
-_CONSUMABLE_STORAGE_EXCLUDES: Tuple[str, ...] = (
-    "ストッカー",
-    "収納",
-    "ホルダー",
-    "スタンド",
-    "ラック",
-    "ディスペンサー",
-    "ボトル",
-    "容器",
-    "洗剤入れ",
-    "マグネット",
-    "山崎実業",
-)
-
-
-# 家庭の買い足し悩み。日付×商品枠でローテ。
-# problem / benefit / avoid は短め口語（本投稿〜140字・リプ事実欄向け）。
-# name_hints は誤マッチしやすい汎用語（詰め替え等）を避け、商品固有語のみにする。
+# 0〜2歳の買い足し悩み。日付×商品枠でローテ。
+# problem / benefit / avoid / scene は短め口語（テスト上限あり）。
 PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
-        id="detergent",
-        pain="洗剤、また切れそうになってない？",
-        keyword="液体洗剤 つめかえ",
-        name_hints=("液体洗剤", "衣料用洗剤", "粉洗剤", "洗たく洗剤", "ジェルボール", "ゲルボール"),
-        genre_id="100939",
-        scene="ボトルが軽い夜",
-        problem="切れた瞬間に洗濯止まって、残業後のドラ行きになる",
-        benefit="詰め替え先置きで、洗濯が止まらない",
-        buy_reason="切れてから買うのがいちばん高い",
-        avoid="香り強めもあるし、容量見ないと損しやすい",
-        template_id="",
-        require_name_hints=("つめかえ", "詰め替え", "詰替", "ジェルボール", "ゲルボール"),
-        exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES
-        + (
-            "漂白剤",
-            "漂白",
-            "ハイター",
-            "衣料用漂白剤",
-            "洗たく槽",
-        ),
-        require_size_token=True,
+        id="stroller-rain",
+        pain="急な雨、ベビーカーどうしてる？",
+        keyword="ベビーカー レインカバー",
+        name_hints=("レインカバー", "レインコート ベビーカー", "ベビーカーカバー"),
+        genre_id="200833",
+        scene="公園帰りに空が怪しいとき",
+        problem="雨に打たれて荷物も子もびしょびしょ",
+        benefit="カバーあればお出かけが止まらない",
+        buy_reason="天気は読めない、備えが本体",
+        avoid="対応機種と窓の位置だけ確認",
+        exclude_name_hints=("大人用", "自転車", "バイク"),
     ),
     PainIntent(
-        id="softener",
-        pain="柔軟剤、ボトル空になってから慌ててない？",
-        keyword="柔軟剤 つめかえ",
-        name_hints=("柔軟剤",),
-        genre_id="100939",
-        scene="カゴ溜まってるのにボトル空の平日",
-        problem="空だと洗濯止まって、着替えが詰まる",
-        benefit="替えがあれば朝のパニック減る",
-        buy_reason="柔軟剤切れは家事全体の詰まり",
-        avoid="香りの好みはレビュー見てからの方が安心",
-        template_id="",
-        require_name_hints=("つめかえ", "詰め替え", "詰替"),
-        exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES,
-        require_size_token=True,
-    ),
-    PainIntent(
-        id="toilet-paper",
-        pain="トイレットペーパー、残り何個か把握してる？",
-        keyword="トイレットペーパー ダブル",
-        # 「トイレットティシュー」は主要ブランドの表記ゆれ
-        name_hints=("トイレットペーパー", "トイレットティシュー", "トイレロール"),
-        genre_id="100939",
-        scene="夜中に芯だけ発見したくないとき",
-        problem="最悪のタイミングで深夜に走ることになる",
-        benefit="まとめ買い宅配なら切れリスク先に潰せる",
-        buy_reason="重い消耗品は届けてもらう方が楽",
-        avoid="シングル/ダブルと芯ありなし、取り違え注意",
-        template_id="",
-        require_name_hints=("ロール", "シングル", "ダブル", "芯なし", "芯あり"),
-        # 「ケース買い」など消耗品表記に誤爆しないよう、収納グッズ固有語だけ除外
-        exclude_name_hints=(
-            "ティッシュケース",
-            "ペーパーポット",
-            "ペーパーホルダー",
-            "トイレットペーパーホルダー",
-            "ロールホルダー",
-            "カバー",
-            "スタンド",
-            "ディスペンサー",
-        ),
-        require_size_token=True,
-    ),
-    PainIntent(
-        id="tissue",
-        pain="ティッシュ、箱ごとに買い足してない？",
-        keyword="ティッシュペーパー ボックス",
-        name_hints=("ティッシュペーパー", "ボックスティッシュ", "ティシュー"),
-        genre_id="100939",
-        scene="リビングと寝室が同時に空になる日",
-        problem="箱ごとに買うと単価も手間も増える",
-        benefit="ケース買いなら補充回数が減る",
-        buy_reason="毎日使うものほど、まとめが効く",
-        avoid="箱かソフトパックか、置き場だけ先に確認",
-        template_id="",
-        require_name_hints=("組", "箱", "個", "パック", "ソフトパック"),
-        exclude_name_hints=(
-            "ティッシュケース",
-            "ティッシュカバー",
-            "ペーパーホルダー",
-            "ホルダー",
-            "スタンド",
-            "ディスペンサー",
-        ),
-        require_size_token=True,
-    ),
-    PainIntent(
-        id="trash-bag",
-        pain="ゴミ袋、レジ袋で凌いでない？",
-        keyword="ゴミ袋 半透明",
-        name_hints=("ゴミ袋", "ごみ袋"),
-        genre_id="100939",
-        scene="ゴミの日の朝に指定袋がないとき",
-        problem="朝の出発が遅れて、最悪一週間持ち越す",
-        benefit="指定サイズ先積みで、朝の慌てが消える",
-        buy_reason="ゴミ袋切れは時間も気力も持っていく",
-        avoid="自治体の色・厚さ指定は要チェック",
-        template_id="",
-    ),
-    PainIntent(
-        id="water-case",
-        pain="水、まだ店で抱えて帰ってる？",
-        keyword="天然水 ラベルレス",
-        name_hints=("天然水", "ラベルレス", "ミネラルウォーター"),
-        genre_id="100227",
-        scene="買い出し帰りが重くてしんどい日",
-        problem="重い水を運ぶたびに、他の家事まで崩れる",
-        benefit="ケース水宅配なら、腕も時間も空く",
-        buy_reason="水は運ばなくていい仕組みが本体",
-        avoid="箱の高さ、置き場測ってからが無難",
-        template_id="",
+        id="stroller-gear",
+        pain="ベビーカー周り、何か足りてない？",
+        keyword="ベビーカー アクセサリー",
+        name_hints=("ベビーカー", "バギー", "ベビーカーバッグ", "ドリンクホルダー"),
+        genre_id="200833",
+        scene="お出かけ準備で手が足りない朝",
+        problem="小物散らばると出発が毎回遅れる",
+        benefit="置き場決まると支度が短くなる",
+        buy_reason="お出かけは周辺グッズで楽になる",
+        avoid="取り付け方と干渉、レビュー見て",
+        exclude_name_hints=("レインカバー", "チャイルドシート", "自転車"),
         timesave=True,
     ),
     PainIntent(
-        id="beer-sapporo-classic",
-        pain="ビール、また店でケース抱えてない？",
-        keyword="サッポロクラシック 350ml 24本",
-        name_hints=("サッポロクラシック", "サッポロ クラシック"),
-        genre_id="100316",
-        scene="週末前にケースが空の夜",
-        problem="重い缶を運ぶと他の買い物も崩れる",
-        benefit="宅配なら運ぶ手間が消える",
-        buy_reason="重い飲みものは届けてもらう前提",
-        avoid="季節限定と取り違え注意",
-        template_id="",
-        require_name_hints=("クラシック",),
-        exclude_name_hints=(
-            "夏の爽快",
-            "黒ラベル",
-            "赤星",
-            "エビス",
-            "ヱビス",
-            "プレミアムアルコールフリー",
-            "ノンアル",
-            "ジョッキ",
-            "グラス",
-            "サーバー",
-        ),
-        timesave=True,
-        max_price=6000,
+        id="baby-towel",
+        pain="沐浴タオル、まだ薄手で凌いでない？",
+        keyword="ベビー バスタオル イブル",
+        name_hints=("バスタオル", "イブル", "ガーゼタオル", "沐浴タオル"),
+        genre_id="100533",
+        scene="上がりの冷えが気になる夜",
+        problem="薄手だと乾き待ちでバタバタする",
+        benefit="一枚あると上がりが落ち着く",
+        buy_reason="毎日使うものほど先に揃える",
+        avoid="厚みと洗濯表記、先にチェック",
+        require_name_hints=("ベビー", "赤ちゃん", "イブル", "ガーゼ", "沐浴"),
     ),
     PainIntent(
-        id="wrap",
-        pain="ラップ、引き出しの奥で切れかけてない？",
-        keyword="サランラップ",
-        name_hints=("サランラップ", "食品用ラップ", "ラップフィルム"),
-        genre_id="551167",
-        scene="お弁当や作り置きの朝",
-        problem="朝いちで切れると、支度が全部遅れる",
-        benefit="替え玉があれば朝の小パニック消える",
-        buy_reason="朝に効く消耗品は、前夜の自分への投資",
-        avoid="22cm/30cmの取り違え注意",
-        template_id="",
-        # SEOで「サランラップ」が付いたホルダー/ケースを除外
-        exclude_name_hints=_CONSUMABLE_STORAGE_EXCLUDES
-        + (
-            "ホルダー",
-            "ケース",
-            "ideaco",
-            "イデアコ",
-            "マグネット",
-            "収納",
-            "ラップカッター",
-        ),
+        id="baby-pillow",
+        pain="ねんね姿勢、気になってない？",
+        keyword="ベビー枕 ジオピロー",
+        name_hints=("ベビー枕", "ベビーまくら", "新生児 枕", "ジオピロー"),
+        genre_id="200822",
+        scene="夜の寝かしつけが長いとき",
+        problem="姿勢不安のまま夜が長引く",
+        benefit="合う枕だと見守りが少し楽",
+        buy_reason="ねんねは毎晩続くから先行投資",
+        avoid="月齢と向き癖、説明見て判断",
+        max_price=12000,
+    ),
+    PainIntent(
+        id="diaper-stock",
+        pain="おむつ山、床に散らばってない？",
+        keyword="おむつストッカー",
+        name_hints=("おむつストッカー", "オムツストッカー", "おむつ収納"),
+        genre_id="100533",
+        scene="夜中の替えで床を探るとき",
+        problem="暗がり探しで起こしがちになる",
+        benefit="定位置あると夜間が短くなる",
+        buy_reason="収納は睡眠時間の確保装置",
+        avoid="置き場サイズと取り出しやすさ",
         timesave=True,
     ),
     PainIntent(
-        id="dish-sponge",
-        pain="スポンジ、ヌメってきたら替え時だよ",
-        keyword="キッチンスポンジ 抗菌",
-        name_hints=("キッチンスポンジ", "食器洗いスポンジ", "スポンジたわし"),
-        genre_id="551167",
-        scene="洗い物のたび衛生感が気になるとき",
-        problem="替え時逃すと、気持ち悪さが毎日続く",
-        benefit="まとめ買いなら迷わず交換できる",
-        buy_reason="安い消耗品ほど、決断コストをゼロに",
-        avoid="油用とグラス用、分けた方が持ちいい",
-        template_id="",
+        id="kids-hanger",
+        pain="子ども服、床置き増えてない？",
+        keyword="キッズ ハンガーラック",
+        name_hints=("ハンガーラック", "キッズハンガー", "子供服 ハンガー"),
+        genre_id="100533",
+        scene="朝の着替えで床が戦場のとき",
+        problem="探せないまま遅刻しそうになる",
+        benefit="手が届く高さだと自分で取れる",
+        buy_reason="片付け習慣は道具で作る",
+        avoid="転倒防止と高さ調節を確認",
+        require_name_hints=("キッズ", "子供", "子ども", "ジュニア", "ベビー"),
     ),
     PainIntent(
-        id="dishwasher-tab",
-        pain="食洗機の洗剤、残り少なくない？",
-        keyword="食洗機 洗剤 タブレット",
-        name_hints=("食洗機用", "食器洗い機用", "食洗機洗剤", "食洗機用洗剤"),
-        genre_id="551167",
-        scene="回すたびに減っていくストック",
-        problem="切れると手洗い戻りで、夜が一気に重い",
-        benefit="大容量先置きで、時短家電が止まらない",
-        buy_reason="食洗機は洗剤があって初めて時短装置",
-        avoid="粉/タブ/ジェルの機種指定だけ確認",
-        template_id="",
+        id="handprint",
+        pain="手形足形、まだ撮れてない？",
+        keyword="手形 スタンプ パームカラーズ",
+        name_hints=("手形", "足形", "パームカラーズ", "スタンプパッド"),
+        genre_id="100533",
+        scene="急に小さく感じる夜",
+        problem="先延ばしするとサイズが変わる",
+        benefit="インク式なら汚れを抑えやすい",
+        buy_reason="記録は今しか取れない買い物",
+        avoid="対象月齢と色移り注意を確認",
+    ),
+    PainIntent(
+        id="baby-wipes",
+        pain="おしりふき、カバンの中空じゃない？",
+        keyword="おしりふき 詰め替え",
+        name_hints=("おしりふき", "お尻拭き", "ベビーシート"),
+        genre_id="100533",
+        scene="外出先で替えたい瞬間",
+        problem="切れに気づくと外出が詰まる",
+        benefit="替えあればお出かけが止まらない",
+        buy_reason="消耗品は切れない仕組みが大事",
+        avoid="携帯用と詰め替え、用途分けて",
+        require_name_hints=("おしり", "お尻", "ベビー"),
+        exclude_name_hints=("大人用", "体ふき", "車用"),
+    ),
+    PainIntent(
+        id="diapers",
+        pain="おむつサイズ、まだギリギリで粘してない？",
+        keyword="おむつ パンツ 新生児",
+        name_hints=("おむつ", "オムツ", "パンツタイプ", "テープタイプ"),
+        genre_id="100533",
+        scene="モレが気になり始めた週",
+        problem="サイズ遅れは洗濯も気分も増える",
+        benefit="合ってると夜間のモレ不安が減る",
+        buy_reason="合わないおむつがいちばん高い",
+        avoid="体重目安とパンツ/テープ確認",
+        require_name_hints=("おむつ", "オムツ", "パンツ", "テープ"),
+        exclude_name_hints=("ストッカー", "ポーチ", "ケース", "消臭"),
+    ),
+    PainIntent(
+        id="baby-carrier",
+        pain="抱っこ移動、腕が限界になってない？",
+        keyword="抱っこひも 新生児",
+        name_hints=("抱っこひも", "抱っこ紐", "ベビースリング", "ヒップシート"),
+        genre_id="100533",
+        scene="両手ほしい買い物や駅の移動",
+        problem="腕抱っこだと荷物が持てない",
+        benefit="両手空くと移動が一気に楽",
+        buy_reason="移動のしんどさは毎日積み上がる",
+        avoid="月齢対応と装着レビューを見て",
         timesave=True,
-    ),
-    PainIntent(
-        id="kitchen-paper",
-        pain="キッチンペーパー、料理中に切れたことない？",
-        keyword="キッチンペーパー",
-        name_hints=("キッチンペーパー", "クッキングペーパー"),
-        genre_id="551167",
-        scene="揚げ物や肉の下処理の最中",
-        problem="調理中に切れると、手が止まって片付け雑になる",
-        benefit="替え1個あるだけで調理が止まらない",
-        buy_reason="料理中の切れがいちばん腹立たしい",
-        avoid="ホルダーサイズ合うかだけ見て",
-        template_id="",
+        max_price=15000,
     ),
 )
 
-# 時短枠専用（通常の商品ローテ長をずらさない）。ガジェット本体ではなく替え消耗品。
-TIMESAVE_ONLY_INTENTS: Tuple[PainIntent, ...] = (
-    PainIntent(
-        id="floor-wiper",
-        pain="床掃除、水拭きまで手が回ってる？",
-        keyword="クイックルワイパー シート",
-        name_hints=(
-            "フローリングワイパー",
-            "フロアワイパー",
-            "クイックルワイパー",
-            "クイックル",
-            "取り替えシート",
-            "ドライシート",
-            "ウェットシート",
-            "ウエットシート",
-        ),
-        genre_id="100939",
-        scene="帰宅直後に床の砂や髪が気になる夜",
-        problem="溜めると休日が掃除デーになって消える",
-        benefit="替えシートあれば、夜の片付け5分で終わる",
-        buy_reason="時短は道具本体より、替えが切れないこと",
-        avoid="ドライ/ウェットと本体サイズ要確認",
-        template_id="",
-        require_name_hints=("シート",),
-        exclude_name_hints=(
-            "本体セット",
-            "ハンドル付き",
-            "伸縮ポール",
-            "スタンド",
-            "ホルダー",
-            "収納",
-            "山崎実業",
-        ),
-        require_size_token=False,
-        timesave=True,
-    ),
-)
+# 時短枠専用は当面空（timesave フラグの悩みを通常ローテ側で扱う）。
+TIMESAVE_ONLY_INTENTS: Tuple[PainIntent, ...] = ()
 
 
 def all_pain_intents() -> Tuple[PainIntent, ...]:
@@ -466,7 +328,7 @@ TIMESAVE_ITEM_SLOTS: Tuple[int, ...] = ()
 # ランキングダイジェストは一旦停止。
 DIGEST_SLOTS: Tuple[int, ...] = ()
 
-# ジブリ大喜利（画像＋短文・PRなし）。家庭の買い足しあるある。
+# ジブリ大喜利（画像＋短文・PRなし）。0〜2歳の買い足しあるある。
 OGIRI_SLOTS: Tuple[int, ...] = (2, 6)
 
 # 価値投稿枠（リンクなし）= アンケート + 雑談。大喜利は OGIRI_SLOTS。

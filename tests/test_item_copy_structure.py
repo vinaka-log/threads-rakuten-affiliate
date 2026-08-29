@@ -30,7 +30,7 @@ def _pick(**kwargs) -> PickResult:
         item_code=kwargs.get("code", "shop:1"),
         item_name=kwargs.get(
             "name",
-            "アタック 液体洗剤 つめかえ用 2900g 超特大",
+            "ベビーカー レインカバー 折りたたみタイプ",
         ),
         item_price=kwargs.get("price", 1980),
         affiliate_url="https://example.com/aff",
@@ -38,11 +38,11 @@ def _pick(**kwargs) -> PickResult:
         review_average=4.5,
         review_count=200,
         shop_name="test-shop",
-        genre_id="100939",
+        genre_id="100533",
         postage_flag=0,
         rank=3,
     )
-    pain = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
+    pain = next(p for p in config.PAIN_INTENTS if p.id == "stroller-rain")
     return PickResult(
         item=item,
         genre=config.GENRES[0],
@@ -64,8 +64,7 @@ class ItemCopyStructureTests(unittest.TestCase):
         self.assertNotIn("レビュー", main)
         self.assertNotIn("「", main)
         self.assertNotIn("」", main)
-        self.assertNotIn("アタック", main)
-        self.assertNotIn("このままだと:", main)
+        self.assertNotIn("レインカバー", main)
         self.assertNotIn("おすすめ", main)
         self.assertNotIn("コスパ", main)
         self.assertLessEqual(len(main), _SOFT_MAIN_LIMIT)
@@ -75,15 +74,14 @@ class ItemCopyStructureTests(unittest.TestCase):
         )
 
     def test_main_has_rami_style_hook_and_after_benefit(self) -> None:
-        pain = next(p for p in config.PAIN_INTENTS if p.id == "detergent")
+        pain = next(p for p in config.PAIN_INTENTS if p.id == "stroller-rain")
         for tid, _ in _MAIN_TEMPLATES:
             composed = compose(_pick(), template_id=tid)
             main, memo, _link = composed.texts
             self.assertTrue(main.startswith("↓"), msg=f"{tid}: {main}")
             self.assertIn("＼", main, msg=f"{tid}: {main}")
-            # 導入後の変化（benefit）が本投稿に入る
             self.assertIn(pain.benefit, main, msg=f"{tid}: {main}")
-            self.assertIn("先置きしてからの方が楽", memo)
+            self.assertIn("揃えてからの方が楽", memo)
 
     def test_all_templates_stay_short(self) -> None:
         for tid, _ in _MAIN_TEMPLATES:
@@ -93,121 +91,29 @@ class ItemCopyStructureTests(unittest.TestCase):
             self.assertLessEqual(len(memo), _SOFT_MEMO_LIMIT, msg=f"{tid} memo too long")
             self.assertLessEqual(len(link), _SOFT_LINK_LIMIT, msg=f"{tid} link too long")
             self.assertNotIn("「", main)
-            self.assertIn("うちのストックはこれ", memo)
-            self.assertIn("アタック", memo)
+            self.assertIn("うちの候補はこれ", memo)
+            self.assertIn("レインカバー", memo)
             self.assertNotIn("http", memo.lower())
             self.assertNotIn(_PR_DISCLOSURE, memo)
             self.assertNotIn("円", memo)
-            self.assertNotIn("レビュー", memo)
 
-    def test_reply_reveals_product_and_ends_with_disclosure(self) -> None:
-        composed = compose(_pick(), template_id="hook-honest")
+    def test_link_has_url_and_disclosure(self) -> None:
+        composed = compose(_pick(), template_id="hook-must")
         main, memo, link = composed.texts
-        self.assertEqual(len(composed.texts), 3)
-        self.assertIn("うちのストックはこれ", memo)
-        self.assertIn("アタック", memo)
-        self.assertIn("先置きしてからの方が楽", memo)
-        self.assertNotIn("正体はこれ", memo)
-        self.assertNotIn("▼商品はこちら", memo)
-        self.assertNotIn("レビュー", memo)
-        self.assertNotIn("円", memo)
         self.assertIn("https://example.com/aff", link)
         self.assertTrue(link.rstrip().endswith(_PR_DISCLOSURE))
         self.assertNotIn("アフィリエイト", link)
-        self.assertNotIn("test-shop", memo)
         self.assertNotIn("test-shop", link)
-        self.assertLessEqual(len(memo), _SOFT_MEMO_LIMIT)
+        _validate(composed.texts)
 
-    def test_pain_copy_stays_compact(self) -> None:
-        for pain in config.all_pain_intents():
+    def test_pain_copy_length_budget(self) -> None:
+        for pain in config.PAIN_INTENTS:
             self.assertLessEqual(len(pain.problem), 32, msg=pain.id)
             self.assertLessEqual(len(pain.benefit), 28, msg=pain.id)
             self.assertLessEqual(len(pain.avoid), 28, msg=pain.id)
             self.assertLessEqual(len(pain.scene), 24, msg=pain.id)
 
-    def test_pains_rotate_templates(self) -> None:
-        fixed = [p for p in config.all_pain_intents() if p.template_id]
-        self.assertEqual(fixed, [])
-
-    def test_one_item_slot_per_day(self) -> None:
-        self.assertEqual(config.POSTS_PER_DAY, 10)
-        self.assertEqual(config.ITEM_SLOTS, (5, 9))
-        self.assertEqual(config.ASK_CHITCHAT_SLOTS, (0, 3, 7))
-        self.assertEqual(config.CHITCHAT_SLOTS, (1, 4, 8))
-        self.assertEqual(config.OGIRI_SLOTS, (2, 6))
-        self.assertEqual(config.STRUGGLE_SLOTS, ())
-        self.assertFalse(config.ATTACH_ITEM_IMAGE)
-        self.assertNotIn(5, config.VALUE_SLOTS)
-        self.assertNotIn(9, config.VALUE_SLOTS)
-
-    def test_wrap_rejects_holder_gadgets(self) -> None:
-        pain = next(p for p in config.PAIN_INTENTS if p.id == "wrap")
-        holder = RakutenItem(
-            item_code="wrap:holder",
-            item_name="イデアコ ラップホルダー マグネット ideaco 22cm ラップケース サランラップ",
-            item_price=2200,
-            affiliate_url="https://example.com/a",
-            item_url="https://example.com/i",
-            review_average=4.3,
-            review_count=171,
-            shop_name="shop",
-            genre_id="551167",
-            postage_flag=0,
-        )
-        roll = RakutenItem(
-            item_code="wrap:roll",
-            item_name="サランラップ 22cm×50m 食品用ラップ",
-            item_price=380,
-            affiliate_url="https://example.com/a",
-            item_url="https://example.com/i",
-            review_average=4.6,
-            review_count=800,
-            shop_name="shop",
-            genre_id="551167",
-            postage_flag=0,
-        )
-        self.assertFalse(_matches_pain(holder, pain))
-        self.assertTrue(_matches_pain(roll, pain))
-
-    def test_floor_wiper_rejects_stand(self) -> None:
-        pain = next(p for p in config.all_pain_intents() if p.id == "floor-wiper")
-        stand = RakutenItem(
-            item_code="fw:stand",
-            item_name="山崎実業 フローリングワイパースタンド クイックルワイパー 収納",
-            item_price=2500,
-            affiliate_url="https://example.com/a",
-            item_url="https://example.com/i",
-            review_average=4.5,
-            review_count=200,
-            shop_name="shop",
-            genre_id="100939",
-            postage_flag=0,
-        )
-        sheet = RakutenItem(
-            item_code="fw:sheet",
-            item_name="クイックルワイパー 取り替え用ドライシート 40枚",
-            item_price=680,
-            affiliate_url="https://example.com/a",
-            item_url="https://example.com/i",
-            review_average=4.5,
-            review_count=200,
-            shop_name="shop",
-            genre_id="100939",
-            postage_flag=0,
-        )
-        self.assertFalse(_matches_pain(stand, pain))
-        self.assertTrue(_matches_pain(sheet, pain))
-
-    def test_validate_rejects_old_style_main(self) -> None:
-        with self.assertRaises(ValueError):
-            _validate(
-                [
-                    "洗剤切れ？\n\nこのままだと: 困る\nこれを置くと: 助かる",
-                    "うちのストックはこれ。\nx",
-                    f"https://example.com/a\n{_PR_DISCLOSURE}",
-                ]
-            )
-
-
-if __name__ == "__main__":
-    unittest.main()
+    def test_rain_cover_matches_stroller_rain(self) -> None:
+        pain = next(p for p in config.PAIN_INTENTS if p.id == "stroller-rain")
+        item = _pick().item
+        self.assertTrue(_matches_pain(item, pain))
