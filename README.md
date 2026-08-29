@@ -180,7 +180,7 @@ PYTHONPATH=src:. python src/post.py --publish --slot 0
 
 枠の種別は `config.py` の `ITEM_SLOTS` / `OGIRI_SLOTS` / `TIMESAVE_ITEM_SLOTS` / `DIGEST_SLOTS` / `VALUE_SLOTS` / `STRUGGLE_SLOTS` / `CHITCHAT_SLOTS` / `ASK_CHITCHAT_SLOTS` で変更できます。CLI では `--item` / `--value` / `--ogiri` / `--digest` で種別を強制、`--value-id` や `--digest-format`（top3 / quiz / sleeper）で内容を指定できます。
 
-ジャンルは `config.py` の `GENRES` を日付×slot でローテします。ペルソナ A の主戦場:
+ジャンルは `config.py` の `GENRES` を日付×slot でローテします。ペルソナ B の主戦場:
 
 - 日用品 (`100939`)
 - キッチン (`551167`)
