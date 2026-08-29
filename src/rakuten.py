@@ -287,13 +287,23 @@ class RakutenClient:
         return f"https://hb.afl.rakuten.co.jp/{self.affiliate_id}/?pc={enc}&m={enc}"
 
     def fetch_item_by_code(self, item_code: str) -> Optional[RakutenItem]:
-        """itemCode（shop:code）で1件取得。見つからなければ None。"""
+        """itemCode（shop:code）で1件取得。見つからなければ None。
+
+        一部アプリ設定では itemCode パラメータ自体が 400 になるため、
+        その場合は None を返す（呼び出し側でフォールバックする）。
+        """
         code = (item_code or "").strip()
         if not code:
             return None
         params: Dict[str, Any] = self._base_params()
         params.update({"itemCode": code, "hits": 1})
-        data = self._get(config.RAKUTEN_SEARCH_URL, params)
+        try:
+            data = self._get(config.RAKUTEN_SEARCH_URL, params)
+        except RakutenApiError as exc:
+            # wrong_parameter / API Configuration not found 等は未対応扱い
+            if exc.status_code == 400:
+                return None
+            raise
         items_raw = data.get("Items") or []
         for raw in items_raw:
             if not isinstance(raw, dict):
@@ -306,8 +316,8 @@ class RakutenClient:
     def fetch_item_by_url(self, item_url: str) -> Optional[RakutenItem]:
         """商品ページURLからアフィ付き商品情報を解決する。
 
-        1) URLパスを itemCode (shop:code) として直接検索
-        2) 失敗時は shopCode + keyword=code で検索し、itemUrl が一致するものを採用
+        1) URLパスを itemCode (shop:code) として直接検索（対応環境のみ）
+        2) shopCode + keyword=code で検索し、itemUrl が一致するものを採用
         """
         parsed_url = self.parse_item_url(item_url)
         if not parsed_url:
@@ -326,7 +336,21 @@ class RakutenClient:
                 "hits": 30,
             }
         )
-        data = self._get(config.RAKUTEN_SEARCH_URL, params)
+        try:
+            data = self._get(config.RAKUTEN_SEARCH_URL, params)
+        except RakutenApiError as exc:
+            if exc.status_code == 400:
+                # shopCode 未対応などの場合は keyword のみで再試行
+                params = self._base_params()
+                params.update({"keyword": f"{shop} {code}", "hits": 30})
+                try:
+                    data = self._get(config.RAKUTEN_SEARCH_URL, params)
+                except RakutenApiError as exc2:
+                    if exc2.status_code == 400:
+                        return None
+                    raise
+            else:
+                raise
         items_raw = data.get("Items") or []
         needle = f"/{shop}/{code}/"
         for raw in items_raw:

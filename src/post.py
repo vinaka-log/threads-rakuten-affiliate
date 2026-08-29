@@ -189,8 +189,15 @@ def _lookup_urls(urls: list[str], *, out_json: str | None = None) -> int:
         parsed = RakutenClient.parse_item_url(url)
         shop = parsed[0] if parsed else ""
         code = parsed[1] if parsed else ""
-        item = client.fetch_item_by_url(url) if parsed else None
         deep = client.deep_affiliate_url(url)
+        item = None
+        api_error = ""
+        if parsed:
+            try:
+                item = client.fetch_item_by_url(url)
+            except Exception as exc:  # noqa: BLE001 — ディープリンクへフォールバック
+                api_error = str(exc)
+                print(f"api_error: {api_error}", file=sys.stderr)
         affiliate = (item.affiliate_url if item else "") or deep
         row = {
             "source_url": url,
@@ -204,6 +211,7 @@ def _lookup_urls(urls: list[str], *, out_json: str | None = None) -> int:
             "api_affiliate_url": item.affiliate_url if item else "",
             "deep_affiliate_url": deep,
             "resolved_via": "api" if item and item.affiliate_url else "deep_link",
+            "api_error": api_error,
         }
         rows.append(row)
         print("=" * 60)
