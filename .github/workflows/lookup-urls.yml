@@ -1,0 +1,103 @@
+name: Lookup affiliate URLs
+
+# 商品ページURL → 楽天アフィリエイトURL を解決する。
+# Actions → この workflow → Run workflow
+# または cursor/lookup-* ブランチへの push で自動実行。
+
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: "改行区切りの楽天商品URL"
+        required: true
+        type: string
+  push:
+    branches:
+      - "cursor/lookup-*"
+
+permissions:
+  contents: read
+
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      RAKUTEN_APPLICATION_ID: ${{ secrets.RAKUTEN_APPLICATION_ID }}
+      RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+      RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+      PYTHONPATH: src:.
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Require Rakuten secrets
+        run: |
+          missing=0
+          for key in RAKUTEN_APPLICATION_ID RAKUTEN_ACCESS_KEY RAKUTEN_AFFILIATE_ID; do
+            if [ -z "${!key}" ]; then
+              echo "Missing secret: $key"
+              missing=1
+            fi
+          done
+          if [ "$missing" = "1" ]; then
+            exit 1
+          fi
+
+      - name: Resolve affiliate URLs
+        env:
+          LOOKUP_URLS_INPUT: ${{ inputs.urls }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from post import _lookup_urls
+
+          # workflow_dispatch の入力があれば優先。なければ既定リスト（今回の依頼分）。
+          raw = (os.environ.get("LOOKUP_URLS_INPUT") or "").strip()
+          if raw:
+              urls = [u.strip() for u in raw.splitlines() if u.strip()]
+          else:
+              urls = [
+                  "https://item.rakuten.co.jp/plaisiureux/pl_65/",
+                  "https://item.rakuten.co.jp/yamabikoya/towel_whgrpk/",
+                  "https://item.rakuten.co.jp/fabomi/c04703dh/",
+                  "https://item.rakuten.co.jp/annon/csh/",
+                  "https://item.rakuten.co.jp/sanho-store/giopillow/",
+                  "https://item.rakuten.co.jp/yamazenyamaya/49017554468143/",
+                  "https://item.rakuten.co.jp/auc-risecreation/r0620/",
+              ]
+
+          out = Path("affiliate_links.json")
+          rc = _lookup_urls(urls, out_json=str(out))
+          # artifact 用にアフィIDを伏せた表示用テキストも出す
+          text_lines = []
+          import json
+          rows = json.loads(out.read_text(encoding="utf-8"))
+          for i, row in enumerate(rows, 1):
+              text_lines.append(f"{i}. {row.get('item_name') or '(name unknown)'}")
+              text_lines.append(f"   source: {row['source_url']}")
+              text_lines.append(f"   affiliate: {row['affiliate_url']}")
+              text_lines.append("")
+          Path("affiliate_links.txt").write_text("\n".join(text_lines) + "\n", encoding="utf-8")
+          raise SystemExit(rc)
+          PY
+
+      - name: Upload affiliate link artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: affiliate-links
+          path: |
+            affiliate_links.json
+            affiliate_links.txt
+          if-no-files-found: error

@@ -256,6 +256,125 @@ class RakutenClient:
         result.sort(key=lambda i: i.rank if i.rank is not None else 999)
         return result[:hits]
 
+    @staticmethod
+    def parse_item_url(url: str) -> Optional[tuple[str, str]]:
+        """楽天商品URLから (shopCode, urlItemCode) を取り出す。"""
+        raw = (url or "").strip()
+        if not raw:
+            return None
+        # クエリ・フラグメントを落としてパスだけ見る
+        raw = raw.split("#", 1)[0].split("?", 1)[0]
+        m = re.search(r"item\.rakuten\.co\.jp/([^/]+)/([^/]+)/?", raw)
+        if not m:
+            return None
+        shop, code = m.group(1).strip(), m.group(2).strip()
+        if not shop or not code:
+            return None
+        return shop, code
+
+    def deep_affiliate_url(self, item_url: str) -> str:
+        """ディープリンク形式のアフィリエイトURLを組み立てる。
+
+        APIの itemCode 解決に失敗したとき用。楽天アフィリエイトの
+        `https://hb.afl.rakuten.co.jp/{affiliateId}/?pc=...&m=...` 形式。
+        """
+        clean = (item_url or "").strip().split("#", 1)[0].split("?", 1)[0]
+        if clean and not clean.endswith("/"):
+            clean += "/"
+        from urllib.parse import quote
+
+        enc = quote(clean, safe="")
+        return f"https://hb.afl.rakuten.co.jp/{self.affiliate_id}/?pc={enc}&m={enc}"
+
+    def fetch_item_by_code(self, item_code: str) -> Optional[RakutenItem]:
+        """itemCode（shop:code）で1件取得。見つからなければ None。
+
+        一部アプリ設定では itemCode パラメータ自体が 400 になるため、
+        その場合は None を返す（呼び出し側でフォールバックする）。
+        """
+        code = (item_code or "").strip()
+        if not code:
+            return None
+        params: Dict[str, Any] = self._base_params()
+        params.update({"itemCode": code, "hits": 1})
+        try:
+            data = self._get(config.RAKUTEN_SEARCH_URL, params)
+        except RakutenApiError as exc:
+            # wrong_parameter / API Configuration not found 等は未対応扱い
+            if exc.status_code == 400:
+                return None
+            raise
+        items_raw = data.get("Items") or []
+        for raw in items_raw:
+            if not isinstance(raw, dict):
+                continue
+            parsed = self._parse_item(raw)
+            if parsed:
+                return parsed
+        return None
+
+    def fetch_item_by_url(self, item_url: str) -> Optional[RakutenItem]:
+        """商品ページURLからアフィ付き商品情報を解決する。
+
+        1) URLパスを itemCode (shop:code) として直接検索（対応環境のみ）
+        2) shopCode + keyword=code で検索し、itemUrl が一致するものを採用
+        """
+        parsed_url = self.parse_item_url(item_url)
+        if not parsed_url:
+            return None
+        shop, code = parsed_url
+        direct = self.fetch_item_by_code(f"{shop}:{code}")
+        if direct:
+            return direct
+
+        # URLの商品コードと API itemCode が一致しない店舗向けフォールバック
+        params: Dict[str, Any] = self._base_params()
+        params.update(
+            {
+                "shopCode": shop,
+                "keyword": code,
+                "hits": 30,
+            }
+        )
+        try:
+            data = self._get(config.RAKUTEN_SEARCH_URL, params)
+        except RakutenApiError as exc:
+            if exc.status_code == 400:
+                # shopCode 未対応などの場合は keyword のみで再試行
+                params = self._base_params()
+                params.update({"keyword": f"{shop} {code}", "hits": 30})
+                try:
+                    data = self._get(config.RAKUTEN_SEARCH_URL, params)
+                except RakutenApiError as exc2:
+                    if exc2.status_code == 400:
+                        return None
+                    raise
+            else:
+                raise
+        items_raw = data.get("Items") or []
+        needle = f"/{shop}/{code}/"
+        for raw in items_raw:
+            if not isinstance(raw, dict):
+                continue
+            parsed = self._parse_item(raw)
+            if not parsed:
+                continue
+            # affiliateUrl / itemUrl どちらにも元URLパスが含まれることが多い
+            hay = f"{parsed.item_url} {parsed.affiliate_url}"
+            if needle in hay or f"/{shop}/{code}" in hay:
+                return parsed
+        # キーワード一致が1件だけならそれを採用
+        candidates = []
+        for raw in items_raw:
+            if not isinstance(raw, dict):
+                continue
+            parsed = self._parse_item(raw)
+            if parsed:
+                candidates.append(parsed)
+        if len(candidates) == 1:
+            return candidates[0]
+        return None
+
     def search_items(
         self,
         keyword: str,
