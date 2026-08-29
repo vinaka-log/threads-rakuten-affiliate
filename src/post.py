@@ -159,7 +159,75 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="ダイジェスト形式を直接指定（省略時は日付×枠でローテ）",
     )
+    p.add_argument(
+        "--lookup-url",
+        action="append",
+        default=None,
+        metavar="URL",
+        help="楽天商品URLからアフィリエイトリンクを解決（複数可）",
+    )
+    p.add_argument(
+        "--lookup-json",
+        type=str,
+        default=None,
+        metavar="PATH",
+        help="--lookup-url の結果を JSON ファイルへ書き出す",
+    )
     return p
+
+
+def _lookup_urls(urls: list[str], *, out_json: str | None = None) -> int:
+    """商品URL一覧をアフィリエイトURLへ解決して表示する。"""
+    import json
+
+    client = RakutenClient()
+    rows: list[dict] = []
+    for raw in urls:
+        url = (raw or "").strip()
+        if not url:
+            continue
+        parsed = RakutenClient.parse_item_url(url)
+        shop = parsed[0] if parsed else ""
+        code = parsed[1] if parsed else ""
+        item = client.fetch_item_by_url(url) if parsed else None
+        deep = client.deep_affiliate_url(url)
+        affiliate = (item.affiliate_url if item else "") or deep
+        row = {
+            "source_url": url,
+            "shop": shop,
+            "url_item_code": code,
+            "item_code": item.item_code if item else "",
+            "item_name": item.item_name if item else "",
+            "item_price": item.item_price if item else None,
+            "shop_name": item.shop_name if item else "",
+            "affiliate_url": affiliate,
+            "api_affiliate_url": item.affiliate_url if item else "",
+            "deep_affiliate_url": deep,
+            "resolved_via": "api" if item and item.affiliate_url else "deep_link",
+        }
+        rows.append(row)
+        print("=" * 60)
+        print(f"source: {url}")
+        print(f"shop/code: {shop}/{code}" if parsed else "shop/code: (parse failed)")
+        if item:
+            print(f"item_code: {item.item_code}")
+            print(f"name: {item.item_name}")
+            print(f"price: {item.item_price}")
+            print(f"shop_name: {item.shop_name}")
+        else:
+            print("api: not found (using deep link)")
+        # Actions の secret masking 対策で2分割表示
+        mid = max(1, len(affiliate) // 2)
+        print(f"affiliate_url_part1: {affiliate[:mid]}")
+        print(f"affiliate_url_part2: {affiliate[mid:]}")
+        print(f"resolved_via: {row['resolved_via']}")
+
+    if out_json:
+        path = Path(out_json)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"wrote: {path}")
+    return 0 if rows else 1
 
 
 def _print_preview(pick, composed, *, dry_run: bool, image_url: str = "") -> None:
@@ -258,6 +326,9 @@ def main(argv: list[str] | None = None) -> int:
         n = asyncio.run(_sync_insights())
         print(f"updated insights on {n} candidates → {config.REUSE_PATH}")
         return 0
+
+    if args.lookup_url:
+        return _lookup_urls(args.lookup_url, out_json=args.lookup_json)
 
     dry_run = True
     if args.publish:
