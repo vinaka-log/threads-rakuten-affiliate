@@ -95,16 +95,21 @@ def genre_by_id(genre_id: str) -> Optional[config.Genre]:
     for g in config.GENRES:
         if g.id == genre_id:
             return g
-    # 悩み起点で GENRES 外（例: 水=100227）を使う場合
+    # 悩み起点で GENRES 外のサブジャンルを使う場合
     shorts = {
-        "100227": "ドリンク",
+        "100533": "ベビー",
+        "200833": "お出かけ",
+        "200822": "ねんね",
+        "566090": "収納",
+        "213972": "おむつ",
+        "200815": "バス",
         "100939": "日用品",
         "551167": "キッチン",
     }
     return config.Genre(
         id=genre_id,
         label=f"genre:{genre_id}",
-        short=shorts.get(genre_id, "日用品"),
+        short=shorts.get(genre_id, "ベビー"),
     )
 
 

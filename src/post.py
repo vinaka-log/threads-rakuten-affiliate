@@ -4,7 +4,7 @@
 例:
   PYTHONPATH=src:. python src/post.py --dry-run --slot 0
   PYTHONPATH=src:. python src/post.py --publish --slot 1
-  PYTHONPATH=src:. python src/post.py --dry-run --genre 100939
+  PYTHONPATH=src:. python src/post.py --dry-run --genre 100533
   PYTHONPATH=src:. python src/post.py --list-genres
   PYTHONPATH=src:. python src/post.py --list-reuse
   PYTHONPATH=src:. python src/post.py --mark-reuse stock-buy

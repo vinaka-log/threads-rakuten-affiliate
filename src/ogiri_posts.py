@@ -1,4 +1,4 @@
-"""ジブリ場面写真 × 買い足し大喜利（かいものくま）.
+"""ジブリ場面写真 × ベビー買い足し大喜利（かいものくま）.
 
 画像はスタジオジブリ公式ギャラリー（常識の範囲で自由利用可）。
 https://www.ghibli.jp/gallery/*.jpg
@@ -23,124 +23,124 @@ def _still(name: str) -> str:
 
 OGIRI_POSTS: List[dict] = [
     {
-        "id": "ogiri-chihiro-detergent",
+        "id": "ogiri-chihiro-rain",
         "kind": "ogiri",
         "image_url": _still("chihiro001"),
-        "text": "洗剤切れに気づいた瞬間の、後ろの席の顔",
+        "text": "レインカバー忘れて、空が怪しくなった瞬間の顔",
     },
     {
-        "id": "ogiri-chihiro-bill",
+        "id": "ogiri-chihiro-bag",
         "kind": "ogiri",
         "image_url": _still("chihiro016"),
-        "text": "レジで合計見た瞬間、予想の1.5倍だった時",
+        "text": "おむつ・おしりふき・着替え…カバンが荷物室になってる",
     },
     {
-        "id": "ogiri-chihiro-stock",
+        "id": "ogiri-chihiro-night",
         "kind": "ogiri",
         "image_url": _still("chihiro030"),
-        "text": "ストック棚、同じやつが3個あるのにまたカゴへ",
+        "text": "夜中のおむつ替え、床のおむつ山を探すタイム",
     },
     {
-        "id": "ogiri-totoro-heavy",
+        "id": "ogiri-totoro-stroll",
         "kind": "ogiri",
         "image_url": _still("totoro001"),
-        "text": "水6本、雨の日に抱えて帰る決意をした顔",
+        "text": "ベビーカーで外出、両手が足りなくて立ち止まる",
     },
     {
-        "id": "ogiri-totoro-rain",
+        "id": "ogiri-totoro-sleep",
         "kind": "ogiri",
         "image_url": _still("totoro012"),
-        "text": "ポイント日なのに、カゴの中身が増えすぎてる",
+        "text": "寝かしつけ完了…と思ったらまた起きてる",
     },
     {
         "id": "ogiri-majo-delivery",
         "kind": "ogiri",
         "image_url": _still("majo020"),
-        "text": "宅配ボックス満杯で、詰め替えが玄関で待ってる",
+        "text": "ベビーグッズの宅配、玄関で段ボールが増えていく",
     },
     {
-        "id": "ogiri-majo-empty",
+        "id": "ogiri-majo-size",
         "kind": "ogiri",
         "image_url": _still("majo001"),
-        "text": "「まだある」って言ったボトル、もう空気だけ",
+        "text": "おむつサイズ、まだいけると思った翌週にモレる",
     },
     {
         "id": "ogiri-howl-messy",
         "kind": "ogiri",
         "image_url": _still("howl012"),
-        "text": "キッチン、消耗品の空パックだけが増えていく城",
+        "text": "子ども服、床に増殖して朝の戦場になる部屋",
     },
     {
         "id": "ogiri-howl-calc",
         "kind": "ogiri",
         "image_url": _still("howl008"),
-        "text": "まとめ買い、本当にお得か計算してフリーズする",
+        "text": "抱っこひも比較表、見すぎて夜更かしする",
     },
     {
         "id": "ogiri-mononoke-stare",
         "kind": "ogiri",
         "image_url": _still("mononoke010"),
-        "text": "詰め替えと本体、どっちが得か棚の前で睨む",
+        "text": "手形スタンプ、汚れるか怖くて棚の前で睨む",
     },
     {
-        "id": "ogiri-ponyo-ham",
+        "id": "ogiri-ponyo-bath",
         "kind": "ogiri",
         "image_url": _still("ponyo008"),
-        "text": "特売ハム見て、カゴに入れる手が止まらない",
+        "text": "沐浴上がり、薄手タオルで急いで包むタイムアタック",
     },
     {
         "id": "ogiri-laputa-robot",
         "kind": "ogiri",
         "image_url": _still("laputa005"),
-        "text": "重い日用品、宅配に寄せたあとのロボット感",
+        "text": "お出かけセット整えたあとの、ちょっと強い気持ち",
     },
     {
         "id": "ogiri-porco-cool",
         "kind": "ogiri",
         "image_url": _still("porco008"),
-        "text": "ポイント日を知ってる顔で、カートを押してる",
+        "text": "ポイント日にベビーグッズをカゴへ入れる顔",
     },
     {
         "id": "ogiri-marnie-window",
         "kind": "ogiri",
         "image_url": _still("marnie005"),
-        "text": "ネット注文したのに、届くまで中身を忘れる窓際",
+        "text": "ネット注文した枕、届くまで月齢を忘れる窓際",
     },
     {
         "id": "ogiri-nausicaa-wind",
         "kind": "ogiri",
         "image_url": _still("nausicaa001"),
-        "text": "値上げの風、日用品コーナーにだけ強く当たってる",
+        "text": "急な雨雲、ベビーカー席にだけ強く当たってる",
     },
     {
         "id": "ogiri-yamada-dinner",
         "kind": "ogiri",
         "image_url": _still("yamada001"),
-        "text": "ラップ切れ、夕飯の残りをどう保存するか会議",
+        "text": "離乳食のあと、床の食べこぼし会議が始まる",
     },
     {
         "id": "ogiri-tanuki-shelf",
         "kind": "ogiri",
         "image_url": _still("tanuki001"),
-        "text": "同じ洗剤なのに、パッケージだけ変身してる棚",
+        "text": "同じおむつなのに、パッケージだけ変身してる棚",
     },
     {
         "id": "ogiri-baron-pose",
         "kind": "ogiri",
         "image_url": _still("baron005"),
-        "text": "ストック先置きしただけで、賢くなった気がする",
+        "text": "先に揃えただけで、育児が少し賢くなった気がする",
     },
     {
         "id": "ogiri-karigurashi-tiny",
         "kind": "ogiri",
         "image_url": _still("karigurashi001"),
-        "text": "詰め替え、最後の一滴まで絞ってる小さな戦い",
+        "text": "おしりふき、携帯用の最後の一枚を節約する戦い",
     },
     {
         "id": "ogiri-kazetachinu-desk",
         "kind": "ogiri",
         "image_url": _still("kazetachinu005"),
-        "text": "買い物リスト書いたのに、店で別のやつ入れてる",
+        "text": "買い物リスト書いたのに、店で別のベビー用品入れてる",
     },
 ]
 
