@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-31T00:53:23+09:00",
+  "updated_at": "2026-08-31T02:14:40+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-49f08143fb",
@@ -11,6 +11,23 @@
         "17906710155307225"
       ],
       "reused": false
+    },
+    {
+      "item_code": "realize-store2020:10000009",
+      "item_name": "【新規購入クーポン有り】★楽天1位★子育てベストアイテム大賞他多数受賞【公式】POMULU ポムル 赤ちゃん 抱っこ スリング 抱っこ紐 ヒップシート バッグ ベビースリング 男性 斜め 腰 子供 ショルダー ショルダーバッグ ウエストポーチ 2WAY 20kg 抱っこバッグ 座る 公園",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-08-31",
+      "threads_post_ids": [
+        "18107035655129729",
+        "18193918549375829",
+        "18192021841383173"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00u2zcn.x8u2b1cd.g00u2zcn.x8u2c0e8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frealize-store2020%2Fpomulu%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 16,
+      "pain_id": "baby-carrier",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/realize-store2020/cabinet/09961721/11270334/11367924/if.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-0d44576564",
