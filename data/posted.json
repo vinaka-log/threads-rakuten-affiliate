@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-30T02:01:07+09:00",
+  "updated_at": "2026-08-30T10:06:05+09:00",
   "entries": [
     {
       "item_code": "value:ask-0d44576564",
@@ -39,6 +39,17 @@
       "rank": 26,
       "pain_id": "baby-wipes",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/lecdirect/cabinet/img/e/e00975-1.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-0247ce6da4",
+      "item_name": "価値投稿 ask-0247ce6da4",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-08-30",
+      "threads_post_ids": [
+        "18141399829600682"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-73b6c95fe3",
