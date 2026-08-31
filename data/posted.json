@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-31T02:14:40+09:00",
+  "updated_at": "2026-08-31T10:06:38+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-49f08143fb",
@@ -28,6 +28,17 @@
       "rank": 16,
       "pain_id": "baby-carrier",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/realize-store2020/cabinet/09961721/11270334/11367924/if.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-4f25f59173",
+      "item_name": "価値投稿 ask-4f25f59173",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-08-31",
+      "threads_post_ids": [
+        "18099813368363483"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-0d44576564",
