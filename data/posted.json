@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-31T14:49:53+09:00",
+  "updated_at": "2026-08-31T16:57:54+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-49f08143fb",
@@ -48,6 +48,17 @@
       "posted_on": "2026-08-31",
       "threads_post_ids": [
         "18099554837022376"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-totoro-stroll",
+      "item_name": "価値投稿 ogiri-totoro-stroll",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-08-31",
+      "threads_post_ids": [
+        "17952940866250930"
       ],
       "reused": false
     },
