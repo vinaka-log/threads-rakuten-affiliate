@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-02T00:56:44+09:00",
+  "updated_at": "2026-09-02T02:12:04+09:00",
   "entries": [
     {
       "item_code": "value:ask-7e77d72ff1",
@@ -22,6 +22,23 @@
         "18015685625931682"
       ],
       "reused": false
+    },
+    {
+      "item_code": "sanho-store:10000207",
+      "item_name": "ベビー枕 ジオピロー プレミアム【公式】 絶壁防止枕 熱吸収 新生児 ドーナツ枕 体温調整 出産祝い シルク 枕カバー リバーシブル 絶壁防止 向き癖 赤ちゃん ベビー 絶壁頭 絶壁予防 メッシュ 0歳 1歳 夏 ひんやり 涼感 枕 まくら 出産準備 おしゃれ プレゼント giopillow",
+      "genre_id": "200822",
+      "genre_label": "ベビー用寝具・ベッド",
+      "slot": 9,
+      "posted_on": "2026-09-02",
+      "threads_post_ids": [
+        "17899565271569770",
+        "17967513750141680",
+        "18104857223267667"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00ss1un.x8u2b1b3.g00ss1un.x8u2c652/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsanho-store%2Fgiopillow-premiumcool%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 15,
+      "pain_id": "baby-pillow",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/sanho-store/cabinet/cart/giopillowpc_cart.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
