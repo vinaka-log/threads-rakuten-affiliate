@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-01T21:12:14+09:00",
+  "updated_at": "2026-09-01T22:47:14+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -122,6 +122,17 @@
       "rank": 23,
       "pain_id": "stroller-rain",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/natural-living/cabinet/spr/6/9/691208308145_3.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-ponyo-bath",
+      "item_name": "価値投稿 ogiri-ponyo-bath",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-01",
+      "threads_post_ids": [
+        "18093631535539388"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-49f08143fb",
