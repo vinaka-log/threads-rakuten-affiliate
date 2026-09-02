@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-03T00:49:21+09:00",
+  "updated_at": "2026-09-03T02:03:06+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-9968c5db51",
@@ -11,6 +11,23 @@
         "18073695170709005"
       ],
       "reused": false
+    },
+    {
+      "item_code": "petitbelly:10000967",
+      "item_name": "荷物もレジカゴもずり落ちない ベビーカーの収納を大容量にする 日本製 【特許取得済み】 　ベビーカーハンモックシート深型 買い物かご ベビーカーアンダーバッグ バギーバッグ 収納バッグ ストローラー マザーズバッグ 撥水 ファムベリー bchs bpw",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 9,
+      "posted_on": "2026-09-03",
+      "threads_post_ids": [
+        "18192289390350260",
+        "18008458670968862",
+        "17967830934173694"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00q8ion.x8u2b690.g00q8ion.x8u2c4dc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpetitbelly%2Fbchs-2%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 30,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/petitbelly/cabinet/bchs/bchs-cart1-2025.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-7e77d72ff1",
