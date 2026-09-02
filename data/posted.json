@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-02T02:12:04+09:00",
+  "updated_at": "2026-09-02T09:50:22+09:00",
   "entries": [
     {
       "item_code": "value:ask-7e77d72ff1",
@@ -39,6 +39,17 @@
       "rank": 15,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/sanho-store/cabinet/cart/giopillowpc_cart.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-22ea999866",
+      "item_name": "価値投稿 ask-22ea999866",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-09-02",
+      "threads_post_ids": [
+        "18100836965627714"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
