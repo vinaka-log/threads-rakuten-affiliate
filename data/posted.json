@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-03T02:03:06+09:00",
+  "updated_at": "2026-09-03T09:58:17+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-9968c5db51",
@@ -28,6 +28,17 @@
       "rank": 30,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/petitbelly/cabinet/bchs/bchs-cart1-2025.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-3d1a64a50c",
+      "item_name": "価値投稿 ask-3d1a64a50c",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-09-03",
+      "threads_post_ids": [
+        "17867516100643750"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-7e77d72ff1",
