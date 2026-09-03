@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-04T00:38:37+09:00",
+  "updated_at": "2026-09-04T01:58:07+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-75f0dbd692",
@@ -11,6 +11,23 @@
         "18120585512487466"
       ],
       "reused": false
+    },
+    {
+      "item_code": "babycareshop:10000000",
+      "item_name": "★楽天1位 30冠★おしりふき 80枚×12パック 厚手で水分たっぷりのおしりふき 厚手 おしりふき 大判 厚手 手口ふき ウェットティッシュ 新生児 おしりふき 水99.9 おしりふき ふた付き タオル並み【Bc Babycare】",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-09-04",
+      "threads_post_ids": [
+        "18437676073192657",
+        "18114745559053638",
+        "18105829337180633"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00ujcfn.x8u2b29d.g00ujcfn.x8u2ca08/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbabycareshop%2Fbc20230001%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 25,
+      "pain_id": "baby-wipes",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/babycareshop/cabinet/item/babywipes/80p.jpg?_ex=400x400"
     },
     {
       "item_code": "value:chat-auto-9968c5db51",
