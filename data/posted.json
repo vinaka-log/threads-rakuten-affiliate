@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-03T18:17:48+09:00",
+  "updated_at": "2026-09-03T20:49:38+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-9968c5db51",
@@ -83,6 +83,23 @@
         "18015327677928573"
       ],
       "reused": false
+    },
+    {
+      "item_code": "fabomi:10000115",
+      "item_name": "【4日20時～★先着50％OFFクーポン】【楽天1位】ベビーカー レインカバー 雨よけ 雨対策 雨 カバー a型 b型 背面式 厚め 破れにくい 収納ポーチ 収納袋 バギー 汎用 ベビー用品 おでかけ 梅雨 ゲリラ豪雨 透明 半透明 風 雨具 防寒 つけたまま乗り降り",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 5,
+      "posted_on": "2026-09-03",
+      "threads_post_ids": [
+        "18164272984417137",
+        "18487667071106801",
+        "18066805925726392"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00u3p0n.x8u2b20e.g00u3p0n.x8u2c84d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffabomi%2Fc05201rc%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 15,
+      "pain_id": "stroller-rain",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/fabomi/cabinet/baby/c05201rc/1.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-7e77d72ff1",
