@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-05T00:37:04+09:00",
+  "updated_at": "2026-09-05T01:46:47+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-72e29cf1e1",
@@ -11,6 +11,23 @@
         "18151383169520978"
       ],
       "reused": false
+    },
+    {
+      "item_code": "konnybaby:10000037",
+      "item_name": "【本日の20%offクーポンは終了いたしました】【SALE4,550円→3,600円】【楽天総合ランキング1位獲得】コニースタイ 送料無料 スタイ 可愛い 360 ローリング コニー Konny ベビーコーデ よだれかけ セット ベビースタイ 抱っこ紐 よだれカバー",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-09-05",
+      "threads_post_ids": [
+        "18135013117624877",
+        "18391511704162713",
+        "17874268278631491"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00tlamn.x8u2bc13.g00tlamn.x8u2cd7e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkonnybaby%2Fkonny-baby-bib%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 1,
+      "pain_id": "baby-carrier",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/konnybaby/cabinet/ss26/supersale/13276751/imgrc0122645719.jpg?_ex=400x400"
     },
     {
       "item_code": "value:chat-auto-75f0dbd692",
