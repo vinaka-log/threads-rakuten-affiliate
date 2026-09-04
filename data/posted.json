@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-04T20:51:05+09:00",
+  "updated_at": "2026-09-04T22:00:08+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-75f0dbd692",
@@ -100,6 +100,17 @@
       "rank": 26,
       "pain_id": "stroller-rain",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/estyler/cabinet/products/cybex/cb-mlo-86056417_2.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-porco-cool",
+      "item_name": "価値投稿 ogiri-porco-cool",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-04",
+      "threads_post_ids": [
+        "17939014263357093"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-9968c5db51",
