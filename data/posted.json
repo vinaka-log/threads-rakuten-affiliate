@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-05T13:42:16+09:00",
+  "updated_at": "2026-09-05T15:34:22+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-72e29cf1e1",
@@ -48,6 +48,17 @@
       "posted_on": "2026-09-05",
       "threads_post_ids": [
         "17926888224405989"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-ponyo-bath",
+      "item_name": "価値投稿 ogiri-ponyo-bath",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-05",
+      "threads_post_ids": [
+        "18118467011510444"
       ],
       "reused": false
     },
