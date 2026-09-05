@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-05T01:46:47+09:00",
+  "updated_at": "2026-09-05T09:38:09+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-72e29cf1e1",
@@ -28,6 +28,17 @@
       "rank": 1,
       "pain_id": "baby-carrier",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/konnybaby/cabinet/ss26/supersale/13276751/imgrc0122645719.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-f2f4d87494",
+      "item_name": "価値投稿 ask-f2f4d87494",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-09-05",
+      "threads_post_ids": [
+        "18007378466977183"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-75f0dbd692",
