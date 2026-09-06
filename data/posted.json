@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-06T13:51:50+09:00",
+  "updated_at": "2026-09-06T15:43:53+09:00",
   "entries": [
     {
       "item_code": "caizu-corporation:10003263",
@@ -26,6 +26,17 @@
       "posted_on": "2026-09-06",
       "threads_post_ids": [
         "18142464967572798"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-porco-cool",
+      "item_name": "価値投稿 ogiri-porco-cool",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-06",
+      "threads_post_ids": [
+        "18132991819647743"
       ],
       "reused": false
     },
