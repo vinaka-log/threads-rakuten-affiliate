@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-06T20:25:17+09:00",
+  "updated_at": "2026-09-06T21:27:28+09:00",
   "entries": [
     {
       "item_code": "caizu-corporation:10003263",
@@ -67,6 +67,17 @@
       "rank": 22,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/poled-japan/cabinet/item/airluv4plus/imgrc0111868044.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-tanuki-shelf",
+      "item_name": "価値投稿 ogiri-tanuki-shelf",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-06",
+      "threads_post_ids": [
+        "17961291846190804"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-72e29cf1e1",
