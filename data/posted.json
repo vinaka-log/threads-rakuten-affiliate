@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-06T18:01:52+09:00",
+  "updated_at": "2026-09-06T20:25:17+09:00",
   "entries": [
     {
       "item_code": "caizu-corporation:10003263",
@@ -50,6 +50,23 @@
         "18105525778915583"
       ],
       "reused": false
+    },
+    {
+      "item_code": "poled-japan:10000052",
+      "item_name": "【期間限定！最大50％OFF】【公式】エアラブ4+ プラス ファン付き クールシート airluv エアラブ ポレッド 赤ちゃん ベビーカー 出産祝い プレゼント ギフト airluv4+ 保冷シート ベビーシート ファン シート扇風機 ファン 冷感 冷却シート",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 5,
+      "posted_on": "2026-09-06",
+      "threads_post_ids": [
+        "17957181624211843",
+        "18132834610647412",
+        "18216729751350374"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00uktjn.x8u2bce5.g00uktjn.x8u2cf0f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpoled-japan%2Fairluv4plus%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 22,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/poled-japan/cabinet/item/airluv4plus/imgrc0111868044.jpg?_ex=400x400"
     },
     {
       "item_code": "value:chat-auto-72e29cf1e1",
