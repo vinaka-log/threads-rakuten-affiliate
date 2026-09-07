@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-07T13:58:14+09:00",
+  "updated_at": "2026-09-07T15:53:11+09:00",
   "entries": [
     {
       "item_code": "baby-alice:10006664",
@@ -26,6 +26,17 @@
       "posted_on": "2026-09-07",
       "threads_post_ids": [
         "18417055630155763"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-nausicaa-wind",
+      "item_name": "価値投稿 ogiri-nausicaa-wind",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-07",
+      "threads_post_ids": [
+        "17963573042983268"
       ],
       "reused": false
     },
