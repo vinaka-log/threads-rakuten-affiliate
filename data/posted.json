@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-07T01:01:22+09:00",
+  "updated_at": "2026-09-07T13:58:14+09:00",
   "entries": [
     {
       "item_code": "baby-alice:10006664",
@@ -17,6 +17,17 @@
       "rank": 9,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/baby-alice/cabinet/img/slide-thumb.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:chat-auto-0cdb2c8fb9",
+      "item_name": "価値投稿 chat-auto-0cdb2c8fb9",
+      "kind": "chitchat",
+      "slot": 1,
+      "posted_on": "2026-09-07",
+      "threads_post_ids": [
+        "18417055630155763"
+      ],
+      "reused": false
     },
     {
       "item_code": "caizu-corporation:10003263",
