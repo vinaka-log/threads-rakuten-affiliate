@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-09T21:02:13+09:00",
+  "updated_at": "2026-09-09T22:14:41+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-fa30f88786",
@@ -78,6 +78,17 @@
       "rank": 20,
       "pain_id": "baby-towel",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/yamabikoya/cabinet/rakuten_ss/13689303/towel_whgrpk_tscp.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-chihiro-night",
+      "item_name": "価値投稿 ogiri-chihiro-night",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-09",
+      "threads_post_ids": [
+        "18281470894288308"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-616c6740fe",
