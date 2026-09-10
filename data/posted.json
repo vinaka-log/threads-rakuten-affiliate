@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-10T02:04:27+09:00",
+  "updated_at": "2026-09-10T13:57:06+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-383b990b4a",
@@ -28,6 +28,17 @@
       "rank": 26,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/baby-alice/cabinet/perso_tumb_new.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:chat-auto-99f8f6ae33",
+      "item_name": "価値投稿 chat-auto-99f8f6ae33",
+      "kind": "chitchat",
+      "slot": 1,
+      "posted_on": "2026-09-10",
+      "threads_post_ids": [
+        "17997796994816302"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-fa30f88786",
