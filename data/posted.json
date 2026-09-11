@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-11T13:54:05+09:00",
+  "updated_at": "2026-09-11T15:53:29+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-f9f231984d",
@@ -37,6 +37,17 @@
       "posted_on": "2026-09-11",
       "threads_post_ids": [
         "17925700437411011"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-chihiro-night",
+      "item_name": "価値投稿 ogiri-chihiro-night",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-11",
+      "threads_post_ids": [
+        "18213275680356860"
       ],
       "reused": false
     },
