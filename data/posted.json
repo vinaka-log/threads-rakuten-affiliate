@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-12T00:42:50+09:00",
+  "updated_at": "2026-09-12T01:57:19+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-1c84414690",
@@ -11,6 +11,23 @@
         "17962100103186887"
       ],
       "reused": false
+    },
+    {
+      "item_code": "kaitekistore:10000972",
+      "item_name": "【LAST DAY！半額セール！21960→9333円】【楽天48冠】【1年保証】ベビー枕 赤ちゃん枕 新生児〜24ヶ月 モロー反射対策 寝返り防止 向き癖防止 絶壁防止 5方向高さ調整 洗える ベビークッション 出産祝い 横向き　寝枕 ギフト GU MODE gumode",
+      "genre_id": "200822",
+      "genre_label": "ベビー用寝具・ベッド",
+      "slot": 9,
+      "posted_on": "2026-09-12",
+      "threads_post_ids": [
+        "18118330544480354",
+        "17967246570168354",
+        "18110281811275238"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00tzytn.x8u2bff3.g00tzytn.x8u2ccbf/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkaitekistore%2Faf01%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 20,
+      "pain_id": "baby-pillow",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/kaitekistore/cabinet/13792142/13792146/13792169/af.jpg?_ex=400x400"
     },
     {
       "item_code": "value:chat-auto-f9f231984d",
