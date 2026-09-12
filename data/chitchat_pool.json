@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-09T00:50:47+09:00",
+  "updated_at": "2026-09-12T13:46:46+09:00",
   "items": [
     {
       "id": "chat-phone-battery",
@@ -690,6 +690,30 @@
       "text": "エレベーター待ってたら結局階段の方が早かった\nいつものことなのに待つ\nまあいいか",
       "source": "auto-draft",
       "created_at": "2026-09-09T00:50:47+09:00"
+    },
+    {
+      "id": "chat-auto-2660b9cfab",
+      "text": "メモ帳アプリ開きすぎてどれが本題かわからん\nまあいいか",
+      "source": "auto-draft",
+      "created_at": "2026-09-12T13:46:46+09:00"
+    },
+    {
+      "id": "chat-auto-5befb5bd02",
+      "text": "スマホ落としそうになって無言で握りしめた\nまあいいか",
+      "source": "auto-draft",
+      "created_at": "2026-09-12T13:46:46+09:00"
+    },
+    {
+      "id": "chat-auto-5144ad710b",
+      "text": "土曜昼寝したら2時間消えた\nまあいいかってなってる\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-09-12T13:46:46+09:00"
+    },
+    {
+      "id": "chat-auto-a408bf2c8b",
+      "text": "イヤホン片耳切れる\n歩きながら再接続してる\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-09-12T13:46:46+09:00"
     }
   ]
 }
