@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-13T01:02:31+09:00",
+  "updated_at": "2026-09-13T09:38:25+09:00",
   "entries": [
     {
       "item_code": "sanho-store:10000068",
@@ -17,6 +17,17 @@
       "rank": 4,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/sanho-store/cabinet/cart/giopillow_cart.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-141ccc117d",
+      "item_name": "価値投稿 ask-141ccc117d",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-09-13",
+      "threads_post_ids": [
+        "18072924059738541"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-1c84414690",
