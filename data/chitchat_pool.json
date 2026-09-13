@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-12T13:46:46+09:00",
+  "updated_at": "2026-09-13T18:52:25+09:00",
   "items": [
     {
       "id": "chat-phone-battery",
@@ -714,6 +714,42 @@
       "text": "イヤホン片耳切れる\n歩きながら再接続してる\nどうでもいい話",
       "source": "auto-draft",
       "created_at": "2026-09-12T13:46:46+09:00"
+    },
+    {
+      "id": "chat-auto-b985d73eab",
+      "text": "朝長袖、昼で暑い\n服装ミスった\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-09-13T18:52:25+09:00"
+    },
+    {
+      "id": "chat-auto-6d8fed8d0b",
+      "text": "カフェの席、コンセント空いてなくて地味に落ち込む\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-09-13T18:52:25+09:00"
+    },
+    {
+      "id": "chat-auto-be43cd53d4",
+      "text": "自販機、推しの飲み物売り切れ\n隣で妥協した\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-09-13T18:52:25+09:00"
+    },
+    {
+      "id": "chat-auto-d1e5dd5132",
+      "text": "寝癖右だけ立つ\n今日も帽子検討中\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-09-13T18:52:25+09:00"
+    },
+    {
+      "id": "chat-auto-cfdb884d1b",
+      "text": "電車でうとうとして乗り過ごしそうになった\n心臓止まった\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-09-13T18:52:25+09:00"
+    },
+    {
+      "id": "chat-auto-37d4214db4",
+      "text": "パスワード忘れて再設定→いつものやつだった\n何してたんだろ\nどうでもいい話",
+      "source": "auto-draft",
+      "created_at": "2026-09-13T18:52:25+09:00"
     }
   ]
 }
