@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-13T14:02:02+09:00",
+  "updated_at": "2026-09-13T16:02:53+09:00",
   "entries": [
     {
       "item_code": "sanho-store:10000068",
@@ -37,6 +37,17 @@
       "posted_on": "2026-09-13",
       "threads_post_ids": [
         "18116320960760360"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-majo-size",
+      "item_name": "価値投稿 ogiri-majo-size",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-13",
+      "threads_post_ids": [
+        "18098095421415433"
       ],
       "reused": false
     },
