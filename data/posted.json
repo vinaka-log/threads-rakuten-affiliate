@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-13T21:25:37+09:00",
+  "updated_at": "2026-09-13T22:31:23+09:00",
   "entries": [
     {
       "item_code": "sanho-store:10000068",
@@ -78,6 +78,17 @@
       "rank": 1,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/kanseikukan/cabinet/10705115/thum1re.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-ponyo-bath",
+      "item_name": "価値投稿 ogiri-ponyo-bath",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-13",
+      "threads_post_ids": [
+        "18595787569071447"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-1c84414690",
