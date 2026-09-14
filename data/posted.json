@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-14T01:52:53+09:00",
+  "updated_at": "2026-09-14T14:10:56+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-3fc8e1e630",
@@ -28,6 +28,17 @@
       "rank": 11,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/758/404758.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:chat-auto-b985d73eab",
+      "item_name": "価値投稿 chat-auto-b985d73eab",
+      "kind": "chitchat",
+      "slot": 1,
+      "posted_on": "2026-09-14",
+      "threads_post_ids": [
+        "18087885437407328"
+      ],
+      "reused": false
     },
     {
       "item_code": "sanho-store:10000068",
