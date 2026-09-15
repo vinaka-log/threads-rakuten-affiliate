@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-15T14:04:21+09:00",
+  "updated_at": "2026-09-15T16:02:25+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-nausicaa-wind",
@@ -48,6 +48,17 @@
       "posted_on": "2026-09-15",
       "threads_post_ids": [
         "17905745979327055"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-ponyo-bath",
+      "item_name": "価値投稿 ogiri-ponyo-bath",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-15",
+      "threads_post_ids": [
+        "18110804242852351"
       ],
       "reused": false
     },
