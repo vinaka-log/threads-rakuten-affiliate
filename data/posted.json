@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-15T21:19:30+09:00",
+  "updated_at": "2026-09-15T22:57:43+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-nausicaa-wind",
@@ -100,6 +100,17 @@
       "rank": 1,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/272/404272.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-nausicaa-wind",
+      "item_name": "価値投稿 ogiri-nausicaa-wind",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-15",
+      "threads_post_ids": [
+        "18372326005232884"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-3fc8e1e630",
