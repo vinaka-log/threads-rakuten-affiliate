@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-16T01:04:00+09:00",
+  "updated_at": "2026-09-16T02:30:50+09:00",
   "entries": [
     {
       "item_code": "value:ask-b466e06cc2",
@@ -22,6 +22,23 @@
         "17906445243519097"
       ],
       "reused": false
+    },
+    {
+      "item_code": "shimachan-store:10000606",
+      "item_name": "【ランキング1位】【超軽量★3秒展開】ベビーカー 折りたたみ式 おでかけ バギー 子供 ストローラー 超軽量 日よけカバー 持ち運び サンシェード コンパクト セカンドベビーバギー ワンタッチ展開 サンルーフ 赤ちゃん 子ども 1歳 2歳 3歳 小型 メッシュ 耐荷重35kg b型 4輪",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 9,
+      "posted_on": "2026-09-16",
+      "threads_post_ids": [
+        "18108616973147121",
+        "18095611919532612",
+        "17868963006642606"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00u1zcn.x8u2b62d.g00u1zcn.x8u2c63a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fshimachan-store%2Fwb-02%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 15,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/shimachan-store/cabinet/11897215/b1.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-nausicaa-wind",
