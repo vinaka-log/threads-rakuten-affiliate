@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-16T02:30:50+09:00",
+  "updated_at": "2026-09-16T10:08:02+09:00",
   "entries": [
     {
       "item_code": "value:ask-b466e06cc2",
@@ -39,6 +39,17 @@
       "rank": 15,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/shimachan-store/cabinet/11897215/b1.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-9ec1424605",
+      "item_name": "価値投稿 ask-9ec1424605",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-09-16",
+      "threads_post_ids": [
+        "18124805155640023"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-nausicaa-wind",
