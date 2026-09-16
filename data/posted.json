@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-16T21:17:45+09:00",
+  "updated_at": "2026-09-16T22:51:01+09:00",
   "entries": [
     {
       "item_code": "value:ask-b466e06cc2",
@@ -100,6 +100,17 @@
       "rank": 28,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/baby-alice/cabinet/imgrc0112936784.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-tanuki-shelf",
+      "item_name": "価値投稿 ogiri-tanuki-shelf",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-16",
+      "threads_post_ids": [
+        "18125731861880147"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-nausicaa-wind",
