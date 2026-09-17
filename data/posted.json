@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-17T14:02:29+09:00",
+  "updated_at": "2026-09-17T15:59:07+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-2e7f226206",
@@ -37,6 +37,17 @@
       "posted_on": "2026-09-17",
       "threads_post_ids": [
         "18062617424777176"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-nausicaa-wind",
+      "item_name": "価値投稿 ogiri-nausicaa-wind",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-17",
+      "threads_post_ids": [
+        "17989739178051410"
       ],
       "reused": false
     },
