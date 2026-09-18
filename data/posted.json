@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-18T20:58:07+09:00",
+  "updated_at": "2026-09-18T22:14:43+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-4bf1909f28",
@@ -89,6 +89,17 @@
       "rank": 15,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/babys/cabinet/12208473/260911/ev_ex-3set-c_thumb.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-chihiro-rain",
+      "item_name": "価値投稿 ogiri-chihiro-rain",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-18",
+      "threads_post_ids": [
+        "17949332016335816"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-2e7f226206",
