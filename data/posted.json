@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-20T01:17:59+09:00",
+  "updated_at": "2026-09-20T14:04:26+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-a5a5930442",
@@ -28,6 +28,17 @@
       "rank": 17,
       "pain_id": "baby-wipes",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/150/405150.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:chat-auto-5026a59c91",
+      "item_name": "価値投稿 chat-auto-5026a59c91",
+      "kind": "chitchat",
+      "slot": 1,
+      "posted_on": "2026-09-20",
+      "threads_post_ids": [
+        "18215489200348660"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-0d3936fcc2",
