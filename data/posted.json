@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-21T01:43:07+09:00",
+  "updated_at": "2026-09-21T14:10:00+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-c6fb1f0e44",
@@ -28,6 +28,17 @@
       "rank": 6,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/fabomi/cabinet/baby/c02314bb/1_1.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:chat-auto-ef9f4f8137",
+      "item_name": "価値投稿 chat-auto-ef9f4f8137",
+      "kind": "chitchat",
+      "slot": 1,
+      "posted_on": "2026-09-21",
+      "threads_post_ids": [
+        "18014470517748834"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-a5a5930442",
