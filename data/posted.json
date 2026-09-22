@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-22T14:11:30+09:00",
+  "updated_at": "2026-09-22T16:08:44+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-howl-calc",
@@ -48,6 +48,17 @@
       "posted_on": "2026-09-22",
       "threads_post_ids": [
         "18103002755459822"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-totoro-sleep",
+      "item_name": "価値投稿 ogiri-totoro-sleep",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-22",
+      "threads_post_ids": [
+        "17883593334503990"
       ],
       "reused": false
     },
