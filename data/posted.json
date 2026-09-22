@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-22T21:11:41+09:00",
+  "updated_at": "2026-09-22T22:45:51+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-howl-calc",
@@ -89,6 +89,17 @@
       "rank": 29,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/mythik/cabinet/product01/classybaby/1000clsbb-01j.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-howl-calc",
+      "item_name": "価値投稿 ogiri-howl-calc",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-22",
+      "threads_post_ids": [
+        "18070104842576399"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-c6fb1f0e44",
