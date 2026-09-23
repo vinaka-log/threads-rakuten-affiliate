@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-24T00:56:46+09:00",
+  "updated_at": "2026-09-24T02:45:27+09:00",
   "entries": [
     {
       "item_code": "value:struggle-delivery-baby",
@@ -11,6 +11,23 @@
         "17976928754916654"
       ],
       "reused": false
+    },
+    {
+      "item_code": "pigeon-shop:10001747",
+      "item_name": "【80枚×40個】おしりナップ やわらか厚手仕上げ 限定デザイン(森のかくれんぼ) | 0ヵ月〜 おしり拭き お尻拭き お尻ふき おしりふき ナップ おてふき 体拭き からだふき 詰め替え 赤ちゃん 赤ちゃん用品 ベビー用品 衛生用品",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-09-24",
+      "threads_post_ids": [
+        "17936987394367979",
+        "18135761455643865",
+        "18104969663191065"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00tgivn.x8u2b7a0.g00tgivn.x8u2cb9f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fpigeon-shop%2F2000363s%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 29,
+      "pain_id": "baby-wipes",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/pigeon-shop/cabinet/thumb/11827558/1039243.jpg?_ex=400x400"
     },
     {
       "item_code": "value:chat-auto-5891a8a251",
