@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-23T13:55:45+09:00",
+  "updated_at": "2026-09-23T16:06:46+09:00",
   "entries": [
     {
       "item_code": "value:chat-auto-5891a8a251",
@@ -37,6 +37,17 @@
       "posted_on": "2026-09-23",
       "threads_post_ids": [
         "17990044812058598"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-majo-size",
+      "item_name": "価値投稿 ogiri-majo-size",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-23",
+      "threads_post_ids": [
+        "18096303455282465"
       ],
       "reused": false
     },
