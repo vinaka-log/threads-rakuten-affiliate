@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-24T16:01:23+09:00",
+  "updated_at": "2026-09-24T18:37:17+09:00",
   "entries": [
     {
       "item_code": "value:struggle-delivery-baby",
@@ -48,6 +48,17 @@
       "posted_on": "2026-09-24",
       "threads_post_ids": [
         "18122132884934431"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-delivery-baby",
+      "item_name": "価値投稿 struggle-delivery-baby",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-09-24",
+      "threads_post_ids": [
+        "18111374779844990"
       ],
       "reused": false
     },
