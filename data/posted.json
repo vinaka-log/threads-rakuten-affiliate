@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-24T02:45:27+09:00",
+  "updated_at": "2026-09-24T14:05:44+09:00",
   "entries": [
     {
       "item_code": "value:struggle-delivery-baby",
@@ -28,6 +28,17 @@
       "rank": 29,
       "pain_id": "baby-wipes",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/pigeon-shop/cabinet/thumb/11827558/1039243.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-delivery-baby",
+      "item_name": "価値投稿 struggle-delivery-baby",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-09-24",
+      "threads_post_ids": [
+        "18071486051711352"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:chat-auto-5891a8a251",
