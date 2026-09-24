@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-24T14:05:44+09:00",
+  "updated_at": "2026-09-24T16:01:23+09:00",
   "entries": [
     {
       "item_code": "value:struggle-delivery-baby",
@@ -37,6 +37,17 @@
       "posted_on": "2026-09-24",
       "threads_post_ids": [
         "18071486051711352"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-howl-calc",
+      "item_name": "価値投稿 ogiri-howl-calc",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-24",
+      "threads_post_ids": [
+        "18122132884934431"
       ],
       "reused": false
     },
