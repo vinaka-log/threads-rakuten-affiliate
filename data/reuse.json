@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-24T18:37:17+09:00",
+  "updated_at": "2026-09-25T01:20:04+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -319,6 +319,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18111374779844990"
+    },
+    {
+      "value_id": "struggle-tiny-win-baby",
+      "last_posted_on": "2026-09-25",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18015482513941374"
     }
   ]
 }
