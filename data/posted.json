@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-09-25T23:17:22+09:00",
+  "updated_at": "2026-09-26T01:20:10+09:00",
   "entries": [
+    {
+      "item_code": "value:struggle-sunday-baby",
+      "item_name": "価値投稿 struggle-sunday-baby",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-09-26",
+      "threads_post_ids": [
+        "18106346537249352"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:struggle-tiny-win-baby",
       "item_name": "価値投稿 struggle-tiny-win-baby",

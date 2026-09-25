@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-25T18:54:35+09:00",
+  "updated_at": "2026-09-26T01:20:10+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -330,6 +330,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18009777440770202"
+    },
+    {
+      "value_id": "struggle-sunday-baby",
+      "last_posted_on": "2026-09-26",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18106346537249352"
     }
   ]
 }
