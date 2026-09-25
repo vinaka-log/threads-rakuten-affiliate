@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-25T21:24:10+09:00",
+  "updated_at": "2026-09-25T23:17:22+09:00",
   "entries": [
     {
       "item_code": "value:struggle-tiny-win-baby",
@@ -61,6 +61,17 @@
       "rank": 29,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/mythik/cabinet/product01/litta/hooclip/1500-sphp001g.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-nausicaa-wind",
+      "item_name": "価値投稿 ogiri-nausicaa-wind",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-25",
+      "threads_post_ids": [
+        "18115560169990649"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-delivery-baby",
