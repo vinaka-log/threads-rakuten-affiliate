@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-25T14:08:05+09:00",
+  "updated_at": "2026-09-25T15:57:18+09:00",
   "entries": [
     {
       "item_code": "value:struggle-tiny-win-baby",
@@ -20,6 +20,17 @@
       "posted_on": "2026-09-25",
       "threads_post_ids": [
         "18097466642570864"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-ponyo-bath",
+      "item_name": "価値投稿 ogiri-ponyo-bath",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-25",
+      "threads_post_ids": [
+        "17956812981016327"
       ],
       "reused": false
     },
