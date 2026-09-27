@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-27T19:16:40+09:00",
+  "updated_at": "2026-09-27T23:23:42+09:00",
   "entries": [
     {
       "item_code": "value:struggle-night-diaper",
@@ -42,6 +42,17 @@
       "posted_on": "2026-09-27",
       "threads_post_ids": [
         "18098096399436528"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-karigurashi-tiny",
+      "item_name": "価値投稿 ogiri-karigurashi-tiny",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-09-27",
+      "threads_post_ids": [
+        "18626794516034381"
       ],
       "reused": false
     },
