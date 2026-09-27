@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-27T19:16:40+09:00",
+  "updated_at": "2026-09-28T01:14:06+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -352,6 +352,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18098096399436528"
+    },
+    {
+      "value_id": "struggle-rain-stroller",
+      "last_posted_on": "2026-09-28",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18172452628459634"
     }
   ]
 }
