@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-28T20:19:27+09:00",
+  "updated_at": "2026-09-29T04:07:14+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -363,6 +363,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18110294234145629"
+    },
+    {
+      "value_id": "struggle-both-hands",
+      "last_posted_on": "2026-09-29",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18130963324706031"
     }
   ]
 }
