@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-28T14:37:23+09:00",
+  "updated_at": "2026-09-28T17:04:03+09:00",
   "entries": [
     {
       "item_code": "value:struggle-rain-stroller",
@@ -20,6 +20,17 @@
       "posted_on": "2026-09-28",
       "threads_post_ids": [
         "17947773519322133"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-tanuki-shelf",
+      "item_name": "価値投稿 ogiri-tanuki-shelf",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-09-28",
+      "threads_post_ids": [
+        "17973801074940663"
       ],
       "reused": false
     },
