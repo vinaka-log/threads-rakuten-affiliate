@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-29T19:58:22+09:00",
+  "updated_at": "2026-09-29T22:30:58+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-chihiro-night",
@@ -72,6 +72,23 @@
         "18280748953293400"
       ],
       "reused": false
+    },
+    {
+      "item_code": "high-high:10000872",
+      "item_name": "1位受賞 ベビーカーレインカバー 雨対策 ベビーカー カバー 防寒 雨よけ ベビー用品 風よけ 雨 風 雪 防虫 花粉 飛沫 お出かけ 散歩 旅行 赤ちゃん ベビー 寒さ対策 防寒対策",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 5,
+      "posted_on": "2026-09-29",
+      "threads_post_ids": [
+        "18111827399113277",
+        "18135705199649933",
+        "18638454466007678"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00tqswn.x8u2b50f.g00tqswn.x8u2c3a8/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhigh-high%2Fcarcover03%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 17,
+      "pain_id": "stroller-rain",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/high-high/cabinet/product/top/carcover03-r.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-rain-stroller",
