@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-30T02:29:01+09:00",
+  "updated_at": "2026-09-30T03:29:42+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -22,6 +22,23 @@
         "18374220664234855"
       ],
       "reused": false
+    },
+    {
+      "item_code": "dotpps:10000024",
+      "item_name": "【レビュー特典あり★工夫盛りだくさん】Puddle Pop ベビーカー レインカバー 光る反射テープ 実用新案登録 A型 B型 汎用 防寒 防水 防風 収納ポーチ マモーレフィット ブラック",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 9,
+      "posted_on": "2026-09-30",
+      "threads_post_ids": [
+        "18428991934182631",
+        "18100970387629869",
+        "17908553145515372"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00ueqsn.x8u2b29c.g00ueqsn.x8u2c24c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdotpps%2Fmamorefit%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 2,
+      "pain_id": "stroller-rain",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/dotpps/cabinet/compass1740190580.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-chihiro-night",
