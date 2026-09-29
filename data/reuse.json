@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-29T19:58:22+09:00",
+  "updated_at": "2026-09-30T02:29:01+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -374,6 +374,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18280748953293400"
+    },
+    {
+      "value_id": "struggle-size-up",
+      "last_posted_on": "2026-09-30",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18374220664234855"
     }
   ]
 }

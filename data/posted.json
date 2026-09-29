@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-30T00:12:45+09:00",
+  "updated_at": "2026-09-30T02:29:01+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -9,6 +9,17 @@
       "posted_on": "2026-09-30",
       "threads_post_ids": [
         "17876371410565944"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-size-up",
+      "item_name": "価値投稿 struggle-size-up",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-09-30",
+      "threads_post_ids": [
+        "18374220664234855"
       ],
       "reused": false
     },
