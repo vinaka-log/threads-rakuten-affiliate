@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-29T05:01:59+09:00",
+  "updated_at": "2026-09-29T14:55:01+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-chihiro-night",
@@ -39,6 +39,17 @@
       "rank": 18,
       "pain_id": "stroller-rain",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/lifeinnovation430/cabinet/item/09606934/imgrc0102102980.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-both-hands",
+      "item_name": "価値投稿 struggle-both-hands",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-09-29",
+      "threads_post_ids": [
+        "18068610155784358"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-rain-stroller",
