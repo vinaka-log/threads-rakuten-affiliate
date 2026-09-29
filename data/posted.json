@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-29T16:44:36+09:00",
+  "updated_at": "2026-09-29T19:58:22+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-chihiro-night",
@@ -59,6 +59,17 @@
       "posted_on": "2026-09-29",
       "threads_post_ids": [
         "18105321703967070"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-both-hands",
+      "item_name": "価値投稿 struggle-both-hands",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-09-29",
+      "threads_post_ids": [
+        "18280748953293400"
       ],
       "reused": false
     },
