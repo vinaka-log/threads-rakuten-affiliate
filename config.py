@@ -135,6 +135,14 @@ class PainIntent:
     buy_reason: str
     # 失敗回避
     avoid: str
+    # 選び方メモの第1基準（短く）
+    pick_first: str
+    # 選び方メモの第2基準（短く）
+    pick_second: str
+    # 二択フック左
+    choice_a: str
+    # 二択フック右
+    choice_b: str
     # 本投稿テンプレ固定（空なら自動）
     template_id: str = ""
     # 追加でどれか必須
@@ -151,6 +159,7 @@ class PainIntent:
 
 # 0〜2歳の買い足し悩み。日付×商品枠でローテ。
 # problem / benefit / avoid / scene は短め口語（テスト上限あり）。
+# pick_* は選び方メモ用（12字以内）、choice_* は二択フック用（12字以内）。
 PAIN_INTENTS: Tuple[PainIntent, ...] = (
     PainIntent(
         id="stroller-rain",
@@ -163,6 +172,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="カバーあればお出かけが止まらない",
         buy_reason="天気は読めない、備えが本体",
         avoid="対応機種と窓の位置だけ確認",
+        pick_first="対応機種",
+        pick_second="窓の位置",
+        choice_a="カバー忘れ",
+        choice_b="走って帰る",
         exclude_name_hints=("大人用", "自転車", "バイク"),
     ),
     PainIntent(
@@ -176,6 +189,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="置き場決まると支度が短くなる",
         buy_reason="お出かけは周辺グッズで楽になる",
         avoid="取り付け方と干渉、レビュー見て",
+        pick_first="取り付け方",
+        pick_second="取り出しやすさ",
+        choice_a="小物散らばり",
+        choice_b="置き場決める",
         exclude_name_hints=("レインカバー", "チャイルドシート", "自転車"),
         timesave=True,
     ),
@@ -190,6 +207,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="一枚あると上がりが落ち着く",
         buy_reason="毎日使うものほど先に揃える",
         avoid="厚みと洗濯表記、先にチェック",
+        pick_first="厚み",
+        pick_second="洗濯表記",
+        choice_a="薄手で凌ぐ",
+        choice_b="一枚足す",
         require_name_hints=("ベビー", "赤ちゃん", "イブル", "ガーゼ", "沐浴"),
     ),
     PainIntent(
@@ -203,6 +224,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="合う枕だと見守りが少し楽",
         buy_reason="ねんねは毎晩続くから先行投資",
         avoid="月齢と向き癖、説明見て判断",
+        pick_first="月齢",
+        pick_second="向き癖",
+        choice_a="様子見続ける",
+        choice_b="先に合わせる",
         max_price=12000,
     ),
     PainIntent(
@@ -216,6 +241,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="定位置あると夜間が短くなる",
         buy_reason="収納は睡眠時間の確保装置",
         avoid="置き場サイズと取り出しやすさ",
+        pick_first="置き場サイズ",
+        pick_second="取り出しやすさ",
+        choice_a="床に積む",
+        choice_b="定位置作る",
         timesave=True,
     ),
     PainIntent(
@@ -229,6 +258,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="手が届く高さだと自分で取れる",
         buy_reason="片付け習慣は道具で作る",
         avoid="転倒防止と高さ調節を確認",
+        pick_first="高さ",
+        pick_second="転倒防止",
+        choice_a="床置き増える",
+        choice_b="手が届く棚",
         require_name_hints=("キッズ", "子供", "子ども", "ジュニア", "ベビー"),
     ),
     PainIntent(
@@ -242,6 +275,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="インク式なら汚れを抑えやすい",
         buy_reason="記録は今しか取れない買い物",
         avoid="対象月齢と色移り注意を確認",
+        pick_first="対象月齢",
+        pick_second="色移り注意",
+        choice_a="あとで撮る",
+        choice_b="今撮る",
     ),
     PainIntent(
         id="baby-wipes",
@@ -254,6 +291,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="替えあればお出かけが止まらない",
         buy_reason="消耗品は切れない仕組みが大事",
         avoid="携帯用と詰め替え、用途分けて",
+        pick_first="携帯用か",
+        pick_second="詰め替えか",
+        choice_a="切れに気づく",
+        choice_b="先に替え置く",
         require_name_hints=("おしり", "お尻", "ベビー"),
         exclude_name_hints=("大人用", "体ふき", "車用"),
     ),
@@ -268,6 +309,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="合ってると夜間のモレ不安が減る",
         buy_reason="合わないおむつがいちばん高い",
         avoid="体重目安とパンツ/テープ確認",
+        pick_first="体重目安",
+        pick_second="パンツ/テープ",
+        choice_a="ギリギリ粘す",
+        choice_b="サイズ上げる",
         require_name_hints=("おむつ", "オムツ", "パンツ", "テープ"),
         exclude_name_hints=("ストッカー", "ポーチ", "ケース", "消臭"),
     ),
@@ -282,6 +327,10 @@ PAIN_INTENTS: Tuple[PainIntent, ...] = (
         benefit="両手空くと移動が一気に楽",
         buy_reason="移動のしんどさは毎日積み上がる",
         avoid="月齢対応と装着レビューを見て",
+        pick_first="月齢対応",
+        pick_second="装着しやすさ",
+        choice_a="腕抱っこ続け",
+        choice_b="両手空けたい",
         timesave=True,
         max_price=15000,
     ),

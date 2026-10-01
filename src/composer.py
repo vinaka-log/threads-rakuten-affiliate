@@ -35,32 +35,41 @@ class ComposedPost:
     image_url: str = ""
 
 
-# 本投稿: らみ型（フック→キャッチ→場面→導入後の変化→問い）。
+# 本投稿: らみ型（フック→キャッチ→場面/失敗/二択→導入後の変化→問い）。
 # 商品名・価格・URL・PR は出さない。「おすすめ」「コスパ」等の売り口調も使わない。
+# フック型: 失敗談 / 二択 / 時間指定 / contrarian / 正直 / 先揃え。
 _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
     (
-        "hook-must",
-        "↓0〜2歳あるある↓\n\n"
-        "＼先に揃えておくだけ／\n\n"
-        "{scene}、地味にキツい。\n"
-        "{benefit}。\n\n"
-        "同じことなってる人いる？",
-    ),
-    (
-        "hook-scene",
-        "↓育児の場所あるある↓\n\n"
-        "＼買い足しメモ／\n\n"
-        "{scene}、地味にキツい。\n"
-        "{benefit}。\n\n"
-        "みんなはどう凌いでる？",
-    ),
-    (
-        "hook-tip",
-        "↓足りなくて焦る↓\n\n"
-        "＼先に用意／\n\n"
+        "hook-fail",
+        "↓昨夜の失敗談↓\n\n"
+        "＼あとから効いた／\n\n"
         "{problem}。\n"
         "{benefit}。\n\n"
-        "先揃え派、どれくらいいる？",
+        "同じ失敗、した人いる？",
+    ),
+    (
+        "hook-choice",
+        "↓どっちが多い？↓\n\n"
+        "＼本音で答えたい／\n\n"
+        "{choice_a} vs {choice_b}。\n"
+        "{benefit}。\n\n"
+        "あなたの家はどっち？",
+    ),
+    (
+        "hook-time",
+        "↓その時間帯あるある↓\n\n"
+        "＼先に仕組み作る／\n\n"
+        "{scene}。\n"
+        "{benefit}。\n\n"
+        "同じ時間帯、どう凌いでる？",
+    ),
+    (
+        "hook-contrarian",
+        "↓順番、間違えてない？↓\n\n"
+        "＼高いものより先に／\n\n"
+        "{buy_reason}。\n"
+        "{benefit}。\n\n"
+        "優先順位、どう決めてる？",
     ),
     (
         "hook-honest",
@@ -71,20 +80,22 @@ _MAIN_TEMPLATES: Sequence[Tuple[str, str]] = (
         "正直なところ、どうしてる？",
     ),
     (
-        "hook-heavy",
-        "↓両手が足りない↓\n\n"
-        "＼仕組みで楽にする／\n\n"
-        "{problem}。\n"
+        "hook-must",
+        "↓0〜2歳あるある↓\n\n"
+        "＼先に揃えておくだけ／\n\n"
+        "{scene}、地味にキツい。\n"
         "{benefit}。\n\n"
-        "グッズ寄せた人、楽になった？",
+        "同じことなってる人いる？",
     ),
 )
 
-# リプ1: うちの候補メモ（会話の続き）。リンク・PR・価格なし。
+# リプ1: 選び方メモ（判断基準→候補）。リンク・PR・価格なし。
 _REPLY_MEMO = (
-    "うちの候補はこれ。\n"
+    "うちの選び方メモ。\n"
+    "・まず{pick_first}\n"
+    "・次に{pick_second}\n"
+    "で絞ったらこれ。\n"
     "{short_name}\n\n"
-    "揃えてからの方が楽。\n"
     "{avoid}"
     "{sale_block}"
 )
@@ -98,9 +109,12 @@ _REPLY_LINK = (
 # 後方互換: 旧ID指定が来ても新テンプレへ寄せる
 _TEMPLATE_ALIASES = {
     "hook-benefit": "hook-must",
-    "hook-stock": "hook-scene",
+    "hook-stock": "hook-time",
     "hook-tonight": "hook-honest",
-    "hook-reason": "hook-tip",
+    "hook-reason": "hook-fail",
+    "hook-scene": "hook-time",
+    "hook-tip": "hook-fail",
+    "hook-heavy": "hook-contrarian",
 }
 
 _PR_DISCLOSURE = "※PR"
@@ -217,6 +231,10 @@ def compose(pick: PickResult, *, template_id: str | None = None) -> ComposedPost
             pain.buy_reason if pain else "切れてから走るより、先に足した方が楽"
         ),
         "avoid": (pain.avoid if pain else "サイズ・香り・容量は要確認"),
+        "pick_first": (pain.pick_first if pain else "用途"),
+        "pick_second": (pain.pick_second if pain else "サイズ感"),
+        "choice_a": (pain.choice_a if pain else "切れてから買う"),
+        "choice_b": (pain.choice_b if pain else "先に足す"),
     }
 
     main = _truncate(templates[tid].format(**fields))

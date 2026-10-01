@@ -81,7 +81,18 @@ class ItemCopyStructureTests(unittest.TestCase):
             self.assertTrue(main.startswith("↓"), msg=f"{tid}: {main}")
             self.assertIn("＼", main, msg=f"{tid}: {main}")
             self.assertIn(pain.benefit, main, msg=f"{tid}: {main}")
-            self.assertIn("揃えてからの方が楽", memo)
+            self.assertIn("うちの選び方メモ", memo)
+            self.assertIn("で絞ったらこれ", memo)
+
+    def test_choice_hook_uses_pain_choices(self) -> None:
+        pain = next(p for p in config.PAIN_INTENTS if p.id == "stroller-rain")
+        composed = compose(_pick(), template_id="hook-choice")
+        main, memo, _link = composed.texts
+        self.assertIn(pain.choice_a, main)
+        self.assertIn(pain.choice_b, main)
+        self.assertIn(" vs ", main)
+        self.assertIn(pain.pick_first, memo)
+        self.assertIn(pain.pick_second, memo)
 
     def test_all_templates_stay_short(self) -> None:
         for tid, _ in _MAIN_TEMPLATES:
@@ -91,7 +102,7 @@ class ItemCopyStructureTests(unittest.TestCase):
             self.assertLessEqual(len(memo), _SOFT_MEMO_LIMIT, msg=f"{tid} memo too long")
             self.assertLessEqual(len(link), _SOFT_LINK_LIMIT, msg=f"{tid} link too long")
             self.assertNotIn("「", main)
-            self.assertIn("うちの候補はこれ", memo)
+            self.assertIn("うちの選び方メモ", memo)
             self.assertIn("レインカバー", memo)
             self.assertNotIn("http", memo.lower())
             self.assertNotIn(_PR_DISCLOSURE, memo)
@@ -112,6 +123,12 @@ class ItemCopyStructureTests(unittest.TestCase):
             self.assertLessEqual(len(pain.benefit), 28, msg=pain.id)
             self.assertLessEqual(len(pain.avoid), 28, msg=pain.id)
             self.assertLessEqual(len(pain.scene), 24, msg=pain.id)
+            self.assertLessEqual(len(pain.pick_first), 12, msg=pain.id)
+            self.assertLessEqual(len(pain.pick_second), 12, msg=pain.id)
+            self.assertLessEqual(len(pain.choice_a), 12, msg=pain.id)
+            self.assertLessEqual(len(pain.choice_b), 12, msg=pain.id)
+            self.assertTrue(pain.pick_first.strip(), msg=pain.id)
+            self.assertTrue(pain.pick_second.strip(), msg=pain.id)
 
     def test_rain_cover_matches_stroller_rain(self) -> None:
         pain = next(p for p in config.PAIN_INTENTS if p.id == "stroller-rain")
