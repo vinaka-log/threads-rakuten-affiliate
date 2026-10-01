@@ -27,7 +27,7 @@ class PrDisclosureTests(unittest.TestCase):
 
     def test_validate_requires_disclosure_phrase(self) -> None:
         main = "急な雨、ベビーカーどうしてる？\n\nみんなはどうしてる？"
-        memo = "うちの候補はこれ。\nテスト商品"
+        memo = "うちの選び方メモ。\n・まず対応機種\n・次に窓の位置\nで絞ったらこれ。\nテスト商品"
         reply_ok = f"https://example.com/a\n{_PR_DISCLOSURE}"
         _validate([main, memo, reply_ok])
         with self.assertRaises(ValueError):
@@ -62,7 +62,8 @@ class PrDisclosureTests(unittest.TestCase):
         self.assertNotIn("http", main.lower())
         self.assertNotIn("http", memo.lower())
         self.assertNotIn("「", main)
-        self.assertIn("うちの候補はこれ", memo)
+        self.assertIn("うちの選び方メモ", memo)
+        self.assertIn("で絞ったらこれ", memo)
         self.assertIn("https://example.com/aff", link)
         self.assertIn(_PR_DISCLOSURE, link)
         self.assertTrue(link.rstrip().endswith(_PR_DISCLOSURE))
