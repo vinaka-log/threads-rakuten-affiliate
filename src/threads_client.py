@@ -137,6 +137,30 @@ class ThreadsClient:
         msg = str(exc).lower()
         return code == 10 or "permission" in msg or "threads_manage_replies" in msg
 
+    @classmethod
+    def _is_token_expired_error(cls, payload: Optional[dict]) -> bool:
+        err = cls._error_payload(payload)
+        code = err.get("code")
+        msg = str(err.get("message") or "").lower()
+        return (
+            code == 190
+            or "session has expired" in msg
+            or ("access token" in msg and "expired" in msg)
+        )
+
+    @classmethod
+    def _format_api_error(cls, path: str, data: dict) -> str:
+        if cls._is_token_expired_error(data):
+            err = cls._error_payload(data)
+            detail = err.get("message") or data
+            return (
+                f"THREADS_ACCESS_TOKEN 期限切れ: {detail}\n"
+                "対処: Meta で短期トークンを再取得→長期トークンに交換し、"
+                "GitHub Secret `THREADS_ACCESS_TOKEN` を更新してください。"
+                "（期限切れ後は refresh_access_token 不可。README「トークン更新」参照）"
+            )
+        return f"API失敗 {path}: {data}"
+
     async def _post_params(
         self,
         path: str,
@@ -169,10 +193,11 @@ class ThreadsClient:
             response = await http.post(f"{self.api_base}/{path}", params=params)
             data = response.json() if response.content else {}
             if response.status_code >= 400 or "id" not in data:
+                payload = data if isinstance(data, dict) else {}
                 raise ThreadsApiError(
-                    f"API失敗 {path}: {data}",
+                    self._format_api_error(path, payload),
                     status_code=response.status_code,
-                    payload=data if isinstance(data, dict) else {},
+                    payload=payload,
                 )
             return data if isinstance(data, dict) else {}
         finally:

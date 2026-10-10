@@ -96,7 +96,29 @@ PR・アフィリエイトリンクを含みます
    - `threads_content_publish`
    - `threads_manage_replies`（自分リプ連鎖に必須）
    - `threads_manage_insights`（任意・伸びた投稿の再利用優先度に使用）
-3. 長期アクセストークンと Threads User ID を控える
+3. 長期アクセストークンと Threads User ID を控える  
+   - 短期トークン（約1時間）を [長期トークン](https://developers.facebook.com/docs/threads/get-started/long-lived-tokens/) に交換して使う
+   - 長期トークンの有効期限は **60日**。期限前なら refresh で延長できるが、**切れたあとは再発行が必要**
+
+### トークン更新（投稿が止まったとき）
+
+Actions が `Session has expired` / `code: 190` で落ちたら **トークン切れ**です（`refresh_access_token` は使えません）。
+
+1. [Meta Developer](https://developers.facebook.com/) → アプリ → Threads → ユーザートークンを再取得（短期）
+2. 長期トークンに交換:
+   ```bash
+   curl -s "https://graph.threads.net/access_token?grant_type=th_exchange_token&client_secret=APP_SECRET&access_token=SHORT_LIVED"
+   ```
+3. Repo → Settings → Secrets → Actions → `THREADS_ACCESS_TOKEN` を新しい値で更新
+4. Actions → **Threads Rakuten daily post** → Run workflow（`dry_run=false`）で1本確認
+
+**予防（まだ有効なうちに）**: 60日以内なら次で延長し、返ってきた `access_token` を Secret に入れ直す。
+
+```bash
+curl -s "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token=CURRENT_LONG_LIVED"
+```
+
+目安: **月1回** refresh → Secret 更新（切れると投稿が全部止まる）。
 
 ### 3. 楽天ウェブサービス + アフィリエイト
 
@@ -255,6 +277,7 @@ Threads API の `poll_attachment`（option_a〜d、各25字以内）を使った
 | `Missing ... secrets` | Secrets 未設定 | GitHub Secrets を確認 |
 | `RAKUTEN_* が未設定` | 環境変数不足 | export または Secrets |
 | `accessKey must be present` | 旧APIキー | Developer Dashboard で再登録（UUID+accessKey） |
+| `Session has expired` / `code: 190` / `THREADS_ACCESS_TOKEN 期限切れ` | 長期トークン期限切れ（60日） | 上記「トークン更新」で再発行→Secret更新。切れたあとは refresh 不可 |
 | `code: 10` / permission | リプ権限不足 | `threads_manage_replies` 追加→トークン再発行 |
 | `投稿可能な商品がありません` | フィルタで全滅 | `DEDUP_DAYS` / レビュー閾値を一時緩和、またはジャンル追加 |
 
