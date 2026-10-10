@@ -102,20 +102,65 @@ PR・アフィリエイトリンクを含みます
 
 ### トークン更新（投稿が止まったとき）
 
-Actions が `Session has expired` / `code: 190` で落ちたら **トークン切れ**です（`refresh_access_token` は使えません）。
+Actions が `Session has expired` / `code: 190` で落ちたら **トークン切れ**です。  
+期限切れ後は `refresh_access_token` が使えないので、下の **A → B → C → D** で再発行します。  
+（ブラウザは **@kaimono_kuma** でログインした状態で行う）
 
-1. [Meta Developer](https://developers.facebook.com/) → アプリ → Threads → ユーザートークンを再取得（短期）
-2. 長期トークンに交換:
-   ```bash
-   curl -s "https://graph.threads.net/access_token?grant_type=th_exchange_token&client_secret=APP_SECRET&access_token=SHORT_LIVED"
+#### A. Meta アプリの値を控える
+
+1. [Meta Developer](https://developers.facebook.com/apps/) を開く
+2. この運用で使っているアプリを選ぶ
+3. **App settings → Basic**（または Use cases → Access the Threads API → Settings）で次を控える
+   - **Threads App ID** → 下の `THREADS_APP_ID`
+   - **Threads App secret** → 下の `THREADS_APP_SECRET`（Show で表示）
+4. 同じ Settings 画面の **Valid OAuth Redirect URIs** に、使うリダイレクト先を入れる  
+   個人運用なら例: `https://localhost/`  
+   （末尾スラッシュ有無は Dashboard に書いた表記と **完全一致** させる。保存には Deauthorize / Data Deletion URL も埋める必要がある場合あり）
+
+#### B. 認可コード → 短期トークン（約1時間）
+
+1. ブラウザで次を開く（自分の値に置換。scope はそのまま）:
+
+   ```text
+   https://threads.com/oauth/authorize?client_id=THREADS_APP_ID&redirect_uri=https://localhost/&scope=threads_basic,threads_content_publish,threads_manage_replies,threads_manage_insights&response_type=code
    ```
-3. Repo → Settings → Secrets → Actions → `THREADS_ACCESS_TOKEN` を新しい値で更新
-4. Actions → **Threads Rakuten daily post** → Run workflow（`dry_run=false`）で1本確認
+
+2. 許可する → `https://localhost/?code=XXXX#_` のような URL に飛ぶ（ページが開けなくてもよい）
+3. アドレスバーから `code=` の値だけコピー（末尾の `#_` は捨てる）→ `AUTH_CODE`
+4. ターミナルで短期トークンに交換:
+
+   ```bash
+   curl -s -X POST https://graph.threads.com/oauth/access_token \
+     -F client_id=THREADS_APP_ID \
+     -F client_secret=THREADS_APP_SECRET \
+     -F grant_type=authorization_code \
+     -F redirect_uri=https://localhost/ \
+     -F code=AUTH_CODE
+   ```
+
+5. レスポンスの `access_token` が短期トークン（`SHORT_LIVED`）。`user_id` は既存の `THREADS_USER_ID` と一致しているか確認
+
+#### C. 長期トークン（60日）に交換
+
+```bash
+curl -s "https://graph.threads.com/access_token?grant_type=th_exchange_token&client_secret=THREADS_APP_SECRET&access_token=SHORT_LIVED"
+```
+
+返ってきた `access_token` が新しい長期トークン（`LONG_LIVED`）。これを使う。
+
+#### D. GitHub Secret を更新して復帰確認
+
+1. https://github.com/vinaka-log/threads-rakuten-affiliate/settings/secrets/actions
+2. `THREADS_ACCESS_TOKEN` → **Update** → `LONG_LIVED` を貼って保存  
+   （`THREADS_USER_ID` は通常そのまま）
+3. https://github.com/vinaka-log/threads-rakuten-affiliate/actions/workflows/daily.yml  
+   → **Run workflow** → `dry_run = false` で1本投稿
+4. 成功したら以降のスケジュール投稿も自動復帰
 
 **予防（まだ有効なうちに）**: 60日以内なら次で延長し、返ってきた `access_token` を Secret に入れ直す。
 
 ```bash
-curl -s "https://graph.threads.net/refresh_access_token?grant_type=th_refresh_token&access_token=CURRENT_LONG_LIVED"
+curl -s "https://graph.threads.com/refresh_access_token?grant_type=th_refresh_token&access_token=CURRENT_LONG_LIVED"
 ```
 
 目安: **月1回** refresh → Secret 更新（切れると投稿が全部止まる）。
