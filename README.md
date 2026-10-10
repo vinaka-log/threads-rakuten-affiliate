@@ -96,7 +96,95 @@ PR・アフィリエイトリンクを含みます
    - `threads_content_publish`
    - `threads_manage_replies`（自分リプ連鎖に必須）
    - `threads_manage_insights`（任意・伸びた投稿の再利用優先度に使用）
-3. 長期アクセストークンと Threads User ID を控える
+3. 長期アクセストークンと Threads User ID を控える  
+   - 短期トークン（約1時間）を [長期トークン](https://developers.facebook.com/docs/threads/get-started/long-lived-tokens/) に交換して使う
+   - 長期トークンの有効期限は **60日**。期限前なら refresh で延長できるが、**切れたあとは再発行が必要**
+
+### トークン更新（投稿が止まったとき）
+
+Actions が `Session has expired` / `code: 190` で落ちたら **トークン切れ**です。  
+期限切れ後は `refresh_access_token` が使えないので、下の **A → B → C → D** で再発行します。  
+（ブラウザは **@kaimono_kuma** でログインした状態で行う）
+
+#### A. Meta アプリの値を控える
+
+1. [Meta Developer](https://developers.facebook.com/apps/) を開く
+2. この運用で使っているアプリを選ぶ
+3. **重要: 画面上部の「アプリID / app secret」は使わない**（Facebook用）。  
+   Threads 用は別組で、次のどちらかで取る:
+   - **アプリの設定 → 基本** を下にスクロール → **Threads アプリID** / **Threads の app secret**
+   - または **ユースケース → Access the Threads API → 設定**
+4. 控えるもの（セットで使う）:
+   - **Threads アプリID** → `THREADS_APP_ID`
+   - **Threads の app secret** → `THREADS_APP_SECRET`（表示を押す）
+5. 同じ Threads 設定画面の **Valid OAuth Redirect URIs** に、使うリダイレクト先を入れる  
+   個人運用なら例: `https://localhost/`  
+   （末尾スラッシュ有無は Dashboard に書いた表記と **完全一致**。保存には Deauthorize / Data Deletion URL も埋める必要がある場合あり）
+
+`error_code: 4476002`（アプリIDが送信されませんでした）は、ほぼ必ず **上部のアプリIDを誤って使った**ときです。Threads アプリIDに差し替えてください。
+
+#### B. 認可コード → 短期トークン（約1時間）
+
+1. ブラウザで次を開く（自分の値に置換。scope はそのまま）:
+
+   ```text
+   https://threads.com/oauth/authorize?client_id=THREADS_APP_ID&redirect_uri=https://localhost/&scope=threads_basic,threads_content_publish,threads_manage_replies,threads_manage_insights&response_type=code
+   ```
+
+2. 許可する → `https://localhost/?code=XXXX#_` のような URL に飛ぶ（ページが開けなくてもよい）
+3. アドレスバーから `code=` の値だけコピー（末尾の `#_` は捨てる）→ `AUTH_CODE`
+4. ターミナルで短期トークンに交換:
+
+   ```bash
+   curl -s -X POST https://graph.threads.com/oauth/access_token \
+     -F client_id=THREADS_APP_ID \
+     -F client_secret=THREADS_APP_SECRET \
+     -F grant_type=authorization_code \
+     -F redirect_uri=https://localhost/ \
+     -F code=AUTH_CODE
+   ```
+
+5. レスポンスの `access_token` が短期トークン（`SHORT_LIVED`）。`user_id` は既存の `THREADS_USER_ID` と一致しているか確認
+
+#### C. 長期トークン（60日）に交換
+
+```bash
+curl -s "https://graph.threads.com/access_token?grant_type=th_exchange_token&client_secret=THREADS_APP_SECRET&access_token=SHORT_LIVED"
+```
+
+返ってきた `access_token` が新しい長期トークン（`LONG_LIVED`）。これを使う。
+
+#### D. GitHub Secret を更新して復帰確認
+
+1. https://github.com/vinaka-log/threads-rakuten-affiliate/settings/secrets/actions
+2. `THREADS_ACCESS_TOKEN` → **Update** → `LONG_LIVED` を貼って保存  
+   （`THREADS_USER_ID` は通常そのまま）
+3. https://github.com/vinaka-log/threads-rakuten-affiliate/actions/workflows/daily.yml  
+   → **Run workflow** → `dry_run = false` で1本投稿
+4. 成功したら以降のスケジュール投稿も自動復帰
+
+#### トークン自動更新（推奨・手作業不要）
+
+毎月1日に Actions が `refresh_access_token` を呼び、`THREADS_ACCESS_TOKEN` Secret を書き戻します。  
+（発行から **24時間未満** だと refresh できないので、再発行直後は翌日以降に初回 Run）
+
+1. GitHub → Settings → Developer settings → **Personal access tokens** で PAT を作る
+   - Fine-grained 推奨: この repo のみ / **Secrets: Read and write**
+   - Classic なら `repo` scope
+2. Repo → Settings → Secrets → Actions に追加:
+
+   | Secret | 内容 |
+   |--------|------|
+   | `TOKEN_ROTATION_PAT` | 上で作った PAT |
+
+3. Actions → **Refresh Threads access token** → **Run workflow**（24時間後以降）
+4. 以降は毎月自動。失敗したらメール/Actions を見て、期限切れなら上記 A〜D で再発行
+
+手動でも同じ延長ができます:
+
+```bash
+curl -s "https://graph.threads.com/refresh_access_token?grant_type=th_refresh_token&access_token=CURRENT_LONG_LIVED"
+```
 
 ### 3. 楽天ウェブサービス + アフィリエイト
 
@@ -122,6 +210,7 @@ Repo → **Settings → Secrets and variables → Actions**:
 | `RAKUTEN_APPLICATION_ID` | 楽天 applicationId（UUID） |
 | `RAKUTEN_ACCESS_KEY` | 楽天 accessKey |
 | `RAKUTEN_AFFILIATE_ID` | 楽天アフィリエイトID |
+| `TOKEN_ROTATION_PAT` | トークン自動更新用 GitHub PAT（Secrets 書き込み可） |
 
 ### 5. 動作確認
 
@@ -255,6 +344,7 @@ Threads API の `poll_attachment`（option_a〜d、各25字以内）を使った
 | `Missing ... secrets` | Secrets 未設定 | GitHub Secrets を確認 |
 | `RAKUTEN_* が未設定` | 環境変数不足 | export または Secrets |
 | `accessKey must be present` | 旧APIキー | Developer Dashboard で再登録（UUID+accessKey） |
+| `Session has expired` / `code: 190` / `THREADS_ACCESS_TOKEN 期限切れ` | 長期トークン期限切れ（60日） | 上記「トークン更新」で再発行→Secret更新。切れたあとは refresh 不可 |
 | `code: 10` / permission | リプ権限不足 | `threads_manage_replies` 追加→トークン再発行 |
 | `投稿可能な商品がありません` | フィルタで全滅 | `DEDUP_DAYS` / レビュー閾値を一時緩和、またはジャンル追加 |
 
