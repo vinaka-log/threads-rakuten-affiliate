@@ -110,12 +110,18 @@ Actions が `Session has expired` / `code: 190` で落ちたら **トークン�
 
 1. [Meta Developer](https://developers.facebook.com/apps/) を開く
 2. この運用で使っているアプリを選ぶ
-3. **App settings → Basic**（または Use cases → Access the Threads API → Settings）で次を控える
-   - **Threads App ID** → 下の `THREADS_APP_ID`
-   - **Threads App secret** → 下の `THREADS_APP_SECRET`（Show で表示）
-4. 同じ Settings 画面の **Valid OAuth Redirect URIs** に、使うリダイレクト先を入れる  
+3. **重要: 画面上部の「アプリID / app secret」は使わない**（Facebook用）。  
+   Threads 用は別組で、次のどちらかで取る:
+   - **アプリの設定 → 基本** を下にスクロール → **Threads アプリID** / **Threads の app secret**
+   - または **ユースケース → Access the Threads API → 設定**
+4. 控えるもの（セットで使う）:
+   - **Threads アプリID** → `THREADS_APP_ID`
+   - **Threads の app secret** → `THREADS_APP_SECRET`（表示を押す）
+5. 同じ Threads 設定画面の **Valid OAuth Redirect URIs** に、使うリダイレクト先を入れる  
    個人運用なら例: `https://localhost/`  
-   （末尾スラッシュ有無は Dashboard に書いた表記と **完全一致** させる。保存には Deauthorize / Data Deletion URL も埋める必要がある場合あり）
+   （末尾スラッシュ有無は Dashboard に書いた表記と **完全一致**。保存には Deauthorize / Data Deletion URL も埋める必要がある場合あり）
+
+`error_code: 4476002`（アプリIDが送信されませんでした）は、ほぼ必ず **上部のアプリIDを誤って使った**ときです。Threads アプリIDに差し替えてください。
 
 #### B. 認可コード → 短期トークン（約1時間）
 
