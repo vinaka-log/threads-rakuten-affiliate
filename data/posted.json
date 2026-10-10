@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-10T19:52:05+09:00",
+  "updated_at": "2026-10-10T22:08:42+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -33,6 +33,23 @@
         "18098064815556275"
       ],
       "reused": false
+    },
+    {
+      "item_code": "kurashikenkou:10225492",
+      "item_name": "＼1枚あたり23.9円〜／【3個】 オムツ M 150枚 L 126枚 ビッグ 108枚 ビッグより大きい 72枚 パンツ ふわもちタッチ 肌に優しい 横モレ 最長12h あんしんGenki！ アイリスオーヤマ さらさら おむつ 紙おむつ Genki * 【子育て寄り添いCP対象】",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 5,
+      "posted_on": "2026-10-10",
+      "threads_post_ids": [
+        "18344988970270491",
+        "18128322136878974",
+        "18465680452139685"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00qhoan.x8u2b37e.g00qhoan.x8u2ca9e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkurashikenkou%2F1925663%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 19,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/kurashikenkou/cabinet/eigyouyou/1925663_cp.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
