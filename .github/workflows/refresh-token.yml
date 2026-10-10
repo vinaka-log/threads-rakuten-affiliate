@@ -1,0 +1,66 @@
+name: Refresh Threads access token
+
+# 長期トークン（60日）を期限前に延長し、GitHub Secret を更新する。
+# 初回は発行から24時間経過後に手動 Run で確認すること。
+
+on:
+  schedule:
+    # 毎月1日 12:00 JST = 03:00 UTC
+    - cron: "0 3 1 * *"
+  workflow_dispatch:
+
+concurrency:
+  group: threads-token-refresh
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Require secrets
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          TOKEN_ROTATION_PAT: ${{ secrets.TOKEN_ROTATION_PAT }}
+        run: |
+          missing=0
+          for key in THREADS_ACCESS_TOKEN TOKEN_ROTATION_PAT; do
+            if [ -z "${!key}" ]; then
+              echo "Missing secret: $key"
+              missing=1
+            fi
+          done
+          if [ "$missing" = "1" ]; then
+            echo "See README.md 「トークン自動更新」 for setup"
+            exit 1
+          fi
+
+      - name: Refresh token and update secret
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.TOKEN_ROTATION_PAT }}
+        run: |
+          set -euo pipefail
+          NEW_TOKEN="$(PYTHONPATH=src:. python src/refresh_token.py)"
+          if [ -z "$NEW_TOKEN" ]; then
+            echo "ERROR: empty token from refresh"
+            exit 1
+          fi
+          # 先頭だけログ（全文は出さない）
+          echo "Refreshed token prefix: ${NEW_TOKEN:0:8}… (len=${#NEW_TOKEN})"
+          printf '%s' "$NEW_TOKEN" | gh secret set THREADS_ACCESS_TOKEN --repo "${{ github.repository }}"
+          echo "Updated GitHub Secret THREADS_ACCESS_TOKEN"

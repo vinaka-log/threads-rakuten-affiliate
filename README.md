@@ -163,13 +163,28 @@ curl -s "https://graph.threads.com/access_token?grant_type=th_exchange_token&cli
    → **Run workflow** → `dry_run = false` で1本投稿
 4. 成功したら以降のスケジュール投稿も自動復帰
 
-**予防（まだ有効なうちに）**: 60日以内なら次で延長し、返ってきた `access_token` を Secret に入れ直す。
+#### トークン自動更新（推奨・手作業不要）
+
+毎月1日に Actions が `refresh_access_token` を呼び、`THREADS_ACCESS_TOKEN` Secret を書き戻します。  
+（発行から **24時間未満** だと refresh できないので、再発行直後は翌日以降に初回 Run）
+
+1. GitHub → Settings → Developer settings → **Personal access tokens** で PAT を作る
+   - Fine-grained 推奨: この repo のみ / **Secrets: Read and write**
+   - Classic なら `repo` scope
+2. Repo → Settings → Secrets → Actions に追加:
+
+   | Secret | 内容 |
+   |--------|------|
+   | `TOKEN_ROTATION_PAT` | 上で作った PAT |
+
+3. Actions → **Refresh Threads access token** → **Run workflow**（24時間後以降）
+4. 以降は毎月自動。失敗したらメール/Actions を見て、期限切れなら上記 A〜D で再発行
+
+手動でも同じ延長ができます:
 
 ```bash
 curl -s "https://graph.threads.com/refresh_access_token?grant_type=th_refresh_token&access_token=CURRENT_LONG_LIVED"
 ```
-
-目安: **月1回** refresh → Secret 更新（切れると投稿が全部止まる）。
 
 ### 3. 楽天ウェブサービス + アフィリエイト
 
@@ -195,6 +210,7 @@ Repo → **Settings → Secrets and variables → Actions**:
 | `RAKUTEN_APPLICATION_ID` | 楽天 applicationId（UUID） |
 | `RAKUTEN_ACCESS_KEY` | 楽天 accessKey |
 | `RAKUTEN_AFFILIATE_ID` | 楽天アフィリエイトID |
+| `TOKEN_ROTATION_PAT` | トークン自動更新用 GitHub PAT（Secrets 書き込み可） |
 
 ### 5. 動作確認
 
