@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T00:56:11+09:00",
+  "updated_at": "2026-10-11T01:48:26+09:00",
   "entries": [
     {
       "item_code": "value:ask-a946054d56",
@@ -9,6 +9,17 @@
       "posted_on": "2026-10-11",
       "threads_post_ids": [
         "18114712961598873"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-night-diaper",
+      "item_name": "価値投稿 struggle-night-diaper",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-10-11",
+      "threads_post_ids": [
+        "18096142616391860"
       ],
       "reused": false
     },
