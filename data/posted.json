@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-11T02:40:47+09:00",
+  "updated_at": "2026-10-11T10:34:49+09:00",
   "entries": [
     {
       "item_code": "value:ask-a946054d56",
@@ -39,6 +39,17 @@
       "rank": 2,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/babys/cabinet/12208473/261009/ev_e-bgh_thumb.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-151030cfce",
+      "item_name": "価値投稿 ask-151030cfce",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-10-11",
+      "threads_post_ids": [
+        "18090690782224402"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
