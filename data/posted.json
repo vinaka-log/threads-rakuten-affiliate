@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-12T02:12:57+09:00",
+  "updated_at": "2026-10-12T02:55:54+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-howl-calc",
@@ -22,6 +22,23 @@
         "17974608969150602"
       ],
       "reused": false
+    },
+    {
+      "item_code": "baby-alice:10006041",
+      "item_name": "【公式】エスメラルダ 1位獲得 新生児 から使える エスメラルダベビー枕 赤ちゃん枕 ドーナツ枕 絶壁防止 向き癖防止 寝汗 出産祝い 出産 かわいい 丸い頭 高さ調節 通気性抜群 丸洗OK【エスメラルダ枕 スタンダードモデル パーソナルムーブ】日本製",
+      "genre_id": "200822",
+      "genre_label": "ベビー用寝具・ベッド",
+      "slot": 9,
+      "posted_on": "2026-10-12",
+      "threads_post_ids": [
+        "18020540564934057",
+        "18118648501937836",
+        "17971191642178012"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00qoaxn.x8u2bbcf.g00qoaxn.x8u2c31e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbaby-alice%2Fesm-makura05pmb%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 22,
+      "pain_id": "baby-pillow",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/baby-alice/cabinet/perso_tumb_new.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-a946054d56",
