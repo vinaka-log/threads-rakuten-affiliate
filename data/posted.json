@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-12T00:11:18+09:00",
+  "updated_at": "2026-10-12T02:12:57+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-howl-calc",
@@ -9,6 +9,17 @@
       "posted_on": "2026-10-12",
       "threads_post_ids": [
         "17989621608100156"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-rain-stroller",
+      "item_name": "価値投稿 struggle-rain-stroller",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-10-12",
+      "threads_post_ids": [
+        "17974608969150602"
       ],
       "reused": false
     },
