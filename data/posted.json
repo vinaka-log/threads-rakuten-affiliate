@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-12T02:55:54+09:00",
+  "updated_at": "2026-10-12T15:13:13+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-howl-calc",
@@ -39,6 +39,17 @@
       "rank": 22,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/baby-alice/cabinet/perso_tumb_new.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-rain-stroller",
+      "item_name": "価値投稿 struggle-rain-stroller",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-10-12",
+      "threads_post_ids": [
+        "18091476341659503"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-a946054d56",
