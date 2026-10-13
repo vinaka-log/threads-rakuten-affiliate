@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-13T06:36:19+09:00",
+  "updated_at": "2026-10-13T15:55:22+09:00",
   "entries": [
     {
       "item_code": "petitbelly:10000967",
@@ -56,6 +56,17 @@
       "rank": 20,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/babys/cabinet/12208473/261009/imgrc0151895416.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-both-hands",
+      "item_name": "価値投稿 struggle-both-hands",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-10-13",
+      "threads_post_ids": [
+        "18644006989004184"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-howl-calc",
