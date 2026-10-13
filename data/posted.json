@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-13T17:48:28+09:00",
+  "updated_at": "2026-10-13T21:18:04+09:00",
   "entries": [
     {
       "item_code": "petitbelly:10000967",
@@ -76,6 +76,17 @@
       "posted_on": "2026-10-13",
       "threads_post_ids": [
         "17954122443036665"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-both-hands",
+      "item_name": "価値投稿 struggle-both-hands",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-10-13",
+      "threads_post_ids": [
+        "18098146499541789"
       ],
       "reused": false
     },
