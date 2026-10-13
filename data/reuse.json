@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-13T21:18:04+09:00",
+  "updated_at": "2026-10-14T03:46:20+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -332,17 +332,6 @@
       "threads_post_id": "18009777440770202"
     },
     {
-      "value_id": "struggle-size-up",
-      "last_posted_on": "2026-09-30",
-      "reuse_count": 0,
-      "priority": 0,
-      "views": 0,
-      "likes": 0,
-      "replies": 0,
-      "source": "auto",
-      "threads_post_id": "18374220664234855"
-    },
-    {
       "value_id": "struggle-sunday-baby",
       "last_posted_on": "2026-10-10",
       "reuse_count": 0,
@@ -385,6 +374,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18098146499541789"
+    },
+    {
+      "value_id": "struggle-size-up",
+      "last_posted_on": "2026-10-14",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18095352752404971"
     }
   ]
 }
