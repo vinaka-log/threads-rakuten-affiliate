@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-13T15:55:22+09:00",
+  "updated_at": "2026-10-13T17:48:28+09:00",
   "entries": [
     {
       "item_code": "petitbelly:10000967",
@@ -65,6 +65,17 @@
       "posted_on": "2026-10-13",
       "threads_post_ids": [
         "18644006989004184"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-majo-size",
+      "item_name": "価値投稿 ogiri-majo-size",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-10-13",
+      "threads_post_ids": [
+        "17954122443036665"
       ],
       "reused": false
     },
