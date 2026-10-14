@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-14T21:32:28+09:00",
+  "updated_at": "2026-10-14T23:10:00+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-porco-cool",
@@ -89,6 +89,17 @@
       "rank": 30,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/sanho-store/cabinet/cart/giopillowpc_cart.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-porco-cool",
+      "item_name": "価値投稿 ogiri-porco-cool",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-10-14",
+      "threads_post_ids": [
+        "18097972181101095"
+      ],
+      "reused": false
     },
     {
       "item_code": "petitbelly:10000967",
