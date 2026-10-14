@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-14T18:49:49+09:00",
+  "updated_at": "2026-10-15T01:21:01+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -385,6 +385,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18131546563786339"
+    },
+    {
+      "value_id": "struggle-clothes-floor",
+      "last_posted_on": "2026-10-15",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "17885535525689943"
     }
   ]
 }

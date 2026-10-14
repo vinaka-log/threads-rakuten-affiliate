@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-10-14T23:10:00+09:00",
+  "updated_at": "2026-10-15T01:21:01+09:00",
   "entries": [
+    {
+      "item_code": "value:struggle-clothes-floor",
+      "item_name": "価値投稿 struggle-clothes-floor",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-10-15",
+      "threads_post_ids": [
+        "17885535525689943"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:ogiri-porco-cool",
       "item_name": "価値投稿 ogiri-porco-cool",
