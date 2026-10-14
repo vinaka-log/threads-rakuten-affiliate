@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-14T14:06:32+09:00",
+  "updated_at": "2026-10-14T15:57:24+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-porco-cool",
@@ -48,6 +48,17 @@
       "posted_on": "2026-10-14",
       "threads_post_ids": [
         "18133937707670357"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-howl-calc",
+      "item_name": "価値投稿 ogiri-howl-calc",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-10-14",
+      "threads_post_ids": [
+        "18104661005628948"
       ],
       "reused": false
     },
