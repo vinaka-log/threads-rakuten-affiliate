@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-14T04:46:50+09:00",
+  "updated_at": "2026-10-14T14:06:32+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-porco-cool",
@@ -39,6 +39,17 @@
       "rank": 19,
       "pain_id": "baby-wipes",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/babycareshop/cabinet/item/babywipes/imgrc0118558245.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-size-up",
+      "item_name": "価値投稿 struggle-size-up",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-10-14",
+      "threads_post_ids": [
+        "18133937707670357"
+      ],
+      "reused": false
     },
     {
       "item_code": "petitbelly:10000967",
