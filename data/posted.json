@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T01:08:44+09:00",
+  "updated_at": "2026-10-16T02:39:19+09:00",
   "entries": [
     {
       "item_code": "value:struggle-wipes-bag",
@@ -11,6 +11,23 @@
         "17925350568201105"
       ],
       "reused": false
+    },
+    {
+      "item_code": "justrich:10001304",
+      "item_name": "【クーポン利用で3184円★ポケット付★簡単脱着】抱っこ紐 ケープ 防寒ケープ 冬 ベビーカー ブランケット 赤ちゃん 防風 ふわふわ 裏ボア ブランケット フットマフ 抱っこ紐カバー ハグウォーマー",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 9,
+      "posted_on": "2026-10-16",
+      "threads_post_ids": [
+        "18119739053053933",
+        "18117581810518424",
+        "18073207073762597"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00trwwn.x8u2bbb4.g00trwwn.x8u2c084/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjustrich%2Fhugwarmer%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 24,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/justrich/cabinet/10140448/imgrc0152343339.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-clothes-floor",
