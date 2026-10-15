@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-15T02:49:45+09:00",
+  "updated_at": "2026-10-15T13:54:52+09:00",
   "entries": [
     {
       "item_code": "value:struggle-clothes-floor",
@@ -28,6 +28,17 @@
       "rank": 12,
       "pain_id": "baby-carrier",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/realize-store2020/cabinet/09961721/11270334/11367924/if.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-clothes-floor",
+      "item_name": "価値投稿 struggle-clothes-floor",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-10-15",
+      "threads_post_ids": [
+        "17912457687500256"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-porco-cool",
