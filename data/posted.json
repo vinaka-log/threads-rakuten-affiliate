@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-10-15T22:47:07+09:00",
+  "updated_at": "2026-10-16T01:08:44+09:00",
   "entries": [
+    {
+      "item_code": "value:struggle-wipes-bag",
+      "item_name": "価値投稿 struggle-wipes-bag",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-10-16",
+      "threads_post_ids": [
+        "17925350568201105"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:struggle-clothes-floor",
       "item_name": "価値投稿 struggle-clothes-floor",
