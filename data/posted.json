@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T17:23:31+09:00",
+  "updated_at": "2026-10-16T18:23:26+09:00",
   "entries": [
     {
       "item_code": "value:struggle-wipes-bag",
@@ -70,6 +70,17 @@
       "posted_on": "2026-10-16",
       "threads_post_ids": [
         "18095005502464957"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-wipes-bag",
+      "item_name": "価値投稿 struggle-wipes-bag",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-10-16",
+      "threads_post_ids": [
+        "17993224379858755"
       ],
       "reused": false
     },
