@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T02:39:19+09:00",
+  "updated_at": "2026-10-16T10:00:49+09:00",
   "entries": [
     {
       "item_code": "value:struggle-wipes-bag",
@@ -28,6 +28,17 @@
       "rank": 24,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/justrich/cabinet/10140448/imgrc0152343339.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-cfb105345d",
+      "item_name": "価値投稿 ask-cfb105345d",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-10-16",
+      "threads_post_ids": [
+        "18144990778587562"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-clothes-floor",
