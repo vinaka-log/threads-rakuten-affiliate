@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T13:45:18+09:00",
+  "updated_at": "2026-10-16T15:37:44+09:00",
   "entries": [
     {
       "item_code": "value:struggle-wipes-bag",
@@ -48,6 +48,17 @@
       "posted_on": "2026-10-16",
       "threads_post_ids": [
         "17950849056313437"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-porco-cool",
+      "item_name": "価値投稿 ogiri-porco-cool",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-10-16",
+      "threads_post_ids": [
+        "18641568406057096"
       ],
       "reused": false
     },
