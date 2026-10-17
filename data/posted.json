@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T21:34:03+09:00",
+  "updated_at": "2026-10-17T22:52:28+09:00",
   "entries": [
     {
       "item_code": "value:struggle-sleep-long",
@@ -109,6 +109,17 @@
       "posted_on": "2026-10-17",
       "threads_post_ids": [
         "18119285095760157"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-14ab785280",
+      "item_name": "価値投稿 ask-14ab785280",
+      "kind": "ask-chitchat",
+      "slot": 7,
+      "posted_on": "2026-10-17",
+      "threads_post_ids": [
+        "17965685018984821"
       ],
       "reused": false
     },
