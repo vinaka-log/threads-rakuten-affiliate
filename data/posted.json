@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T17:54:49+09:00",
+  "updated_at": "2026-10-17T20:15:15+09:00",
   "entries": [
     {
       "item_code": "value:struggle-sleep-long",
@@ -83,6 +83,23 @@
         "18106688569981723"
       ],
       "reused": false
+    },
+    {
+      "item_code": "yamabikoya:10000278",
+      "item_name": "【楽天1位】(ケラッタ) イブル ベビー バスタオル ガーゼタオル ガーゼ タオル 赤ちゃん 新生児 湯上がりタオル おくるみ くすみカラー 6重ガーゼ 105×105cm 正方形 1枚 3枚セット ピンク グレー ホワイト グリーン ベージュ",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 5,
+      "posted_on": "2026-10-17",
+      "threads_post_ids": [
+        "18431485549149805",
+        "18470654356184019",
+        "17938342917388141"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00t7v5n.x8u2bf3c.g00t7v5n.x8u2ccd6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyamabikoya%2Ftowel_whgrpk%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 28,
+      "pain_id": "baby-towel",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/yamabikoya/cabinet/08574425/10127824/towel_top_2607.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-wipes-bag",
