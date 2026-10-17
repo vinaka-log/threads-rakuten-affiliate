@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T20:15:15+09:00",
+  "updated_at": "2026-10-17T21:34:03+09:00",
   "entries": [
     {
       "item_code": "value:struggle-sleep-long",
@@ -100,6 +100,17 @@
       "rank": 28,
       "pain_id": "baby-towel",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/yamabikoya/cabinet/08574425/10127824/towel_top_2607.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-karigurashi-tiny",
+      "item_name": "価値投稿 ogiri-karigurashi-tiny",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-10-17",
+      "threads_post_ids": [
+        "18119285095760157"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-wipes-bag",
