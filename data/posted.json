@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T02:12:03+09:00",
+  "updated_at": "2026-10-17T10:05:50+09:00",
   "entries": [
     {
       "item_code": "value:struggle-sleep-long",
@@ -28,6 +28,17 @@
       "rank": 1,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/sanho-store/cabinet/cart/giopillow_cart.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-421622da3d",
+      "item_name": "価値投稿 ask-421622da3d",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-10-17",
+      "threads_post_ids": [
+        "17878089177562465"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-wipes-bag",
