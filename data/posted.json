@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-18T17:13:47+09:00",
+  "updated_at": "2026-10-18T18:13:09+09:00",
   "entries": [
     {
       "item_code": "baby-alice:10005157",
@@ -59,6 +59,17 @@
       "posted_on": "2026-10-18",
       "threads_post_ids": [
         "18115901708277705"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-bath-cold",
+      "item_name": "価値投稿 struggle-bath-cold",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-10-18",
+      "threads_post_ids": [
+        "18123734380924142"
       ],
       "reused": false
     },
