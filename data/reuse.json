@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T23:49:22+09:00",
+  "updated_at": "2026-10-18T13:49:41+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -418,6 +418,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "17978984349133135"
+    },
+    {
+      "value_id": "struggle-bath-cold",
+      "last_posted_on": "2026-10-18",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18142385446592410"
     }
   ]
 }
