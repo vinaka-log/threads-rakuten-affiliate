@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-18T18:13:09+09:00",
+  "updated_at": "2026-10-19T00:14:36+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -429,6 +429,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18123734380924142"
+    },
+    {
+      "value_id": "struggle-handprint-delay",
+      "last_posted_on": "2026-10-19",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "17911488111515715"
     }
   ]
 }
