@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-19T01:24:09+09:00",
+  "updated_at": "2026-10-19T09:50:51+09:00",
   "entries": [
     {
       "item_code": "value:struggle-handprint-delay",
@@ -28,6 +28,17 @@
       "rank": 19,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/babys/cabinet/12208473/261014/261015/ev_ex-3set-c_thumb.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-3f2cb7e929",
+      "item_name": "価値投稿 ask-3f2cb7e929",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-10-19",
+      "threads_post_ids": [
+        "18102975044036350"
+      ],
+      "reused": false
     },
     {
       "item_code": "baby-alice:10005157",
