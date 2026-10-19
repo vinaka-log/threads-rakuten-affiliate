@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-19T09:50:51+09:00",
+  "updated_at": "2026-10-19T13:57:40+09:00",
   "entries": [
     {
       "item_code": "value:struggle-handprint-delay",
@@ -37,6 +37,17 @@
       "posted_on": "2026-10-19",
       "threads_post_ids": [
         "18102975044036350"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-handprint-delay",
+      "item_name": "価値投稿 struggle-handprint-delay",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-10-19",
+      "threads_post_ids": [
+        "18025296146870243"
       ],
       "reused": false
     },
