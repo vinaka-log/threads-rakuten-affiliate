@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-20T03:11:44+09:00",
+  "updated_at": "2026-10-20T04:05:31+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -33,6 +33,23 @@
         "17934330333403565"
       ],
       "reused": false
+    },
+    {
+      "item_code": "irisplaza-r:10163793",
+      "item_name": "＼1枚あたり16.6円～☆彡／【公式】 おむつ オムツ パンツ 3個セット 大容量 ゲンキ M 150枚 444枚 L 126枚 372枚 ビッグ 108枚 324枚 ビッグより大きい 72枚 紙おむつ Genki GBP-M50 GBP-L42 GBP-BIG36 GBP-BIGD24",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-10-20",
+      "threads_post_ids": [
+        "18002562014796881",
+        "18077636600456335",
+        "18102156614455953"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00t3ztn.x8u2b155.g00t3ztn.x8u2c5a5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Firisplaza-r%2F1925663%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 21,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/irisplaza-r/cabinet/12351902/imgrc0116485668.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-handprint-delay",
