@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-20T04:05:31+09:00",
+  "updated_at": "2026-10-20T10:36:17+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -50,6 +50,17 @@
       "rank": 21,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/irisplaza-r/cabinet/12351902/imgrc0116485668.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-cb2f62bc14",
+      "item_name": "価値投稿 ask-cb2f62bc14",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-10-20",
+      "threads_post_ids": [
+        "18160659031498612"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-handprint-delay",
