@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-21T01:12:32+09:00",
+  "updated_at": "2026-10-21T02:49:21+09:00",
   "entries": [
     {
       "item_code": "value:ask-8e9027f1c8",
@@ -22,6 +22,23 @@
         "18355874452169189"
       ],
       "reused": false
+    },
+    {
+      "item_code": "united-f:10000053",
+      "item_name": "＼期間中◆P10倍／スヤビー 呼吸を守る ベビー枕 suyabee 赤ちゃん 新生児 向き癖 ドーナツ枕 ベビーまくら 枕 ピロー 綿 絶壁予防 吐き戻し 頭の形 洗える 丸洗い プレゼント 出産祝い 送料無料",
+      "genre_id": "200822",
+      "genre_label": "ベビー用寝具・ベッド",
+      "slot": 9,
+      "posted_on": "2026-10-21",
+      "threads_post_ids": [
+        "17923022844440355",
+        "17952704748325411",
+        "18118961026991617"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00tm76n.x8u2b069.g00tm76n.x8u2c554/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Funited-f%2Fsuyabee%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 23,
+      "pain_id": "baby-pillow",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/united-f/cabinet/t01/suyabee_t05_p10.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
