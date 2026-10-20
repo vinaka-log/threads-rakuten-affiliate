@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-20T21:22:20+09:00",
+  "updated_at": "2026-10-20T22:57:22+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -122,6 +122,17 @@
       "rank": 26,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/hikaritv/cabinet/sale/1710000040_rma.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-totoro-sleep",
+      "item_name": "価値投稿 ogiri-totoro-sleep",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-10-20",
+      "threads_post_ids": [
+        "18103315037564928"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-handprint-delay",
