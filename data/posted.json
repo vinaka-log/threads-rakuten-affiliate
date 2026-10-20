@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-21T00:17:27+09:00",
+  "updated_at": "2026-10-21T01:12:32+09:00",
   "entries": [
     {
       "item_code": "value:ask-8e9027f1c8",
@@ -9,6 +9,17 @@
       "posted_on": "2026-10-21",
       "threads_post_ids": [
         "18373731559211143"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-point-baby",
+      "item_name": "価値投稿 struggle-point-baby",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-10-21",
+      "threads_post_ids": [
+        "18355874452169189"
       ],
       "reused": false
     },
