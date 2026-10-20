@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-20T18:43:00+09:00",
+  "updated_at": "2026-10-20T21:22:20+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -105,6 +105,23 @@
         "18452888620192066"
       ],
       "reused": false
+    },
+    {
+      "item_code": "hikaritv:10227866",
+      "item_name": "P&G 【全サイズ選択可】パンパース おむつ テープ さらさらケア ウルトラジャンボ 4パック",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 5,
+      "posted_on": "2026-10-20",
+      "threads_post_ids": [
+        "18145955848572735",
+        "18021322574731406",
+        "17876887650651302"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00t2ngn.x8u2bae7.g00t2ngn.x8u2c425/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhikaritv%2F1710000040%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 26,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/hikaritv/cabinet/sale/1710000040_rma.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-handprint-delay",
