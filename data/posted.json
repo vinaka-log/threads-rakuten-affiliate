@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-21T21:31:31+09:00",
+  "updated_at": "2026-10-21T23:13:33+09:00",
   "entries": [
     {
       "item_code": "value:ask-8e9027f1c8",
@@ -111,6 +111,17 @@
       "rank": 15,
       "pain_id": "stroller-rain",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/fabomi/cabinet/baby/c05201rc/1.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-majo-size",
+      "item_name": "価値投稿 ogiri-majo-size",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-10-21",
+      "threads_post_ids": [
+        "18070316276781749"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
