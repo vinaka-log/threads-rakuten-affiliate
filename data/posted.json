@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-21T02:49:21+09:00",
+  "updated_at": "2026-10-21T10:19:34+09:00",
   "entries": [
     {
       "item_code": "value:ask-8e9027f1c8",
@@ -39,6 +39,17 @@
       "rank": 23,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/united-f/cabinet/t01/suyabee_t05_p10.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-2e6828f043",
+      "item_name": "価値投稿 ask-2e6828f043",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-10-21",
+      "threads_post_ids": [
+        "17910113127578762"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
