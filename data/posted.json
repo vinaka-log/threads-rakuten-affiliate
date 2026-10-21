@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-22T01:27:39+09:00",
+  "updated_at": "2026-10-22T02:56:53+09:00",
   "entries": [
     {
       "item_code": "value:ask-6ad8579c93",
@@ -22,6 +22,23 @@
         "18381027199234057"
       ],
       "reused": false
+    },
+    {
+      "item_code": "netbaby:10041996",
+      "item_name": "【1種類を選べる】ムーニー おしりふき 詰替用(40個入)【ムーニー　ベビーケアウエット】",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-10-22",
+      "threads_post_ids": [
+        "18099468131533699",
+        "18104940530345076",
+        "18330365524262848"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzd4n.x8u2b60b.g00pzd4n.x8u2c327/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2F405150%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 26,
+      "pain_id": "baby-wipes",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/150/405150.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-8e9027f1c8",
