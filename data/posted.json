@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-22T17:49:17+09:00",
+  "updated_at": "2026-10-22T18:43:54+09:00",
   "entries": [
     {
       "item_code": "value:ask-6ad8579c93",
@@ -81,6 +81,17 @@
       "posted_on": "2026-10-22",
       "threads_post_ids": [
         "18076883516465127"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-delivery-baby",
+      "item_name": "価値投稿 struggle-delivery-baby",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-10-22",
+      "threads_post_ids": [
+        "18121656392470119"
       ],
       "reused": false
     },
