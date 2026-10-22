@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-22T18:43:54+09:00",
+  "updated_at": "2026-10-22T21:37:01+09:00",
   "entries": [
     {
       "item_code": "value:ask-6ad8579c93",
@@ -94,6 +94,23 @@
         "18121656392470119"
       ],
       "reused": false
+    },
+    {
+      "item_code": "netbaby:10027996",
+      "item_name": "【1種類を選べる】メリーズ ファーストプレミアム(4個)【メリーズ ファーストプレミアム】[オムツ 紙おむつ 紙オムツ ファーストプレミアム]",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 5,
+      "posted_on": "2026-10-22",
+      "threads_post_ids": [
+        "18031119590857402",
+        "18633499033025273",
+        "18104968670635289"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzd4n.x8u2b60b.g00pzd4n.x8u2c327/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2F404201%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 14,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/201/404201.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-8e9027f1c8",
