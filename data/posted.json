@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-22T21:37:01+09:00",
+  "updated_at": "2026-10-22T23:12:52+09:00",
   "entries": [
     {
       "item_code": "value:ask-6ad8579c93",
@@ -111,6 +111,17 @@
       "rank": 14,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/201/404201.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-howl-calc",
+      "item_name": "価値投稿 ogiri-howl-calc",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-10-22",
+      "threads_post_ids": [
+        "17951808267294780"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-8e9027f1c8",
