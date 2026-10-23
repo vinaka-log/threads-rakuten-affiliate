@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T01:17:35+09:00",
+  "updated_at": "2026-10-24T02:46:06+09:00",
   "entries": [
     {
       "item_code": "value:ask-a1d371e047",
@@ -22,6 +22,23 @@
         "18125670601912798"
       ],
       "reused": false
+    },
+    {
+      "item_code": "netbaby:10027922",
+      "item_name": "【1種類を選べる】グーン ぐんぐん吸収パンツ ディズニー・プリンセス おむつ(3個)【mmw】【グーン(GOO.N)】[オムツ 紙おむつ 紙オムツ]",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-10-24",
+      "threads_post_ids": [
+        "17944828434369720",
+        "17889003732623409",
+        "17932249335163652"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzd4n.x8u2b60b.g00pzd4n.x8u2c327/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2F404196%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 12,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/196/404196.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-1e4a001dab",
