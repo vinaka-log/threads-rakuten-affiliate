@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-23T21:15:13+09:00",
+  "updated_at": "2026-10-23T22:55:36+09:00",
   "entries": [
     {
       "item_code": "value:ask-1e4a001dab",
@@ -111,6 +111,17 @@
       "rank": 27,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/fabomi/cabinet/baby/c02314bb/1_1.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-ponyo-bath",
+      "item_name": "価値投稿 ogiri-ponyo-bath",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-10-23",
+      "threads_post_ids": [
+        "18097392854433706"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-6ad8579c93",
