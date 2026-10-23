@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-23T02:53:23+09:00",
+  "updated_at": "2026-10-23T10:14:59+09:00",
   "entries": [
     {
       "item_code": "value:ask-1e4a001dab",
@@ -39,6 +39,17 @@
       "rank": 2,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/313/404313.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-684a160ff0",
+      "item_name": "価値投稿 ask-684a160ff0",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-10-23",
+      "threads_post_ids": [
+        "18114105986145665"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-6ad8579c93",
