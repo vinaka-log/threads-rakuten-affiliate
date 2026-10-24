@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T18:12:12+09:00",
+  "updated_at": "2026-10-25T00:14:58+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -299,17 +299,6 @@
       "threads_post_id": "18064620020495652"
     },
     {
-      "value_id": "struggle-night-diaper",
-      "last_posted_on": "2026-10-11",
-      "reuse_count": 0,
-      "priority": 0,
-      "views": 0,
-      "likes": 0,
-      "replies": 0,
-      "source": "auto",
-      "threads_post_id": "17888765310618042"
-    },
-    {
       "value_id": "struggle-rain-stroller",
       "last_posted_on": "2026-10-12",
       "reuse_count": 0,
@@ -451,6 +440,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18101249783370563"
+    },
+    {
+      "value_id": "struggle-night-diaper",
+      "last_posted_on": "2026-10-25",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "17903370921375282"
     }
   ]
 }
