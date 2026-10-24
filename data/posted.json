@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T20:42:20+09:00",
+  "updated_at": "2026-10-24T21:59:35+09:00",
   "entries": [
     {
       "item_code": "value:ask-a1d371e047",
@@ -100,6 +100,17 @@
       "rank": 17,
       "pain_id": "stroller-rain",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/natural-living/cabinet/spr/4/2/428214118355_4.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-porco-cool",
+      "item_name": "価値投稿 ogiri-porco-cool",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-10-24",
+      "threads_post_ids": [
+        "17925955311428631"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-1e4a001dab",
