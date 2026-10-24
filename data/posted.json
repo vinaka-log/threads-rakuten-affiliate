@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24T15:45:11+09:00",
+  "updated_at": "2026-10-24T18:12:12+09:00",
   "entries": [
     {
       "item_code": "value:ask-a1d371e047",
@@ -70,6 +70,17 @@
       "posted_on": "2026-10-24",
       "threads_post_ids": [
         "18118010459023221"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-sunday-baby",
+      "item_name": "価値投稿 struggle-sunday-baby",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-10-24",
+      "threads_post_ids": [
+        "18101249783370563"
       ],
       "reused": false
     },
