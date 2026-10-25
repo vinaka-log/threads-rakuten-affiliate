@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T21:11:05+09:00",
+  "updated_at": "2026-10-25T22:26:32+09:00",
   "entries": [
     {
       "item_code": "value:struggle-night-diaper",
@@ -78,6 +78,17 @@
       "rank": 2,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/272/404272.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-nausicaa-wind",
+      "item_name": "価値投稿 ogiri-nausicaa-wind",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-10-25",
+      "threads_post_ids": [
+        "17954652288328499"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-a1d371e047",
