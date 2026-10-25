@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-25T18:29:31+09:00",
+  "updated_at": "2026-10-25T21:11:05+09:00",
   "entries": [
     {
       "item_code": "value:struggle-night-diaper",
@@ -61,6 +61,23 @@
         "17973061536186818"
       ],
       "reused": false
+    },
+    {
+      "item_code": "netbaby:10028506",
+      "item_name": "【1種類を選べる】マミーポコパンツ 大きめで長〜く使える オムツ M L BIG(3個)【マミーポコパンツ】",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 5,
+      "posted_on": "2026-10-25",
+      "threads_post_ids": [
+        "17889898614686700",
+        "17923452828225475",
+        "18145221004579445"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzd4n.x8u2b60b.g00pzd4n.x8u2c327/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2F404272%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 2,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/272/404272.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ask-a1d371e047",
