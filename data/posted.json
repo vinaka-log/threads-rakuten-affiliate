@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-10-26T22:42:16+09:00",
+  "updated_at": "2026-10-27T00:36:29+09:00",
   "entries": [
+    {
+      "item_code": "value:ogiri-karigurashi-tiny",
+      "item_name": "価値投稿 ogiri-karigurashi-tiny",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-10-27",
+      "threads_post_ids": [
+        "17899610985608871"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:struggle-rain-stroller",
       "item_name": "価値投稿 struggle-rain-stroller",
