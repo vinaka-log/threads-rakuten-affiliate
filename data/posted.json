@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-26T19:38:00+09:00",
+  "updated_at": "2026-10-26T22:42:16+09:00",
   "entries": [
     {
       "item_code": "value:struggle-rain-stroller",
@@ -61,6 +61,23 @@
         "18072619493668360"
       ],
       "reused": false
+    },
+    {
+      "item_code": "lecdirect:10001749",
+      "item_name": "おしりふき まとめ買い おしり拭き 水99.9 【送料無料】 ふんわり シート 80枚×20個 【1,600枚】【肌にやさしい】 レック ダイレクト お尻拭き お尻ふき ウエットシート",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 5,
+      "posted_on": "2026-10-26",
+      "threads_post_ids": [
+        "17903342256372144",
+        "17955109392272636",
+        "17918283219524506"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pv4jn.x8u2bdd8.g00pv4jn.x8u2cea6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flecdirect%2Fe163_999fun20p%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 13,
+      "pain_id": "baby-wipes",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/lecdirect/cabinet/img/e/e00974.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-night-diaper",
