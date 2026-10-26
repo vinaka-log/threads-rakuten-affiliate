@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-26T01:59:32+09:00",
+  "updated_at": "2026-10-26T14:03:16+09:00",
   "entries": [
     {
       "item_code": "value:struggle-rain-stroller",
@@ -28,6 +28,17 @@
       "rank": 22,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/mythik/cabinet/product01/litta/hooclip/1500-sphp001g.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-rain-stroller",
+      "item_name": "価値投稿 struggle-rain-stroller",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-10-26",
+      "threads_post_ids": [
+        "18134053316501400"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-night-diaper",
