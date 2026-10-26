@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-26T16:17:17+09:00",
+  "updated_at": "2026-10-26T19:38:00+09:00",
   "entries": [
     {
       "item_code": "value:struggle-rain-stroller",
@@ -48,6 +48,17 @@
       "posted_on": "2026-10-26",
       "threads_post_ids": [
         "18147154243592291"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-rain-stroller",
+      "item_name": "価値投稿 struggle-rain-stroller",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-10-26",
+      "threads_post_ids": [
+        "18072619493668360"
       ],
       "reused": false
     },
