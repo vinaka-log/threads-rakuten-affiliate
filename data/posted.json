@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T00:00:37+09:00",
+  "updated_at": "2026-10-28T02:16:52+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-chihiro-rain",
@@ -9,6 +9,17 @@
       "posted_on": "2026-10-28",
       "threads_post_ids": [
         "18162323719503837"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-size-up",
+      "item_name": "価値投稿 struggle-size-up",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-10-28",
+      "threads_post_ids": [
+        "18100949519082428"
       ],
       "reused": false
     },
