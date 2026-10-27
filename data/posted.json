@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-27T04:03:57+09:00",
+  "updated_at": "2026-10-27T10:50:21+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-karigurashi-tiny",
@@ -50,6 +50,17 @@
       "rank": 20,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/mythik/cabinet/product01/litta/clips/1500-bc001aw1.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-82fe47aa47",
+      "item_name": "価値投稿 ask-82fe47aa47",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-10-27",
+      "threads_post_ids": [
+        "17954557068276559"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-rain-stroller",
