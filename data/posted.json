@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-27T10:50:21+09:00",
+  "updated_at": "2026-10-27T14:19:12+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-karigurashi-tiny",
@@ -59,6 +59,17 @@
       "posted_on": "2026-10-27",
       "threads_post_ids": [
         "17954557068276559"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-both-hands",
+      "item_name": "価値投稿 struggle-both-hands",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-10-27",
+      "threads_post_ids": [
+        "18114150185110166"
       ],
       "reused": false
     },
