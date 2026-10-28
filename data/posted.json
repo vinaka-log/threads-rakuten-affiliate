@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T03:35:48+09:00",
+  "updated_at": "2026-10-28T14:58:27+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-chihiro-rain",
@@ -39,6 +39,17 @@
       "rank": 30,
       "pain_id": "baby-wipes",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/pigeon-shop/cabinet/thumb/11827558/1039243.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-size-up",
+      "item_name": "価値投稿 struggle-size-up",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-10-28",
+      "threads_post_ids": [
+        "17899592523394834"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-karigurashi-tiny",
