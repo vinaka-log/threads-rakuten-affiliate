@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-29T02:47:25+09:00",
+  "updated_at": "2026-10-29T03:41:48+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-chihiro-night",
@@ -22,6 +22,23 @@
         "18134282041805697"
       ],
       "reused": false
+    },
+    {
+      "item_code": "netbaby:10018748",
+      "item_name": "【1種類を選べる】パンパース オムツ はじめての肌へのいちばん テープ(3個)【パンパース 肌へのいちばん】[肌へのいちばん]",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-10-29",
+      "threads_post_ids": [
+        "17911972491304840",
+        "18134351347670211",
+        "18638839687029888"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzd4n.x8u2b60b.g00pzd4n.x8u2c327/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2Fa62067xxx%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 7,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/049/402049.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-chihiro-rain",
