@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T16:48:13+09:00",
+  "updated_at": "2026-10-28T18:55:35+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-chihiro-rain",
@@ -59,6 +59,17 @@
       "posted_on": "2026-10-28",
       "threads_post_ids": [
         "17894194317615111"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-93f61ba1eb",
+      "item_name": "価値投稿 ask-93f61ba1eb",
+      "kind": "ask-chitchat",
+      "slot": 3,
+      "posted_on": "2026-10-28",
+      "threads_post_ids": [
+        "18110831363267225"
       ],
       "reused": false
     },
