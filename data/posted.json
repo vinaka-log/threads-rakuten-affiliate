@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-29T03:41:48+09:00",
+  "updated_at": "2026-10-29T15:04:51+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-chihiro-night",
@@ -39,6 +39,17 @@
       "rank": 7,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/049/402049.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-clothes-floor",
+      "item_name": "価値投稿 struggle-clothes-floor",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-10-29",
+      "threads_post_ids": [
+        "17910084744570360"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-chihiro-rain",
