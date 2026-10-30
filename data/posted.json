@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T02:37:28+09:00",
+  "updated_at": "2026-10-31T03:27:25+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-majo-size",
@@ -22,6 +22,23 @@
         "18125871100955795"
       ],
       "reused": false
+    },
+    {
+      "item_code": "yamabikoya:10000344",
+      "item_name": "【楽天1位】(ケラッタ) ふわもこイブル スリーパー 冬 冬用 フリース 赤ちゃん 新生児 ベビー 横開き 上質フランネル 着る毛布 内側ガーゼで汗吸収 0歳 1歳 2歳 3歳 4歳 刺繍 チェリー レモン 雪 月 うさぎ 恐竜 チェック",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-10-31",
+      "threads_post_ids": [
+        "17917213494524275",
+        "18109628831606862",
+        "18102661958338718"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00t7v5n.x8u2bf3c.g00t7v5n.x8u2ccd6/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyamabikoya%2Fibul_winslp%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 3,
+      "pain_id": "baby-towel",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/yamabikoya/cabinet/07916987/13808582/fuwa_slp_top_02.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
