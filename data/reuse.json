@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T20:05:22+09:00",
+  "updated_at": "2026-10-31T02:37:28+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -299,17 +299,6 @@
       "threads_post_id": "18064620020495652"
     },
     {
-      "value_id": "struggle-sleep-long",
-      "last_posted_on": "2026-10-17",
-      "reuse_count": 0,
-      "priority": 0,
-      "views": 0,
-      "likes": 0,
-      "replies": 0,
-      "source": "auto",
-      "threads_post_id": "17978984349133135"
-    },
-    {
       "value_id": "struggle-bath-cold",
       "last_posted_on": "2026-10-18",
       "reuse_count": 0,
@@ -451,6 +440,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18118428694811646"
+    },
+    {
+      "value_id": "struggle-sleep-long",
+      "last_posted_on": "2026-10-31",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "18125871100955795"
     }
   ]
 }
