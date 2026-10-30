@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T15:05:37+09:00",
+  "updated_at": "2026-10-30T16:56:58+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -70,6 +70,17 @@
       "posted_on": "2026-10-30",
       "threads_post_ids": [
         "17904457722601103"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-chihiro-rain",
+      "item_name": "価値投稿 ogiri-chihiro-rain",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-10-30",
+      "threads_post_ids": [
+        "18639518710043051"
       ],
       "reused": false
     },
