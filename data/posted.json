@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T19:20:06+09:00",
+  "updated_at": "2026-10-30T20:05:22+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -92,6 +92,17 @@
       "posted_on": "2026-10-30",
       "threads_post_ids": [
         "18645378904013182"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-wipes-bag",
+      "item_name": "価値投稿 struggle-wipes-bag",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-10-30",
+      "threads_post_ids": [
+        "18118428694811646"
       ],
       "reused": false
     },
