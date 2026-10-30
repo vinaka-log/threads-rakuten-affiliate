@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-30T03:49:58+09:00",
+  "updated_at": "2026-10-30T11:25:04+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -50,6 +50,17 @@
       "rank": 18,
       "pain_id": "stroller-rain",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/lifeinnovation430/cabinet/item/09606934/imgrc0102102980.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-3fdc9ffca6",
+      "item_name": "価値投稿 ask-3fdc9ffca6",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-10-30",
+      "threads_post_ids": [
+        "18124817584929625"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-chihiro-night",
