@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-01T00:49:45+09:00",
+  "updated_at": "2026-11-01T01:41:29+09:00",
   "entries": [
     {
       "item_code": "value:ask-eada6a90b6",
@@ -9,6 +9,17 @@
       "posted_on": "2026-11-01",
       "threads_post_ids": [
         "17954110485295390"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-bath-cold",
+      "item_name": "価値投稿 struggle-bath-cold",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-01",
+      "threads_post_ids": [
+        "18111784436224087"
       ],
       "reused": false
     },
