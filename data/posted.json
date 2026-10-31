@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T22:11:11+09:00",
+  "updated_at": "2026-10-31T23:53:54+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-majo-size",
@@ -89,6 +89,17 @@
       "rank": 23,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/312/402312.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-majo-size",
+      "item_name": "価値投稿 ogiri-majo-size",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-10-31",
+      "threads_post_ids": [
+        "17944833978383531"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
