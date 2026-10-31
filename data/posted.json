@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-31T14:59:44+09:00",
+  "updated_at": "2026-10-31T16:51:24+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-majo-size",
@@ -48,6 +48,17 @@
       "posted_on": "2026-10-31",
       "threads_post_ids": [
         "18108789818224015"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-chihiro-night",
+      "item_name": "価値投稿 ogiri-chihiro-night",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-10-31",
+      "threads_post_ids": [
+        "17899290714612315"
       ],
       "reused": false
     },
