@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-01T01:41:29+09:00",
+  "updated_at": "2026-11-01T02:32:35+09:00",
   "entries": [
     {
       "item_code": "value:ask-eada6a90b6",
@@ -22,6 +22,23 @@
         "18111784436224087"
       ],
       "reused": false
+    },
+    {
+      "item_code": "netbaby:10029707",
+      "item_name": "【1種類を選べる】メリーズ おむつ パンツ ファーストプレミアム 梱販売用 M L BIG(4個)【メリーズ ファーストプレミアム】[オムツ 紙おむつ 紙オムツ ファーストプレミアム]",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-11-01",
+      "threads_post_ids": [
+        "17977019820145948",
+        "18122056267994942",
+        "18479992924118014"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzd4n.x8u2b60b.g00pzd4n.x8u2c327/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2F404698%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 21,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/698/404698.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-majo-size",
