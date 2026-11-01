@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-01T20:33:40+09:00",
+  "updated_at": "2026-11-01T22:54:12+09:00",
   "entries": [
     {
       "item_code": "value:ask-eada6a90b6",
@@ -94,6 +94,23 @@
         "18135434194777687"
       ],
       "reused": false
+    },
+    {
+      "item_code": "babys:10003125",
+      "item_name": "＼クーポン発行中＆名入れ刻印半額／ ブランケット クリップ 名入れ刻印 ベビーカー 2個入り シリコン ブランケットクリップ ひざ掛けクリップ ベビーカークリップ 出産祝い ギフト お名前入り フック ベビーカーフック バギーフック",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 5,
+      "posted_on": "2026-11-01",
+      "threads_post_ids": [
+        "17914909944283272",
+        "18377690800215830",
+        "18122213332964115"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00ps8on.x8u2be41.g00ps8on.x8u2c197/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbabys%2Fe-bcc%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 16,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/babys/cabinet/12208473/261030/ev_e-bcc_thumb.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-majo-size",
