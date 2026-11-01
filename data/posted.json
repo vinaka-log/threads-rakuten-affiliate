@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-01T15:28:43+09:00",
+  "updated_at": "2026-11-01T17:31:36+09:00",
   "entries": [
     {
       "item_code": "value:ask-eada6a90b6",
@@ -59,6 +59,17 @@
       "posted_on": "2026-11-01",
       "threads_post_ids": [
         "18102639539378097"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-totoro-sleep",
+      "item_name": "価値投稿 ogiri-totoro-sleep",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-01",
+      "threads_post_ids": [
+        "17895260973438392"
       ],
       "reused": false
     },
