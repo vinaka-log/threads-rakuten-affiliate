@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T21:57:02+09:00",
+  "updated_at": "2026-11-03T06:17:19+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -299,17 +299,6 @@
       "threads_post_id": "18064620020495652"
     },
     {
-      "value_id": "struggle-cart-baby",
-      "last_posted_on": "2026-10-20",
-      "reuse_count": 0,
-      "priority": 0,
-      "views": 0,
-      "likes": 0,
-      "replies": 0,
-      "source": "auto",
-      "threads_post_id": "18452888620192066"
-    },
-    {
       "value_id": "struggle-point-baby",
       "last_posted_on": "2026-10-21",
       "reuse_count": 0,
@@ -451,6 +440,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "17914291323555410"
+    },
+    {
+      "value_id": "struggle-cart-baby",
+      "last_posted_on": "2026-11-03",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "17865771459692208"
     }
   ]
 }
