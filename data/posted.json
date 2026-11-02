@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T03:18:09+09:00",
+  "updated_at": "2026-11-02T11:08:21+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-ponyo-bath",
@@ -50,6 +50,17 @@
       "rank": 10,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/blanco-shop/cabinet/compass1755667630.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-ac80d80307",
+      "item_name": "価値投稿 ask-ac80d80307",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-11-02",
+      "threads_post_ids": [
+        "17997286053072660"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ask-eada6a90b6",
