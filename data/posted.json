@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03T06:17:19+09:00",
+  "updated_at": "2026-11-03T07:12:25+09:00",
   "entries": [
     {
       "item_code": "netbaby:10029457",
@@ -39,6 +39,23 @@
         "17865771459692208"
       ],
       "reused": false
+    },
+    {
+      "item_code": "netbaby:10053126",
+      "item_name": "パンパース オムツ 超吸収エアリー パンツ(4個セット)【パンパース】",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-11-03",
+      "threads_post_ids": [
+        "17987571600105739",
+        "18118510466118258",
+        "18117613883590633"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzd4n.x8u2b60b.g00pzd4n.x8u2c327/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2F406828%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 12,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/828/406828.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-ponyo-bath",
