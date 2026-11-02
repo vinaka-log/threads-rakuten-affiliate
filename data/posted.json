@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T17:43:04+09:00",
+  "updated_at": "2026-11-02T21:57:02+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-ponyo-bath",
@@ -81,6 +81,17 @@
       "posted_on": "2026-11-02",
       "threads_post_ids": [
         "18116833616126052"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-handprint-delay",
+      "item_name": "価値投稿 struggle-handprint-delay",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-11-02",
+      "threads_post_ids": [
+        "17914291323555410"
       ],
       "reused": false
     },
