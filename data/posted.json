@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03T07:12:25+09:00",
+  "updated_at": "2026-11-03T16:01:42+09:00",
   "entries": [
     {
       "item_code": "netbaby:10029457",
@@ -56,6 +56,17 @@
       "rank": 12,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/828/406828.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-cart-baby",
+      "item_name": "価値投稿 struggle-cart-baby",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-11-03",
+      "threads_post_ids": [
+        "18105978599011708"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-ponyo-bath",
