@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03T16:01:42+09:00",
+  "updated_at": "2026-11-03T17:54:09+09:00",
   "entries": [
     {
       "item_code": "netbaby:10029457",
@@ -65,6 +65,17 @@
       "posted_on": "2026-11-03",
       "threads_post_ids": [
         "18105978599011708"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-howl-calc",
+      "item_name": "価値投稿 ogiri-howl-calc",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-03",
+      "threads_post_ids": [
+        "17952483363325379"
       ],
       "reused": false
     },
