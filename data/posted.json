@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-04T17:24:10+09:00",
+  "updated_at": "2026-11-04T21:39:51+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-nausicaa-wind",
@@ -42,6 +42,17 @@
       "posted_on": "2026-11-04",
       "threads_post_ids": [
         "18117495848019598"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-point-baby",
+      "item_name": "価値投稿 struggle-point-baby",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-11-04",
+      "threads_post_ids": [
+        "18014472947766873"
       ],
       "reused": false
     },
