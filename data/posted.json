@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-06T01:56:05+09:00",
+  "updated_at": "2026-11-06T04:22:06+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-karigurashi-tiny",
@@ -9,6 +9,17 @@
       "posted_on": "2026-11-06",
       "threads_post_ids": [
         "18122093489472606"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-tiny-win-baby",
+      "item_name": "価値投稿 struggle-tiny-win-baby",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-06",
+      "threads_post_ids": [
+        "18022378004940801"
       ],
       "reused": false
     },
