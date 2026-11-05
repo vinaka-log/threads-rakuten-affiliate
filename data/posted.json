@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-05T04:14:30+09:00",
+  "updated_at": "2026-11-05T16:04:47+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-tanuki-shelf",
@@ -20,6 +20,17 @@
       "posted_on": "2026-11-05",
       "threads_post_ids": [
         "18646023148047677"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-delivery-baby",
+      "item_name": "価値投稿 struggle-delivery-baby",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-11-05",
+      "threads_post_ids": [
+        "18646552420057970"
       ],
       "reused": false
     },
