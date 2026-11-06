@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-11-06T23:41:26+09:00",
+  "updated_at": "2026-11-07T01:28:05+09:00",
   "entries": [
+    {
+      "item_code": "value:ogiri-chihiro-rain",
+      "item_name": "価値投稿 ogiri-chihiro-rain",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-07",
+      "threads_post_ids": [
+        "17941686492384884"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:ogiri-karigurashi-tiny",
       "item_name": "価値投稿 ogiri-karigurashi-tiny",
