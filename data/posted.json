@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-06T16:04:22+09:00",
+  "updated_at": "2026-11-06T17:49:58+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-karigurashi-tiny",
@@ -48,6 +48,17 @@
       "posted_on": "2026-11-06",
       "threads_post_ids": [
         "18480339727117459"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-nausicaa-wind",
+      "item_name": "価値投稿 ogiri-nausicaa-wind",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-06",
+      "threads_post_ids": [
+        "17918805090544190"
       ],
       "reused": false
     },
