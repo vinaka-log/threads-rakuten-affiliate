@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-07T15:17:25+09:00",
+  "updated_at": "2026-11-07T17:06:23+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-chihiro-rain",
@@ -31,6 +31,17 @@
       "posted_on": "2026-11-07",
       "threads_post_ids": [
         "18102379103638931"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-tanuki-shelf",
+      "item_name": "価値投稿 ogiri-tanuki-shelf",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-07",
+      "threads_post_ids": [
+        "18178263487453851"
       ],
       "reused": false
     },
