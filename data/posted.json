@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-08T00:15:56+09:00",
+  "updated_at": "2026-11-08T02:17:44+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-chihiro-night",
@@ -9,6 +9,17 @@
       "posted_on": "2026-11-08",
       "threads_post_ids": [
         "18114568883592661"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-night-diaper",
+      "item_name": "価値投稿 struggle-night-diaper",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-08",
+      "threads_post_ids": [
+        "18020246309949112"
       ],
       "reused": false
     },
