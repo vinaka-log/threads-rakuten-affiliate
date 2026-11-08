@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-11-08T20:36:06+09:00",
+  "updated_at": "2026-11-09T00:39:34+09:00",
   "entries": [
+    {
+      "item_code": "value:ogiri-totoro-sleep",
+      "item_name": "価値投稿 ogiri-totoro-sleep",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-09",
+      "threads_post_ids": [
+        "18102877463060963"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:ogiri-chihiro-night",
       "item_name": "価値投稿 ogiri-chihiro-night",
