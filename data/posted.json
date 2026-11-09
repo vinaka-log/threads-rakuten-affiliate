@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-09T17:55:48+09:00",
+  "updated_at": "2026-11-09T22:28:44+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-totoro-sleep",
@@ -42,6 +42,17 @@
       "posted_on": "2026-11-09",
       "threads_post_ids": [
         "17914886961487530"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-rain-stroller",
+      "item_name": "価値投稿 struggle-rain-stroller",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-11-09",
+      "threads_post_ids": [
+        "17967618195214708"
       ],
       "reused": false
     },
