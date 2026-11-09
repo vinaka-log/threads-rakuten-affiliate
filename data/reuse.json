@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-09T22:28:44+09:00",
+  "updated_at": "2026-11-10T06:51:13+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -299,17 +299,6 @@
       "threads_post_id": "18064620020495652"
     },
     {
-      "value_id": "struggle-both-hands",
-      "last_posted_on": "2026-10-27",
-      "reuse_count": 0,
-      "priority": 0,
-      "views": 0,
-      "likes": 0,
-      "replies": 0,
-      "source": "auto",
-      "threads_post_id": "17866928085677513"
-    },
-    {
       "value_id": "struggle-size-up",
       "last_posted_on": "2026-10-28",
       "reuse_count": 0,
@@ -451,6 +440,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "17967618195214708"
+    },
+    {
+      "value_id": "struggle-both-hands",
+      "last_posted_on": "2026-11-10",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "17959175742066899"
     }
   ]
 }
