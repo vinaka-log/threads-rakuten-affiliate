@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T01:57:26+09:00",
+  "updated_at": "2026-11-10T04:18:38+09:00",
   "entries": [
     {
       "item_code": "soyott-camp:10000468",
@@ -17,6 +17,17 @@
       "rank": 24,
       "pain_id": "baby-towel",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/soyott-camp/cabinet/goods/ppm-frsleep_m30.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-majo-size",
+      "item_name": "価値投稿 ogiri-majo-size",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-10",
+      "threads_post_ids": [
+        "17988766449120510"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
