@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T06:51:13+09:00",
+  "updated_at": "2026-11-10T07:54:31+09:00",
   "entries": [
     {
       "item_code": "soyott-camp:10000468",
@@ -39,6 +39,23 @@
         "17959175742066899"
       ],
       "reused": false
+    },
+    {
+      "item_code": "kurashikenkou:10225492",
+      "item_name": "＼1枚あたり16.6円〜／【3個】 オムツ M 150枚 L 126枚 ビッグ 108枚 ビッグより大きい 72枚 パンツ ふわもちタッチ 肌に優しい 横モレ 最長12h あんしんGenki！ アイリスオーヤマ さらさら おむつ 紙おむつ Genki *",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-11-10",
+      "threads_post_ids": [
+        "18114500963128561",
+        "17972701902192709",
+        "18471554137136077"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00qhoan.x8u2b37e.g00qhoan.x8u2ca9e/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkurashikenkou%2F1925663%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 12,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/kurashikenkou/cabinet/jisyakura2/1925663_.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-totoro-sleep",
