@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T16:32:57+09:00",
+  "updated_at": "2026-11-10T18:02:19+09:00",
   "entries": [
     {
       "item_code": "soyott-camp:10000468",
@@ -65,6 +65,17 @@
       "posted_on": "2026-11-10",
       "threads_post_ids": [
         "18140399632633433"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-chihiro-night",
+      "item_name": "価値投稿 ogiri-chihiro-night",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-10",
+      "threads_post_ids": [
+        "17919115827535560"
       ],
       "reused": false
     },
