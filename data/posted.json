@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T18:02:19+09:00",
+  "updated_at": "2026-11-10T22:07:42+09:00",
   "entries": [
     {
       "item_code": "soyott-camp:10000468",
@@ -76,6 +76,17 @@
       "posted_on": "2026-11-10",
       "threads_post_ids": [
         "17919115827535560"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-both-hands",
+      "item_name": "価値投稿 struggle-both-hands",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-11-10",
+      "threads_post_ids": [
+        "18126308686714298"
       ],
       "reused": false
     },
