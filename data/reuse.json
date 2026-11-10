@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T22:07:42+09:00",
+  "updated_at": "2026-11-11T04:12:14+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -299,17 +299,6 @@
       "threads_post_id": "18064620020495652"
     },
     {
-      "value_id": "struggle-size-up",
-      "last_posted_on": "2026-10-28",
-      "reuse_count": 0,
-      "priority": 0,
-      "views": 0,
-      "likes": 0,
-      "replies": 0,
-      "source": "auto",
-      "threads_post_id": "18097787162406683"
-    },
-    {
       "value_id": "struggle-clothes-floor",
       "last_posted_on": "2026-10-29",
       "reuse_count": 0,
@@ -451,6 +440,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18126308686714298"
+    },
+    {
+      "value_id": "struggle-size-up",
+      "last_posted_on": "2026-11-11",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "17890181652485576"
     }
   ]
 }

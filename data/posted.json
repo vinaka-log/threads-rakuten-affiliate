@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-11T01:39:56+09:00",
+  "updated_at": "2026-11-11T04:12:14+09:00",
   "entries": [
     {
       "item_code": "hukumimi:10000034",
@@ -26,6 +26,17 @@
       "posted_on": "2026-11-11",
       "threads_post_ids": [
         "18035321141889519"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-size-up",
+      "item_name": "価値投稿 struggle-size-up",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-11",
+      "threads_post_ids": [
+        "17890181652485576"
       ],
       "reused": false
     },
