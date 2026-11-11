@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-11T15:50:21+09:00",
+  "updated_at": "2026-11-11T17:42:22+09:00",
   "entries": [
     {
       "item_code": "hukumimi:10000034",
@@ -65,6 +65,17 @@
       "posted_on": "2026-11-11",
       "threads_post_ids": [
         "18140499286726885"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-totoro-sleep",
+      "item_name": "価値投稿 ogiri-totoro-sleep",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-11",
+      "threads_post_ids": [
+        "18123251311975505"
       ],
       "reused": false
     },
