@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-11T05:17:34+09:00",
+  "updated_at": "2026-11-11T15:50:21+09:00",
   "entries": [
     {
       "item_code": "hukumimi:10000034",
@@ -56,6 +56,17 @@
       "rank": 3,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/babys/cabinet/12208473/261110/ev_e-bgh_thumb.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-size-up",
+      "item_name": "価値投稿 struggle-size-up",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-11-11",
+      "threads_post_ids": [
+        "18140499286726885"
+      ],
+      "reused": false
     },
     {
       "item_code": "soyott-camp:10000468",
