@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-11T21:17:02+09:00",
+  "updated_at": "2026-11-12T04:10:35+09:00",
   "candidates": [
     {
       "value_id": "heavy-items",
@@ -299,17 +299,6 @@
       "threads_post_id": "18064620020495652"
     },
     {
-      "value_id": "struggle-clothes-floor",
-      "last_posted_on": "2026-10-29",
-      "reuse_count": 0,
-      "priority": 0,
-      "views": 0,
-      "likes": 0,
-      "replies": 0,
-      "source": "auto",
-      "threads_post_id": "18115710596038679"
-    },
-    {
       "value_id": "struggle-wipes-bag",
       "last_posted_on": "2026-10-30",
       "reuse_count": 0,
@@ -451,6 +440,17 @@
       "replies": 0,
       "source": "auto",
       "threads_post_id": "18392749813228849"
+    },
+    {
+      "value_id": "struggle-clothes-floor",
+      "last_posted_on": "2026-11-12",
+      "reuse_count": 0,
+      "priority": 0,
+      "views": 0,
+      "likes": 0,
+      "replies": 0,
+      "source": "auto",
+      "threads_post_id": "17890773204479376"
     }
   ]
 }
