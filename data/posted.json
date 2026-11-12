@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-13T02:13:03+09:00",
+  "updated_at": "2026-11-13T03:31:10+09:00",
   "entries": [
     {
       "item_code": "petitbelly:10000967",
@@ -26,6 +26,17 @@
       "posted_on": "2026-11-13",
       "threads_post_ids": [
         "17913320865307047"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-c38e5e1f06",
+      "item_name": "価値投稿 ask-c38e5e1f06",
+      "kind": "ask-chitchat",
+      "slot": 7,
+      "posted_on": "2026-11-13",
+      "threads_post_ids": [
+        "18472244809138938"
       ],
       "reused": false
     },
