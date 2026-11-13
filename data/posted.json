@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-13T21:42:43+09:00",
+  "updated_at": "2026-11-13T23:59:01+09:00",
   "entries": [
     {
       "item_code": "petitbelly:10000967",
@@ -83,6 +83,23 @@
         "18352514794270767"
       ],
       "reused": false
+    },
+    {
+      "item_code": "alohababy:10000000",
+      "item_name": "ベビーカー用 ハンドルカバー サイズ選べる レザー調 黒 ブラック ALOHABABY グリップカバー 防水 送料無料 汚れ防止 ペットカー 合皮 革 フェイクレザー レザー 清潔 cybex用 アップリカ用 ピジョン用 コンビ用 メリオ用 ビングル用",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 5,
+      "posted_on": "2026-11-13",
+      "threads_post_ids": [
+        "17955269808083375",
+        "17878014501588162",
+        "18141171343728642"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00u25jn.x8u2b8d4.g00u25jn.x8u2c14d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Falohababy%2Fhandlecover-black%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 30,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/alohababy/cabinet/compass1628138223.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-ponyo-bath",
