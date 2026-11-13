@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-13T15:58:59+09:00",
+  "updated_at": "2026-11-13T17:57:51+09:00",
   "entries": [
     {
       "item_code": "petitbelly:10000967",
@@ -59,6 +59,17 @@
       "posted_on": "2026-11-13",
       "threads_post_ids": [
         "18126402121930465"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-howl-calc",
+      "item_name": "価値投稿 ogiri-howl-calc",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-13",
+      "threads_post_ids": [
+        "18120447452048955"
       ],
       "reused": false
     },
