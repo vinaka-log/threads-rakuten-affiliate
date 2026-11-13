@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-14T04:04:41+09:00",
+  "updated_at": "2026-11-14T05:22:08+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-nausicaa-wind",
@@ -22,6 +22,23 @@
         "18646972060058269"
       ],
       "reused": false
+    },
+    {
+      "item_code": "loar:10000170",
+      "item_name": "［同じ悩みを持つママ企画の新商品］ベビーカーアンダーバッグ ベビーカーバッグ マザーズバッグ アップリカ ベビーバッグ 撥水 おむつポーチ 荷物掛け リベル 荷物入れ ベビー用バッグ マザーズバッグ ギフト おしゃれ 出産祝い",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 9,
+      "posted_on": "2026-11-14",
+      "threads_post_ids": [
+        "18469102627188221",
+        "18045099029834042",
+        "18037902578853674"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00u0g9n.x8u2b0be.g00u0g9n.x8u2c508/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Floar%2Flrb-1022%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 22,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_gold/loar/img/lrb-1022-0.jpg?_ex=400x400"
     },
     {
       "item_code": "petitbelly:10000967",
