@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-13T04:26:05+09:00",
+  "updated_at": "2026-11-13T15:58:59+09:00",
   "entries": [
     {
       "item_code": "petitbelly:10000967",
@@ -48,6 +48,17 @@
       "posted_on": "2026-11-13",
       "threads_post_ids": [
         "18149934232603486"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-wipes-bag",
+      "item_name": "価値投稿 struggle-wipes-bag",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-11-13",
+      "threads_post_ids": [
+        "18126402121930465"
       ],
       "reused": false
     },
