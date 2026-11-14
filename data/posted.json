@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-14T20:51:23+09:00",
+  "updated_at": "2026-11-14T22:51:37+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-nausicaa-wind",
@@ -72,6 +72,23 @@
         "18013612901995276"
       ],
       "reused": false
+    },
+    {
+      "item_code": "tcconlineshop:10000019",
+      "item_name": "＼楽天ランキング1位／【保育士が監修】 ベビーカーステップ ベビーカー ステップ 補助ペダル ステップボード バギー お出かけ ボード 接続 オプションボード ベビーカーボード ベビーカーステップボード 二人乗り 取り付け サドル付き 座れる",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 5,
+      "posted_on": "2026-11-14",
+      "threads_post_ids": [
+        "17928017991442867",
+        "18139209316636682",
+        "18139114981680699"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00tpaln.x8u2bb57.g00tpaln.x8u2c462/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftcconlineshop%2Fatyc_017%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 22,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/tcconlineshop/cabinet/08948435/compass1751265809.jpg?_ex=400x400"
     },
     {
       "item_code": "petitbelly:10000967",
