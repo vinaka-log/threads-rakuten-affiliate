@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T20:20:55+09:00",
+  "updated_at": "2026-11-15T21:21:23+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-tanuki-shelf",
@@ -81,6 +81,17 @@
       "posted_on": "2026-11-15",
       "threads_post_ids": [
         "18018681995953608"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-bath-cold",
+      "item_name": "価値投稿 struggle-bath-cold",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-11-15",
+      "threads_post_ids": [
+        "17951892243303260"
       ],
       "reused": false
     },
