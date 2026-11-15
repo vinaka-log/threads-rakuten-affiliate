@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-11-15T23:24:59+09:00",
+  "updated_at": "2026-11-16T00:57:52+09:00",
   "entries": [
+    {
+      "item_code": "value:ogiri-karigurashi-tiny",
+      "item_name": "価値投稿 ogiri-karigurashi-tiny",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-16",
+      "threads_post_ids": [
+        "18091113860277471"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:ogiri-tanuki-shelf",
       "item_name": "価値投稿 ogiri-tanuki-shelf",
