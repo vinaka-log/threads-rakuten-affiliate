@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T21:21:23+09:00",
+  "updated_at": "2026-11-15T23:24:59+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-tanuki-shelf",
@@ -94,6 +94,23 @@
         "17951892243303260"
       ],
       "reused": false
+    },
+    {
+      "item_code": "ameliashop:10000062",
+      "item_name": "【LumiLumi公式 楽天1位！】ベビーカーロック ベビーカー ロック 鍵 盗難防止 防犯 ワイヤーロック ダイヤル 巻き取り式 ファンシート 旅行 テーマパーク 遊園地 公園 ショッピングモール",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 5,
+      "posted_on": "2026-11-15",
+      "threads_post_ids": [
+        "18036923399904985",
+        "17996571564104957",
+        "18127961866977436"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00ufspn.x8u2b450.g00ufspn.x8u2c88d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fameliashop%2F20250701%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 27,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/ameliashop/cabinet/img/12346101/4.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-nausicaa-wind",
