@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17T01:34:27+09:00",
+  "updated_at": "2026-11-17T04:01:31+09:00",
   "entries": [
     {
       "item_code": "estyler:10010269",
@@ -17,6 +17,17 @@
       "rank": 26,
       "pain_id": "stroller-rain",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/estyler/cabinet/products/cybex/cb46054794n.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-chihiro-rain",
+      "item_name": "価値投稿 ogiri-chihiro-rain",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-17",
+      "threads_post_ids": [
+        "18119904770609736"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-karigurashi-tiny",
