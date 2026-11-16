@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17T06:31:39+09:00",
+  "updated_at": "2026-11-17T07:46:25+09:00",
   "entries": [
     {
       "item_code": "estyler:10010269",
@@ -50,6 +50,23 @@
         "17885044401535397"
       ],
       "reused": false
+    },
+    {
+      "item_code": "justrich:10001304",
+      "item_name": "【ポケット付★簡単脱着】抱っこ紐 ケープ 防寒ケープ 冬 ベビーカー ブランケット 赤ちゃん 防風 ポンチョ 5way フード取り外し可能 撥水 ギフト 出産祝い ふわふわ 裏ボア ブランケット フットマフ 抱っこ紐カバー ハグウォーマー",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 9,
+      "posted_on": "2026-11-17",
+      "threads_post_ids": [
+        "18024286580938964",
+        "18036059045885439",
+        "18120460415088434"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00trwwn.x8u2bbb4.g00trwwn.x8u2c084/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjustrich%2Fhugwarmer%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 1,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/justrich/cabinet/10140448/hug_warmer_top_1013.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-karigurashi-tiny",
