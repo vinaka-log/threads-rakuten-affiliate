@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-16T20:52:42+09:00",
+  "updated_at": "2026-11-16T22:13:52+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-karigurashi-tiny",
@@ -81,6 +81,17 @@
       "posted_on": "2026-11-16",
       "threads_post_ids": [
         "17998486040843832"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-handprint-delay",
+      "item_name": "価値投稿 struggle-handprint-delay",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-11-16",
+      "threads_post_ids": [
+        "18443745988178543"
       ],
       "reused": false
     },
