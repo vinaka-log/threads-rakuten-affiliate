@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17T05:38:47+09:00",
+  "updated_at": "2026-11-17T06:31:39+09:00",
   "entries": [
     {
       "item_code": "estyler:10010269",
@@ -37,6 +37,17 @@
       "posted_on": "2026-11-17",
       "threads_post_ids": [
         "18115138757141987"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-cart-baby",
+      "item_name": "価値投稿 struggle-cart-baby",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-17",
+      "threads_post_ids": [
+        "17885044401535397"
       ],
       "reused": false
     },
