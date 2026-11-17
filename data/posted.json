@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-18T01:32:59+09:00",
+  "updated_at": "2026-11-18T02:58:40+09:00",
   "entries": [
     {
       "item_code": "loar:10000124",
@@ -17,6 +17,17 @@
       "rank": 30,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/loar/cabinet/color/lrb-1008-00.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-chihiro-night",
+      "item_name": "価値投稿 ogiri-chihiro-night",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-18",
+      "threads_post_ids": [
+        "17957674923037061"
+      ],
+      "reused": false
     },
     {
       "item_code": "estyler:10010269",
