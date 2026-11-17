@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-18T02:58:40+09:00",
+  "updated_at": "2026-11-18T04:17:39+09:00",
   "entries": [
     {
       "item_code": "loar:10000124",
@@ -26,6 +26,17 @@
       "posted_on": "2026-11-18",
       "threads_post_ids": [
         "17957674923037061"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-42872f0b0c",
+      "item_name": "価値投稿 ask-42872f0b0c",
+      "kind": "ask-chitchat",
+      "slot": 7,
+      "posted_on": "2026-11-18",
+      "threads_post_ids": [
+        "18139200904738108"
       ],
       "reused": false
     },
