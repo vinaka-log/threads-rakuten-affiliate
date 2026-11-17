@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17T18:58:36+09:00",
+  "updated_at": "2026-11-17T21:16:31+09:00",
   "entries": [
     {
       "item_code": "estyler:10010269",
@@ -98,6 +98,17 @@
       "posted_on": "2026-11-17",
       "threads_post_ids": [
         "17995778631025454"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-a112b91eea",
+      "item_name": "価値投稿 ask-a112b91eea",
+      "kind": "ask-chitchat",
+      "slot": 3,
+      "posted_on": "2026-11-17",
+      "threads_post_ids": [
+        "17956209702300457"
       ],
       "reused": false
     },
