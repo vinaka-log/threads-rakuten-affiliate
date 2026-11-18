@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-18T21:02:11+09:00",
+  "updated_at": "2026-11-18T22:33:25+09:00",
   "entries": [
     {
       "item_code": "loar:10000124",
@@ -109,6 +109,17 @@
       "posted_on": "2026-11-18",
       "threads_post_ids": [
         "18073000160602098"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-point-baby",
+      "item_name": "価値投稿 struggle-point-baby",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-11-18",
+      "threads_post_ids": [
+        "18471339937190755"
       ],
       "reused": false
     },
