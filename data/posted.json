@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-19T03:58:15+09:00",
+  "updated_at": "2026-11-19T04:51:49+09:00",
   "entries": [
     {
       "item_code": "netbaby:10035957",
@@ -37,6 +37,17 @@
       "posted_on": "2026-11-19",
       "threads_post_ids": [
         "18138207106669205"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-delivery-baby",
+      "item_name": "価値投稿 struggle-delivery-baby",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-19",
+      "threads_post_ids": [
+        "18108326630459432"
       ],
       "reused": false
     },
