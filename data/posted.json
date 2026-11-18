@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-19T01:02:18+09:00",
+  "updated_at": "2026-11-19T02:40:23+09:00",
   "entries": [
     {
       "item_code": "netbaby:10035957",
@@ -17,6 +17,17 @@
       "rank": 2,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/758/404758.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-totoro-sleep",
+      "item_name": "価値投稿 ogiri-totoro-sleep",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-19",
+      "threads_post_ids": [
+        "18075319436781651"
+      ],
+      "reused": false
     },
     {
       "item_code": "loar:10000124",
