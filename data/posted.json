@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-18T06:32:27+09:00",
+  "updated_at": "2026-11-18T13:01:55+09:00",
   "entries": [
     {
       "item_code": "loar:10000124",
@@ -67,6 +67,17 @@
       "rank": 29,
       "pain_id": "baby-wipes",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/babycareshop/cabinet/item/babywipes/imgrc0118558245.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-2d816086d9",
+      "item_name": "価値投稿 ask-2d816086d9",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-11-18",
+      "threads_post_ids": [
+        "18035729555676272"
+      ],
+      "reused": false
     },
     {
       "item_code": "estyler:10010269",
