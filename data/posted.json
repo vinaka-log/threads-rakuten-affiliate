@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-19T18:42:58+09:00",
+  "updated_at": "2026-11-19T20:58:37+09:00",
   "entries": [
     {
       "item_code": "netbaby:10035957",
@@ -98,6 +98,17 @@
       "posted_on": "2026-11-19",
       "threads_post_ids": [
         "18122387803766943"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-d6cb48e4b3",
+      "item_name": "価値投稿 ask-d6cb48e4b3",
+      "kind": "ask-chitchat",
+      "slot": 3,
+      "posted_on": "2026-11-19",
+      "threads_post_ids": [
+        "17916132981489780"
       ],
       "reused": false
     },
