@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-20T04:06:19+09:00",
+  "updated_at": "2026-11-20T04:52:00+09:00",
   "entries": [
     {
       "item_code": "auc-risecreation:10005139",
@@ -37,6 +37,17 @@
       "posted_on": "2026-11-20",
       "threads_post_ids": [
         "18646841677055728"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-tiny-win-baby",
+      "item_name": "価値投稿 struggle-tiny-win-baby",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-20",
+      "threads_post_ids": [
+        "18101255897101074"
       ],
       "reused": false
     },
