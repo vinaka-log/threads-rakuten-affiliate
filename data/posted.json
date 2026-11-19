@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-19T16:41:24+09:00",
+  "updated_at": "2026-11-19T18:42:58+09:00",
   "entries": [
     {
       "item_code": "netbaby:10035957",
@@ -87,6 +87,17 @@
       "posted_on": "2026-11-19",
       "threads_post_ids": [
         "18106712483565939"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-chihiro-rain",
+      "item_name": "価値投稿 ogiri-chihiro-rain",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-19",
+      "threads_post_ids": [
+        "18122387803766943"
       ],
       "reused": false
     },
