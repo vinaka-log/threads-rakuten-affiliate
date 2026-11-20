@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-20T18:30:21+09:00",
+  "updated_at": "2026-11-20T20:59:51+09:00",
   "entries": [
     {
       "item_code": "auc-risecreation:10005139",
@@ -98,6 +98,17 @@
       "posted_on": "2026-11-20",
       "threads_post_ids": [
         "18174213544475685"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-44135fa4f8",
+      "item_name": "価値投稿 ask-44135fa4f8",
+      "kind": "ask-chitchat",
+      "slot": 3,
+      "posted_on": "2026-11-20",
+      "threads_post_ids": [
+        "18139666405653235"
       ],
       "reused": false
     },
