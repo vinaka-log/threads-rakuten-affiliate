@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21T03:44:13+09:00",
+  "updated_at": "2026-11-21T04:31:29+09:00",
   "entries": [
     {
       "item_code": "baby-alice:10006664",
@@ -37,6 +37,17 @@
       "posted_on": "2026-11-21",
       "threads_post_ids": [
         "18182374753434314"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-sunday-baby",
+      "item_name": "価値投稿 struggle-sunday-baby",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-21",
+      "threads_post_ids": [
+        "18109839860623603"
       ],
       "reused": false
     },
