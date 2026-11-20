@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21T02:24:45+09:00",
+  "updated_at": "2026-11-21T03:44:13+09:00",
   "entries": [
     {
       "item_code": "baby-alice:10006664",
@@ -26,6 +26,17 @@
       "posted_on": "2026-11-21",
       "threads_post_ids": [
         "18099721490138775"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-1da43e2e11",
+      "item_name": "価値投稿 ask-1da43e2e11",
+      "kind": "ask-chitchat",
+      "slot": 7,
+      "posted_on": "2026-11-21",
+      "threads_post_ids": [
+        "18182374753434314"
       ],
       "reused": false
     },
