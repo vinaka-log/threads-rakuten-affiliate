@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-22T03:35:10+09:00",
+  "updated_at": "2026-11-22T04:58:39+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-ponyo-bath",
@@ -33,6 +33,23 @@
         "18115721702175858"
       ],
       "reused": false
+    },
+    {
+      "item_code": "netbaby:10041996",
+      "item_name": "【1種類を選べる】ムーニー おしりふき 詰替用(40個入)【ムーニー　ベビーケアウエット】",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 9,
+      "posted_on": "2026-11-22",
+      "threads_post_ids": [
+        "18077268566754355",
+        "18123399689068283",
+        "18142519408559328"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzd4n.x8u2b60b.g00pzd4n.x8u2c327/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2F405150%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 25,
+      "pain_id": "baby-wipes",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/150/405150.jpg?_ex=400x400"
     },
     {
       "item_code": "baby-alice:10006664",
