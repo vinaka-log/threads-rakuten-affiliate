@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-22T02:44:01+09:00",
+  "updated_at": "2026-11-22T03:35:10+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-ponyo-bath",
@@ -20,6 +20,17 @@
       "posted_on": "2026-11-22",
       "threads_post_ids": [
         "17927161794449373"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-night-diaper",
+      "item_name": "価値投稿 struggle-night-diaper",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-22",
+      "threads_post_ids": [
+        "18115721702175858"
       ],
       "reused": false
     },
