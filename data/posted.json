@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-22T21:55:49+09:00",
+  "updated_at": "2026-11-22T23:58:02+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-ponyo-bath",
@@ -105,6 +105,23 @@
         "17905564578376624"
       ],
       "reused": false
+    },
+    {
+      "item_code": "netbaby:10027996",
+      "item_name": "【1種類を選べる】メリーズ ファーストプレミアム(4個)【メリーズ ファーストプレミアム】[オムツ 紙おむつ 紙オムツ ファーストプレミアム]",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 5,
+      "posted_on": "2026-11-22",
+      "threads_post_ids": [
+        "18142719811627251",
+        "18120482903015542",
+        "18132773167932960"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzd4n.x8u2b60b.g00pzd4n.x8u2c327/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2F404201%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 29,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/201/404201.jpg?_ex=400x400"
     },
     {
       "item_code": "baby-alice:10006664",
