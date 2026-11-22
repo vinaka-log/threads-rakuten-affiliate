@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-23T02:59:05+09:00",
+  "updated_at": "2026-11-23T03:56:45+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-porco-cool",
@@ -20,6 +20,17 @@
       "posted_on": "2026-11-23",
       "threads_post_ids": [
         "18352968121266700"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-rain-stroller",
+      "item_name": "価値投稿 struggle-rain-stroller",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-23",
+      "threads_post_ids": [
+        "18034695845683735"
       ],
       "reused": false
     },
