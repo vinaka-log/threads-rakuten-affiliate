@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-11-22T23:58:02+09:00",
+  "updated_at": "2026-11-23T01:46:19+09:00",
   "entries": [
+    {
+      "item_code": "value:ogiri-porco-cool",
+      "item_name": "価値投稿 ogiri-porco-cool",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-23",
+      "threads_post_ids": [
+        "18510983701102196"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:ogiri-ponyo-bath",
       "item_name": "価値投稿 ogiri-ponyo-bath",
