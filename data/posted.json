@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-22T18:10:29+09:00",
+  "updated_at": "2026-11-22T20:47:39+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-ponyo-bath",
@@ -81,6 +81,17 @@
       "posted_on": "2026-11-22",
       "threads_post_ids": [
         "18404382931205137"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-9afb241c31",
+      "item_name": "価値投稿 ask-9afb241c31",
+      "kind": "ask-chitchat",
+      "slot": 3,
+      "posted_on": "2026-11-22",
+      "threads_post_ids": [
+        "18135274381813261"
       ],
       "reused": false
     },
