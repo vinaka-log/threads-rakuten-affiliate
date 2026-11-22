@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-23T01:46:19+09:00",
+  "updated_at": "2026-11-23T02:59:05+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-porco-cool",
@@ -9,6 +9,17 @@
       "posted_on": "2026-11-23",
       "threads_post_ids": [
         "18510983701102196"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-0749d56b70",
+      "item_name": "価値投稿 ask-0749d56b70",
+      "kind": "ask-chitchat",
+      "slot": 7,
+      "posted_on": "2026-11-23",
+      "threads_post_ids": [
+        "18352968121266700"
       ],
       "reused": false
     },
