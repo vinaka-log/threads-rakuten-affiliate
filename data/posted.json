@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T00:30:27+09:00",
+  "updated_at": "2026-11-24T03:50:07+09:00",
   "entries": [
     {
       "item_code": "value:struggle-both-hands",
@@ -11,6 +11,23 @@
         "18100019636479733"
       ],
       "reused": false
+    },
+    {
+      "item_code": "netbaby:10027922",
+      "item_name": "【1種類を選べる】グーン ぐんぐん吸収パンツ ディズニー・プリンセス おむつ(3個)【mmw】【グーン(GOO.N)】[オムツ 紙おむつ 紙オムツ]",
+      "genre_id": "100533",
+      "genre_label": "キッズ・ベビー・マタニティ",
+      "slot": 5,
+      "posted_on": "2026-11-24",
+      "threads_post_ids": [
+        "17995002372027202",
+        "18177973231454118",
+        "18087818033324126"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00pzd4n.x8u2b60b.g00pzd4n.x8u2c327/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnetbaby%2F404196%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 9,
+      "pain_id": "diapers",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/196/404196.jpg?_ex=400x400"
     },
     {
       "item_code": "value:ogiri-porco-cool",
