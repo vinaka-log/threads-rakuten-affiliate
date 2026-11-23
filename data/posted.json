@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-23T05:11:16+09:00",
+  "updated_at": "2026-11-23T12:31:28+09:00",
   "entries": [
     {
       "item_code": "value:ogiri-porco-cool",
@@ -50,6 +50,17 @@
       "rank": 3,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/313/404313.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-f617286b23",
+      "item_name": "価値投稿 ask-f617286b23",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-11-23",
+      "threads_post_ids": [
+        "17948006217379773"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-ponyo-bath",
