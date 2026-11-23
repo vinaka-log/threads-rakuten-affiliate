@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T05:41:51+09:00",
+  "updated_at": "2026-11-24T08:14:16+09:00",
   "entries": [
     {
       "item_code": "value:struggle-both-hands",
@@ -37,6 +37,17 @@
       "posted_on": "2026-11-24",
       "threads_post_ids": [
         "18434315005150322"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-both-hands",
+      "item_name": "価値投稿 struggle-both-hands",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-24",
+      "threads_post_ids": [
+        "18097247279184607"
       ],
       "reused": false
     },
