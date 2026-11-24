@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T19:09:37+09:00",
+  "updated_at": "2026-11-24T20:53:35+09:00",
   "entries": [
     {
       "item_code": "value:struggle-both-hands",
@@ -76,6 +76,17 @@
       "posted_on": "2026-11-24",
       "threads_post_ids": [
         "18029082308927753"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-ponyo-bath",
+      "item_name": "価値投稿 ogiri-ponyo-bath",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-24",
+      "threads_post_ids": [
+        "17946956661091069"
       ],
       "reused": false
     },
