@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T03:26:38+09:00",
+  "updated_at": "2026-11-25T04:47:06+09:00",
   "entries": [
     {
       "item_code": "value:struggle-size-up",
@@ -28,6 +28,17 @@
       "rank": 29,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/slotre/cabinet/11790707/main_251021.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-tanuki-shelf",
+      "item_name": "価値投稿 ogiri-tanuki-shelf",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-25",
+      "threads_post_ids": [
+        "18046209743835836"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-both-hands",
