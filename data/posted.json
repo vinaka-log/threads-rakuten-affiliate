@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-24T09:37:35+09:00",
+  "updated_at": "2026-11-24T19:09:37+09:00",
   "entries": [
     {
       "item_code": "value:struggle-both-hands",
@@ -67,6 +67,17 @@
       "rank": 26,
       "pain_id": "stroller-rain",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/natural-living/cabinet/spr/6/9/691208308145_3.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:struggle-both-hands",
+      "item_name": "価値投稿 struggle-both-hands",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-11-24",
+      "threads_post_ids": [
+        "18029082308927753"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:ogiri-porco-cool",
