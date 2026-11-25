@@ -1,6 +1,17 @@
 {
-  "updated_at": "2026-11-25T22:19:03+09:00",
+  "updated_at": "2026-11-26T00:07:00+09:00",
   "entries": [
+    {
+      "item_code": "value:struggle-clothes-floor",
+      "item_name": "価値投稿 struggle-clothes-floor",
+      "kind": "value",
+      "slot": 4,
+      "posted_on": "2026-11-26",
+      "threads_post_ids": [
+        "18095578850697633"
+      ],
+      "reused": false
+    },
     {
       "item_code": "value:struggle-size-up",
       "item_name": "価値投稿 struggle-size-up",
