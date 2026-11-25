@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26T00:07:00+09:00",
+  "updated_at": "2026-11-26T02:41:28+09:00",
   "entries": [
     {
       "item_code": "value:struggle-clothes-floor",
@@ -11,6 +11,23 @@
         "18095578850697633"
       ],
       "reused": false
+    },
+    {
+      "item_code": "fabomi:10000163",
+      "item_name": "【ブラックフライデー限定！5％OFFクーポン】【楽天1位★新色登場】 ベビーカーバッグ ドリンクホルダー おしりふき おしゃれ ショルダー ドリンク 大容量 マルチ ベビーカーバック 保冷 保温 ショルダー ベビーカー ドリンクホルダー 折りたたみ 軽量 小物 収納",
+      "genre_id": "200833",
+      "genre_label": "ベビーカー",
+      "slot": 5,
+      "posted_on": "2026-11-26",
+      "threads_post_ids": [
+        "17962312230016386",
+        "17884049229628043",
+        "17917612488280481"
+      ],
+      "affiliate_url": "https://hb.afl.rakuten.co.jp/hgc/g00u3p0n.x8u2b20e.g00u3p0n.x8u2c84d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffabomi%2Fc02314bb%2F&rafcid=wsc_i_ra_69a82a1e-78ce-480a-951c-bbb222e80ae5",
+      "rank": 20,
+      "pain_id": "stroller-gear",
+      "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/fabomi/cabinet/baby/c02314bb/1_1.jpg?_ex=400x400"
     },
     {
       "item_code": "value:struggle-size-up",
