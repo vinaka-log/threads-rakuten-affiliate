@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T17:54:47+09:00",
+  "updated_at": "2026-11-25T19:45:37+09:00",
   "entries": [
     {
       "item_code": "value:struggle-size-up",
@@ -98,6 +98,17 @@
       "posted_on": "2026-11-25",
       "threads_post_ids": [
         "18035408006883384"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-porco-cool",
+      "item_name": "価値投稿 ogiri-porco-cool",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-25",
+      "threads_post_ids": [
+        "18117980351333136"
       ],
       "reused": false
     },
