@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T14:15:14+09:00",
+  "updated_at": "2026-11-25T17:54:47+09:00",
   "entries": [
     {
       "item_code": "value:struggle-size-up",
@@ -87,6 +87,17 @@
       "posted_on": "2026-11-25",
       "threads_post_ids": [
         "18218304460369497"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-size-up",
+      "item_name": "価値投稿 struggle-size-up",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-11-25",
+      "threads_post_ids": [
+        "18035408006883384"
       ],
       "reused": false
     },
