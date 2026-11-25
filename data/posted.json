@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T19:45:37+09:00",
+  "updated_at": "2026-11-25T22:19:03+09:00",
   "entries": [
     {
       "item_code": "value:struggle-size-up",
@@ -109,6 +109,17 @@
       "posted_on": "2026-11-25",
       "threads_post_ids": [
         "18117980351333136"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ask-04165c35c9",
+      "item_name": "価値投稿 ask-04165c35c9",
+      "kind": "ask-chitchat",
+      "slot": 3,
+      "posted_on": "2026-11-25",
+      "threads_post_ids": [
+        "18392380828234530"
       ],
       "reused": false
     },
