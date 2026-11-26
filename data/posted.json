@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26T17:40:14+09:00",
+  "updated_at": "2026-11-26T19:17:28+09:00",
   "entries": [
     {
       "item_code": "value:struggle-clothes-floor",
@@ -76,6 +76,17 @@
       "posted_on": "2026-11-26",
       "threads_post_ids": [
         "18129469105926666"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-nausicaa-wind",
+      "item_name": "価値投稿 ogiri-nausicaa-wind",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-26",
+      "threads_post_ids": [
+        "18078152783769228"
       ],
       "reused": false
     },
