@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T02:24:40+09:00",
+  "updated_at": "2026-11-27T03:42:56+09:00",
   "entries": [
     {
       "item_code": "baby-alice:10005157",
@@ -17,6 +17,17 @@
       "rank": 26,
       "pain_id": "baby-pillow",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/baby-alice/cabinet/imgrc0112936784.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-chihiro-rain",
+      "item_name": "価値投稿 ogiri-chihiro-rain",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-27",
+      "threads_post_ids": [
+        "17989781466087862"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-clothes-floor",
