@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T07:09:49+09:00",
+  "updated_at": "2026-11-27T13:48:31+09:00",
   "entries": [
     {
       "item_code": "baby-alice:10005157",
@@ -56,6 +56,17 @@
       "rank": 1,
       "pain_id": "diapers",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/netbaby/cabinet/272/404272.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-7daf89e434",
+      "item_name": "価値投稿 ask-7daf89e434",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-11-27",
+      "threads_post_ids": [
+        "18122381051587818"
+      ],
+      "reused": false
     },
     {
       "item_code": "value:struggle-clothes-floor",
