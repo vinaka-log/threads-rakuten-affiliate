@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T17:51:10+09:00",
+  "updated_at": "2026-11-27T19:23:36+09:00",
   "entries": [
     {
       "item_code": "baby-alice:10005157",
@@ -76,6 +76,17 @@
       "posted_on": "2026-11-27",
       "threads_post_ids": [
         "17921032758539461"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:ogiri-tanuki-shelf",
+      "item_name": "価値投稿 ogiri-tanuki-shelf",
+      "kind": "ogiri",
+      "slot": 2,
+      "posted_on": "2026-11-27",
+      "threads_post_ids": [
+        "18196428052396820"
       ],
       "reused": false
     },
