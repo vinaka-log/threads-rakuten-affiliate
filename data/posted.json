@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-28T03:33:31+09:00",
+  "updated_at": "2026-11-28T05:34:56+09:00",
   "entries": [
     {
       "item_code": "high-high:10000421",
@@ -26,6 +26,17 @@
       "posted_on": "2026-11-28",
       "threads_post_ids": [
         "17935226058164898"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-sleep-long",
+      "item_name": "価値投稿 struggle-sleep-long",
+      "kind": "value",
+      "slot": 8,
+      "posted_on": "2026-11-28",
+      "threads_post_ids": [
+        "17980944411164781"
       ],
       "reused": false
     },
