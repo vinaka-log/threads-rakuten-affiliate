@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T13:48:31+09:00",
+  "updated_at": "2026-11-27T17:51:10+09:00",
   "entries": [
     {
       "item_code": "baby-alice:10005157",
@@ -65,6 +65,17 @@
       "posted_on": "2026-11-27",
       "threads_post_ids": [
         "18122381051587818"
+      ],
+      "reused": false
+    },
+    {
+      "item_code": "value:struggle-wipes-bag",
+      "item_name": "価値投稿 struggle-wipes-bag",
+      "kind": "value",
+      "slot": 1,
+      "posted_on": "2026-11-27",
+      "threads_post_ids": [
+        "17921032758539461"
       ],
       "reused": false
     },
