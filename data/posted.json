@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-28T02:02:40+09:00",
+  "updated_at": "2026-11-28T03:33:31+09:00",
   "entries": [
     {
       "item_code": "high-high:10000421",
@@ -17,6 +17,17 @@
       "rank": 16,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/high-high/cabinet/product/sale/babycarboard-s.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ogiri-chihiro-night",
+      "item_name": "価値投稿 ogiri-chihiro-night",
+      "kind": "ogiri",
+      "slot": 6,
+      "posted_on": "2026-11-28",
+      "threads_post_ids": [
+        "17935226058164898"
+      ],
+      "reused": false
     },
     {
       "item_code": "baby-alice:10005157",
