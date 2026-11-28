@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-28T06:50:41+09:00",
+  "updated_at": "2026-11-28T13:33:21+09:00",
   "entries": [
     {
       "item_code": "high-high:10000421",
@@ -56,6 +56,17 @@
       "rank": 20,
       "pain_id": "stroller-gear",
       "image_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/babys/cabinet/12208473/261126/ev_ex-3set-c_thumb.jpg?_ex=400x400"
+    },
+    {
+      "item_code": "value:ask-26fb249536",
+      "item_name": "価値投稿 ask-26fb249536",
+      "kind": "ask-chitchat",
+      "slot": 0,
+      "posted_on": "2026-11-28",
+      "threads_post_ids": [
+        "17916913506553774"
+      ],
+      "reused": false
     },
     {
       "item_code": "baby-alice:10005157",
